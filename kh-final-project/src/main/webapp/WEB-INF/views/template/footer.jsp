@@ -2,10 +2,9 @@
     pageEncoding="UTF-8"%>
 
   
-  	</section>
 	<div class="div-line"></div>
 	
-	<footer class="main-row">
+	<footer class="main-row topLine">
 		<div class="footer-row">
 			<p style="color: black; font-size: 12px; margin-bottom: 10px">
 				상호:FUN_ding | 사업장소재지:서울특별시 영등포구 | 안내전화:1588-XXXX | 대표이사:이창엽 |

@@ -4,19 +4,21 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="section-row">
-	<div class="section-event" style="background-color: #dcdcdc;">
+<section class="main-row">
+	<div class="section-row">
+		<div class="section-event" style="background-color: #dcdcdc;">
+			
+			이벤트 구현 위치
+			
+		</div>
 		
-		이벤트 구현 위치
-		
+		<div class="section-project" style="background-color: #dcdcdc;">
+			
+			프로젝트 구현 위치
+			
+		</div>
 	</div>
-	
-	<div class="section-project" style="background-color: #dcdcdc;">
-		
-		프로젝트 구현 위치
-		
-	</div>
-</div>
+</section>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 	

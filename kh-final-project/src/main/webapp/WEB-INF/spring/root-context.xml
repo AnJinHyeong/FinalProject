@@ -115,6 +115,6 @@
 	<task:annotation-driven/>
 	
 	<!-- property file 등록 -->
-	<context:property-placeholder location="classpath:/propertise/**/*.properties"/>
+	<context:property-placeholder location="classpath:/properties/**/*.properties"/>
 	
 </beans>
