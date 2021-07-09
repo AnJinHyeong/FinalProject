@@ -19,7 +19,7 @@ public class ProjectController {
 	
 	@GetMapping("/projectInsert")
 	public String projectInsert(Model model) {
-//		model.addAttribute("categoryList", categoryDao.list());
+		model.addAttribute("categoryList", categoryDao.list());
 		return "project/projectInsert";
 	}
 	
