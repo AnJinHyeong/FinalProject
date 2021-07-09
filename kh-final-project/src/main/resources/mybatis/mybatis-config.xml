@@ -20,6 +20,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAliases>
 <!-- 		<package name="com.kh.spring09.entity"/> -->
 <!-- 		<typeAlias type="kh.exam.model.vo.MemberVO" alias="m"/> -->
+		<package name="com.kh.finalproject.entity"/>
 	</typeAliases>	
 	
 	<!-- 데이터베이스 환경 설정 -->
