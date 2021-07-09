@@ -31,10 +31,7 @@
 		- box-sizing:content-box; 로 설정하면 width 가 내용물을 기준으로 설정
 		- box-sizing:border-box; 로 설정하면 width 가 테두리를 기준으로 설정
 */
-* {
-	font-family: Neo Sans Pro, sans-serif;
-	box-sizing: border-box;
-}
+
 
 html, body {
 	min-width: 1200px;
@@ -389,15 +386,15 @@ textarea.form-input {
 	float: right;
 }
 
-section {
+/* section { */
 	
-}
+/* } */
 
-select {
-	border: none;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-	padding: 0 1rem;
-}
+/* select { */
+/* 	border: none; */
+/* 	border-bottom: 1px solid rgba(0, 0, 0, 0.4); */
+/* 	padding: 0 1rem; */
+/* } */
 
 .link-box {
 	text-align: center;
