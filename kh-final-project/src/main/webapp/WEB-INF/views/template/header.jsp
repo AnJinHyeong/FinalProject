@@ -24,7 +24,7 @@
 </head>
 <body class="align-column">
 
-	<header class="mian-row"> 
+	<header class="main-row"> 
 		<div class="header-row">
 			<div class="header-left">
 				<a class="header-a" href="#">프로젝트 둘러보기</a>
@@ -42,7 +42,7 @@
 						<img src="image/user-in.svg" width="25" height="25">
 					</c:when>
 					<c:otherwise>
-						<a class="header-link" href="#" style="width: 100px; margin: 0 35px;">로그인/회원가입</a>
+						<a class="header-link" href="#" style="width: 120px; margin: 0 35px;">로그인/회원가입</a>
 						<img src="image/user-out.svg" width="25" height="25" >
 					</c:otherwise>
 				</c:choose>
