@@ -31,6 +31,6 @@ category_no REFERENCES category(category_no) ON DELETE SET NULL
 #category table
 create table category(
 category_no number(19) primary key,
-category_theme number(60) not null unique,
+category_theme varchar2(60) not null unique,
 category_super number(19)
 );
