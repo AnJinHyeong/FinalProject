@@ -28,6 +28,9 @@ member_no references member(member_no) on delete SET NULL,
 category_no REFERENCES category(category_no) ON DELETE SET NULL
 );
 
+CREATE SEQUENCE project_seq;
+
+
 #category table
 create table category(
 category_no number(19) primary key,
