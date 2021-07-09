@@ -83,8 +83,6 @@
 	<root>
 		<priority value="debug" />
 		<appender-ref ref="console" />
-		<appender-ref ref="fout" />
-		<appender-ref ref="daily" />
 	</root>
 	
 </log4j:configuration>
