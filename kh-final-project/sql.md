@@ -34,3 +34,5 @@ category_no number(19) primary key,
 category_theme varchar2(60) not null unique,
 category_super number(19)
 );
+
+create sequence category_seq;
