@@ -18,3 +18,4 @@ public class MemberDto {
 	private String memberGrade;
 	private String memberAddress;
 }
+   
