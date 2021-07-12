@@ -9,4 +9,8 @@ public class MemberController {
 	public String join() {
 		return "client/join";
 	}
+	@RequestMapping("/login")
+	public String login() {
+		return "member/login";
+	}
 }

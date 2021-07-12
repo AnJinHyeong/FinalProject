@@ -21,7 +21,7 @@
 
 	.loginBtn{
 		border-radius:5px;
-		border-color:#E4E4E4 #E4E4E4 #E4E4E4 #E4E4E4;
+		border-color:rgb
 		background:red;
 		color:#fff;
 		border:none;
