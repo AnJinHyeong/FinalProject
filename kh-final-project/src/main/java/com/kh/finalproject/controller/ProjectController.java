@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.repository.CategoryDao;
-
-import lombok.extern.slf4j.Slf4j;
+import com.kh.finalproject.repository.ProjectDao;
 
 @Controller
 @RequestMapping("/project")
@@ -28,8 +30,17 @@ public class ProjectController {
 	
 	@GetMapping("/projectInsert")
 	public String projectInsert(Model model) {
-		model.addAttribute("categoryList", categoryDao.list());
+		model.addAttribute("categoryApproveList", categoryDao.approveList());
 		return "project/projectInsert";
+	}
+	
+	@Autowired
+	private ProjectDao projectDao;
+	
+	@PostMapping("/projectInsert")
+	public String projectInsert(@ModelAttribute ProjectDto projectDto) {
+		projectDao.insert(projectDto);
+		return "redirect:projectMain";
 	}
 	
 

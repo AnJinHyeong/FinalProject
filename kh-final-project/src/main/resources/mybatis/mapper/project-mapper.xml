@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into project
 			(project_no, project_state, project_regist_date, project_summary, member_no, category_no)
 		values
-			(project_seq.nextval, 'X', sysdate, 'ㅇㅇ', #{memberNo}, #{categoryNo})
+			(project_seq.nextval, 'X', sysdate, #{projectSummary}, #{memberNo}, #{categoryNo})
 	</select>
 	
 </mapper>
