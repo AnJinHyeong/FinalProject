@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.entity.CategoryDto;
 import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.repository.ProjectDao;
+import com.kh.finalproject.vo.ProjectCategoryVo;
 
 @Controller
 @RequestMapping("/project")
@@ -38,10 +39,22 @@ public class ProjectController {
 	private ProjectDao projectDao;
 	
 	@PostMapping("/projectInsert")
-	public String projectInsert(@ModelAttribute ProjectDto projectDto) {
-		projectDao.insert(projectDto);
+	public String projectInsert(@ModelAttribute ProjectCategoryVo projectCategoryVo) {
+		String categoryTheme = projectCategoryVo.getCategoryTheme();
+		int categoryNo;
+		if(categoryDao.isExist(categoryTheme)) {
+			categoryNo = categoryDao.get(categoryTheme).getCategoryNo();
+		}
+		else {
+			int sequence = categoryDao.getSequence();
+			categoryNo = sequence;
+			categoryDao.insert(CategoryDto.builder()
+								.categoryNo(sequence)
+								.categoryTheme(categoryTheme)
+									.build());
+		}
+		projectCategoryVo.setCategoryNo(categoryNo);
+		projectDao.insert(projectCategoryVo);
 		return "redirect:projectMain";
 	}
-	
-
 }
