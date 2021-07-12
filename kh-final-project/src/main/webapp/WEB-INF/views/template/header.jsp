@@ -38,7 +38,7 @@
 				<img src="${root}/image/search.svg" width="20" height="20">
 				<c:choose>
 					<c:when test="${isLogin}">
-						<a class="header-link" href="#" style="width: 95px; text-align: center;">로그아웃</a>
+						<a class="header-link" href="${root}/member/logout" style="width: 95px; text-align: center;">로그아웃</a>
 						<a class="header-link" href="#" style="margin: 0 10px;">5000p</a>
 						<img src="${root}/image/user-in.svg" width="25" height="25">
 					</c:when>
