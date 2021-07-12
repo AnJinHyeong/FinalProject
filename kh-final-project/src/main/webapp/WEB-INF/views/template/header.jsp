@@ -16,7 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="${root}/css/project.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/yb.css">
 	
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <style>
 
 </style>
@@ -43,7 +43,7 @@
 						<img src="${root}/image/user-in.svg" width="25" height="25">
 					</c:when>
 					<c:otherwise>
-						<a class="header-link" href="#" style="width: 120px; margin: 0 35px;">로그인/회원가입</a>
+						<a class="header-link" href="${root}/member/login" style="width: 120px; margin: 0 35px;">로그인/회원가입</a>
 						<img src="${root}/image/user-out.svg" width="25" height="25" >
 					</c:otherwise>
 				</c:choose>
