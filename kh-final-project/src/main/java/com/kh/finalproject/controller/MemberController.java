@@ -9,4 +9,5 @@ public class MemberController {
 	public String join() {
 		return "client/join";
 	}
+	 
 }
