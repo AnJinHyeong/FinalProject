@@ -51,6 +51,13 @@ public class MemberController {
 			return "redirect:login?error";
 		}
 	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+			session.removeAttribute("memberNo");
+			
+			return "redirect:/";
+	}
 		
 
 }
