@@ -301,6 +301,9 @@
 	line-height: 20px !important;"
 }
 
+.project-funding-li{
+	padding: 0px 0px 45px 20px;
+}
 
 lili:before {
     position: absolute;
@@ -323,4 +326,39 @@ lili:after {
     left: 4px;
     height: 100%;
     border-left: 1px solid rgb(228, 228, 228);
+}
+
+.project-funding-money-div{
+	display: flex;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    align-items: center;
+    border-radius: 4px;
+    background: rgb(255, 255, 255);
+    padding: 0px 18px;
+    border: 1px solid rgb(240, 240, 240);
+}
+
+.project-funding-money-span{
+    color: rgb(13, 13, 13);
+    max-height: 44px;
+    min-width: 100px;
+    display: flex;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.015em;
+    -webkit-box-align: center;
+    align-items: center;
+    border-radius: 4px;
+    flex: 1 1 0%;
+    border: 0px;
+    text-align: right;
+    padding: 0px;
+    background: transparent;
+}
+
+.project-funding-p{
+	padding-left: 14px; 
+	margin-bottom: 5px;"
 }

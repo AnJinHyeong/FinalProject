@@ -10,7 +10,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>FUN_ding</title>
+	<title>FüN_ding - 즐거움의 시작</title>
 	<link rel="stylesheet" type="text/css" href="${root}/css/template.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/common.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/project.css">
