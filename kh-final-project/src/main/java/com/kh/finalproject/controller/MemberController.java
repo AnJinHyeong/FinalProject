@@ -17,10 +17,6 @@ public class MemberController {
 	public String join() {
 		return "member/join";
 	}
-	@RequestMapping("/login")
-	public String login() {
-		return "member/login";
-	}
 	
 	@Autowired
 	private MemberDao memberDao; 
@@ -31,9 +27,8 @@ public class MemberController {
 	return "member/joinSuccess";
 	
 	}
-
 	 
-	@GetMapping("/memberLogin")
+	@GetMapping("/login")
 	public String memberInsert() {
 		return "member/login";
 	}
