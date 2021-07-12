@@ -38,18 +38,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 			</dataSource>
 		
 		</environment>
-		
-		<!-- 
-		<environment id="deploy"></environment>
-		-->
-		 
+
 	</environments>
-	
-	<!-- 
-		매퍼 설정 : 구문을 가지고 있는 매퍼 파일들을 등록
-	-->
+
 	<mappers>
-<!-- 		<mapper resource="mybatis/mapper/item-mapper.xml"/> -->
+
 	</mappers>
 	
 </configuration>
