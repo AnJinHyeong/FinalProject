@@ -50,7 +50,7 @@
 			</p>
 		
 			<button class="yb btn btn-hover w100p h80">
-				<img class="w80 h100p" alt="" src="">
+				<img class="w80 h100p" alt="" src="${pageContext.request.contextPath}/image/insertBackground.jpg">
 				<div class="btn-text">ㅇㅇ의 프로젝트</div>
 				<div class="btn-progress w140 h100p">
 					<div class="btn-text">기획중 - 8% 완료</div>
