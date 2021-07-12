@@ -26,5 +26,5 @@ public class RandomServiceImpl implements RandomService{
 		
 		return buffer.toString();
 	}
-
+ 
 }
