@@ -18,8 +18,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	
 	<!-- mybatis 클래스 별칭 설정 -->
 	<typeAliases>
-<!-- 		<package name="com.kh.spring09.entity"/> -->
-<!-- 		<typeAlias type="kh.exam.model.vo.MemberVO" alias="m"/> -->
+		<package name="com.kh.finalproject.entity"/>
+		<package name="com.kh.finalproject.vo.member"/>
 	</typeAliases>	
 	
 	<!-- 데이터베이스 환경 설정 -->
@@ -39,18 +39,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 			</dataSource>
 		
 		</environment>
-		
-		<!-- 
-		<environment id="deploy"></environment>
-		-->
-		 
+
 	</environments>
-	
-	<!-- 
-		매퍼 설정 : 구문을 가지고 있는 매퍼 파일들을 등록
-	-->
+
 	<mappers>
-<!-- 		<mapper resource="mybatis/mapper/item-mapper.xml"/> -->
+ 
 	</mappers>
 	
 </configuration>

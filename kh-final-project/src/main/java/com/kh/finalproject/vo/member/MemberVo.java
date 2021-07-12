@@ -1,4 +1,4 @@
-package com.kh.finalproject.entity;
+package com.kh.finalproject.vo.member;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,16 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @Builder @AllArgsConstructor
-public class MemberDto {
+public class MemberVo{
 	private int memberNo;
 	private String memberId;
 	private String memberPw;
 	private String memberNick;
-	private int memberHavePoint;
-	private int memberUsePoint;
 	private String memberEmail;
 	private String memberIntroduce;
-	private String memberGrade;
-	private String memberAddress;
 }
     

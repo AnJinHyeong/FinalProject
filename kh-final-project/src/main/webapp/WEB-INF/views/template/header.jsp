@@ -14,6 +14,9 @@
 	<link rel="stylesheet" type="text/css" href="${root}/css/template.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/common.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/project.css">
+	<link rel="stylesheet" type="text/css" href="${root}/css/yb.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 	
 <style>
 
@@ -27,7 +30,7 @@
 		<div class="header-row">
 			<div class="header-left">
 				<a class="header-a" href="${root}/project/projectMain">프로젝트 둘러보기</a>
-				<a class="header-a" href="#">프로젝트 올리기</a>
+				<a class="header-a" href="${root}/project/projectInsert">프로젝트 올리기</a>
 			</div>
 			<div class="header-center">
 				<a class="header-center-link" href="${root}/">FüN_ding</a>
@@ -41,8 +44,7 @@
 						<img src="${root}/image/user-in.svg" width="25" height="25">
 					</c:when>
 					<c:otherwise>
-						<a class="header-link" href="#" style="width: 50px; margin: 0 10px;">로그인</a>
-						<a class="header-link" href="${root}/join" style="width: 60px; margin: 0 10px;">회원가입</a>
+						<a class="header-link" href="#" style="width: 120px; margin: 0 35px;">로그인/회원가입</a>
 						<img src="${root}/image/user-out.svg" width="25" height="25" >
 					</c:otherwise>
 				</c:choose>
