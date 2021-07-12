@@ -7,6 +7,4 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/project")
 public class ProjectController {
 	
-	
-	
 }
