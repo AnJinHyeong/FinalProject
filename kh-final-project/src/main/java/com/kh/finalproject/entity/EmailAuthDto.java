@@ -11,9 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CertDto {
-
+public class EmailAuthDto {
+	
 	private int auth_no;
-	private int auth_key;
+	private String auth_key;
 	private Date auth_date;
+
 }
