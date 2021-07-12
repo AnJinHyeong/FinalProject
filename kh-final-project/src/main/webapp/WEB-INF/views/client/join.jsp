@@ -10,10 +10,10 @@
 	<link rel="stylesheet" type="text/css" href="${root}/css/join.css">
 	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="${root}/js/join.js"></script>
+	<script src="<%=request.getContextPath()%>/js/join.js"></script>
 
 <body>
-
+<section class="main-row topLine">
 <div class="container">
 	<a href= "<%=request.getContextPath()%>/index.jsp" >
 	<img src="<%=request.getContextPath()%>/image/example.png" class = inline-block>
@@ -25,7 +25,7 @@
 			<h2>회원 가입</h2>
 		</div>
 		
-		<form action = "join" id = "form" method = "post" class="join-form">
+		<form action = "join.kh" id = "form" method = "post" class="join-form">
 			<div class = "row text-left">
 				<label for = "memberId">아이디</label>
 				<input type = "text" name="memberId" id = "memberId" required class = "form-input form-input-underline2" placeholder = "8~20자 이내의 영문 소대문자, 숫자 조합가능">
@@ -70,8 +70,7 @@
 			</div>
 		</form>
 	</div>
-
+</section>
 </body>
 </html>
-
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -29,6 +29,7 @@
 	-->	
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
 		<property name="driverClassName" value="${database.driver}"></property>
 		<property name="url" value="${database.url}"></property>
 		<property name="username" value="${database.username}"></property>
@@ -43,6 +44,7 @@
 		<property name="maxTotal" value="${database.max-total}"></property>
 		<property name="minIdle" value="${database.max-idle}"></property>
 		<property name="maxWaitMillis" value="${database.max-wait}"></property>
+
 	</bean>
 	
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">

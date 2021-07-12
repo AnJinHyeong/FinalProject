@@ -87,14 +87,6 @@ input[type=password]::after placeholder {
 }
 
 
-.fail, .success{
-	display:none;
-	font-size: 15px;
-}
-.fail{
-	color : red;
-}
-
 .a{
 	text-decoration: underline;
 }
@@ -143,3 +135,17 @@ input[type=password]::after placeholder {
     position : relative;
     padding-top: 300px;
     }
+    
+    .container-blank{
+    width: 500px;
+    hegiht: 1500px;
+    }
+    
+    .fail, .success{
+	display:none;
+	font-size: 15px;
+}
+.fail{
+	color : red;
+}
+    
