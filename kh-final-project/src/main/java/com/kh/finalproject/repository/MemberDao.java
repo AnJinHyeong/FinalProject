@@ -8,5 +8,4 @@ public interface MemberDao {
 	MemberVo memberInsert(MemberVo memberVo);
 	MemberVo memberNoSequence(MemberVo memberVo);
 	MemberDto login(MemberDto memberDto);
-	MemberDto logout(MemberDto memberDto);
 }
