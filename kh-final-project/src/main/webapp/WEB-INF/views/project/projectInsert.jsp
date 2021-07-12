@@ -164,7 +164,7 @@
 					<div class="float-container">
 
 						<input type="hidden" value="${memberNo}" name="memberNo">
-						<input type="text" value="" name="categoryTheme">
+						<input type="hidden" value="" name="categoryTheme">
 					
 						<input class="btn btn-insert btn-hover right" type="submit" value="프로젝트 생성하기">
 					</div>
