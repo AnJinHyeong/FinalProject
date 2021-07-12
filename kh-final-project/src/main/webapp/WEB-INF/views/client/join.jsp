@@ -13,6 +13,7 @@
 	<script src="<%=request.getContextPath()%>/js/join.js"></script>
 
 <body>
+<section class="main-row topLine">
 <div class="container">
 	<a href= "<%=request.getContextPath()%>/index.jsp" >
 	<img src="<%=request.getContextPath()%>/image/example.png" class = inline-block>
@@ -69,8 +70,7 @@
 			</div>
 		</form>
 	</div>
-
+</section>
 </body>
 </html>
-
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
