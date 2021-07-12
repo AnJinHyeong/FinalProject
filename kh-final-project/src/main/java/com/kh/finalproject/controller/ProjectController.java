@@ -57,5 +57,4 @@ public class ProjectController {
 		projectDao.insert(projectCategoryVo);
 		return "redirect:projectMain";
 	}
-	
 }
