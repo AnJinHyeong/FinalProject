@@ -62,7 +62,7 @@
 						<span class="project-main-span">0% 작성완료</span>
 					</p>
 				</a>
-				<a class="project-main-link" href="#">
+				<a class="project-main-link" href="projectMainGift">
 					<div style="margin: 0px 0px 70px;">
 						<p class="fRed fBold f16"><i class="fas fa-gift"></i></i></p>
 					</div>
