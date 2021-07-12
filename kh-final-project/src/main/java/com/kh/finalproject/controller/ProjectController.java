@@ -57,4 +57,15 @@ public class ProjectController {
 		projectDao.insert(projectCategoryVo);
 		return "redirect:projectMain";
 	}
+	
+	@GetMapping("/projectMainFunding")
+	public String projectFunding() {
+		return "project/projectMainFunding";
+	}
+	
+	@GetMapping("/projectMainGift")
+	public String projectMainGift() {
+		return "project/projectMainGift";
+	}
+
 }

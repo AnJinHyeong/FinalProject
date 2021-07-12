@@ -4,6 +4,22 @@
 
 <jsp:include page="/WEB-INF/views/template/projectHeader.jsp"></jsp:include>
 
+		<div class="project-main-header3 bottomLine">
+			<div style="width: 1200px; margin: 0 auto; height: 35px;">
+				<ul class="project-main-ul">
+					<li class="project-main-li main-li-on"><a href="${pageContext.request.contextPath}/project/projectMainDefault" class="main-li-a">기본정보</a></li>
+					<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/projectMainFunding" class="main-li-a">펀딩 계획</a></li>
+					<li class="project-main-li"><a href="#" class="main-li-a">선물 구성</a></li>
+					<li class="project-main-li"><a href="#" class="main-li-a">스토리</a></li>
+					<li class="project-main-li"><a href="#" class="main-li-a">창작자 정보</a></li>
+					<li class="project-main-li"><a href="#" class="main-li-a">신뢰와 안전</a></li>
+				</ul>
+
+			</div>
+		</div>
+
+	</header>
+
 <section class="main-row topLine">
 	
 	<div class="project-back-color" style="height: 1900px;">
@@ -96,8 +112,6 @@
 					</div>
 				</div>
 			</div>
-			
-			<hr>
 			
 			
 			<div class="project-insert-div3">
