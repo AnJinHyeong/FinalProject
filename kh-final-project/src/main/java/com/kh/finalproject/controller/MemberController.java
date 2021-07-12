@@ -19,8 +19,8 @@ public class MemberController {
 	}
 	
 	@Autowired
-	private MemberDao memberDao; 
-
+	private MemberDao memberDao;
+  
 	@PostMapping(value = "/memberInsert")
 	public String memberInsert(@ModelAttribute MemberVo memberVo) {
 	memberDao.memberInsert(memberVo);
@@ -32,5 +32,5 @@ public class MemberController {
 	public String memberInsert() {
 		return "member/login";
 	}
-	
 }
+
