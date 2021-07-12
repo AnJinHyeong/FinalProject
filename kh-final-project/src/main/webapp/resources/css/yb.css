@@ -1,0 +1,152 @@
+@charset "UTF-8";
+
+/* font 관련 설정 */
+.fRed{
+	color: red;
+}
+.fBold{
+	font-weight: bold;
+}
+.f24{
+	font-size: 24px;
+}
+.f16{
+	font-size: 16px;
+}
+.f12{
+	font-size: 12px;
+}
+
+/* width, height 관련 설정 */
+.w100p{
+	width: 100%
+}
+.h100p{
+	height: 100%
+}
+.w20{
+	width: 20px;
+}
+.w40{
+	width: 40px;
+}
+.w60{
+	width: 60px;
+}
+.w80{
+	width: 80px;
+}
+.w100{
+	width: 100px;
+}
+.w120{
+	width: 120px;
+}
+.w140{
+	width: 140px;
+}
+.w160{
+	width: 160px;
+}
+.w180{
+	width: 180px;
+}
+.w200{
+	width: 200px;
+}
+.h20{
+	height: 20px;
+}
+.h40{
+	height: 40px;
+}
+.h60{
+	height: 60px;
+}
+.h80{
+	height: 80px;
+}
+.h100{
+	height: 100px;
+}
+.h120{
+	height: 120px;
+}
+.h140{
+	height: 140px;
+}
+.h160{
+	height: 160px;
+}
+.h180{
+	height: 180px;
+}
+.h200{
+	height: 200px;
+}
+
+/* margin, padding 관련 설정 */
+.mb60{
+	margin-bottom: 60px;
+}
+.mt60{
+	margin-top: 60px;
+}
+
+
+
+
+
+
+
+.yb.btn, .yb.btn>.btn-progress{
+	padding: 0.5rem;
+	outline: none;
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	display: flex;
+	position: relative;
+}
+
+.yb.btn-hover:hover{
+	background-color: rgb(245, 245, 245);
+	transition: background-color 0.2s ease-in-out;
+	cursor: pointer;
+}
+
+.yb.btn>.btn-text, .yb.btn>.btn-progress>.btn-text{
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.yb.btn{
+	background-color: white;
+}
+
+.yb.btn>.btn-progress{
+	margin-left: auto;
+	background-color: rgb(245, 245, 245);
+}
+
+.yb.btn.btn-inline{
+	display: inline-block;
+}
+
+.yb>ul{
+	list-style:none;
+    margin:0px;
+    padding:0px;
+    text-align: justify;
+}
+
+.yb>ul>li{
+	margin: 5px 4px;
+    padding: 0px;
+    border: none;
+    list-style: none;
+    display: inline-block;
+    border-radius: 20px;
+}
