@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="member">
 <!--  id 복체크-->
-	<select id = "check" parameterType = "String" resultType = "MemberDto">
+	<select id = "idCheck" parameterType = "String" resultType = "MemberVo">
 	select*from member where member_id = #{memberId}
 	</select>
 
@@ -17,38 +17,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 <!--  가입 구문-->
-	<insert id = "insert" parameterType = "MemberDto">
-		INSERT INTO member(
-			member_id, 
-			member_pw,
-			member_nick,
-			member_email,
-			member_address
-		)
-		VALUES(
-			#{member_id}
-			#{member_pw}		
-			#{member_nick}				
-			#{member_email}
-			#{member_address}			
-		)
+	<insert id = "insert" parameterType = "MemberVo" >
+		INSERT INTO member(member_no,member_id,member_pw,member_nick,member_email)
+		VALUES( #{memberNo},#{memberId},#{memberPw},#{memberNick},#{memberEmail})
 	</insert>
 	
-		<select id="get" resultType="MemberDto" parameterType="int">
+		<select id="get" resultType="MemberVo" parameterType="int">
 		select * from member where member_no = #{memberNo}
 	</select>
 	
 	
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-

@@ -13,6 +13,7 @@
 	<script src="${root}/js/join.js"></script>
 
 <body>
+
 <div class="container">
 	<a href= "<%=request.getContextPath()%>/index.jsp" >
 	<img src="<%=request.getContextPath()%>/image/example.png" class = inline-block>
