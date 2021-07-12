@@ -113,7 +113,7 @@
 			<div class="row">
 			
 				<div class="text-center subDiv">
-					<span>아직 Fun_ding 계정이 없으신가요? <a href="#">가입하기</a></span>
+					<span>아직 Fun_ding 계정이 없으신가요? <a href="${pageContext.request.contextPath}/member/join">가입하기</a></span>
 					
 				</div>
 				<hr>

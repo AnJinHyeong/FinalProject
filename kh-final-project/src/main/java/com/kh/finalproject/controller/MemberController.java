@@ -1,6 +1,7 @@
 package com.kh.finalproject.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,15 +10,12 @@ import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.vo.member.MemberVo;
 
 @Controller
+@RequestMapping("/member")
 public class MemberController {
 
 	@RequestMapping("/join")
 	public String join() {
 		return "member/join";
-	}
-	@RequestMapping("/login")
-	public String login() {
-		return "member/login";
 	}
 	
 	@Autowired
@@ -29,7 +27,10 @@ public class MemberController {
 	return "member/joinSuccess";
 	
 	}
-
 	 
-
+	@GetMapping("/login")
+	public String memberInsert() {
+		return "member/login";
+	}
+	
 }
