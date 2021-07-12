@@ -18,7 +18,7 @@ public class JoinController {
 	
 	@Autowired
 	private MemberDao memberDao; 
-
+ 
 	@PostMapping(value = "/memberInsert")
 	public String memberInsert(@ModelAttribute MemberVo memberVo) {
 	memberDao.memberInsert(memberVo);
