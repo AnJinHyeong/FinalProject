@@ -15,7 +15,7 @@ auth_check varchar2(30)
 #project table
 CREATE TABLE project(
 project_no NUMBER(19) PRIMARY KEY,
-project_title varchar2(300) NOT NULL,
+project_title varchar2(300),
 project_content varchar2(4000),
 project_target_amount NUMBER(19),
 project_percente NUMBER(5),
@@ -24,7 +24,7 @@ project_regist_date DATE DEFAULT sysdate NOT NULL,
 project_start_date DATE,
 project_end_date DATE,
 project_stop_caues varchar2(4000),
-project_summary varchar2(50) not null,
+project_summary varchar2(150) not null,
 member_no references member(member_no) on delete SET NULL,
 category_no REFERENCES category(category_no) ON DELETE SET NULL
 );
@@ -36,7 +36,8 @@ CREATE SEQUENCE project_seq;
 create table category(
 category_no number(19) primary key,
 category_theme varchar2(60) not null unique,
-category_super number(19)
+category_super number(19),
+category_approve char(1) check (category_approve in ('Y'))
 );
 
 create sequence category_seq;

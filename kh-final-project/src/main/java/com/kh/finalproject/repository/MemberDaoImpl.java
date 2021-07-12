@@ -34,4 +34,15 @@ public class MemberDaoImpl implements MemberDao{
 		return sqlSession.selectOne("member.get",memberVo);
 	}
 
+	@Override
+	public MemberDto login(MemberDto memberDto) {
+		return sqlSession.selectOne("member.login", memberDto);
+	}
+
+	@Override
+	public MemberDto logout(MemberDto memberDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
