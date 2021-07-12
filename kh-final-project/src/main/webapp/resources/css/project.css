@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+*:after, *:before{
+	box-sizing: inherit;
+}
+
 .section-project-main{
 	width: 1200px;
 	height: 600px;
@@ -287,4 +291,40 @@
 
 .font-gray{
 	color: #dcdcdc;
+}
+
+.project-insert-funding-div{
+	margin-top:15px; 
+	height: 200px; 
+	background: rgb(253, 244, 243); 
+	border-radius: 8px; 
+	padding: 23px 24px 22px;
+	font-weight: 400; 
+	color: rgb(109, 109, 109); 
+	font-size: 12px !important; 
+	line-height: 20px !important;"
+}
+
+
+lili:before {
+    position: absolute;
+    top: 4px;
+    left: 0px;
+    z-index: 1;
+    content: "";
+    border: 3px solid rgb(0, 0, 0);
+    display: block;
+    width: 9px;
+    height: 9px;
+    border-radius: 4px;
+    background: rgb(255, 255, 255);
+}
+
+lili:after {
+	content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    height: 100%;
+    border-left: 1px solid rgb(228, 228, 228);
 }

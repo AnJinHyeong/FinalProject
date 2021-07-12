@@ -43,5 +43,9 @@ public class ProjectController {
 		return "redirect:projectMain";
 	}
 	
+	@GetMapping("/projectMainFunding")
+	public String projectFunding() {
+		return "project/projectMainFunding";
+	}
 
 }
