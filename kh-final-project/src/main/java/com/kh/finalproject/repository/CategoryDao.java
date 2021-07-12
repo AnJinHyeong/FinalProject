@@ -5,5 +5,5 @@ import java.util.List;
 import com.kh.finalproject.entity.CategoryDto;
 
 public interface CategoryDao {
-	List<CategoryDto> list();
+	List<CategoryDto> approveList();
 }

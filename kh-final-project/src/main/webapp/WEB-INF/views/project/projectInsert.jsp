@@ -71,6 +71,15 @@
 				$("#result").show();
 			}
 		});
+		
+		$("#projectInsertForm").on("submit", function(e){
+			if($("textarea[name=projectSummary]").val().length < 10 || $("textarea[name=projectSummary]").val().length > 50){
+				$("textarea[name=projectSummary]").focus();
+				e.preventDefault();
+			}
+			
+		});
+		
 	});
 </script>
 
@@ -111,7 +120,7 @@
 			<div class="mb40">
 				<ul>
 
-					<c:forEach var="categoryDto" items="${categoryList}">
+					<c:forEach var="categoryDto" items="${categoryApproveList}">
 
 						<li>
 							<button class="btn btn-hover btn-inline w120 category-btn">${categoryDto.categoryTheme}</button>
@@ -136,20 +145,28 @@
 					<p class="f24 fBold pb10">프로젝트를 간단하게 소개해주세요.</p>
 					<p class="f16 pb20">나중에 수정 가능하니 편하게 적어주세요.</p>
 				</div>
-			
 				
-				<div class="bottomLine mb10">
-					<textarea name="projectSummary" placeholder="프로젝트 요약을 입력해주세요." class="w100p h140 textarea-fix"></textarea>
-					<div class="float-container">
-						<p id="textMin" class="f12 pb10 pt10 left fRed">최소 10자 이상 입력해주세요</p>
-						<p id="textMax" class="f12 pb10 pt10 left fRed">최대 50자 이하로 입력해주세요</p>
-						<p id="textSize" class="f12 pb10 pt10 right">(<span id="textSizeSpan">0</span><span>/50</span>)</p>
+				<form id="projectInsertForm" action="projectInsert" method="post">
+				
+					<div class="bottomLine mb10">
+						<textarea name="projectSummary" placeholder="프로젝트 요약을 입력해주세요." class="w100p h140 textarea-fix" required></textarea>
+						<div class="float-container">
+							<p id="textMin" class="f12 pb10 pt10 left fRed">최소 10자 이상 입력해주세요</p>
+							<p id="textMax" class="f12 pb10 pt10 left fRed">최대 50자 이하로 입력해주세요</p>
+							<p id="textSize" class="f12 pb10 pt10 right">(<span id="textSizeSpan">0</span><span>/50</span>)</p>
+						</div>
 					</div>
-				</div>
 				
-				<div class="float-container">
-					<button class="btn btn-insert btn-hover right">프로젝트 생성하기</button>
-				</div>
+					<div class="float-container">
+						
+						<input type="hidden" value="40" name="memberNo">
+						<input type="hidden" value="1" name="categoryNo">
+					
+						<input class="btn btn-insert btn-hover right" type="submit" value="프로젝트 생성하기">
+					</div>
+				
+				</form>
+				
 			</div>
 
 		</div>

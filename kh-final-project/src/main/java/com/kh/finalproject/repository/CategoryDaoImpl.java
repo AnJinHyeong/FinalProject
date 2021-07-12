@@ -15,8 +15,8 @@ public class CategoryDaoImpl implements CategoryDao{
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<CategoryDto> list() {
-		return sqlSession.selectList("category.list");
+	public List<CategoryDto> approveList() {
+		return sqlSession.selectList("category.approveList");
 	}
 
 	
