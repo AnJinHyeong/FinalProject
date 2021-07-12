@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.repository.MemberDao;
-import com.kh.finalproject.vo.member.MemberVo;
+import com.kh.finalproject.vo.MemberVo;
 
 @Controller
 @RequestMapping("/member")

@@ -4,7 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.vo.ProjectCategoryVo;
 
 @Repository
 public class ProjectDaoImpl implements ProjectDao{
@@ -13,8 +13,8 @@ public class ProjectDaoImpl implements ProjectDao{
 	private SqlSession sqlSession;
 	
 	@Override
-	public void insert(ProjectDto projectDto) {
-		sqlSession.insert("project.insert", projectDto);
+	public void insert(ProjectCategoryVo projectCategoryVo) {
+		sqlSession.insert("project.insert", projectCategoryVo);
 	}
 
 }

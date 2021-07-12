@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.MemberDto;
-import com.kh.finalproject.vo.member.MemberVo;
+import com.kh.finalproject.vo.MemberVo;
 
 @Repository
 public class MemberDaoImpl implements MemberDao{

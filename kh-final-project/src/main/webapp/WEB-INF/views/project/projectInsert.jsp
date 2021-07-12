@@ -21,6 +21,9 @@
 			$("#result").show();
 			
 	        $(this).addClass("btn-clicked");
+	        
+	        $("input[name=categoryTheme]").val($(this).text());
+	        console.log($(this));
 		});
 		
 		$("textarea[name=projectSummary]").on("input", function(){
@@ -69,6 +72,7 @@
 				$(this).css("font-weight", "bold");
 				$(this).css("background-color", "rgb(245, 245, 245)");
 				$("#result").show();
+				$("input[name=categoryTheme]").val($(this).val());
 			}
 		});
 		
@@ -159,8 +163,8 @@
 				
 					<div class="float-container">
 						
-						<input type="hidden" value="40" name="memberNo">
-						<input type="hidden" value="1" name="categoryNo">
+						<input type="hidden" value="${memberNo}" name="memberNo">
+						<input type="text" value="" name="categoryTheme">
 					
 						<input class="btn btn-insert btn-hover right" type="submit" value="프로젝트 생성하기">
 					</div>

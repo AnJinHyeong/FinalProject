@@ -19,5 +19,24 @@ public class CategoryDaoImpl implements CategoryDao{
 		return sqlSession.selectList("category.approveList");
 	}
 
+	@Override
+	public CategoryDto get(String categoryTheme) {
+		return sqlSession.selectOne("category.get", categoryTheme);
+	}
+
+	@Override
+	public boolean isExist(String categoryTheme) {
+		return sqlSession.selectOne("category.get", categoryTheme) != null;
+	}
+
+	@Override
+	public int getSequence() {
+		return sqlSession.selectOne("category.sequence");
+	}
+
+	@Override
+	public void insert(CategoryDto categoryDto) {
+		sqlSession.insert("category.insert", categoryDto);
+	}
 	
 }

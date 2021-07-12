@@ -1,7 +1,7 @@
 package com.kh.finalproject.repository;
 
-import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.vo.ProjectCategoryVo;
 
 public interface ProjectDao {
-	 void insert(ProjectDto projectDto);
+	 void insert(ProjectCategoryVo projectCategoryVo);
 }
