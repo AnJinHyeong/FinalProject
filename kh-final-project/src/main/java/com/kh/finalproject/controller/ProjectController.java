@@ -14,8 +14,17 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/project")
 public class ProjectController {
 	
+	@GetMapping("/projectMain")
+	public String projectMain() {
+		return "project/projectMain";
+	}
 	@Autowired
 	private CategoryDao categoryDao;
+	
+	@GetMapping("/projectMainDefault")
+	public String projectMainDefault(){
+		return "project/projectMainDefault";
+	}
 	
 	@GetMapping("/projectInsert")
 	public String projectInsert(Model model) {

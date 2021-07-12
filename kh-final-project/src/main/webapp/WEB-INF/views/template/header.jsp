@@ -13,8 +13,7 @@
 <title>FUN_ding</title>
 	<link rel="stylesheet" type="text/css" href="${root}/css/template.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/common.css">
-<%-- 	<link rel="stylesheet" type="text/css" href="${root}/css/test.css"> --%>
-
+	<link rel="stylesheet" type="text/css" href="${root}/css/project.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/yb.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
@@ -24,18 +23,17 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
-
 </head>
 <body class="align-column">
 
 	<header class="main-row"> 
 		<div class="header-row">
 			<div class="header-left">
-				<a class="header-a" href="#">프로젝트 둘러보기</a>
+				<a class="header-a" href="${root}/project/projectMain">프로젝트 둘러보기</a>
 				<a class="header-a" href="${root}/project/projectInsert">프로젝트 올리기</a>
 			</div>
 			<div class="header-center">
-				<a style="font-size: 30px;" href="${root}/">FUN_ding</a>
+				<a class="header-center-link" href="${root}/">FüN_ding</a>
 			</div>
 			<div class="header-right">
 				<img src="${root}/image/search.svg" width="20" height="20">
@@ -53,4 +51,3 @@
 			</div>
 		</div>
 	</header>
-		

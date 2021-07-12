@@ -13,4 +13,7 @@ public class MemberController {
 	public String login() {
 		return "member/login";
 	}
+
+	 
+
 }
