@@ -23,6 +23,10 @@ public class MemberController {
 	public String join() {
 		return "member/join";
 	}
+	@RequestMapping("/myPage")
+	public String myPage() {
+		return "member/myPage";
+	}
 	
 	@Autowired
 	private MemberDao memberDao;

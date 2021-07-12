@@ -40,13 +40,17 @@
 					<c:when test="${isLogin}">
 						<a class="header-link" href="${root}/member/logout" style="width: 95px; text-align: center;">로그아웃</a>
 						<a class="header-link" href="#" style="margin: 0 10px;">5000p</a>
-						<img src="${root}/image/user-in.svg" width="25" height="25">
+						<a href="${root}/member/myPage"><img src="${root}/image/user-in.svg" width="25" height="25"></a>
 					</c:when>
 					<c:otherwise>
 						<a class="header-link" href="${root}/member/login" style="width: 120px; margin: 0 35px;">로그인/회원가입</a>
-						<img src="${root}/image/user-out.svg" width="25" height="25" >
+						<a href="${root}/member/myPage"><img src="${root}/image/user-out.svg" width="25" height="25" ></a>
 					</c:otherwise>
 				</c:choose>
 			</div>
+		</div>
+		
+		<div>
+		
 		</div>
 	</header>
