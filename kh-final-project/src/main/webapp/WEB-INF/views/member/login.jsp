@@ -1,77 +1,135 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
-
-<html>
-	<link rel="stylesheet" type="text/css" href="${root}/css/join.css">
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<style>
 	
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="${root}/js/join.js"></script>
-
-<body>
-
-<div class="container">
-	<a href= "<%=request.getContextPath()%>/index.jsp" >
-	<img src="<%=request.getContextPath()%>/image/example.png" class = inline-block>
-	</a>
-</div>
+	.loginForm{
+		width: 80%;
+		margin-top : 20px;
+		margin:0 auto;
+		border:1px groove #E4E4E4;
+		padding:40px;
+		border-radius:10px;
+		border-color:#E4E4E4;
+	
+	}
+	.hrClass{
+		size : 1px;
 		
-	<div class = "container joinBorder">
-		<div class = "row text-center">
-			<h2>회원 가입</h2>
+	}
+
+	.loginBtn{
+		border-radius:5px;
+		background:red;
+		color:#fff;
+		border:none;
+		position:relative;
+		height:50px;
+		width:100%;
+  		font-size:1.6em;
+  		padding:0 2em;
+  		cursor:pointer;
+  		transition:800ms ease all;
+  		outline:none;
+	}
+	.loginBtn:hover{
+		background:#fff;
+		color:red;
+	}
+	.loginBtn:before,.loginBtn:after{
+	  	content:'';
+	  	position:absolute;
+	  	top:0;
+	  	right:0;
+	  	height:2px;
+	  	width:0;
+	  	background: #1AAB8A;
+	 	transition:400ms ease all;
+	}
+	.loginBtn:after{
+		right:inherit;
+		top:inherit;
+		left:0;
+		bottom:0;
+	}
+	.loginBtn:hover:before,.loginBtn:hover:after{
+		width:100%;
+		transition:800ms ease all;
+	}
+	.mainDiv{
+		width:40%;
+		min-height: 600px;
+		padding:50px;
+	}
+	.subDiv{
+		padding: 20px;
+
+	}
+	.radius-b{
+		height:60px;
+		border-radius:5px;
+	}
+	.titleDiv{
+		padding-bottom:20px;
+	}
+	a:hover{
+		color:green;
+	}
+	
+
+</style>
+<hr class="hrClass">
+<div class="container-600 mainDiv">
+	<div class="loginForm">
+		<div class="text-left titleDiv">
+			<h1>로그인</h1>
 		</div>
-		
-		<form action = "join" id = "form" method = "post" class="join-form">
-			<div class = "row text-left">
-				<label for = "memberId">아이디</label>
-				<input type = "text" name="memberId" id = "memberId" required class = "form-input form-input-underline2" placeholder = "8~20자 이내의 영문 소대문자, 숫자 조합가능">
-					<span class = "fail">아이디 형식이 올바르지 않습니다</span>
-					<span class = "success">올바른 형식의 아이디입니다</span>
-			</div>
-			<div class = "row text-left">
-				<label for = "memberPw">비밀번호</label>
-				<input type = "password" name="memberPw" id = "memberPw" required class = "form-input form-input-underline2"
-							placeholder = "8~16자 이내의 영문 소대문자, 숫자, 특수문자(!@#$%^&*)조합 가능">
-							
-				<input type = "password" id = "memberPw2" required class = "form-input form-input-underline2 padding-t"
-							placeholder = "비밀번호 재입력">
-					<div class = "fail failPw">비밀번호 형식이 올바르지 않습니다</div>
-			 	   <div class = "success successPw">올바른 형식의 비밀번호입니다</div>
-					<div class = "fail failPw2">비밀번호와 재입력하신 비밀번호가 다릅니다</div>
-					<div class = "success successPw2">일치하는 비밀번호입니다</div>
-					<div class = "fail firstPw">비밀번호를 먼저 입력해주세요</div>
-			</div>
+
+		<form action="login" method="post">
 			
-			<div class = "row text-left">
-				<label for = "memberNick">닉네임</label>
-				<input type = "text" name="memberNick" id = "memberNick" required class= "form-input form-input-underline2"
-							placeholder = "한 글자 이상, 형식 제한 없음 ">
-							<span class = "fail">닉네임은 최소 한 글자 이상, 최대 열 글자 까지입니다</span>
-							<span class = "success">멋진 닉네임입니다.</span>
-			</div>
-			
-				<div class = "row text-left">
-				<label for = "memberEmail">이메일</label>
-				<input type = "email" name="memberEmail" id = "memberEmail" required class = "form-input form-input-underline2"
-							placeholder = "자주 사용하는 이메일">
-			</div>
-			
-			<div class = "row text-left">
-				<label for = "memberIntroduce">자기소개</label>
-				<input type="text" id = "memberIntroduce" class= "form-input form-input-underline2">
+			<div class="row text-left">
+				<div class="row text-left">
+					<input type="text" name="memberId" required class="form-input form-underline radius-b" placeholder="아이디 입력">
 				
+				
+				</div>
+				<div>
+					<input type="password" name="memberPw" required class="form-input form-underline radius-b" placeholder="비밀번호 입력">
+				
+				</div>
+				<div>
+					<c:if test="${param.error != null}">
+					<div class="row">
+						<h5 class="error">정보가 일치하지 않습니다</h5>
+					</div>
+					</c:if>
+				
+				</div>
+			
 			</div>
-			<div class = "row text-center">
-			<input type = "submit" id= "submit" style= 'cursor:pointer' value = "가입" class = "form-btn form-btn-normal ">
+			<button type="submit" class="loginBtn">로그인</button>
+			
+			<div class="row">
+			
+				<div class="text-center subDiv">
+					<span>아직 Fun_ding 계정이 없으신가요? <a href="#">가입하기</a></span>
+					
+				</div>
+				<hr>
+				<div class="text-center subDiv">
+					<div><a href="#">아이디를 잊으셨나요?</a></div>
+					
+					<div><a href="#">비밀번호를 잊으셨나요?</a></div>
+				</div>
+			
 			</div>
 		</form>
+		
 	</div>
+	
+</div>
 
-</body>
-</html>
+
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
