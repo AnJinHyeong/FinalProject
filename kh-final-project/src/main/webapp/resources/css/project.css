@@ -96,6 +96,34 @@
     font-weight: 700 !important;
 }
 
+.main-li-a2{
+	color: rgba(13, 13, 13, 0.2);
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    opacity: 1;
+    font-size: 14px !important;
+    line-height: 22px !important;
+    font-family: NotoSansKR, "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+    font-weight: 700 !important;
+}
+
+.main-li-a2:hover{
+	color: rgb(13, 13, 13);
+}
+
+.main-li-a2.on{
+	color: rgb(13, 13, 13);
+}
+
+.main-li-a2>i{
+	color: rgba(255, 0, 0, 0.2);
+}
+
+.main-li-a2.on>i, .main-li-a2:hover>i{
+	color: rgb(255, 0, 0);
+}
+
 .project-main-span{
 	color: rgb(158, 158, 158);
     font-size: 12px;
@@ -190,7 +218,7 @@
 .project-main-header4{
 	width: 100%; 
 	background-color: rgb(255, 255, 255);
-	margin-top: 15px;
+	margin-top: 215px;
 	padding-top: 10px;
 	position: fixed; 
 }
@@ -313,9 +341,22 @@
 	font-weight: 400; 
 	color: rgb(109, 109, 109); 
 	font-size: 12px !important; 
-	line-height: 20px !important;"
+	line-height: 20px !important;
 }
 
+.project-insert-item-div{
+	margin-top:15px;
+	padding: 0 auto;
+	height: 200px; 
+	background: white; 
+	border-radius: 8px; 
+	padding: 23px 24px 22px;
+	font-weight: 400; 
+	color: rgb(109, 109, 109); 
+	font-size: 12px !important; 
+	line-height: 20px !important;
+	display: inline-block;
+}
 
 lili:before {
     position: absolute;
@@ -338,4 +379,23 @@ lili:after {
     left: 4px;
     height: 100%;
     border-left: 1px solid rgb(228, 228, 228);
+}
+
+.project-itemList{
+	max-height: 1000px;
+	overflow-y: auto;
+}
+
+.project-insert-item-list{
+	width: 98%;
+	height: 100px;
+	margin-top: 15px;
+	background: white; 
+	border-radius: 8px;
+	padding: 20px 20px;
+	font-weight: 400; 
+	color: rgb(109, 109, 109); 
+	font-size: 12px !important;
+	display: inline-block;
+	text-align: justify;
 }

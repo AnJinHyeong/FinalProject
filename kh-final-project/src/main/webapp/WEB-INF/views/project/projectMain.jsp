@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <section class="main-row topLine">
@@ -44,7 +45,7 @@
 			
 			
 			<div style="width: 100%; display: flex; -webkit-box-pack: justify; justify-content: space-between; padding: 20px 0;">
-				<a class="project-main-link" href="projectMainDefault">
+				<a class="project-main-link" href="${root}/project/${projectNo}/projectMainDefault">
 					<div style="margin: 0px 0px 70px;">
 						<p class="fRed fBold f16"><i class="fas fa-pen"></i></p>
 					</div>
