@@ -17,17 +17,22 @@ public class MemberController {
 	public String join() {
 		return "member/join";
 	}
-	 
-	@Autowired
-	private MemberDao memberDao;
-	
-	@PostMapping(value = "/memberInsert")
-	public String memberInsert(@ModelAttribute MemberVo memberVo) {
-		memberDao.memberInsert(memberVo);
-		return "member/joinSuccess";
-	
+	@RequestMapping("/login")
+	public String login() {
+		return "member/login";
 	}
 	
+	@Autowired
+	private MemberDao memberDao; 
+
+	@PostMapping(value = "/memberInsert")
+	public String memberInsert(@ModelAttribute MemberVo memberVo) {
+	memberDao.memberInsert(memberVo);
+	return "member/joinSuccess";
+	
+	}
+
+	 
 	@GetMapping("/memberLogin")
 	public String memberInsert() {
 		return "member/login";
