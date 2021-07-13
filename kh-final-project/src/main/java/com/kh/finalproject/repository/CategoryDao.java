@@ -11,6 +11,8 @@ public interface CategoryDao {
 	boolean isExist(String categoryTheme);
 	int getSequence();
 	void insert(CategoryDto categoryDto);
+	//카테고리 번호를 이용한 approve상태 확인
 	String approveCheck(int categoryNo);
-	CategoryDto getNo(int categoryNo);
+	//카테고리 번호를 이용한 category 조회
+	CategoryDto getByNo(int categoryNo);
 }

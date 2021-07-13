@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT CATEGORY_APPROVE FROM category where category_no = #{categoryNo}
 	</select>
 	
-	<select id="getNo" resultType="CategoryDto" parameterType="int">
+	<select id="getByNo" resultType="CategoryDto" parameterType="int">
 		select * from category where category_no = #{categoryNo}
 	</select>
 	

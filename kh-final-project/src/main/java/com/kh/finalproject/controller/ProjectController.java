@@ -73,7 +73,7 @@ public class ProjectController {
 		ProjectDto find = projectDao.get(projectDto);
 		model.addAttribute("projectDto", find);
 		
-		CategoryDto theme = categoryDao.getNo(find.getCategoryNo());
+		CategoryDto theme = categoryDao.getByNo(find.getCategoryNo());
 		
 		model.addAttribute("categoryDto", theme);
 		
@@ -95,7 +95,7 @@ public class ProjectController {
 		model.addAttribute("projectDto", find);
 		
 		model.addAttribute("categoryDto", categoryDao.userCustomList(find.getCategoryNo()));
-		model.addAttribute("category", categoryDao.getNo(find.getCategoryNo()));
+		model.addAttribute("category", categoryDao.getByNo(find.getCategoryNo()));
 		
 		
 		return "project/projectMainDefault";

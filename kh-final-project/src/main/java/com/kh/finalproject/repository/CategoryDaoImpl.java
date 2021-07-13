@@ -50,8 +50,8 @@ public class CategoryDaoImpl implements CategoryDao{
 	}
 
 	@Override
-	public CategoryDto getNo(int categoryNo) {
-		return sqlSession.selectOne("category.getNo",categoryNo);
+	public CategoryDto getByNo(int categoryNo) {
+		return sqlSession.selectOne("category.getByNo",categoryNo);
 	}
 
 	
