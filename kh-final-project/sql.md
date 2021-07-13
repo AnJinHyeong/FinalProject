@@ -40,7 +40,6 @@ category_theme varchar2(60) not null unique,
 category_super number(19),
 category_approve char(1) check (category_approve in ('Y'))
 );
-<<<<<<< HEAD
 
 create sequence category_seq;
 
@@ -76,6 +75,4 @@ member_no REFERENCES member(member_no) ON DELETE SET NULL
 );
 DROP SEQUENCE pay_seq;
 CREATE SEQUENCE pay_seq;
-=======
- 
-create sequence category_seq;
+
