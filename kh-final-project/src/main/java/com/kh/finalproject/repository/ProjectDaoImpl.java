@@ -17,4 +17,14 @@ public class ProjectDaoImpl implements ProjectDao{
 		sqlSession.insert("project.insert", projectCategoryVo);
 	}
 
+	@Override
+	public void insertBySequence(ProjectCategoryVo projectCategoryVo) {
+		sqlSession.insert("project.insertBySequence", projectCategoryVo);
+	}
+
+	@Override
+	public int sequence() {
+		return sqlSession.selectOne("project.sequence");
+	}
+
 }

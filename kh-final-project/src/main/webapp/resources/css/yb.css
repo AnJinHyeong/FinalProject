@@ -54,6 +54,15 @@
 .w200{
 	width: 200px;
 }
+.w260{
+	width: 260px;
+}
+.w280{
+	width: 280px;
+}
+.w310{
+	width: 310px;
+}
 .h20{
 	height: 20px;
 }
@@ -134,10 +143,18 @@
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
+	min-height: 100%;
+}
+
+.yb.section-row{
+	width: 1200px;
+	min-height: 1000px;
+	margin: 0 auto;
 }
 
 .yb .section-opacity{
 	background-color: rgba( 255, 255, 255, 0.9 );
+	min-height: 100%;
 }
 
 .yb .btn, .yb .btn-progress{
@@ -228,4 +245,25 @@
 .yb .textarea-fix{
 	 resize: none;
 	 padding: 20px;
+}
+
+.yb.modal{
+	position: fixed;
+	background-color: white;
+	height: 300px;
+	width: 400px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 102;
+}
+
+.yb.modal-background{
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.2);
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 101;
 }
