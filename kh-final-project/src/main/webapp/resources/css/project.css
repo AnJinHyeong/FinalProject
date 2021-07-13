@@ -346,6 +346,7 @@
 
 .project-funding-li{
 	padding: 0px 0px 45px 20px;
+	border-left:1px solid #dcdcdc;
 }
 
 .project-insert-item-div{
@@ -359,10 +360,10 @@
 	color: rgb(109, 109, 109); 
 	font-size: 12px !important; 
 	line-height: 20px !important;
-	display: inline-block;
+/* 	display: inline-block; */
 }
 
-lili:before {
+.project-funding-li:before {
     position: absolute;
     top: 4px;
     left: 0px;
@@ -376,7 +377,7 @@ lili:before {
     background: rgb(255, 255, 255);
 }
 
-lili:after {
+.project-funding-li:after {
 	content: "";
     position: absolute;
     top: 4px;

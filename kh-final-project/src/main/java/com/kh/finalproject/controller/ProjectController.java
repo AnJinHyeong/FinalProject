@@ -91,6 +91,7 @@ public class ProjectController {
 		
 		model.addAttribute("categoryDto", categoryDao.userCustomList(find.getCategoryNo()));
 		
+		
 		return "project/projectMainDefault";
 	}
 	
@@ -148,6 +149,12 @@ public class ProjectController {
 	@PostMapping("/{projectNo}/projectMainGiftItem")
 	public String projectMainGiftItem(@ModelAttribute ItemDto itemDto, @PathVariable int projectNo) {
 		itemDao.insert(itemDto);
+		return "redirect:projectMainGiftItem";
+	}
+	
+	@PostMapping("/{projectNo}/projectMainGiftItemDelete")
+	public String projectMainGiftItemDelete(@PathVariable int projectNo, @RequestParam int itemNo) {
+		itemDao.delete(itemNo);
 		return "redirect:projectMainGiftItem";
 	}
 

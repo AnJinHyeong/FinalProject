@@ -5,8 +5,33 @@
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
 <jsp:include page="/WEB-INF/views/project/projectHeader.jsp">
-	<jsp:param value="${root}/project/projectMainDefault" name="division"/>
+	<jsp:param value="${root}/project/${projectNo}/projectMainDefault" name="division"/>
 </jsp:include>
+
+
+<c:forEach var="categoryDto" items="${categoryDto}">
+	<c:if test="${categoryDto.categoryApprove == null}">
+		<p class="project-insert-font" style="font-size: 12px; margin-top: 5px;">* 현태 카테고리는 심사중입니다.</p>
+	</c:if>
+</c:forEach>
+
+
+<script>
+	
+	$(function(){
+		
+		$('.project-insert-select').on('input', function () {
+			var selectVal = $(this).val();
+			console.log(selectVal);
+			
+			
+			
+		});
+		
+	});
+	
+	
+</script>
 
 <section class="main-row topLine">
 	
@@ -30,9 +55,10 @@
 						<p class="project-insert-p">카테고리</p>
 						<select class="project-insert-select" name="categoryNo">
 							<c:forEach var="categoryDto" items="${categoryDto}">
-								<option value="${categoryDto.categoryNo}">${categoryDto.categoryTheme}(변경시 사라집니다)</option>
+								<option value="${categoryDto.categoryNo}" data-approve="${categoryDto.categoryApprove}">${categoryDto.categoryTheme}</option>
 							</c:forEach>
 						</select>
+						<p class="project-insert-font" style="font-size: 12px; margin-top: 5px;">* 현태 카테고리는 심사중입니다.</p>
 					</div>
 					<div>
 						<p class="project-insert-p">세부 카테고리</p>

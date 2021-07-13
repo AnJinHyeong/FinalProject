@@ -6,7 +6,7 @@
 <c:set var="projectNo" value="${projectNo}"></c:set>
 
 <jsp:include page="/WEB-INF/views/project/projectHeader.jsp">
-	<jsp:param value="${root}/project/projectMainGift" name="division" />
+	<jsp:param value="${root}/project/${projectNo}/projectMainGift" name="division" />
 </jsp:include>
 
 <script>
@@ -41,7 +41,7 @@
 				<div class="project-insert-div" style="height: 300px;">
 					<dl class="project-insert-dl">
 						<dt class="project-insert-dt">
-							내가 만든 선물 <span class="project-insert-font">*</span>
+							내가 만든 선물 (<span id="giftCount">${giftCount}33</span>)
 						</dt>
 						<div class="project-insert-funding-div">
 							<div>

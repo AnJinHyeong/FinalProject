@@ -5,12 +5,12 @@
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
 <jsp:include page="/WEB-INF/views/project/projectHeader.jsp">
-	<jsp:param value="${root}/project/projectMainFunding" name="division"/>
+	<jsp:param value="${root}/project/${projectNo}/projectMainFunding" name="division"/>
 </jsp:include>
 
 <section class="main-row topLine">
 	
-	<div class="project-back-color" style="min-height: 1050px;">
+	<div class="project-back-color" style="min-height: 1150px;">
 		
 		<div class="section-row" style=" padding-top: 10px;">
 			
@@ -49,7 +49,7 @@
 				
 				<hr>
 				
-				<div class="project-insert-div" style="height: 320px;">
+				<div class="project-insert-div" style="height: 400px;">
 					<dl class="project-insert-dl">
 						<dt class="project-insert-dt">
 							펀딩 일정 <span class="project-insert-font">*</span>
@@ -60,13 +60,17 @@
 					</dl>
 					<div class="projcet-insert-div2">
 						<div style="width: 630px;">
-							<ul style="margin: 0; padding: 0;">
+							<ul style="margin: 0; padding: 0; list-style-position: inherit;">
 								<li class="project-funding-li">
 									<div style="width: 630px;">
 										<p class="project-insert-p">시작일</p>
 										<div class="projcet-insert-div2">
 											<input type="date" class="projcet-insert-input" name="projectStartDate">
 										</div>
+									</div>
+									<div style="height: 20px; margin-top: 30px;">
+										<p class="project-insert-p">펀딩기간</p>
+										<p class="project-insert-p" style="font-size: 12px; color: #a09e9e;">30일</p>
 									</div>
 								</li>
 								<li class="project-funding-li">

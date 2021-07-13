@@ -28,6 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{categoryNo}, #{categoryTheme})
 	</insert>
 	
+	
 </mapper>
 
 
