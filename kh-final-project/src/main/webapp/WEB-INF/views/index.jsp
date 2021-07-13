@@ -11,7 +11,7 @@
 		
 	</div>
 	
-	<div class="section-project" style="background-color: #dcdcdc;">
+	<div class="section-project-view" style="background-color: #dcdcdc;">
 		
 		프로젝트 구현 위치
 		

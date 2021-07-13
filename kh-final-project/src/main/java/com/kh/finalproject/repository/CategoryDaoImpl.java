@@ -18,6 +18,11 @@ public class CategoryDaoImpl implements CategoryDao{
 	public List<CategoryDto> approveList() {
 		return sqlSession.selectList("category.approveList");
 	}
+	
+	@Override
+	public List<CategoryDto> userCustomList(int categoryNo) {
+		return sqlSession.selectList("category.userCustomList",categoryNo);
+	}
 
 	@Override
 	public CategoryDto get(String categoryTheme) {
@@ -38,5 +43,17 @@ public class CategoryDaoImpl implements CategoryDao{
 	public void insert(CategoryDto categoryDto) {
 		sqlSession.insert("category.insert", categoryDto);
 	}
+
+	@Override
+	public String approveCheck(int categoryNo) {
+		return sqlSession.selectOne("category.approveCheck",categoryNo);
+	}
+
+	@Override
+	public CategoryDto getByNo(int categoryNo) {
+		return sqlSession.selectOne("category.getByNo",categoryNo);
+	}
+
+	
 	
 }

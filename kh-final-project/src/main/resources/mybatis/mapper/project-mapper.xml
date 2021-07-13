@@ -13,6 +13,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			(project_seq.nextval, 'X', sysdate, #{projectSummary}, #{memberNo}, #{categoryNo})
 	</select>
 	
+	<select id="list" parameterType="int" resultType="ProjectDto">
+		select * from project where member_no = #{memberNo}
+	</select>
+	
+	<select id="get" parameterType="ProjectDto" resultType="ProjectDto">
+		select * from project where member_no = #{memberNo} and project_no = #{projectNo}
+	</select>
+	
 	<select id="insertBySequence" parameterType="ProjectCategoryVo">
 		insert into project
 			(project_no, project_state, project_regist_date, project_summary, member_no, category_no)
@@ -23,6 +31,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="sequence" resultType="int">
 		select project_seq.nextval from dual
 	</select>
+	
+	<update id="projectUpdate" parameterType="ProjectDto">
+		update project set category_no = #{categoryNo}, project_title = #{projectTitle} ,project_summary = #{projectSummary} where project_no = #{projectNo}
+	</update>
 	
 </mapper>
 
