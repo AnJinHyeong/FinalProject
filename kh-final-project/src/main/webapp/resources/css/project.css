@@ -335,7 +335,7 @@
 	margin-top:15px;
 	padding: 0 auto;
 	height: 200px; 
-	background: white; 
+	background: white;
 	border-radius: 8px; 
 	padding: 23px 24px 22px;
 	font-weight: 400; 
@@ -355,7 +355,7 @@
 	color: rgb(109, 109, 109); 
 	font-size: 12px !important; 
 	line-height: 20px !important;
-	display: inline-block;
+/* 	display: inline-block; */
 }
 
 lili:before {

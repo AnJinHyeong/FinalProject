@@ -90,5 +90,11 @@ public class ProjectController {
 		itemDao.insert(itemDto);
 		return "redirect:projectMainGiftItem";
 	}
+	
+	@PostMapping("/{projectNo}/projectMainGiftItemDelete")
+	public String projectMainGiftItemDelete(@PathVariable int projectNo, @RequestParam int itemNo) {
+		itemDao.delete(itemNo);
+		return "redirect:projectMainGiftItem";
+	}
 
 }
