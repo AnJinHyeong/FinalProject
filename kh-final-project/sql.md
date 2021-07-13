@@ -5,11 +5,12 @@ member_id varchar2(30) not null unique,
 member_pw varchar2(30) not null,
 member_nick varchar2(30) not null,
 member_have_point number(19) default 0,
-member_use_point number(19) default 0,
 member_email varchar2(30) not null unique,
 member_introduce varchar2(1000),
 member_grade varchar2(30) check (member_grade in('관리자','사용자','블랙')),   
-auth_check varchar2(30)
+member_address VARCHAR2(200)
+
+CREATE SEQUENCE member_seq;
 );
 
 #project table
@@ -63,3 +64,15 @@ gift_summary varchar2(150)
 );
 
 create sequence gift_seq;
+
+#pay table
+DROP TABLE pay;
+CREATE TABLE pay(
+pay_no NUMBER(19) PRIMARY KEY,
+pay_money VARCHAR2(30) NOT NULL,
+pay_date DATE,
+member_no REFERENCES member(member_no) ON DELETE SET NULL
+);
+DROP SEQUENCE pay_seq;
+CREATE SEQUENCE pay_seq;
+

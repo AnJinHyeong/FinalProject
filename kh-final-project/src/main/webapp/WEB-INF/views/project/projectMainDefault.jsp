@@ -134,7 +134,7 @@
 						</select>
 						<p class="project-insert-font font-on" style="font-size: 12px; margin-top: 5px;"> </p>
 					</div>
-					<div>
+					<div style="display: ;">
 						<p class="project-insert-p">세부 카테고리<em class="project-insert-p-em">(선택사항)</em></p>
 						<select class="project-insert-select">
 							<option class="font-gray"></option>
