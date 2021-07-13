@@ -79,4 +79,3 @@ CREATE SEQUENCE pay_seq;
 =======
  
 create sequence category_seq;
->>>>>>> branch 'ChangYeop' of https://github.com/AnJinHyeong/FinalProject.git
