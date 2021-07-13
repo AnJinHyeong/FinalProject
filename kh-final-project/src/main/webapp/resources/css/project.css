@@ -65,7 +65,7 @@
 	display: flex;
 	-webkit-box-align: center; 
 	align-items: center; 
-	white-space: nowrap;"
+	white-space: nowrap;
 }
 
 .project-main-li{
@@ -304,9 +304,8 @@
 
 .project-insert-text{
 	width: 620px; 
-	min-height: 300px; 
 	border: 1px solid rgb(240, 240, 240);
-	height: 300px;
+	height: 100px;
 	resize: none;
 }
 
@@ -318,7 +317,6 @@
     border: 1px dashed rgb(228, 228, 228);
     box-sizing: border-box;
     border-radius: 4px;
-    position: relative;
     transition: border 0.4s ease 0s;
     display: flex;
     flex-wrap: wrap;

@@ -80,7 +80,7 @@
 				$("#textSize").css("color", "red");
 				$("#textMax").show();
 			}
-			else if($(this).val().length < 10 && $(this).val().length >= 0){
+			else if($(this).val().length < 10 && $(this).val().length > 0){
 				$("#textSize").css("color", "red");
 				$("#textMin").show();
 			}
@@ -107,7 +107,7 @@
 
 <section class="main-row topLine" style="background-color: #f8f8f8;">
 	
-	<div class="project-back-color" style="height: 1900px;">
+	<div class="project-back-color" style="height: 1600px;">
 		
 		<div class="section-row" style=" padding-top: 10px;">
 			
@@ -165,7 +165,7 @@
 			
 			<hr>
 			
-			<div class="project-insert-div" style="height: 500px;">
+			<div class="project-insert-div" style="height: 200px;">
 				<dl class="project-insert-dl">
 					<dt class="project-insert-dt">
 						프로젝트 요약 <span class="project-insert-font">*</span>
@@ -177,7 +177,7 @@
 				<div class="projcet-insert-div2">
 					<div>
 						<p class="project-insert-p">요약 내용</p>
-						<textarea class="project-insert-text" rows="1" name="projectSummary">${projectDto.projectSummary}</textarea>
+						<textarea class="project-insert-text" rows="1" name="projectSummary" required>${projectDto.projectSummary}</textarea>
 						<div>
 							<p id="textMin" class="f12 pb10 pt10 left fRed">최소 10자 이상 입력해주세요</p>
 							<p id="textMax" class="f12 pb10 pt10 left fRed">최대 50자 이하로 입력해주세요</p>
