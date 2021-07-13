@@ -74,6 +74,12 @@
 	padding-bottom: 10px;
 }
 
+.project-main-li2{
+	list-style: none; 
+	margin-right: 32px;
+	padding-bottom: 10px;
+}
+
 .main-li-on{
 	border-bottom: 2px solid red;
 }
@@ -178,6 +184,14 @@
 	width: 100%; 
 	background: rgb(255, 255, 255); 
 	margin-top: 180px; 
+	position: fixed; 
+}
+
+.project-main-header4{
+	width: 100%; 
+	background-color: rgb(255, 255, 255);
+	margin-top: 15px;
+	padding-top: 10px;
 	position: fixed; 
 }
 
@@ -290,9 +304,10 @@
 }
 
 .project-insert-funding-div{
-	margin-top:15px; 
+	margin-top:15px;
+	padding: 0 auto;
 	height: 200px; 
-	background: rgb(253, 244, 243); 
+	background: white; 
 	border-radius: 8px; 
 	padding: 23px 24px 22px;
 	font-weight: 400; 

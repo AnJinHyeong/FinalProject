@@ -18,7 +18,7 @@
 			<div class="project-main-div2">
 				<div class="project-main-img"></div>
 				<div>
-					<p style="font-size: 35px;"><strong>OO의 프로젝트</strong></p>
+					<p style="font-size: 35px;"><strong>${ProjectDto.projectNo}의 프로젝트</strong></p>
 					<p style="font-size: 14px; line-height: 24px; letter-spacing: -0.015em; color: rgb(109, 109, 109);">카테고리<p>
 				</div>
 			</div>
@@ -44,7 +44,7 @@
 			
 			
 			<div style="width: 100%; display: flex; -webkit-box-pack: justify; justify-content: space-between; padding: 20px 0;">
-				<a class="project-main-link" href="projectMainDefault">
+				<a class="project-main-link" href="projectMainDefault?projectNo=${ProjectDto.projectNo}">
 					<div style="margin: 0px 0px 70px;">
 						<p class="fRed fBold f16"><i class="fas fa-pen"></i></p>
 					</div>
@@ -62,7 +62,7 @@
 						<span class="project-main-span">0% 작성완료</span>
 					</p>
 				</a>
-				<a class="project-main-link" href="#">
+				<a class="project-main-link" href="projectMainGift">
 					<div style="margin: 0px 0px 70px;">
 						<p class="fRed fBold f16"><i class="fas fa-gift"></i></i></p>
 					</div>

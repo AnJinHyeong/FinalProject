@@ -1,24 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
-<jsp:include page="/WEB-INF/views/template/projectHeader.jsp"></jsp:include>
-
-		<div class="project-main-header3 bottomLine">
-			<div style="width: 1200px; margin: 0 auto; height: 35px;">
-				<ul class="project-main-ul">
-					<li class="project-main-li main-li-on"><a href="${pageContext.request.contextPath}/project/projectMainDefault" class="main-li-a">기본정보</a></li>
-					<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/projectMainFunding" class="main-li-a">펀딩 계획</a></li>
-					<li class="project-main-li"><a href="#" class="main-li-a">선물 구성</a></li>
-					<li class="project-main-li"><a href="#" class="main-li-a">스토리</a></li>
-					<li class="project-main-li"><a href="#" class="main-li-a">창작자 정보</a></li>
-					<li class="project-main-li"><a href="#" class="main-li-a">신뢰와 안전</a></li>
-				</ul>
-
-			</div>
-		</div>
-
-	</header>
+<jsp:include page="/WEB-INF/views/project/projectHeader.jsp">
+	<jsp:param value="${root}/project/projectMainDefault" name="division"/>
+</jsp:include>
 
 <section class="main-row topLine">
 	
@@ -68,7 +56,7 @@
 				<div class="projcet-insert-div2">
 					<div>
 						<p class="project-insert-p">제목</p>
-						<input type="text" name="projectTile" class="projcet-insert-input">
+						<input type="text" name="projectTile" class="projcet-insert-input" value="${projectDto.projectTitle}">
 					</div>
 				</div>
 			</div>

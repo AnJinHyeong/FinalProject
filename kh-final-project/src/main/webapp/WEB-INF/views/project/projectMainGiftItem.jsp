@@ -30,17 +30,17 @@
 			<div class="project-insert-div" style="height: 300px;">
 				<dl class="project-insert-dl">
 					<dt class="project-insert-dt">
-						내가 만든 선물 <span class="project-insert-font">*</span>
+						내가 만든 아이템 <span id="itemCount">0</span>
 					</dt>
 					<div class="project-insert-funding-div">
 						<div>
-							<p style="padding-left: 14px; margin-bottom: 5px;">만든 선물이 없습니다</p>
+							<p style="padding-left: 14px; margin-bottom: 5px;">만든 아이템이 없습니다</p>
 						</div>
 					</div>
 				</dl>
 				<div class="projcet-insert-div2">
 					<div>
-						<p class="project-insert-p">선물 만들기</p>
+						<p class="project-insert-p">아이템 만들기</p>
 						<input type="text" class="projcet-insert-input">
 					</div>
 				</div>

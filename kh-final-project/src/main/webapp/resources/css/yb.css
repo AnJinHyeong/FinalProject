@@ -57,6 +57,9 @@
 .h20{
 	height: 20px;
 }
+.h35{
+	height: 35px;
+}
 .h40{
 	height: 40px;
 }
@@ -86,6 +89,9 @@
 }
 
 /* margin, padding 관련 설정 */
+.mCenter{
+	margin: 0 auto;
+}
 .mb10{
 	margin-bottom: 10px;
 }
@@ -98,8 +104,14 @@
 .mb60{
 	margin-bottom: 60px;
 }
+.mt30{
+	margin-top: 30px;
+}
 .mt60{
 	margin-top: 60px;
+}
+.mr5{
+	margin-right: 5px;
 }
 .pt10{
 	padding-top: 10px;

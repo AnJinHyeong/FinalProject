@@ -13,6 +13,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			(project_seq.nextval, 'X', sysdate, #{projectSummary}, #{memberNo}, #{categoryNo})
 	</select>
 	
+	<select id="list" parameterType="int" resultType="ProjectDto">
+		select * from project where member_no = #{memberNo}
+	</select>
+	
+	<select id="get" parameterType="ProjectDto" resultType="ProjectDto">
+		select * from project where member_no = #{memberNo} and project_no = #{projectNo}
+	</select>
+	
 </mapper>
 
 

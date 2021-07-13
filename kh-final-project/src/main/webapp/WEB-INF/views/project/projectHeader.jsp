@@ -1,24 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+    pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <c:set var="isLogin" value="${not empty memberNo}"></c:set>
+<c:set var="division" value="${param.division}"></c:set>
 
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>FüN_ding - 즐거움의 시작</title>
+	<title>FUN‿ding</title>
 	<link rel="stylesheet" type="text/css" href="${root}/css/template.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/common.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/project.css">
+	
+	<link rel="stylesheet" type="text/css" href="${root}/css/yb.css">
+	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<style>
 	</style>
+	
+	<script>
+		$(function(){
+			var projectBtnList = $(".project-main-li");
+			projectBtnList.each(function(index, item){
+				if($(this).find(".main-li-a").attr("href") == "${division}"){
+					$(this).addClass("main-li-on");
+				}
+			});
+		});
+	</script>
 
 </head>
 <body class="align-column">
@@ -42,5 +56,17 @@
 			</div>
 		</div>
 		
-
+		<div class="project-main-header3 bottomLine">
+			<div style="width: 1200px; margin: 0 auto; height: 35px;">
+				<ul class="project-main-ul">
+					<li class="project-main-li"><a href="${root}/project/projectMainDefault" class="main-li-a">기본정보</a></li>
+					<li class="project-main-li"><a href="${root}/project/projectMainFunding" class="main-li-a">펀딩 계획</a></li>
+					<li class="project-main-li"><a href="${root}/project/projectMainGift" class="main-li-a">선물 구성</a></li>
+					<li class="project-main-li"><a href="#" class="main-li-a">스토리</a></li>
+					<li class="project-main-li"><a href="#" class="main-li-a">창작자 정보</a></li>
+					<li class="project-main-li"><a href="#" class="main-li-a">신뢰와 안전</a></li>
+				</ul>
+			</div>
+		</div>
 		
+	</header>
