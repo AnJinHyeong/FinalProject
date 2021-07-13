@@ -39,3 +39,12 @@ category_super number(19)
 );
 
 create sequence category_seq;
+
+#email_auth table
+create table email_auth(
+    auth_no number(19) primary key,
+    auth_key varchar2(30) not null,
+    auth_time date not null
+);
+
+CREATE SEQUENCE auth_seq nocache;
