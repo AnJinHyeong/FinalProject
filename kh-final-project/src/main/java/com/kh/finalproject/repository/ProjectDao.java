@@ -1,5 +1,9 @@
 package com.kh.finalproject.repository;
 
-public interface ProjectDao {
+import com.kh.finalproject.vo.ProjectCategoryVo;
 
+public interface ProjectDao {
+	 void insert(ProjectCategoryVo projectCategoryVo);
+	 void insertBySequence(ProjectCategoryVo projectCategoryVo);
+	 int sequence();
 }

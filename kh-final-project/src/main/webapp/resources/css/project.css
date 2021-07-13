@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+*:after, *:before{
+	box-sizing: inherit;
+}
+
 .section-project-main{
 	width: 1200px;
 	height: 600px;
@@ -31,6 +35,19 @@
 	border: 1px solid #fff;
 }
 
+.project-btn.btn3{
+	background-color: #f0f0f0; 
+	color: #8c8c8c; 
+	border: 1px solid #dcdcdc;
+	cursor: pointer; 
+}
+
+.project-btn-hover:hover{
+	background: rgb(248, 100, 83);
+	color: #fcfcfc;
+	
+}
+
 .project-main-link{
 	margin-bottom: 0px; 
 	width: 168px; 
@@ -44,7 +61,7 @@
 .project-main-ul{
 	padding: 0px; 
 	margin: 0px auto;
-	height: 60px;
+	height: 35px;
 	display: flex;
 	-webkit-box-align: center; 
 	align-items: center; 
@@ -54,11 +71,17 @@
 .project-main-li{
 	list-style: none; 
 	margin-right: 32px;
+	padding-bottom: 10px;
+}
+
+.project-main-li2{
+	list-style: none; 
+	margin-right: 32px;
+	padding-bottom: 10px;
 }
 
 .main-li-on{
-	
-	
+	border-bottom: 2px solid red;
 }
 
 .main-li-a{
@@ -71,6 +94,34 @@
     line-height: 22px !important;
     font-family: NotoSansKR, "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
     font-weight: 700 !important;
+}
+
+.main-li-a2{
+	color: rgba(13, 13, 13, 0.2);
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    opacity: 1;
+    font-size: 14px !important;
+    line-height: 22px !important;
+    font-family: NotoSansKR, "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+    font-weight: 700 !important;
+}
+
+.main-li-a2:hover{
+	color: rgb(13, 13, 13);
+}
+
+.main-li-a2.on{
+	color: rgb(13, 13, 13);
+}
+
+.main-li-a2>i{
+	color: rgba(255, 0, 0, 0.2);
+}
+
+.main-li-a2.on>i, .main-li-a2:hover>i{
+	color: rgb(255, 0, 0);
 }
 
 .project-main-span{
@@ -117,15 +168,16 @@
     top: 0px;
     z-index: 100;
     width: 1200px;
-    height: 80px;
+    height: 60px;
     background: rgb(255, 255, 255);
     font-size: 14px;
     line-height: 24px;
     letter-spacing: -0.015em;
     box-shadow: none;
     transform: translateY(0px);
-    padding: 20px;
+    padding: 10px;
     margin: 0 auto;
+    width: 100%;
 }
 
 .project-main-header-in{
@@ -136,4 +188,214 @@
     -webkit-box-pack: justify;
     justify-content: space-between;
     position: relative;
+}
+
+.project-main-header2{
+	width: 100%; 
+	overflow-x: hidden; 
+	background: rgb(255, 255, 255); 
+	position: fixed;
+}
+
+.project-main-header2 > .header2-in{
+	 font-weight: 700; 
+	 padding: 39px 0px 21px; 
+	 margin: 0 auto; 
+	 width: 1200px; 
+	 font-size: 32px !important; 
+	 line-height: 44px !important; 
+	 height: 120px;
+	 margin-top: 60px;
+}
+
+.project-main-header3{
+	width: 100%; 
+	background: rgb(255, 255, 255); 
+	margin-top: 180px; 
+	position: fixed; 
+}
+
+.project-main-header4{
+	width: 100%; 
+	background-color: rgb(255, 255, 255);
+	margin-top: 215px;
+	padding-top: 10px;
+	position: fixed; 
+}
+
+.project-insert-div{
+	 display: flex; 
+	 padding-bottom: 48px; 
+	 margin-bottom: 56px;
+	 margin-top: 100px; 
+	 -webkit-box-pack: justify;
+	 justify-content: space-between; 
+	 
+}
+
+.projcet-insert-div2{
+	display: flex;
+	-webkit-box-pack: justify;
+	justify-content: space-between; 
+	width: 630px;
+}
+
+.project-insert-div3{
+	width: 100%; 
+	height: 40px; 
+	text-align: right; 
+	margin: 20px 0;
+}
+
+
+.project-insert-dl{
+	margin: 0px 0px 14px; 
+	width: 351px;"
+}
+
+.project-insert-dt{
+	font-weight: 700; 
+	margin-bottom: 12px; 
+	font-size: 18px !important; 
+	line-height: 24px !important;	
+}
+
+.project-insert-dd{
+	font-weight: 400;
+	color: rgb(109, 109, 109); 
+	margin: 0px;
+	font-size: 14px !important;
+	line-height: 22px !important;
+}
+
+.project-insert-p{
+	font-size: 14px; 
+	line-height: 18px; 
+	letter-spacing: -0.005em; 
+	margin-bottom: 8px; 
+	color: rgb(61, 61, 61); 
+	display: flex;
+}
+
+.project-insert-select{
+	width: 300px; 
+	height: 40px; 
+	border: 1px solid rgb(240, 240, 240);
+}
+
+.project-insert-font{
+	font-size:23px;
+	color: red;
+}
+
+.projcet-insert-input{
+	width: 620px; 
+	height: 40px; 
+	border: 1px solid rgb(240, 240, 240);
+}
+
+.project-insert-text{
+	width: 620px; 
+	min-height: 300px; 
+	border: 1px solid rgb(240, 240, 240);
+	height: 300px;
+	resize: none;
+}
+
+.project-insert-file-div{
+	width: 620px;
+    min-height: 320px;
+    padding: 37px 35px;
+    background: rgb(255, 255, 255);
+    border: 1px dashed rgb(228, 228, 228);
+    box-sizing: border-box;
+    border-radius: 4px;
+    position: relative;
+    transition: border 0.4s ease 0s;
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.projcet-insert-file{
+	display: block;
+    width: 620px;
+    height: 300px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    
+}
+
+.project-insert-funding-div{
+	margin-top:15px;
+	padding: 0 auto;
+	height: 200px; 
+	background: white; 
+	border-radius: 8px; 
+	padding: 23px 24px 22px;
+	font-weight: 400; 
+	color: rgb(109, 109, 109); 
+	font-size: 12px !important; 
+	line-height: 20px !important;
+}
+
+.project-insert-item-div{
+	margin-top:15px;
+	padding: 0 auto;
+	height: 200px; 
+	background: white; 
+	border-radius: 8px; 
+	padding: 23px 24px 22px;
+	font-weight: 400; 
+	color: rgb(109, 109, 109); 
+	font-size: 12px !important; 
+	line-height: 20px !important;
+	display: inline-block;
+}
+
+lili:before {
+    position: absolute;
+    top: 4px;
+    left: 0px;
+    z-index: 1;
+    content: "";
+    border: 3px solid rgb(0, 0, 0);
+    display: block;
+    width: 9px;
+    height: 9px;
+    border-radius: 4px;
+    background: rgb(255, 255, 255);
+}
+
+lili:after {
+	content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    height: 100%;
+    border-left: 1px solid rgb(228, 228, 228);
+}
+
+.project-itemList{
+	max-height: 1000px;
+	overflow-y: auto;
+}
+
+.project-insert-item-list{
+	width: 98%;
+	height: 100px;
+	margin-top: 15px;
+	background: white; 
+	border-radius: 8px;
+	padding: 20px 20px;
+	font-weight: 400; 
+	color: rgb(109, 109, 109); 
+	font-size: 12px !important;
+	display: inline-block;
+	text-align: justify;
 }

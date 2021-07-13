@@ -6,9 +6,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="category">
 	
-	<select id="list" resultType="CategoryDto">
-		select * from category order by category_no
+	<select id="approveList" resultType="CategoryDto">
+		select * from category where category_approve = 'Y' order by category_no
 	</select>
+	
+	<select id="sequence" resultType="int">
+		select category_seq.nextval from dual
+	</select>
+	
+	<select id="get" parameterType="string" resultType="CategoryDto">
+		select * from category where category_theme = #{categoryTheme}
+	</select>
+	
+	<insert id="insert" parameterType="CategoryDto">
+		insert into category(category_no, category_theme)
+		values(#{categoryNo}, #{categoryTheme})
+	</insert>
 	
 </mapper>
 

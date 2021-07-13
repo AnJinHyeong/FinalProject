@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <section class="main-row topLine">
 	<div class="section-project-row">
 			
 			<div class="project-main-div1">
-				<button class="project-btn btn1">미리보기</button>
+				<button class="project-btn btn1 project-btn-hover">미리보기</button>
 				<div style="text-decoration: none; height: 40px;">
 					<button class="project-btn btn2">기획중·43% 완료</button>
 				</div>
@@ -35,18 +36,18 @@
 			</div>
 	</div>
 	
-	<div class="topLine project-back-color" style="height: 620px;">
+	<div class="topLine project-back-color" style="height: 650px;">
 		
-		<div class="section-row" style="padding: 25px 0 200px 0;" >
+		<div class="section-project-row" style="padding: 25px 0 200px 0;" >
 			<div style="width: 100%; text-align: right;">
-				<button class="project-btn btn1" style="margin: 0;">심사기준</button>
+				<button class="project-btn btn1 project-btn-hover" style="margin: 0;">심사기준</button>
 			</div>
 			
 			
 			<div style="width: 100%; display: flex; -webkit-box-pack: justify; justify-content: space-between; padding: 20px 0;">
-				<a class="project-main-link" href="projectMainDefault">
+				<a class="project-main-link" href="${root}/project/${projectNo}/projectMainDefault">
 					<div style="margin: 0px 0px 70px;">
-						<img src="${pageContext.request.contextPath}/image/pen.svg" width="20" height="20">
+						<p class="fRed fBold f16"><i class="fas fa-pen"></i></p>
 					</div>
 					<p>
 						<strong>기본정보</strong>
@@ -55,16 +56,16 @@
 				</a>
 				<a class="project-main-link" href="#">
 					<div style="margin: 0px 0px 70px;">
-						<img src="${pageContext.request.contextPath}/image/money.svg" width="20" height="20">
+						<p class="fRed fBold f16"><i class="fas fa-money-check-alt"></i></p>
 					</div>
 					<p>
 						<strong>펀딩 계획</strong>
 						<span class="project-main-span">0% 작성완료</span>
 					</p>
 				</a>
-				<a class="project-main-link" href="#">
+				<a class="project-main-link" href="projectMainGift">
 					<div style="margin: 0px 0px 70px;">
-						<img src="${pageContext.request.contextPath}/image/gift.svg" width="20" height="20">
+						<p class="fRed fBold f16"><i class="fas fa-gift"></i></i></p>
 					</div>
 					<p>
 						<strong>선물 구성</strong>
@@ -73,7 +74,7 @@
 				</a>
 				<a class="project-main-link" href="#">
 					<div style="margin: 0px 0px 70px;">
-						<img src="${pageContext.request.contextPath}/image/book.svg" width="20" height="20">
+						<p class="fRed fBold f16"><i class="fas fa-book"></i></i></p>
 					</div>
 					<p>
 						<strong>스토리</strong>
@@ -82,7 +83,7 @@
 				</a>
 				<a class="project-main-link" href="#">
 					<div style="margin: 0px 0px 70px;">
-						<img src="${pageContext.request.contextPath}/image/originator.svg" width="20" height="20">
+						<p class="fRed fBold f16"><i class="fas fa-smile"></i></i></p>
 					</div>
 					<p>
 						<strong>창작자 정보</strong>
@@ -91,7 +92,7 @@
 				</a>
 				<a class="project-main-link" href="#">
 					<div style="margin: 0px 0px 70px;">
-						<img src="${pageContext.request.contextPath}/image/security.svg" width="20" height="20">
+						<p class="fRed fBold f16"><i class="fas fa-shield-alt"></i></i></p>
 					</div>
 					<p>
 						<strong>신뢰와 안전</strong>
