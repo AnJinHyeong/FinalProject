@@ -5,7 +5,7 @@
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
 <jsp:include page="/WEB-INF/views/project/projectHeader.jsp">
-	<jsp:param value="${root}/project/projectMainGift" name="division" />
+	<jsp:param value="${root}/project/${projectNo}/projectMainGift" name="division" />
 </jsp:include>
 
 <script>
@@ -37,17 +37,23 @@
 			$("#itemListNone").show();
 		};
 		
-		$("#modal").hide();
-		$("#modalBackground").hide();
-		
-		$(".modalOn").on("click", function(){
-			$("#modal").show();
-			$("#modalBackground").show();
+		$(".modalX").on("click", function(){
+			$("input[name=itemNo]").val($(this).siblings("#itemNo").html());
+			$("#modal-target").text($(this).siblings("#itemName").html());
+			$("#modal").toggle();
+			$("#modalBackground").toggle();
 		});
 		
 		$("#modalBackground").on("click", function(){
 			$("#modal").hide();
 			$("#modalBackground").hide();
+		});
+		
+		$("#projectMainGiftItemInsertForm").on("submit", function(e){
+			if($("input[name=itemName]").val().length < 10 || $("input[name=itemName]").val().length > 50){
+				$("input[name=itemName]").focus();
+				e.preventDefault();
+			}
 		});
 		
 	});
@@ -74,7 +80,7 @@
 
 		<div class="section-row" style="padding-top: 10px;">
 
-			<form action="projectMainGiftItem" method="post">
+			<form id="projectMainGiftItemInsertForm" action="projectMainGiftItem" method="post">
 				<input type="hidden" value="${projectNo}" name="projectNo">
 
 				<div class="project-insert-div" style="height: 300px;">
@@ -94,8 +100,9 @@
 						<div class="project-itemList">
 							<c:forEach var="itemDto" items="${itemList}">
 									<div class="project-insert-item-list float-container">
-										<span class="left w260">${itemDto.itemName}</span>
-										<span class="modalOn right" style="cursor: pointer;">
+										<span id="itemName" class="left w260">${itemDto.itemName}</span>
+										<span id="itemNo" class="yb hidden">${itemDto.itemNo}</span>
+										<span class="yb modalX right">
 										<i class="fas fa-times"></i></span>
 									</div>
 							</c:forEach>
@@ -121,16 +128,32 @@
 						value="저장">
 				</div>
 				
-				<div id="modal" class="yb modal float-container">
-					<span>dddddddddddd</span>
-					아이템 삭제
-					이 아이템을 삭제하시겠습니까? 삭제하면 해당 아이템이 포함된 0개의 선물에서도 삭제됩니다.
-				</div>
-				
 				<div id="modalBackground" class="yb modal-background float-container">
 				</div>
 
 			</form>
+			
+			<div id="modal" class="yb modal">
+					
+				<div class="modal-header float-container">
+                    <span class="modal-title left">아이템 삭제</span>
+                    <span class="yb modalX right"><i class="fas fa-times"></i></span>
+                </div>
+
+                <div class="modal-body">
+                	<pre id="modal-target"></pre>
+					<pre>이 아이템을 삭제하시겠습니까?</pre>
+					<pre>삭제하면 해당 아이템이 포함된 0개의 선물에서도 삭제됩니다.</pre>
+                </div>
+
+                <div class="modal-footer">
+                	<form action="projectMainGiftItemDelete" method="post">
+                		<input type="hidden" name="itemNo" value="">
+                    	<button class="modal-btn">삭제</button>
+                    </form>
+                </div>
+			                
+			</div>
 
 		</div>
 

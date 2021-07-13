@@ -49,3 +49,17 @@ item_no number(19) primary key,
 project_no references project(project_no) on delete cascade,
 item_name varchar2(150) not null
 );
+
+create sequence item_seq;
+
+
+#gift table
+create table gift(
+gift_no number(19) primary key,
+project_no references project(project_no) on delete set null,
+member_no references member(member_no) on delete set null,
+gift_price number(19) default 0 not null check(gift_price >= 0),
+gift_summary varchar2(150)
+);
+
+create sequence gift_seq;

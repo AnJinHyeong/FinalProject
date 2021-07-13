@@ -5,7 +5,7 @@
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
 <jsp:include page="/WEB-INF/views/project/projectHeader.jsp">
-	<jsp:param value="${root}/project/projectMainFunding" name="division"/>
+	<jsp:param value="${root}/project/${projectNo}/projectMainFunding" name="division"/>
 </jsp:include>
 
 <section class="main-row topLine">

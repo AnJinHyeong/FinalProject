@@ -29,4 +29,9 @@ public class ItemDaoImpl implements ItemDao{
 		return sqlSession.selectOne("item.count", projectNo);
 	}
 
+	@Override
+	public boolean delete(int itemNo) {
+		return sqlSession.delete("item.delete", itemNo) > 0;
+	}
+
 }
