@@ -71,7 +71,9 @@ public class ProjectController {
 	}
 	
 	@GetMapping("/{projectNo}/projectMainGift")
-	public String projectMainGift(@PathVariable int projectNo) {
+	public String projectMainGift(@PathVariable int projectNo, Model model) {
+		model.addAttribute("itemCount", itemDao.count(projectNo));
+		model.addAttribute("itemList", itemDao.list(projectNo));
 		return "project/projectMainGift";
 	}
 	
