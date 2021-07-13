@@ -9,9 +9,12 @@ public interface ProjectDao {
 	
 	//프로젝트 추가
 	void insert(ProjectCategoryVo projectCategoryVo);
-	//프로젝트 조회
+	//회원이 만든 프로젝트 전체 조회
 	List<ProjectDto> list(int memberNo);
 	//프로젝트 상세 조회
-	ProjectDto listOne(ProjectDto projectDto);
-	
+	ProjectDto get(ProjectDto projectDto);
+	//시퀀스를 이용한 프로젝트 생성
+	void insertBySequence(ProjectCategoryVo projectCategoryVo);
+	//프로젝트 시퀀스 생성
+	int sequence();
 }

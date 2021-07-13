@@ -23,7 +23,6 @@
 	        $(this).addClass("btn-clicked");
 	        
 	        $("input[name=categoryTheme]").val($(this).text());
-	        console.log($(this));
 		});
 		
 		$("textarea[name=projectSummary]").on("input", function(){
@@ -94,7 +93,7 @@
 <section class="yb main-row topLine section-background-image"
 	style="background-image: url('${root}/image/insertBackground.jpg');">
 
-	<div class="section-row section-opacity">
+	<div class="yb section-row section-opacity">
 
 		<div class="container-800 pt20">
 

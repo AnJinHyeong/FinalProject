@@ -41,3 +41,11 @@ category_approve char(1) check (category_approve in ('Y'))
 );
 
 create sequence category_seq;
+
+
+#item table
+create table item(
+item_no number(19) primary key,
+project_no references project(project_no) on delete cascade,
+item_name varchar2(150) not null
+);

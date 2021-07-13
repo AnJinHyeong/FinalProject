@@ -7,13 +7,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalproject.entity.CategoryDto;
 import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.entity.ItemDto;
 import com.kh.finalproject.repository.CategoryDao;
+import com.kh.finalproject.repository.ItemDao;
 import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.vo.ProjectCategoryVo;
 
@@ -26,6 +29,7 @@ public class ProjectController {
 	
 	@Autowired
 	private ProjectDao projectDao;
+
 	
 	@GetMapping("/projectInsert")
 	public String projectInsert(Model model) {
@@ -34,7 +38,7 @@ public class ProjectController {
 	}
 	
 	@PostMapping("/projectInsert")
-	public String projectInsert(@ModelAttribute ProjectCategoryVo projectCategoryVo) {
+	public String projectInsert(@ModelAttribute ProjectCategoryVo projectCategoryVo, Model model) {
 		String categoryTheme = projectCategoryVo.getCategoryTheme();
 		int categoryNo;
 		if(categoryDao.isExist(categoryTheme)) {
@@ -49,14 +53,16 @@ public class ProjectController {
 									.build());
 		}
 		projectCategoryVo.setCategoryNo(categoryNo);
-		projectDao.insert(projectCategoryVo);
-		return "redirect:projectMain";
+		int projectNo = projectDao.sequence();
+		projectCategoryVo.setProjectNo(projectNo);
+		projectDao.insertBySequence(projectCategoryVo);
+		return "redirect:" + projectNo + "/projectMain/";
 	}
 	
-	@GetMapping("/projectMain")
+	@GetMapping("/{projectNo}/projectMain")
 	public String projectMain(
 			@ModelAttribute ProjectDto projectDto,
-			@RequestParam int projectNo,
+			@PathVariable int projectNo,
 			HttpSession session,
 			Model model) {
 		int memberNo = (int)session.getAttribute("memberNo");
@@ -64,41 +70,52 @@ public class ProjectController {
 				.projectNo(projectNo)
 				.memberNo(memberNo)
 				.build();
-		ProjectDto find = projectDao.listOne(projectDto);
+		ProjectDto find = projectDao.get(projectDto);
 		model.addAttribute("projectDto", find);
 		return "project/projectMain";
 	}
 	
-	
-	@GetMapping("/projectMainDefault")
+	@GetMapping("/{projectNo}/projectMainDefault")
 	public String projectMainDefault(
 			@ModelAttribute ProjectDto projectDto,
 			@RequestParam int projectNo,
 			HttpSession session,
 			Model model){
+		
 		int memberNo = (int)session.getAttribute("memberNo");
 		projectDto = ProjectDto.builder()
 				.projectNo(projectNo)
 				.memberNo(memberNo)
 				.build();
-		ProjectDto find = projectDao.listOne(projectDto);
+		ProjectDto find = projectDao.get(projectDto);
 		model.addAttribute("projectDto", find);
 		return "project/projectMainDefault";
 	}
 	
-	@GetMapping("/projectMainFunding")
-	public String projectFunding() {
+	@GetMapping("/{projectNo}/projectMainFunding")
+	public String projectFunding(@PathVariable int projectNo) {
 		return "project/projectMainFunding";
 	}
 	
-	@GetMapping("/projectMainGift")
-	public String projectMainGift() {
+	@GetMapping("/{projectNo}/projectMainGift")
+	public String projectMainGift(@PathVariable int projectNo) {
 		return "project/projectMainGift";
 	}
 	
-	@GetMapping("/projectMainGiftItem")
-	public String projectMainGiftItem() {
+	@GetMapping("/{projectNo}/projectMainGiftItem")
+	public String projectMainGiftItem(@PathVariable int projectNo, Model model) {
+		model.addAttribute("itemCount", itemDao.count(projectNo));
+		model.addAttribute("itemList", itemDao.list(projectNo));
 		return "project/projectMainGiftItem";
+	}
+	
+	@Autowired
+	private ItemDao itemDao;
+	
+	@PostMapping("/{projectNo}/projectMainGiftItem")
+	public String projectMainGiftItem(@ModelAttribute ItemDto itemDto, @PathVariable int projectNo) {
+		itemDao.insert(itemDto);
+		return "redirect:projectMainGiftItem";
 	}
 
 }
