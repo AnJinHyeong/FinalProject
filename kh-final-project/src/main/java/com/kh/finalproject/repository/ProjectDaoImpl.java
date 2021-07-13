@@ -40,4 +40,10 @@ public class ProjectDaoImpl implements ProjectDao{
 		return sqlSession.selectOne("project.sequence");
 	}
 
+	@Override
+	public boolean projectUpdate(ProjectDto projectDto) {
+		int count = sqlSession.update("project.projectUpdate",projectDto);
+		return count > 0;
+	}
+
 }

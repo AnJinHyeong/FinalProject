@@ -10,4 +10,5 @@ public class CategoryDto {
 	private int categoryNo;
 	private String categoryTheme;
 	private int categorySuper;
+	private String categoryApprove;
 }

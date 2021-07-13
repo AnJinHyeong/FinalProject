@@ -19,8 +19,8 @@
 			<div class="project-main-div2">
 				<div class="project-main-img"></div>
 				<div>
-					<p style="font-size: 35px;"><strong>${ProjectDto.projectNo}의 프로젝트</strong></p>
-					<p style="font-size: 14px; line-height: 24px; letter-spacing: -0.015em; color: rgb(109, 109, 109);">카테고리<p>
+					<p style="font-size: 35px;"><strong>${memberNo}의 프로젝트</strong></p>
+					<p style="font-size: 14px; line-height: 24px; letter-spacing: -0.015em; color: rgb(109, 109, 109);">${Project.categoryNo}<p>
 				</div>
 			</div>
 		

@@ -6,6 +6,7 @@ import com.kh.finalproject.entity.CategoryDto;
 
 public interface CategoryDao {
 	List<CategoryDto> approveList();
+	List<CategoryDto> userCustomList(int categoryNo);
 	CategoryDto get(String categoryTheme);
 	boolean isExist(String categoryTheme);
 	int getSequence();

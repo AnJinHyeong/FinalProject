@@ -77,23 +77,56 @@ public class ProjectController {
 	
 	@GetMapping("/{projectNo}/projectMainDefault")
 	public String projectMainDefault(
-			@ModelAttribute ProjectDto projectDto,
-			@RequestParam int projectNo,
+			@PathVariable int projectNo,
 			HttpSession session,
 			Model model){
 		
 		int memberNo = (int)session.getAttribute("memberNo");
-		projectDto = ProjectDto.builder()
+		ProjectDto projectDto = ProjectDto.builder()
 				.projectNo(projectNo)
 				.memberNo(memberNo)
 				.build();
 		ProjectDto find = projectDao.get(projectDto);
 		model.addAttribute("projectDto", find);
+		
+		model.addAttribute("categoryDto", categoryDao.userCustomList(find.getCategoryNo()));
+		
 		return "project/projectMainDefault";
 	}
 	
+	@PostMapping("/{projectNo}/projectMainDefault")
+	public String projectMainDefault(
+			@PathVariable int projectNo,
+			@ModelAttribute ProjectDto projectDto,
+			Model model) {
+		boolean result = projectDao.projectUpdate(projectDto);
+		
+		if(result) {
+			return "redirect:projectMainDefault";
+		}
+		else {
+			return "redirect:projectMainDefautlt?error";
+		}
+		
+		
+	}
+	
+	
 	@GetMapping("/{projectNo}/projectMainFunding")
-	public String projectFunding(@PathVariable int projectNo) {
+	public String projectFunding(
+			@PathVariable int projectNo,
+			HttpSession session,
+			Model model) {
+		
+		int memberNo = (int)session.getAttribute("memberNo");
+		ProjectDto projectDto = ProjectDto.builder()
+				.projectNo(projectNo)
+				.memberNo(memberNo)
+				.build();
+		ProjectDto find = projectDao.get(projectDto);
+		
+		model.addAttribute("projectDto", find);
+		
 		return "project/projectMainFunding";
 	}
 	

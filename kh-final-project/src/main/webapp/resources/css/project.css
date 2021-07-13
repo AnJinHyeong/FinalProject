@@ -335,7 +335,7 @@
 	margin-top:15px;
 	padding: 0 auto;
 	height: 200px; 
-	background: white; 
+	background: #ffe6e6; 
 	border-radius: 8px; 
 	padding: 23px 24px 22px;
 	font-weight: 400; 
@@ -344,10 +344,10 @@
 	line-height: 20px !important;
 }
 
-<<<<<<< HEAD
 .project-funding-li{
 	padding: 0px 0px 45px 20px;
-=======
+}
+
 .project-insert-item-div{
 	margin-top:15px;
 	padding: 0 auto;
@@ -360,7 +360,6 @@
 	font-size: 12px !important; 
 	line-height: 20px !important;
 	display: inline-block;
->>>>>>> refs/remotes/origin/main
 }
 
 lili:before {
@@ -386,7 +385,6 @@ lili:after {
     border-left: 1px solid rgb(228, 228, 228);
 }
 
-<<<<<<< HEAD
 .project-funding-money-div{
 	display: flex;
     -webkit-box-pack: start;
@@ -419,8 +417,9 @@ lili:after {
 
 .project-funding-p{
 	padding-left: 14px; 
-	margin-bottom: 5px;"
-=======
+	margin-bottom: 5px;
+}
+
 .project-itemList{
 	max-height: 1000px;
 	overflow-y: auto;
@@ -438,5 +437,4 @@ lili:after {
 	font-size: 12px !important;
 	display: inline-block;
 	text-align: justify;
->>>>>>> refs/remotes/origin/main
 }

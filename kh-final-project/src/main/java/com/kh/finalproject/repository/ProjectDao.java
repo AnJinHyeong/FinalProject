@@ -17,4 +17,7 @@ public interface ProjectDao {
 	void insertBySequence(ProjectCategoryVo projectCategoryVo);
 	//프로젝트 시퀀스 생성
 	int sequence();
+	//프로젝트 제목 업데이트
+	boolean projectUpdate(ProjectDto projectDto);
+	
 }

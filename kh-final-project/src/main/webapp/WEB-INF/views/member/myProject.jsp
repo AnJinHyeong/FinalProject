@@ -16,7 +16,7 @@
 			<div>
 				<p>${projectDto.projectNo}</p>
 				<p>${projectDto.projectTitle}</p>
-				<a href="${pageContext.request.contextPath}/project/projectMain?projectNo=${projectDto.projectNo}">수정</a>
+				<a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMain">수정</a>
 			</div>
 		
 		</c:forEach>

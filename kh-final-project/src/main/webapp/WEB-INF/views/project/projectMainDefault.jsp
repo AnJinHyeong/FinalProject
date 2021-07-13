@@ -14,7 +14,7 @@
 		
 		<div class="section-row" style=" padding-top: 10px;">
 			
-			<form action="?" method="post">
+			<form action="projectMainDefault" method="post">
 			
 			<div class="project-insert-div" style="height: 130px;">
 				<dl class="project-insert-dl">
@@ -28,15 +28,16 @@
 				<div class="projcet-insert-div2">
 					<div>
 						<p class="project-insert-p">카테고리</p>
-						<select class="project-insert-select">
-							<option>게임</option>
+						<select class="project-insert-select" name="categoryNo">
+							<c:forEach var="categoryDto" items="${categoryDto}">
+								<option value="${categoryDto.categoryNo}">${categoryDto.categoryTheme}(변경시 사라집니다)</option>
+							</c:forEach>
 						</select>
 					</div>
 					<div>
 						<p class="project-insert-p">세부 카테고리</p>
 						<select class="project-insert-select">
 							<option class="font-gray">세부 카테고리를 선택해주세요.</option>
-							<option>게임</option>
 						</select>
 					</div>
 				</div>
@@ -56,7 +57,7 @@
 				<div class="projcet-insert-div2">
 					<div>
 						<p class="project-insert-p">제목</p>
-						<input type="text" name="projectTile" class="projcet-insert-input" value="${projectDto.projectTitle}">
+						<input type="text" name="projectTitle" class="projcet-insert-input" value="${projectDto.projectTitle}">
 					</div>
 				</div>
 			</div>
@@ -75,7 +76,7 @@
 				<div class="projcet-insert-div2">
 					<div>
 						<p class="project-insert-p">요약 내용</p>
-						<textarea class="project-insert-text" rows="1" name="projectContent"></textarea>
+						<textarea class="project-insert-text" rows="1" name="projectSummary">${projectDto.projectSummary}</textarea>
 					</div>
 				</div>
 			</div>
