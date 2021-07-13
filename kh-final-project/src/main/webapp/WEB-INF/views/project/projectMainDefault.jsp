@@ -9,37 +9,109 @@
 </jsp:include>
 
 
-<c:forEach var="categoryDto" items="${categoryDto}">
-	<c:if test="${categoryDto.categoryApprove == null}">
-		<p class="project-insert-font" style="font-size: 12px; margin-top: 5px;">* 현태 카테고리는 심사중입니다.</p>
-	</c:if>
-</c:forEach>
-
-
+<script src="http://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
-	
+
 	$(function(){
+		$("select[name=categoryNo]").val(${projectDto.categoryNo});
+	
 		
-		$('.project-insert-select').on('input', function () {
-			var selectVal = $(this).val();
-			console.log(selectVal);
+		$(document).ready(function() {
+			$.ajax({
+				url:"${pageContext.request.contextPath}/project/data/categoryApproveCheck",
+				type: "post",
+				data:{
+					categoryNo:$("select[name=categoryNo]").val()
+				},
+				success:function(resp){
+					if(resp === "Y"){
+						$("select[name=categoryNo] + p").text("");
+					}
+					else{
+						$("select[name=categoryNo] + p").text("* 현재 카테고리는 심사중입니다.");
+					}
+				}
+				
+			});
+	    });
+		
+		$(".project-insert-select").on("input",function(){
 			
-			
+			$.ajax({
+				url:"${pageContext.request.contextPath}/project/data/categoryApproveCheck",
+				type: "post",
+				data:{
+					categoryNo:$("select[name=categoryNo]").val()
+				},
+				success:function(resp){
+					if(resp === "Y"){
+						$("select[name=categoryNo] + p").text("");
+					}
+					else{
+						$("select[name=categoryNo] + p").text("* 현재 카테고리는 심사중입니다.");
+					}
+				}
+				
+			});
+		});
+		
+		var textSize = $("textarea[name=projectSummary]").val().length;
+		
+		$(document).ready(function(){
+			$("#textSizeSpan").text(textSize);
+			if($(this).val().length > 50){
+				$("#textSize").css("color", "red");
+				$("#textMax").show();
+			}
+			else if($(this).val().length < 10 && $(this).val().length > 0){
+				$("#textSize").css("color", "red");
+				$("#textMin").show();
+			}
+			else{
+				$("#textSize").css("color", "black");
+				$("#textMin").hide();
+				$("#textMax").hide();
+			}
+		}); 
+		
+		$("textarea[name=projectSummary").on("input", function(){
+			$("#textSizeSpan").text($(this).val().length);
+			if($(this).val().length > 50){
+				$("#textSize").css("color", "red");
+				$("#textMax").show();
+			}
+			else if($(this).val().length < 10 && $(this).val().length >= 0){
+				$("#textSize").css("color", "red");
+				$("#textMin").show();
+			}
+			else{
+				$("#textSize").css("color", "black");
+				$("#textMin").hide();
+				$("#textMax").hide();
+			}
+		});
+		
+		$("#projectMainDefault").on("submit", function(e){
+			if($("textarea[name=projectSummary]").val().length < 10 || $("textarea[name=projectSummary]").val().length > 50){
+				$("textarea[name=projectSummary]").focus();
+				e.preventDefault();
+			}
 			
 		});
+		
 		
 	});
 	
 	
 </script>
 
-<section class="main-row topLine">
+<section class="main-row topLine" style="background-color: #f8f8f8;">
 	
 	<div class="project-back-color" style="height: 1900px;">
 		
 		<div class="section-row" style=" padding-top: 10px;">
 			
-			<form action="projectMainDefault" method="post">
+			<form id="projectMainDefault" action="projectMainDefault" method="post">
 			
 			<div class="project-insert-div" style="height: 130px;">
 				<dl class="project-insert-dl">
@@ -48,22 +120,25 @@
 					</dt> 
 					<dd class="project-insert-dd">
 						<p>프로젝트 성격과 가장 일치하는 카테고리를 선택해주세요. 적합하지 않을 경우 운영자에 의해 조정될 수 있습니다.</p>
+						<br>
+						<p style="color: rgb(248, 100, 83); font-size: 12px;"><i class="fas fa-exclamation-circle"></i> 심사 중인 카테고리는 심사가 끝나기 전 변경 시 목록에서 지워집니다.</p>
 					</dd>
 				</dl>
 				<div class="projcet-insert-div2">
 					<div>
 						<p class="project-insert-p">카테고리</p>
-						<select class="project-insert-select" name="categoryNo">
+						<select class="project-insert-select select1" name="categoryNo">
 							<c:forEach var="categoryDto" items="${categoryDto}">
 								<option value="${categoryDto.categoryNo}" data-approve="${categoryDto.categoryApprove}">${categoryDto.categoryTheme}</option>
 							</c:forEach>
 						</select>
-						<p class="project-insert-font" style="font-size: 12px; margin-top: 5px;">* 현태 카테고리는 심사중입니다.</p>
+						<p class="project-insert-font font-on" style="font-size: 12px; margin-top: 5px;"> </p>
 					</div>
 					<div>
-						<p class="project-insert-p">세부 카테고리</p>
+						<p class="project-insert-p">세부 카테고리<em class="project-insert-p-em">(선택사항)</em></p>
 						<select class="project-insert-select">
-							<option class="font-gray">세부 카테고리를 선택해주세요.</option>
+							<option class="font-gray"></option>
+							<option class="font-gray">RPG</option>
 						</select>
 					</div>
 				</div>
@@ -103,6 +178,11 @@
 					<div>
 						<p class="project-insert-p">요약 내용</p>
 						<textarea class="project-insert-text" rows="1" name="projectSummary">${projectDto.projectSummary}</textarea>
+						<div>
+							<p id="textMin" class="f12 pb10 pt10 left fRed">최소 10자 이상 입력해주세요</p>
+							<p id="textMax" class="f12 pb10 pt10 left fRed">최대 50자 이하로 입력해주세요</p>
+							<p id="textSize" class="f12 pb10 pt10 right">(<span id="textSizeSpan">0</span><span>/50</span>)</p>
+						</div>
 					</div>
 				</div>
 			</div>

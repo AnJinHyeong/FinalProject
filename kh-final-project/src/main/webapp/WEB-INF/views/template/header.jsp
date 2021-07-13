@@ -28,7 +28,7 @@
 	<header class="main-row"> 
 		<div class="header-row">
 			<div class="header-left">
-				<a class="header-a" href="${root}/project/projectMain">프로젝트 둘러보기</a>
+				<a class="header-a" href="#">프로젝트 둘러보기</a>
 				<a class="header-a" href="${root}/project/projectInsert">프로젝트 올리기</a>
 			</div>
 			<div class="header-center">

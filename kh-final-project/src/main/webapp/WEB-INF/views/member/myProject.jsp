@@ -9,7 +9,7 @@
 
 <section class="main-row topLine">
 
-	<div style="margin: 0 auto; width: 1200px; height: 500px;">
+	<div style="margin: 0 auto; width: 1200px; height: 800px;">
 		<span>내가 만든 프로젝트</span>
 		
 		<c:forEach var="projectDto" items="${projectDto}">

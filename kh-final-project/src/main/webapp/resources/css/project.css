@@ -218,7 +218,7 @@
 .project-main-header4{
 	width: 100%; 
 	background-color: rgb(255, 255, 255);
-	margin-top: 215px;
+	margin-top: 15px;
 	padding-top: 10px;
 	position: fixed; 
 }
@@ -275,6 +275,14 @@
 	margin-bottom: 8px; 
 	color: rgb(61, 61, 61); 
 	display: flex;
+}
+
+.project-insert-p-em{
+	font-style: normal;
+    color: rgb(158, 158, 158);
+    font-weight: normal;
+    margin: 0px 0px 0px 4px;
+    font-size: 13px;
 }
 
 .project-insert-select{
@@ -439,3 +447,9 @@
 	display: inline-block;
 	text-align: justify;
 }
+
+.project-disable{ 
+	color: #DEDEDE;
+	pointer-events: none;
+}
+

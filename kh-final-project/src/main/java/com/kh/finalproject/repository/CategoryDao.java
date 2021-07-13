@@ -11,4 +11,6 @@ public interface CategoryDao {
 	boolean isExist(String categoryTheme);
 	int getSequence();
 	void insert(CategoryDto categoryDto);
+	String approveCheck(int categoryNo);
+	CategoryDto getNo(int categoryNo);
 }

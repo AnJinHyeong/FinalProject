@@ -44,6 +44,16 @@ public class CategoryDaoImpl implements CategoryDao{
 		sqlSession.insert("category.insert", categoryDto);
 	}
 
+	@Override
+	public String approveCheck(int categoryNo) {
+		return sqlSession.selectOne("category.approveCheck",categoryNo);
+	}
+
+	@Override
+	public CategoryDto getNo(int categoryNo) {
+		return sqlSession.selectOne("category.getNo",categoryNo);
+	}
+
 	
 	
 }

@@ -28,6 +28,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{categoryNo}, #{categoryTheme})
 	</insert>
 	
+	<select id="approveCheck" resultType="String" parameterType="int">
+		SELECT CATEGORY_APPROVE FROM category where category_no = #{categoryNo}
+	</select>
+	
+	<select id="getNo" resultType="CategoryDto" parameterType="int">
+		select * from category where category_no = #{categoryNo}
+	</select>
+	
 	
 </mapper>
 
