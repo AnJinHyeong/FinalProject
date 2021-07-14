@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalproject.entity.CategoryDto;
-import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.entity.ItemDto;
+import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.repository.ItemDao;
 import com.kh.finalproject.repository.ProjectDao;
@@ -32,13 +32,20 @@ public class ProjectController {
 
 	
 	@GetMapping("/projectInsert")
-	public String projectInsert(Model model) {
+	public String projectInsert(
+			HttpSession session,
+			Model model) {
+		int memberNo = (int)session.getAttribute("memberNo");
+		ProjectDto projectDto = projectDao.workingProject(memberNo);
+
 		model.addAttribute("categoryApproveList", categoryDao.approveList());
+		model.addAttribute("projectDto", projectDto);
+		
 		return "project/projectInsert";
 	}
 	
 	@PostMapping("/projectInsert")
-	public String projectInsert(@ModelAttribute ProjectCategoryVo projectCategoryVo, Model model) {
+	public String projectInsert(@ModelAttribute ProjectCategoryVo projectCategoryVo) {
 		String categoryTheme = projectCategoryVo.getCategoryTheme();
 		int categoryNo;
 		if(categoryDao.isExist(categoryTheme)) {
@@ -56,6 +63,9 @@ public class ProjectController {
 		int projectNo = projectDao.sequence();
 		projectCategoryVo.setProjectNo(projectNo);
 		projectDao.insertBySequence(projectCategoryVo);
+		
+		
+		
 		return "redirect:" + projectNo + "/projectMain/";
 	}
 	
@@ -104,9 +114,8 @@ public class ProjectController {
 	@PostMapping("/{projectNo}/projectMainDefault")
 	public String projectMainDefault(
 			@PathVariable int projectNo,
-			@ModelAttribute ProjectDto projectDto,
-			Model model) {
-		boolean result = projectDao.projectUpdate(projectDto);
+			@ModelAttribute ProjectDto projectDto) {
+		boolean result = projectDao.projectDefaultUpdate(projectDto);
 		
 		if(result) {
 			return "redirect:projectMainDefault";
@@ -131,11 +140,26 @@ public class ProjectController {
 				.memberNo(memberNo)
 				.build();
 		ProjectDto find = projectDao.get(projectDto);
-		
 		model.addAttribute("projectDto", find);
+		
+		String plus7 = projectDao.projectEndDatePlus7(projectNo);
+		String plus14 = projectDao.projectEndDatePlus14(projectNo);
+		model.addAttribute("plus7", plus7);
+		model.addAttribute("plus14", plus14);
 		
 		return "project/projectMainFunding";
 	}
+	
+	@PostMapping("/{projectNo}/projectMainFunding")
+	public String projectMainFunding(
+			@PathVariable int projectNo,
+			@ModelAttribute ProjectDto projectDto) {
+		boolean result = projectDao.projectFundingUpdate(projectDto);
+		
+		return "redirect:projectMainFunding";
+		
+	}
+	
 	
 	@GetMapping("/{projectNo}/projectMainGift")
 	public String projectMainGift(@PathVariable int projectNo, Model model) {
