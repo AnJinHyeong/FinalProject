@@ -8,4 +8,5 @@ public interface ItemDao {
 	void insert(ItemDto itemDto);
 	List<ItemDto> list(int projectNo);
 	int count(int projectNo);
+	boolean delete(int itemNo);
 }

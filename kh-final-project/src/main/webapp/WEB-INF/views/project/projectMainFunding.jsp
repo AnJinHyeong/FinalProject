@@ -5,12 +5,12 @@
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
 <jsp:include page="/WEB-INF/views/project/projectHeader.jsp">
-	<jsp:param value="${root}/project/projectMainFunding" name="division"/>
+	<jsp:param value="${root}/project/${projectNo}/projectMainFunding" name="division"/>
 </jsp:include>
 
 <section class="main-row topLine">
 	
-	<div class="project-back-color" style="height: 1900px;">
+	<div class="project-back-color" style="min-height: 1150px;">
 		
 		<div class="section-row" style=" padding-top: 10px;">
 			
@@ -29,23 +29,27 @@
 								<i class="fas fa-exclamation-circle"></i> 목표 금액 설정 시 꼭 알아두세요!
 							</div>
 							<div>
-								<p style="padding-left: 14px; margin-bottom: 5px;">종료일까지 목표금액을 달성하지 못하면 후원자 결제가 진행되지 않습니다.</p>
-								<p style="padding-left: 14px; margin-bottom: 5px;">종료 전 후원 취소를 대비해 10% 이상 초과 달성을 목표로 해주세요.</p>
-								<p style="padding-left: 14px; margin-bottom: 5px;">제작비, 선물 배송비, 인건비, 예비 비용 등을 함께 고려해주세요.</p>
+								<p class="project-funding-p">종료일까지 목표금액을 달성하지 못하면 후원자 결제가 진행되지 않습니다.</p>
+								<p class="project-funding-p">종료 전 후원 취소를 대비해 10% 이상 초과 달성을 목표로 해주세요.</p>
+								<p class="project-funding-p">제작비, 선물 배송비, 인건비, 예비 비용 등을 함께 고려해주세요.</p>
 							</div>
 						</div>
 					</dl>
 					<div class="projcet-insert-div2">
-						<div>
+						<div style="width: 630px;">
 							<p class="project-insert-p">목표 금액</p>
-							<input type="text" class="projcet-insert-input">
+							<div class="project-funding-money-div">
+								<span class="project-funding-money-span">
+									<input type="text" class="projcet-insert-input" name="projectTargetAmount" style="text-align: inherit; border: none;"><p style="padding-left: 3px;">원</p>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
 				
 				<hr>
 				
-				<div class="project-insert-div" style="height: 500px;">
+				<div class="project-insert-div" style="height: 400px;">
 					<dl class="project-insert-dl">
 						<dt class="project-insert-dt">
 							펀딩 일정 <span class="project-insert-font">*</span>
@@ -55,29 +59,36 @@
 						</dd>
 					</dl>
 					<div class="projcet-insert-div2">
-						<div>
-							<ul style="margin: 0; padding: 0;">
-								<li style="padding: 0px 0px 38px 18px;color: rgb(158, 158, 158);" class="lili">
+						<div style="width: 630px;">
+							<ul style="margin: 0; padding: 0; list-style-position: inherit;">
+								<li class="project-funding-li">
 									<div style="width: 630px;">
 										<p class="project-insert-p">시작일</p>
 										<div class="projcet-insert-div2">
-											<input type="date" class="project-insert-input">
+											<input type="date" class="projcet-insert-input" name="projectStartDate">
+										</div>
+									</div>
+									<div style="height: 20px; margin-top: 30px;">
+										<p class="project-insert-p">펀딩기간</p>
+										<p class="project-insert-p" style="font-size: 12px; color: #a09e9e;">30일</p>
+									</div>
+								</li>
+								<li class="project-funding-li">
+									<div style="width: 630px;">
+										<p class="project-insert-p">종료일</p>
+										<div class="projcet-insert-div2">
+											<input type="date" class="projcet-insert-input" name="projectEndDate">
 										</div>
 									</div>
 								</li>
-								<li style="padding: 0px 0px 38px 18px;color: rgb(158, 158, 158);" class="lili">
-									<div>
-										1
+								<li class="project-funding-li">
+									<div style="width: 630px;">
+										<p class="project-insert-p">후원자 결제 종료</p>
 									</div>
 								</li>
-								<li style="padding: 0px 0px 38px 18px;color: rgb(158, 158, 158);" class="lili">
-									<div>
-										1
-									</div>
-								</li>
-								<li style="padding: 0px 0px 38px 18px;color: rgb(158, 158, 158);" class="lili">
-									<div> 
-										1
+								<li class="project-funding-li">
+									<div style="width: 630px;">
+										<p class="project-insert-p">정산일</p>
 									</div>
 								</li>
 								

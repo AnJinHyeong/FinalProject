@@ -42,10 +42,28 @@
 	cursor: pointer; 
 }
 
+.project-btn.btn4{
+	background-color: white;
+	color: #8c8c8c; 
+	border: 1px solid #dcdcdc;
+	cursor: pointer;
+	text-align: left;
+	padding-left: 20px;
+}
+
+.project-btn.btn5{
+	background-color: white;
+	color: #8c8c8c;
+	border: none;
+	border-bottom: 1px solid #dcdcdc;
+	cursor: pointer;
+	text-align: left;
+	padding-left: 20px;
+}
+
 .project-btn-hover:hover{
 	background: rgb(248, 100, 83);
 	color: #fcfcfc;
-	
 }
 
 .project-main-link{
@@ -65,7 +83,7 @@
 	display: flex;
 	-webkit-box-align: center; 
 	align-items: center; 
-	white-space: nowrap;"
+	white-space: nowrap;
 }
 
 .project-main-li{
@@ -218,7 +236,7 @@
 .project-main-header4{
 	width: 100%; 
 	background-color: rgb(255, 255, 255);
-	margin-top: 215px;
+	margin-top: 15px;
 	padding-top: 10px;
 	position: fixed; 
 }
@@ -277,6 +295,14 @@
 	display: flex;
 }
 
+.project-insert-p-em{
+	font-style: normal;
+    color: rgb(158, 158, 158);
+    font-weight: normal;
+    margin: 0px 0px 0px 4px;
+    font-size: 13px;
+}
+
 .project-insert-select{
 	width: 300px; 
 	height: 40px; 
@@ -296,9 +322,8 @@
 
 .project-insert-text{
 	width: 620px; 
-	min-height: 300px; 
 	border: 1px solid rgb(240, 240, 240);
-	height: 300px;
+	height: 100px;
 	resize: none;
 }
 
@@ -310,7 +335,6 @@
     border: 1px dashed rgb(228, 228, 228);
     box-sizing: border-box;
     border-radius: 4px;
-    position: relative;
     transition: border 0.4s ease 0s;
     display: flex;
     flex-wrap: wrap;
@@ -335,7 +359,7 @@
 	margin-top:15px;
 	padding: 0 auto;
 	height: 200px; 
-	background: white; 
+	background: #ffe6e6; 
 	border-radius: 8px; 
 	padding: 23px 24px 22px;
 	font-weight: 400; 
@@ -344,7 +368,12 @@
 	line-height: 20px !important;
 }
 
-.project-insert-item-div{
+.project-funding-li{
+	padding: 0px 0px 45px 20px;
+	border-left:1px solid #dcdcdc;
+}
+
+.project-insert-gift-item-div{
 	margin-top:15px;
 	padding: 0 auto;
 	height: 200px; 
@@ -355,10 +384,74 @@
 	color: rgb(109, 109, 109); 
 	font-size: 12px !important; 
 	line-height: 20px !important;
-	display: inline-block;
+	position: relative;
+	line-height: 20px;
 }
 
-lili:before {
+.project-insert-gift-div{
+	padding: 20px 40px;
+	margin: 0px;
+	width: 620px;
+	height: auto;
+	min-height: 300px;
+	background: white;
+	border-radius: 8px;
+	border: 1px solid rgb(240, 240, 240);
+	font-size: 12px !important;
+	line-height: 20px;
+}
+
+.project-insert-gift-item-div>p{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.project-insert-gift-item-div>div{
+	position: relative;
+}
+
+.project-insert-gift-div>div{
+	padding: 10px;
+	position: relative;
+}
+
+.project-insert-gift-item-div>div>pre{
+	text-align: center;
+	width: 400px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	white-space: pre-line;
+}
+
+.project-insert-gift-div>div>pre{
+	text-align: center;
+	width: 400px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	white-space: pre-line;
+}
+
+.project-insert-gift-div>div>p{
+	margin-top: 10px;
+}
+
+.project-insert-gift-item-div>div>a>button{
+	text-align: center;
+	width: 100%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	white-space: pre-line;
+}
+
+.project-funding-li:before {
     position: absolute;
     top: 4px;
     left: 0px;
@@ -372,13 +465,48 @@ lili:before {
     background: rgb(255, 255, 255);
 }
 
-lili:after {
+.project-funding-li:after {
 	content: "";
     position: absolute;
     top: 4px;
     left: 4px;
     height: 100%;
     border-left: 1px solid rgb(228, 228, 228);
+}
+
+.project-funding-money-div{
+	display: flex;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    align-items: center;
+    border-radius: 4px;
+    background: rgb(255, 255, 255);
+    padding: 0px 18px;
+    border: 1px solid rgb(240, 240, 240);
+}
+
+.project-funding-money-span{
+    color: rgb(13, 13, 13);
+    max-height: 44px;
+    min-width: 100px;
+    display: flex;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.015em;
+    -webkit-box-align: center;
+    align-items: center;
+    border-radius: 4px;
+    flex: 1 1 0%;
+    border: 0px;
+    text-align: right;
+    padding: 0px;
+    background: transparent;
+}
+
+.project-funding-p{
+	padding-left: 14px; 
+	margin-bottom: 5px;
 }
 
 .project-itemList{
@@ -398,4 +526,66 @@ lili:after {
 	font-size: 12px !important;
 	display: inline-block;
 	text-align: justify;
+	word-break: break-all;
+}
+
+.project-disable{ 
+	color: #DEDEDE;
+	pointer-events: none;
+}
+
+.itemListIcon{
+	position: relative;
+	left: -15px;
+	top: -30px;
+}
+
+.displayNone{
+	display: none;
+}
+
+.zi100{
+	z-index: 100;
+}
+
+.project-gift-item-list{
+	overflow-y: scroll;
+	overflow-x: hidden; 
+}
+
+.project-item-checkbox{
+	display: none;
+}
+
+.project-item-checkbox-wrap {
+	position: relative;
+	min-height: 60px;
+}
+
+.project-item-checkbox+.project-item-checkbox-label{
+	margin-top: 20px;
+	display: inline-block;
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
+	background-color: #f0f0f0; 
+	color: #8c8c8c; 
+	border: 1px solid #dcdcdc;
+}
+
+.project-item-checkbox:checked+.project-item-checkbox-label{
+	background-color: rgb(248, 100, 83);
+	transition: background-color 0.2s ease-in-out;
+}
+
+.project-item-checkbox-text {
+	position: absolute;
+	left: 40px;
+	height: 100%;
+	width: 100%;
+	display: inline-block;
+	padding-right: 60px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

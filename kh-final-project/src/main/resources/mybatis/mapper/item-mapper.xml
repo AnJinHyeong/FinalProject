@@ -18,6 +18,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from item where project_no = #{projectNo}
 	</select>
 	
+	<delete id="delete" parameterType="int">
+		delete item where item_No = #{itemNo}
+	</delete>
+	
 </mapper>
 
 

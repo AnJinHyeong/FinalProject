@@ -5,7 +5,8 @@
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
 <jsp:include page="/WEB-INF/views/project/projectHeader.jsp">
-	<jsp:param value="${root}/project/projectMainGift" name="division" />
+	<jsp:param value="${root}/project/${projectNo}/projectMainGift"
+		name="division" />
 </jsp:include>
 
 <script>
@@ -37,12 +38,11 @@
 			$("#itemListNone").show();
 		};
 		
-		$("#modal").hide();
-		$("#modalBackground").hide();
-		
-		$(".modalOn").on("click", function(){
-			$("#modal").show();
-			$("#modalBackground").show();
+		$(".modalX").on("click", function(){
+			$("input[name=itemNo]").val($(this).siblings("#itemNo").html());
+			$("#modal-target").text($(this).siblings("#itemName").html());
+			$("#modal").toggle();
+			$("#modalBackground").toggle();
 		});
 		
 		$("#modalBackground").on("click", function(){
@@ -50,12 +50,19 @@
 			$("#modalBackground").hide();
 		});
 		
+		$("#projectMainGiftItemInsertForm").on("submit", function(e){
+			if($("input[name=itemName]").val().length < 10 || $("input[name=itemName]").val().length > 50){
+				$("input[name=itemName]").focus();
+				e.preventDefault();
+			}
+		});
+		
 	});
 </script>
 
 <section class="main-row topLine">
 
-	<div class="bottomLine project-main-header4" style="position: fixed;">
+	<div class="bottomLine project-main-header4">
 		<div class="container-1200 h35 mCenter">
 			<ul class="project-main-ul">
 				<li class="project-main-li2"><a
@@ -72,65 +79,85 @@
 
 	<div class="project-back-color" style="height: 1900px;">
 
-		<div class="section-row" style="padding-top: 10px;">
+		<div class="section-row pt10">
 
-			<form action="projectMainGiftItem" method="post">
+			<form id="projectMainGiftItemInsertForm" action="projectMainGiftItem"
+				method="post">
 				<input type="hidden" value="${projectNo}" name="projectNo">
 
-				<div class="project-insert-div" style="height: 300px;">
+				<div class="project-insert-div h300">
 					<div class="project-insert-dl">
+
 						<div class="project-insert-dt">
 							내가 만든 아이템 (<span id="itemCount">${itemCount}</span>)
 						</div>
-						
-						
-						<div id="itemListNone" class="project-insert-item-div">
-							<div>
-								<p style="padding-left: 14px; margin-bottom: 5px;">만든 아이템이
-									없습니다</p>
-							</div>
+
+						<div id="itemListNone" class="project-insert-gift-item-div h200">
+							<p>만든 아이템이 없습니다</p>
 						</div>
-						
+
 						<div class="project-itemList">
 							<c:forEach var="itemDto" items="${itemList}">
-									<div class="project-insert-item-list float-container">
-										<span class="left w260">${itemDto.itemName}</span>
-										<span class="modalOn right" style="cursor: pointer;">
-										<i class="fas fa-times"></i></span>
-									</div>
+								<div class="project-insert-item-list float-container">
+									<span id="itemName" class="left w260">${itemDto.itemName}</span>
+									<span id="itemNo" class="yb hidden">${itemDto.itemNo}</span> <span
+										class="yb modalX right"> <i class="fas fa-times"></i></span>
+								</div>
 							</c:forEach>
 						</div>
-						
+
 					</div>
 					<div class="projcet-insert-div2">
 						<div>
 							<p class="project-insert-p">아이템 만들기</p>
-							<input type="text" class="projcet-insert-input" name="itemName" autocomplete="off">
+							<input type="text" class="projcet-insert-input" name="itemName"
+								autocomplete="off">
 							<div class="float-container">
-								<p id="textMin" class="f12 pb10 pt10 left fRed">최소 10자 이상 입력해주세요</p>
-								<p id="textMax" class="f12 pb10 pt10 left fRed">최대 50자 이하로 입력해주세요</p>
-								<p id="textSize" class="f12 pb10 pt10 right">(<span id="textSizeSpan">0</span><span>/50</span>)</p>
+								<p id="textMin" class="f12 pb10 pt10 left fRed">최소 10자 이상
+									입력해주세요</p>
+								<p id="textMax" class="f12 pb10 pt10 left fRed">최대 50자 이하로
+									입력해주세요</p>
+								<p id="textSize" class="f12 pb10 pt10 right">
+									(<span id="textSizeSpan">0</span><span>/50</span>)
+								</p>
+							</div>
+
+							<div class="project-insert-div3">
+								<input class="project-btn btn3 project-btn-hover"
+									style="margin-right: 0px" type="submit" value="등록">
 							</div>
 						</div>
-					</div>
-					
-				</div>
 
-				<div class="project-insert-div3">
-					<input class="project-btn btn3 project-btn-hover" type="submit"
-						value="저장">
-				</div>
-				
-				<div id="modal" class="yb modal float-container">
-					<span>dddddddddddd</span>
-					아이템 삭제
-					이 아이템을 삭제하시겠습니까? 삭제하면 해당 아이템이 포함된 0개의 선물에서도 삭제됩니다.
-				</div>
-				
-				<div id="modalBackground" class="yb modal-background float-container">
+					</div>
+
 				</div>
 
 			</form>
+
+			<div id="modal" class="yb modal">
+
+				<div class="modal-header float-container">
+					<span class="modal-title left">아이템 삭제</span> <span
+						class="yb modalX right"><i class="fas fa-times"></i></span>
+				</div>
+
+				<div class="modal-body">
+					<pre id="modal-target"></pre>
+					<pre>이 아이템을 삭제하시겠습니까?</pre>
+					<pre>삭제하면 해당 아이템이 포함된 0개의 선물에서도 삭제됩니다.</pre>
+				</div>
+
+				<div class="modal-footer">
+					<form action="projectMainGiftItemDelete" method="post">
+						<input type="hidden" name="itemNo" value="">
+						<button class="modal-btn">삭제</button>
+					</form>
+				</div>
+
+			</div>
+
+			<div id="modalBackground" class="yb modal-background float-container">
+			</div>
 
 		</div>
 
