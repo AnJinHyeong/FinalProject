@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="gift">
+
+	<!-- 선물 데이터 삽입 -->
+	<insert id="insert" parameterType="GiftDto">
+		insert into gift values(gift_seq.nextval, #{projectNo}, #{memberNo}, #{giftPrice}, #{giftSummary})
+	</insert>
+	
+	<!-- 프로젝트 번호와 일치하는 선물 리스트 생성 -->
+	<select id="listByProjectNo" resultType="GiftDto" parameterType="int">
+		select * from gift where project_no = #{projectNo}
+	</select>
+	
+	<!-- 프로젝트 번호와 일치하는 선물 갯수 -->
+	<select id="count" resultType="int" parameterType="int">
+		select count(*) from gift where project_no = #{projectNo}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

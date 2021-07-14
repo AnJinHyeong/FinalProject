@@ -213,6 +213,7 @@
 	overflow-x: hidden; 
 	background: rgb(255, 255, 255); 
 	position: fixed;
+	z-index: 2;
 }
 
 .project-main-header2 > .header2-in{
@@ -230,7 +231,8 @@
 	width: 100%; 
 	background: rgb(255, 255, 255); 
 	margin-top: 180px; 
-	position: fixed; 
+	position: fixed;
+	z-index: 2;
 }
 
 .project-main-header4{
@@ -238,7 +240,8 @@
 	background-color: rgb(255, 255, 255);
 	margin-top: 15px;
 	padding-top: 10px;
-	position: fixed; 
+	position: fixed;
+	z-index: 2;
 }
 
 .project-insert-div{
@@ -510,14 +513,14 @@
 }
 
 .project-itemList{
-	max-height: 1000px;
+	max-height: 400px;
 	overflow-y: auto;
 }
 
 .project-insert-item-list{
-	width: 98%;
-	height: 100px;
-	margin-top: 15px;
+	width: 100%;
+	height: 80px;
+	margin-bottom: 15px;
 	background: white; 
 	border-radius: 8px;
 	padding: 20px 20px;
@@ -540,17 +543,14 @@
 	top: -30px;
 }
 
-.displayNone{
-	display: none;
-}
-
 .zi100{
 	z-index: 100;
 }
 
 .project-gift-item-list{
+	max-height: 300px;
 	overflow-y: scroll;
-	overflow-x: hidden; 
+	overflow-x: hidden;
 }
 
 .project-item-checkbox{
@@ -558,12 +558,12 @@
 }
 
 .project-item-checkbox-wrap {
+	width: 100%;
 	position: relative;
-	min-height: 60px;
+	min-height: 40px;
 }
 
 .project-item-checkbox+.project-item-checkbox-label{
-	margin-top: 20px;
 	display: inline-block;
 	cursor: pointer;
 	width: 20px;
@@ -579,13 +579,179 @@
 }
 
 .project-item-checkbox-text {
+	top: -10px;
+	padding-top: 12px;
+	padding-left: 40px;
+	padding-right: 20px;
+	font-size: 12px;
 	position: absolute;
-	left: 40px;
-	height: 100%;
 	width: 100%;
+	height: 40px;
 	display: inline-block;
-	padding-right: 60px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.project-item-checkbox-text:hover{
+	background-color: rgba(0, 0, 0, 0.01);
+	border-radius: 10px;
+}
+
+
+
+
+
+/* projectInsert */
+.projectInsert.section-background-image{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	min-height: 100%;
+}
+
+.projectInsert1.section-row{
+	width: 1200px;
+	min-height: 1000px;
+	margin: 0 auto;
+}
+
+.projectInsert1.section-opacity{
+	background-color: rgba( 255, 255, 255, 0.9 );
+	min-height: 100%;
+}
+
+.projectInsert3>.btn,
+.projectInsert3>.btn>.btn-progress,
+.projectInsert3>ul>li>.btn,
+.projectInsert4>.btn{
+	padding: 0.5rem;
+	outline: none;
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	display: flex;
+	position: relative;
+}
+
+.projectInsert3>.btn,
+.projectInsert3>ul>li>.btn,
+.projectInsert4>.btn{
+	background-color: white;
+}
+
+.projectInsert3>ul{
+	max-height: 170px;
+	list-style:none;
+    margin:0px;
+    padding:0px;
+    display: block;
+    overflow: auto;
+}
+
+.projectInsert3>ul:after{
+	display: inline-block;
+	width: 99%;
+	height: 0px;
+	content: '';
+}
+
+.projectInsert3>ul>li{
+	margin: 10px 4px; */
+    padding: 0px;
+    border: none;
+    list-style: none;
+    display: inline-block;
+    border-radius: 20px;
+}
+
+.projectInsert3>ul>li>.btn-insert,
+.projectInsert3>ul>li>.btn.category-btn{
+	background-color: rgba(235, 232, 163, 0.2);
+}
+
+.projectInsert3>.btn>.btn-progress{
+	margin-left: auto;
+	background-color: rgb(245, 245, 245);
+}
+
+.projectInsert3>.btn.btn-hover:hover,
+.projectInsert3>ul>li>.btn.btn-hover:hover,
+.projectInsert4>.btn.btn-hover:hover{
+	background-color: rgb(245, 245, 245);
+	transition: background-color 0.2s ease-in-out;
+	cursor: pointer;
+}
+
+.projectInsert3>ul>li>.btn.btn-hover:hover,
+.projectInsert4>.btn.btn-hover:hover{
+	background-color: rgb(235, 232, 163);
+}
+
+.projectInsert3>.btn>.btn-text,
+.projectInsert3>.btn>.btn-progress>.btn-text{
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.projectInsert3>ul>li>.btn.btn-inline{
+	display: inline-block;
+}
+
+.projectInsert3>ul>li>.category-btn.btn-clicked{
+	font-weight: bold;
+	background-color: rgb(235, 232, 163);
+}
+
+
+
+
+
+/* projectMainGiftandItem */
+.projectMainGiftAndItem1{
+	background-color: rgb(248,248,248);
+	min-height: 1200px;
+}
+
+.projectMainGiftAndItemList{
+	margin: 0px; 
+	width: 400px;
+}
+
+.projectMainGiftAndItemInsert{
+	display: flex;
+	-webkit-box-pack: justify;
+	justify-content: space-between; 
+	width: 700px;
+}
+
+.projectMainItemInsert{
+	
+}
+
+
+
+
+
+/* border & background-color */
+.project-border-normal{
+	border: 1px solid lightgray;
+}
+
+.project-border-none{
+	border: none;
+}
+
+.project-border-radius{
+	border-radius: 5px;
+}
+
+.project-background-none{
+	background-color: rgba(255, 255, 255, 0);
+}
+
+.project-background-white{
+	background-color: white;
 }

@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalproject.entity.CategoryDto;
-import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.entity.GiftDto;
 import com.kh.finalproject.entity.ItemDto;
+import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.repository.CategoryDao;
+import com.kh.finalproject.repository.GiftDao;
 import com.kh.finalproject.repository.ItemDao;
 import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.vo.ProjectCategoryVo;
@@ -137,10 +139,15 @@ public class ProjectController {
 		return "project/projectMainFunding";
 	}
 	
+	@Autowired
+	private GiftDao giftDao;
+	
 	@GetMapping("/{projectNo}/projectMainGift")
 	public String projectMainGift(@PathVariable int projectNo, Model model) {
 		model.addAttribute("itemCount", itemDao.count(projectNo));
 		model.addAttribute("itemList", itemDao.list(projectNo));
+		model.addAttribute("giftCount", giftDao.count(projectNo));
+		model.addAttribute("giftList", giftDao.listByProjectNo(projectNo));
 		return "project/projectMainGift";
 	}
 	
@@ -149,6 +156,15 @@ public class ProjectController {
 		model.addAttribute("itemCount", itemDao.count(projectNo));
 		model.addAttribute("itemList", itemDao.list(projectNo));
 		return "project/projectMainGiftItem";
+	}
+	
+	@PostMapping("/{projectNo}/projectMainGift")
+	public String projectMainGift(HttpSession session, @ModelAttribute GiftDto giftDto, @PathVariable int projectNo) {
+		int memberNo = (int)session.getAttribute("memberNo");
+		giftDto.setProjectNo(projectNo);
+		giftDto.setMemberNo(memberNo);
+		giftDao.insert(giftDto);
+		return "redirect:projectMainGift";
 	}
 	
 	@Autowired
