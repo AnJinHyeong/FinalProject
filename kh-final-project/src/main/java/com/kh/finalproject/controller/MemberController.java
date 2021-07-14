@@ -1,4 +1,4 @@
-package com.kh.finalproject.controller;
+	package com.kh.finalproject.controller;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,12 +13,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.repository.MemberDao;
+import com.kh.finalproject.service.EmailService;
 import com.kh.finalproject.vo.MemberVo;
 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
 
+	@Autowired
+	private EmailService emailService;
+	
+	@Autowired
+	private MemberDao memberDao;
+	
 	@RequestMapping("/join")
 	public String join() {
 		return "member/join";
@@ -28,8 +35,6 @@ public class MemberController {
 		return "member/myPage";
 	}
 	
-	@Autowired
-	private MemberDao memberDao;
   
 	@PostMapping(value = "/memberInsert")
 	public String memberInsert(@ModelAttribute MemberVo memberVo) {
