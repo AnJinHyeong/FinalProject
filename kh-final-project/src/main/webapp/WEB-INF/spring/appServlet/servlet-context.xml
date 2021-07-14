@@ -50,18 +50,15 @@
 	<!-- 
 		인터셉터 설정
 		- MemberLoginInterceptor : 비회원 접근 차단 
+	-->
 	
 	<interceptors>
 		<interceptor>
-			<mapping path="/member/**"/>
-			<exclude-mapping path="/member/regist"/>
-			<exclude-mapping path="/member/registSuccess"/>
-			<exclude-mapping path="/member/login"/>
-			<exclude-mapping path="/member/goodbye"/>
-			<beans:bean class="com.kh.home.interceptor.MemberLoginInterceptor"></beans:bean>
+			<mapping path="/project/**"/>
+			<exclude-mapping path="/project/projectHeader"/>
+			<beans:bean class="com.kh.finalproject.interceptor.MemberLoginInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>
-	-->
 	
 	
 	<!-- 

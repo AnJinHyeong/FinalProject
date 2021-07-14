@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <c:set var="isLogin" value="${not empty memberNo}"></c:set>
+<c:set var="projectNo" value="${workingProject.projectNo}"></c:set>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"/>
 
@@ -102,6 +103,10 @@
 			$("#scrollUp").hide();
 		}
 		
+		$("#workingProject").on("click", function(){
+			location.href="${root}/project/"+${projectDto.projectNo}+"/projectMain";
+		});
+    
 	});
 </script>
 
@@ -121,10 +126,10 @@ style="background-image: url('${root}/image/insertBackground.jpg');">
 				<p class="fRed fBold f16 pb10">
 					<i class="fas fa-exclamation-circle"></i> 작성 중인 프로젝트가 있습니다.
 				</p>
-
-				<button class="btn btn-hover w100p h80">
+					
+				<button class="btn btn-hover w100p h80" id="workingProject">
 					<div class="project-main-img w80 h100p"></div>
-					<div class="btn-text">ㅇㅇ의 프로젝트</div>
+					<div class="btn-text">${projectDto.projectTitle}</div>
 					<div class="btn-progress w140 h100p">
 						<div class="btn-text">기획중 - 8% 완료</div>
 					</div>

@@ -755,3 +755,8 @@
 .project-background-white{
 	background-color: white;
 }
+
+.project-input-money{
+	text-align: inherit; 
+	border: none;
+}
