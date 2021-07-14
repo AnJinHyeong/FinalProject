@@ -589,3 +589,8 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
+.project-input-money{
+	text-align: inherit; 
+	border: none;
+}
