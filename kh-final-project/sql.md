@@ -7,7 +7,7 @@ member_nick varchar2(30) not null,
 member_have_point number(19) default 0,
 member_email varchar2(30) not null unique,
 member_introduce varchar2(1000),
-member_grade varchar2(30) check (member_grade in('관리자','사용자','블랙')),   
+member_grade varchar2(30) default '사용자' check (member_grade in('관리자','사용자','블랙')) ,   
 member_address VARCHAR2(200)
 
 CREATE SEQUENCE member_seq;
@@ -80,7 +80,9 @@ create sequence gift_seq;
 DROP TABLE pay;
 CREATE TABLE pay(
 pay_no NUMBER(19) PRIMARY KEY,
-pay_money VARCHAR2(30) NOT NULL,
+pay_tid VARCHAR2(30) NOT NULL,
+pay_price NUMBER(19) NOT NULL,
+pay_status VARCHAR2(20) CHECK(pay_status IN ('결제 요청','결제 완료')) NOT NULL,
 pay_date DATE,
 member_no REFERENCES member(member_no) ON DELETE SET NULL
 );
