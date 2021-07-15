@@ -2,7 +2,6 @@ package com.kh.finalproject.controller;
 
 import java.util.List;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.repository.MemberDao;
-
+import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.service.EmailService;
 
-import com.kh.finalproject.repository.ProjectDao;
-
-import com.kh.finalproject.vo.MemberVo;
 
 @Controller
 @RequestMapping("/member")
@@ -44,9 +40,9 @@ public class MemberController {
 	
   
 	@PostMapping(value = "/memberInsert")
-	public String memberInsert(@ModelAttribute MemberVo memberVo) {
-	memberDao.memberInsert(memberVo);
-	return "member/joinSuccess";
+	public String memberInsert(@ModelAttribute MemberDto memberDto) {
+		memberDao.memberInsert(memberDto);
+		return "member/joinSuccess";
 	
 	}
 	 
@@ -74,7 +70,7 @@ public class MemberController {
 			
 			return "redirect:/";
 	}
-	
+
 	@Autowired
 	private ProjectDao projectDao;
 	
@@ -88,7 +84,5 @@ public class MemberController {
 		
 		return "member/myProject";
 	}
-		
-
 }
 

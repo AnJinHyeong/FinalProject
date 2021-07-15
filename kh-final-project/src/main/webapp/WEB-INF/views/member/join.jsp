@@ -70,15 +70,13 @@ $("#emailSend").click(function(){
 			
 			<div class = "row text-left">
 				<label for = "memberIntroduce">자기소개</label>
-				<input type="text" id = "memberIntroduce" class= "form-input form-input-underline2" placeholder = "(선택) 간단한 자기소개를 입력해주세요">
+				<input type="text" name = "memberIntroduce" class= "form-input form-input-underline2"  placeholder = "(선택) 간단한 자기소개를 입력해주세요">
 				
 			</div>
 			<div class = "row text-center">
 			<input type = "submit" id= "submit" style= 'cursor:pointer' value = "가입" class = "form-btn form-btn-normal ">
 			</div>
-			
-			
-			
+
 		</form>
 	</div>
 </body>
