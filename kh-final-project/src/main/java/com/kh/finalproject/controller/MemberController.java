@@ -1,6 +1,4 @@
 package com.kh.finalproject.controller;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.repository.MemberDao;
-import com.kh.finalproject.vo.MemberVo;
 
 @Controller
 @RequestMapping("/member")
@@ -32,9 +28,9 @@ public class MemberController {
 	private MemberDao memberDao;
   
 	@PostMapping(value = "/memberInsert")
-	public String memberInsert(@ModelAttribute MemberVo memberVo) {
-	memberDao.memberInsert(memberVo);
-	return "member/joinSuccess";
+	public String memberInsert(@ModelAttribute MemberDto memberDto) {
+		memberDao.memberInsert(memberDto);
+		return "member/joinSuccess";
 	
 	}
 	 
@@ -62,7 +58,5 @@ public class MemberController {
 			
 			return "redirect:/";
 	}
-		
-
 }
 
