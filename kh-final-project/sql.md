@@ -88,3 +88,12 @@ DROP SEQUENCE pay_seq;
 CREATE SEQUENCE pay_seq;
 
 
+#giftItem table
+create table giftItem(
+giftItem_no number(19) primary key,
+gift_no references gift(gift_no) on delete cascade,
+item_no references item(item_no) on delete cascade,
+item_count number(19) not null
+);
+
+create sequence giftItem_seq;

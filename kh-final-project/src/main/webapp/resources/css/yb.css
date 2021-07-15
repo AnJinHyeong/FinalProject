@@ -205,6 +205,18 @@
 
 
 
+/* text-align */
 .yb .tac{
 	text-align: center;
+}
+
+
+
+
+
+/* pre */
+.yb pre.oneLine{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
