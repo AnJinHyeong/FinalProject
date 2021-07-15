@@ -14,9 +14,7 @@
 <br><br>
 <script>
 
-$("#emailSend").click(function(){
-	var memberEmail = $(".memberEmail").val();
-})
+
 </script>
 <body>
 	<div class = "container joinBorder">
