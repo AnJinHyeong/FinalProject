@@ -32,9 +32,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select project_seq.nextval from dual
 	</select>
 	
-	<update id="projectUpdate" parameterType="ProjectDto">
-		update project set category_no = #{categoryNo}, project_title = #{projectTitle} ,project_summary = #{projectSummary} where project_no = #{projectNo}
+	<update id="projectDefaultUpdate" parameterType="ProjectDto">
+		update project 
+		set category_no = #{categoryNo}, project_title = #{projectTitle} ,project_summary = #{projectSummary} 
+		where project_no = #{projectNo}
 	</update>
+	
+	<update id="projectFundingUpdate" parameterType="ProjectDto">
+		update project 
+		set project_target_amount = #{projectTargetAmount}, project_start_date = #{projectStartDate}, project_end_date = #{projectEndDate}
+		where project_no = #{projectNo}
+	</update>
+	
+	<select id="projectEndDatePlus7" parameterType="int" resultType="String">
+		SELECT project_end_date + INTERVAL '7' DAY FROM project WHERE project_no = #{projectNo}
+	</select>
+	
+	<select id="projectEndDatePlus14" parameterType="int" resultType="String">
+		SELECT project_end_date + INTERVAL '14' DAY FROM project WHERE project_no = #{projectNo}
+	</select>
+	
+	<select id="workingProject" parameterType="int" resultType="ProjectDto">
+		select * from(
+			select rownum rn, TMP.* from(
+				SELECT * FROM project WHERE member_no = #{memberNo} ORDER BY project_no DESC
+			)TMP
+		) where rn = 1
+	</select>
 	
 </mapper>
 
