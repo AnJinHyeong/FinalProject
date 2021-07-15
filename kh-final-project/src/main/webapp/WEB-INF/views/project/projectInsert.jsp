@@ -1,10 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
+<c:set var="isLogin" value="${not empty memberNo}"></c:set>
+<c:set var="projectNo" value="${workingProject.projectNo}"></c:set>
 
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/header.jsp"/>
+
+<style>
+	html, body{
+		height: 100%;
+	}
+</style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
@@ -69,7 +77,7 @@
 			}
 			else{
 				$(this).css("font-weight", "bold");
-				$(this).css("background-color", "rgb(245, 245, 245)");
+				$(this).css("background-color", "rgb(235, 232, 163)");
 				$("#result").show();
 				$("input[name=categoryTheme]").val($(this).val());
 			}
@@ -80,9 +88,25 @@
 				$("textarea[name=projectSummary]").focus();
 				e.preventDefault();
 			}
-			
 		});
 		
+		$("#scrollDown").on("click", function(){
+			$(".scrollBlind").animate({scrollTop:'+=200'}, 200);
+		});
+		$("#scrollUp").on("click", function(){
+			$(".scrollBlind").animate({scrollTop:'-=200'}, 200);
+		});
+		
+		var categoryListHeight = $('#categoryList').height()
+		if(categoryListHeight < 100){
+			$("#scrollDown").hide();
+			$("#scrollUp").hide();
+		}
+		
+		$("#workingProject").on("click", function(){
+			location.href="${root}/project/"+${projectDto.projectNo}+"/projectMain";
+		});
+    
 	});
 </script>
 
@@ -90,22 +114,22 @@
 	
 </script>
 
-<section class="yb main-row topLine section-background-image"
-	style="background-image: url('${root}/image/insertBackground.jpg');">
+<section class="yb projectInsert main-row topLine section-background-image"
+style="background-image: url('${root}/image/insertBackground.jpg');">
 
-	<div class="yb section-row section-opacity">
+	<div class="projectInsert1 section-row section-opacity">
 
-		<div class="container-800 pt20">
+		<div class="projectInsert2 container-800 pt20">
 
-			<div class="mb60">
+			<div class="projectInsert3 mb30">
 
 				<p class="fRed fBold f16 pb10">
 					<i class="fas fa-exclamation-circle"></i> 작성 중인 프로젝트가 있습니다.
 				</p>
-
-				<button class="btn btn-hover w100p h80">
+					
+				<button class="btn btn-hover w100p h80" id="workingProject">
 					<div class="project-main-img w80 h100p"></div>
-					<div class="btn-text">ㅇㅇ의 프로젝트</div>
+					<div class="btn-text">${projectDto.projectTitle}</div>
 					<div class="btn-progress w140 h100p">
 						<div class="btn-text">기획중 - 8% 완료</div>
 					</div>
@@ -120,8 +144,8 @@
 			</div>
 
 
-			<div class="mb40">
-				<ul>
+			<div class="projectInsert3 mb30 project-border-normal project-background-white project-border-radius">
+				<ul id="categoryList" class="scrollBlind">
 
 					<c:forEach var="categoryDto" items="${categoryApproveList}">
 
@@ -141,7 +165,17 @@
 						</li>
 
 				</ul>
+				
+				<div class="float-container">
+					<button id="scrollUp" class="left h20 w50p pRel m0 p0 btnNone project-border-radius">
+						<i class="fas fa-chevron-up pAbs pAbsCenter"></i>
+					</button>
+					<button id="scrollDown" class="right h20 w50p pRel m0 p0 btnNone project-border-radius">
+						<i class="fas fa-chevron-down pAbs pAbsCenter"></i>
+					</button>
+				</div>
 			</div>
+			
 
 			<div id="result">
 				<div>
@@ -152,7 +186,7 @@
 				<form id="projectInsertForm" action="projectInsert" method="post">
 				
 					<div class="bottomLine mb10">
-						<textarea name="projectSummary" placeholder="프로젝트 요약을 입력해주세요." class="w100p h140 textarea-fix" required></textarea>
+						<textarea name="projectSummary" placeholder="프로젝트 요약을 입력해주세요." class="w100p h120 textarea-fix project-normal-border" required></textarea>
 						<div class="float-container">
 							<p id="textMin" class="f12 pb10 pt10 left fRed">최소 10자 이상 입력해주세요</p>
 							<p id="textMax" class="f12 pb10 pt10 left fRed">최대 50자 이하로 입력해주세요</p>
@@ -160,7 +194,7 @@
 						</div>
 					</div>
 				
-					<div class="float-container">
+					<div class="projectInsert4 float-container">
 
 						<input type="hidden" value="${memberNo}" name="memberNo">
 						<input type="hidden" value="" name="categoryTheme">

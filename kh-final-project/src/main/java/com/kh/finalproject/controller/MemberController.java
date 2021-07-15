@@ -1,20 +1,34 @@
 package com.kh.finalproject.controller;
+
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.finalproject.entity.MemberDto;
+import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.repository.MemberDao;
+import com.kh.finalproject.repository.ProjectDao;
+import com.kh.finalproject.service.EmailService;
+
 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
 
+	@Autowired
+	private EmailService emailService;
+	
+	@Autowired
+	private MemberDao memberDao;
+	
 	@RequestMapping("/join")
 	public String join() {
 		return "member/join";
@@ -24,8 +38,6 @@ public class MemberController {
 		return "member/myPage";
 	}
 	
-	@Autowired
-	private MemberDao memberDao;
   
 	@PostMapping(value = "/memberInsert")
 	public String memberInsert(@ModelAttribute MemberDto memberDto) {
@@ -57,6 +69,20 @@ public class MemberController {
 			session.removeAttribute("memberNo");
 			
 			return "redirect:/";
+	}
+
+	@Autowired
+	private ProjectDao projectDao;
+	
+	@GetMapping("/myProject")
+	public String myProject(
+			HttpSession session,
+			Model model) {
+		int memberNo = (int)session.getAttribute("memberNo");
+		List<ProjectDto> find = projectDao.list(memberNo);
+		model.addAttribute("projectDto", find);
+		
+		return "member/myProject";
 	}
 }
 

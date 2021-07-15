@@ -10,13 +10,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>FUN_ding</title>
+<title>FüN‿ding - 즐거움의 시작</title>
 	<link rel="stylesheet" type="text/css" href="${root}/css/template.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/common.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/project.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/yb.css">
+	<link rel="stylesheet" type="text/css" href="${root}/css/w_h_m_p_f.css">
 	
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <style>
 
 </style>
@@ -28,11 +29,11 @@
 	<header class="main-row"> 
 		<div class="header-row">
 			<div class="header-left">
-				<a class="header-a" href="${root}/project/projectMain">프로젝트 둘러보기</a>
+				<a class="header-a" href="#">프로젝트 둘러보기</a>
 				<a class="header-a" href="${root}/project/projectInsert">프로젝트 올리기</a>
 			</div>
 			<div class="header-center">
-				<a class="header-center-link" href="${root}/">FüN_ding</a>
+				<a class="header-center-link" href="${root}/">FüN‿ding</a>
 			</div>
 			<div class="header-right">
 				<img src="${root}/image/search.svg" width="20" height="20">

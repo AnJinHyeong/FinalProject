@@ -44,12 +44,23 @@ category_approve char(1) check (category_approve in ('Y'))
 create sequence category_seq;
 
 
+#email_auth table
+create table email_auth(
+    auth_no number(19) primary key,
+    auth_key varchar2(30) not null,
+    auth_time date not null
+);
+
+CREATE SEQUENCE auth_seq nocache;
+
+
 #item table
 create table item(
 item_no number(19) primary key,
 project_no references project(project_no) on delete cascade,
 item_name varchar2(150) not null
 );
+
 
 create sequence item_seq;
 
@@ -77,4 +88,5 @@ member_no REFERENCES member(member_no) ON DELETE SET NULL
 );
 DROP SEQUENCE pay_seq;
 CREATE SEQUENCE pay_seq;
+
 

@@ -10,12 +10,13 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>FUN_ding</title>
+	<title>FUN‿ding</title>
 	<link rel="stylesheet" type="text/css" href="${root}/css/template.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/common.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/project.css">
 	
 	<link rel="stylesheet" type="text/css" href="${root}/css/yb.css">
+	<link rel="stylesheet" type="text/css" href="${root}/css/w_h_m_p_f.css">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 
@@ -42,7 +43,7 @@
 		
 		<div class="project-main-header">
 			<div class="project-main-header-in">
-				<a href="${root}/project/projectMain"><img src="${pageContext.request.contextPath}/image/back.svg" width="25" height="25"></a>
+				<a href="${root}/project/${projectNo}/projectMain"><img src="${pageContext.request.contextPath}/image/back.svg" width="25" height="25"></a>
 				<div>
 					<button class="project-btn btn1 project-btn-hover">미리보기</button>
 					<button style="text-decoration: none;" class="project-btn btn2">기획중·43% 완료</button>

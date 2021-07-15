@@ -10,6 +10,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from category where category_approve = 'Y' order by category_no
 	</select>
 	
+	<select id="userCustomList" resultType="CategoryDto" parameterType="int">
+		select * from category where category_approve = 'Y' or category_no = #{categoryNo}
+	</select>
+	
+	
 	<select id="sequence" resultType="int">
 		select category_seq.nextval from dual
 	</select>
@@ -22,6 +27,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into category(category_no, category_theme)
 		values(#{categoryNo}, #{categoryTheme})
 	</insert>
+	
+	<select id="approveCheck" resultType="String" parameterType="int">
+		SELECT CATEGORY_APPROVE FROM category where category_no = #{categoryNo}
+	</select>
+	
+	<select id="getByNo" resultType="CategoryDto" parameterType="int">
+		select * from category where category_no = #{categoryNo}
+	</select>
+	
 	
 </mapper>
 
