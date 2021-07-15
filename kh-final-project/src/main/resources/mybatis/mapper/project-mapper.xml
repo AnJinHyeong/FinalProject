@@ -13,6 +13,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			(project_seq.nextval, 'X', sysdate, #{projectSummary}, #{memberNo}, #{categoryNo})
 	</select>
 	
+	<select id="list" parameterType="int" resultType="ProjectDto">
+		select * from project where member_no = #{memberNo}
+	</select>
+	
+	<select id="get" parameterType="ProjectDto" resultType="ProjectDto">
+		select * from project where member_no = #{memberNo} and project_no = #{projectNo}
+	</select>
+	
 	<select id="insertBySequence" parameterType="ProjectCategoryVo">
 		insert into project
 			(project_no, project_state, project_regist_date, project_summary, member_no, category_no)
@@ -22,6 +30,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="sequence" resultType="int">
 		select project_seq.nextval from dual
+	</select>
+	
+	<update id="projectDefaultUpdate" parameterType="ProjectDto">
+		update project 
+		set category_no = #{categoryNo}, project_title = #{projectTitle} ,project_summary = #{projectSummary} 
+		where project_no = #{projectNo}
+	</update>
+	
+	<update id="projectFundingUpdate" parameterType="ProjectDto">
+		update project 
+		set project_target_amount = #{projectTargetAmount}, project_start_date = #{projectStartDate}, project_end_date = #{projectEndDate}
+		where project_no = #{projectNo}
+	</update>
+	
+	<select id="projectEndDatePlus7" parameterType="int" resultType="String">
+		SELECT project_end_date + INTERVAL '7' DAY FROM project WHERE project_no = #{projectNo}
+	</select>
+	
+	<select id="projectEndDatePlus14" parameterType="int" resultType="String">
+		SELECT project_end_date + INTERVAL '14' DAY FROM project WHERE project_no = #{projectNo}
+	</select>
+	
+	<select id="workingProject" parameterType="int" resultType="ProjectDto">
+		select * from(
+			select rownum rn, TMP.* from(
+				SELECT * FROM project WHERE member_no = #{memberNo} ORDER BY project_no DESC
+			)TMP
+		) where rn = 1
 	</select>
 	
 </mapper>

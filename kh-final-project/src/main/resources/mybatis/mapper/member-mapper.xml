@@ -22,9 +22,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(member_seq.nextval,#{memberId},#{memberPw},#{memberNick},#{memberEmail},#{memberIntroduce})
 	</insert>
 	
-<!-- 		<select id="get" resultType="MemberDto" parameterType="int">
+ 		<select id="get" resultType="MemberDto" parameterType="int">
 		select * from member where member_no = #{memberNo}
-	</select> -->
+	</select>
 	
 <!-- 	로그인 구문 -->
 	<!-- 로그인 -->

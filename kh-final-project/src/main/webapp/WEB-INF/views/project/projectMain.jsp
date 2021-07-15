@@ -5,6 +5,7 @@
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+
 <section class="main-row topLine">
 	<div class="section-project-row">
 			
@@ -19,20 +20,40 @@
 			<div class="project-main-div2">
 				<div class="project-main-img"></div>
 				<div>
-					<p style="font-size: 35px;"><strong>OO의 프로젝트</strong></p>
-					<p style="font-size: 14px; line-height: 24px; letter-spacing: -0.015em; color: rgb(109, 109, 109);">카테고리<p>
+					<c:choose>
+						<c:when test="${projectDto.projectTitle != null}">
+							<p style="font-size: 35px;"><strong>${projectDto.projectTitle}</strong></p>
+						</c:when>
+						<c:otherwise>
+							<p style="font-size: 35px;"><strong>프로젝트의 이름을 작성해주세요.</strong></p>
+						</c:otherwise>
+					</c:choose>
+					<p style="font-size: 14px; line-height: 24px; letter-spacing: -0.015em; color: rgb(109, 109, 109);">${categoryDto.categoryTheme}<p>
 				</div>
 			</div>
 		
 			<div style="overflow-x: hidden; padding: 0px;">
-				<ul class="project-main-ul">
-					<li class="project-main-li main-li-on"><a href="#" class="main-li-a">프로젝트 기획</a></li>
-					<li class="project-main-li"><a href="#" class="main-li-a">승인심사 요청</a></li>
-					<li class="project-main-li"><a href="#" class="main-li-a">대시보드</a></li>
-					<li class="project-main-li"><a href="#" class="main-li-a">서베이</a></li>
-					<li class="project-main-li"><a href="#" class="main-li-a">후원자 관리</a></li>
-					<li class="project-main-li"><a href="#" class="main-li-a">모금액 명세</a></li>
-				</ul>
+				<c:choose>
+					<c:when test="${projectDto.projectState == 'Y'}">
+						<ul class="project-main-ul">
+							<li class="project-main-li main-li-on"><a href="#" class="main-li-a">프로젝트 기획</a></li>
+							<li class="project-main-li"><a href="#" class="main-li-a">승인심사 요청</a></li>
+							<li class="project-main-li"><a href="#" class="main-li-a ">커뮤니티</a></li>
+							<li class="project-main-li"><a href="#" class="main-li-a ">후원자 관리</a></li>
+							<li class="project-main-li"><a href="#" class="main-li-a ">모금액 명세</a></li>
+						</ul>
+					</c:when>
+					<c:otherwise>
+						<ul class="project-main-ul">
+							<li class="project-main-li main-li-on"><a href="#" class="main-li-a">프로젝트 기획</a></li>
+							<li class="project-main-li"><a href="#" class="main-li-a">승인심사 요청</a></li>
+							<li class="project-main-li"><a href="#" class="main-li-a project-disable">커뮤니티<i class="fas fa-lock" style="margin-left: 5px;"></i></a></li>
+							<li class="project-main-li"><a href="#" class="main-li-a project-disable">후원자 관리<i class="fas fa-lock" style="margin-left: 5px;"></i></a></li>
+							<li class="project-main-li"><a href="#" class="main-li-a project-disable">모금액 명세<i class="fas fa-lock" style="margin-left: 5px;"></i></a></li>
+						</ul>
+					</c:otherwise>
+				</c:choose>
+				
 			</div>
 	</div>
 	
@@ -45,7 +66,7 @@
 			
 			
 			<div style="width: 100%; display: flex; -webkit-box-pack: justify; justify-content: space-between; padding: 20px 0;">
-				<a class="project-main-link" href="${root}/project/${projectNo}/projectMainDefault">
+				<a class="project-main-link" href="${pageContext.request.contextPath}/project/${projectNo}/projectMainDefault">
 					<div style="margin: 0px 0px 70px;">
 						<p class="fRed fBold f16"><i class="fas fa-pen"></i></p>
 					</div>
@@ -54,7 +75,7 @@
 						<span class="project-main-span">71% 작성완료</span>
 					</p>
 				</a>
-				<a class="project-main-link" href="#">
+				<a class="project-main-link" href="${pageContext.request.contextPath}/project/${projectNo}/projectMainFunding">
 					<div style="margin: 0px 0px 70px;">
 						<p class="fRed fBold f16"><i class="fas fa-money-check-alt"></i></p>
 					</div>
@@ -63,7 +84,7 @@
 						<span class="project-main-span">0% 작성완료</span>
 					</p>
 				</a>
-				<a class="project-main-link" href="projectMainGift">
+				<a class="project-main-link" href="${pageContext.request.contextPath}/project/${projectNo}/projectMainGift">
 					<div style="margin: 0px 0px 70px;">
 						<p class="fRed fBold f16"><i class="fas fa-gift"></i></i></p>
 					</div>

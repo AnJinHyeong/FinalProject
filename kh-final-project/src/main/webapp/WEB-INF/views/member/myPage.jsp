@@ -77,7 +77,7 @@
 			<div class="subTitle">메세지</div>
 			<div class="subTitle">후원현황</div>
 			<div class="subTitle">좋아한프로젝트</div>
-			<div class="subTitle">내가만든프로젝트</div>
+			<div class="subTitle"><a href="${pageContext.request.contextPath}/member/myProject">내가만든프로젝트</a></div>
 			<div class="subTitle">내 정보 수정</div>
 		
 		</div>

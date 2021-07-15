@@ -12,6 +12,12 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/join.js"></script>
 <br><br>
+<script>
+
+$("#emailSend").click(function(){
+	var memberEmail = $(".memberEmail").val();
+})
+</script>
 <body>
 	<div class = "container joinBorder">
 		<div class = "row text-center">
@@ -46,11 +52,21 @@
 			</div>
 
 			
-				<div class = "row text-left">
+			<div class = "row text-left">
 				<label for = "memberEmail">이메일</label>
 				<input type = "email" name="memberEmail" id = "memberEmail" required class = "form-input form-input-underline2"
 							placeholder = "자주 사용하는 이메일">
+				<button id="emailCheck" onclick="emailSend()">인증번호 받기</button>
 			</div>
+			
+			<div class = "row text-left">
+				<label for = "authKey">이메일</label>
+				<input type = "text" name="authKey" id = "authKey" required class = "form-input form-input-underline2"
+							placeholder = "인증번호입력">
+				<button id="checkBtn" onclick="emailChecking()">인증하기</button>
+			</div>
+			
+			
 			
 			<div class = "row text-left">
 				<label for = "memberIntroduce">자기소개</label>

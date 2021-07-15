@@ -34,4 +34,9 @@ public class ItemDaoImpl implements ItemDao{
 		return sqlSession.delete("item.delete", itemNo) > 0;
 	}
 
+	@Override
+	public ItemDto get(int itemNo) {
+		return sqlSession.selectOne("item.get", itemNo);
+	}
+
 }
