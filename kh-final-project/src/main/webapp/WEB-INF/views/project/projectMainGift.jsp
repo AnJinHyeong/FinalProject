@@ -17,6 +17,8 @@
 			$(this).siblings("i").toggleClass("reverse");
 			$("#itemList").toggle('fast');
 			$("#itemListAddBtn").toggle('fast');
+			$("#scrollDown2").toggle('fast');
+			$("#scrollUp2").toggle('fast');
 		});
 
 		if ($("#giftCount").html() > 0) {
@@ -44,25 +46,34 @@
 											"selectedItems" : selectedItems
 										},
 										success : function(resp) {
-											console.log(resp);
 											$("#search-result").empty();
 											for (var i = 0 ; i < resp.length ; i++){
 												var template = $("#list-item-template").html();
+												template = template.replace("{{indexNo}}", i);
+												template = template.replace("{{indexNo}}", i);
+												template = template.replace("{{no}}", resp[i].itemNo);
 												template = template.replace("{{name}}", resp[i].itemName);
 												$("#search-result").append(template);
 											}
+											
+											$(".itemDeselect").on("click", function(){
+												console.log($(this).closest(".float-container").children(".itemName").text());
+												console.log($(this).closest(".itemName"));
+// 												$(this).closest(".float-container").remove();
+// 												$("input[name=selectedItemList]").prop("checked", true);
+											});
 										}
 									});
 
 						});
 
-		$("#scrollDown").on("click", function() {
-			$(".scrollBlind").animate({
+		$(".scrollDown").on("click", function() {
+			$(this).parents().siblings(".scrollBlind").animate({
 				scrollTop : '+=200'
 			}, 200);
 		});
-		$("#scrollUp").on("click", function() {
-			$(".scrollBlind").animate({
+		$(".scrollUp").on("click", function() {
+			$(this).parents().siblings(".scrollBlind").animate({
 				scrollTop : '-=200'
 			}, 200);
 		});
@@ -72,6 +83,27 @@
 			$("#scrollDown").hide();
 			$("#scrollUp").hide();
 		}
+		
+		var itemListHeight = $('#itemList').height();
+		if (itemListHeight < 300) {
+			$("#scrollDown2").hide();
+			$("#scrollUp2").hide();
+		}
+		
+		$(".modalX").on("click", function() {
+			$("input[name=giftNo]").val($(this).siblings("#giftNo").html());
+			$("#modal-target").text($(this).siblings("div").children("#giftPrice").html());
+			$("#modal-target2").text($(this).siblings("div").children("#giftSummary").html());
+			$("#modal").toggle();
+			$("#modalBackground").toggle();
+			$('body').toggleClass('scrollOff');
+		});
+
+		$("#modalBackground").on("click", function() {
+			$("#modal").hide();
+			$("#modalBackground").hide();
+		});
+		
 	});
 </script>
 
@@ -79,14 +111,17 @@
 <script id="list-item-template" type="text/template">
 	<div class="float-container w100p project-border-normal mb20" style="min-height: 60px; vertical-align: middle;">
 		<div class="w70p left p20" style="word-break: break-all;">
-    		<span>{{name}}</span>
+    		<span class=".itemName">{{name}}</span>
 		</div>
 		<div class="right w10p p20">
-			<div class="project-border-normal w50 h30" style="background-color: blue; display: block;">
+			<div class="project-border-normal w50 h30" style="display: block;">
+				<button class="itemDeselect">삭제</button>
 			</div>
 		</div>
 		<div class="right w20p p20">
-			<div class="project-border-normal w100 h30" style="background-color: black; display: block;">
+			<div class="project-border-normal w100 h30" style="display: block;">
+				<input type="hidden" name="itemList[{{indexNo}}].itemNo" value="{{no}}">
+				<input type="number" name="itemList[{{indexNo}}].itemQuantity" value="1" min="1">
 			</div>
 		</div>
     </div>
@@ -126,22 +161,53 @@
 					</div>
 
 					<div id="giftList" class="project-itemList scrollBlind">
+						<div class="project-insert-gift-list float-container">
+							<div>
+								<div class="mb10">
+									<span class="left w260 fBold f22">1000원+</span>
+								</div>
+								<div>
+									<span class="left w260 f14 fBold">선물을 선택하지 않고 밀어만 줍니다.</span>
+								</div>
+							</div>
+						</div>
 						<c:forEach var="giftDto" items="${giftList}">
-							<div class="project-insert-item-list float-container">
-								<span id="giftName" class="left w260">${giftDto.giftSummary}</span>
-								<span id="giftNo" class="yb hidden">${giftDto.giftNo}</span> <span
-									class="yb modalX right"> <i class="fas fa-times"></i></span>
+							<div class="project-insert-gift-list float-container">
+								<span id="giftNo" class="yb hidden">${giftDto.giftNo}</span>
+								<span class="yb modalX right"> <i class="fas fa-times"></i></span>
+								<div class="mb10">
+									<span id="giftPrice" class="left w260 fBold f22">${giftDto.giftPrice}원+</span>
+								</div>
+								<div>
+									<span id="giftSummary" class="left w260 f14 fBold">${giftDto.giftSummary}</span>
+								</div>
+								<div class="w100p f12 p20">
+									<ul style="list-style: none;">
+											
+										<c:forEach var="giftItemVo" items="${giftItemVoList}">
+											<c:if test="${giftItemVo.giftNo == giftDto.giftNo}">
+												<li>
+													<div class="float-container w100p mb20">
+														<span class="left w80p">${giftItemVo.itemName}</span>
+														<span class="right w10p">x ${giftItemVo.itemCount}</span>
+													</div>
+												</li>
+											</c:if>
+										</c:forEach>
+										
+									</ul>
+								</div>
 							</div>
 						</c:forEach>
 					</div>
 
 					<div class="float-container">
 						<button id="scrollUp"
-							class="left h20 w50p pRel m0 p0 btnNone project-background-white project-border-radius">
+							class="scrollUp left h20 w50p pRel m0 p0 btnNone project-background-white project-border-radius">
 							<i class="fas fa-chevron-up pAbs pAbsCenter"></i>
 						</button>
 						<button id="scrollDown"
-							class="right h20 w50p pRel m0 p0 btnNone project-background-white project-border-radius">
+							class="scrollDown right h20 w50p pRel m0 p0 btnNone project-background-white project-border-radius">
 							<i class="fas fa-chevron-down pAbs pAbsCenter"></i>
 						</button>
 					</div>
@@ -210,6 +276,17 @@
 											</ul>
 										</div>
 									</div>
+									
+									<div class="float-container">
+										<button id="scrollUp2"
+											class="scrollUp displayNone left h20 w50p pRel m0 p0 btnNone project-background-white project-border-radius">
+											<i class="fas fa-chevron-up pAbs pAbsCenter"></i>
+										</button>
+										<button id="scrollDown2"
+											class="scrollDown displayNone right h20 w50p pRel m0 p0 btnNone project-background-white project-border-radius">
+											<i class="fas fa-chevron-down pAbs pAbsCenter"></i>
+										</button>
+									</div>
 
 									<div id="itemListAddBtn" class="h60 displayNone bottomLine">
 										<div class="project-insert-div3">
@@ -222,13 +299,10 @@
 								</c:otherwise>
 							</c:choose>
 
-							<div id="search-result" class="scrollBlind"
-								style="max-height: 400px; overflow-x: hidden"></div>
-
 							<form action="projectMainGift" method="post">
 							
-<%-- 							<input type="hidden" name="projectNo" value="${projectNo}"> --%>
-<%-- 							<input type="hidden" name="memberNo" value="${memberNo}"> --%>
+							<div id="search-result" class="scrollBlind"
+								style="max-height: 400px; overflow-x: hidden"></div>
 							
 								<div class="mt50">
 									<p class="fBold f12 mb20">선물 설명</p>
@@ -267,6 +341,33 @@
 
 		</div>
 
+	</div>
+	
+	<div id="modal" class="modal">
+
+			<div class="modal-header float-container">
+				<span class="modal-title left">아이템 삭제</span> <span
+					class="modalX right"><i class="fas fa-times"></i></span>
+			</div>
+
+			<div class="modal-body">
+				<pre>이 선물을 삭제하시겠습니까?</pre>
+				<div class="project-border-normal project-border-radius p20 mt20 w100p">
+					<pre id="modal-target" class="fBold mb10"></pre>
+					<pre id="modal-target2" class="f12 oneLine"></pre>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<form action="projectMainGiftDelete" method="post">
+					<input type="hidden" name="giftNo" value="">
+					<button class="modal-btn">삭제</button>
+				</form>
+			</div>
+
+		</div>
+
+		<div id="modalBackground" class="yb modal-background float-container">
 	</div>
 
 </section>

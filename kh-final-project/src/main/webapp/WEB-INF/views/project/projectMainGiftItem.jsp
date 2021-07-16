@@ -113,7 +113,7 @@
 					<div id="itemList" class="project-itemList scrollBlind">
 						<c:forEach var="itemDto" items="${itemList}">
 							<div class="project-insert-item-list float-container">
-								<span id="itemName" class="left w320">${itemDto.itemName}</span>
+								<span id="itemName" class="left w280 fBold">${itemDto.itemName}</span>
 								<span id="itemNo" class="yb hidden">${itemDto.itemNo}</span> <span
 									class="yb modalX right"> <i class="fas fa-times"></i></span>
 							</div>
