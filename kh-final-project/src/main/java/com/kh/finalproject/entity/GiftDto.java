@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 public class GiftDto {
 	private int giftNo;
 	private int projectNo;
-	private int memberNo;
 	private int giftPrice;
 	private String giftSummary;
 }

@@ -155,11 +155,10 @@ public class ProjectController {
 	}
 
 	@PostMapping("/{projectNo}/projectMainGift")
-	public String projectMainGift(HttpSession session, @ModelAttribute GiftSelectedItemVo giftSelectedItemVo,
+	public String projectMainGift(@ModelAttribute GiftSelectedItemVo giftSelectedItemVo,
 			@PathVariable int projectNo) {
-		int memberNo = (int) session.getAttribute("memberNo");
 		int giftNo = giftDao.getSequence();
-		giftDao.insertBySequence(GiftDto.builder().projectNo(projectNo).memberNo(memberNo).giftNo(giftNo)
+		giftDao.insertBySequence(GiftDto.builder().projectNo(projectNo).giftNo(giftNo)
 				.giftPrice(giftSelectedItemVo.getGiftPrice()).giftSummary(giftSelectedItemVo.getGiftSummary()).build());
 		List<ItemListVo> itemList = giftSelectedItemVo.getItemList();
 

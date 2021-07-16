@@ -18,32 +18,30 @@ import com.kh.finalproject.repository.ItemDao;
 @RequestMapping("/project/data")
 @RestController
 public class ProjectDataController {
-	
+
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	@Autowired
 	private CategoryDao categoryDao;
-	
-	
+
 	@PostMapping("/categoryApproveCheck")
 	public String approveCheck(@RequestParam int categoryNo) {
 		String result = categoryDao.approveCheck(categoryNo);
 		return result;
 	}
-	
+
 	@Autowired
 	private ItemDao itemDao;
-	
+
 	@GetMapping("/selectedItemList")
-	public List<ItemDto> selectedItemList(
-			@RequestParam(value="selectedItems[]") List<String> selectedItems) {
+	public List<ItemDto> selectedItemList(@RequestParam(value = "selectedItems[]") List<String> selectedItems) {
 		List<ItemDto> selectedItemList = new ArrayList<>();
-		for(int i = 0 ; i < selectedItems.size() ; i++) {
+		for (int i = 0; i < selectedItems.size(); i++) {
 			ItemDto itemDto = itemDao.get(Integer.parseInt(selectedItems.get(i)));
 			selectedItemList.add(itemDto);
 		}
-			return selectedItemList;
+		return selectedItemList;
 	}
-	
+
 }
