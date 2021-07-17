@@ -8,12 +8,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 선물 데이터 삽입 -->
 	<insert id="insert" parameterType="GiftDto">
-		insert into gift values(gift_seq.nextval, #{projectNo}, #{memberNo}, #{giftPrice}, #{giftSummary})
+		insert into gift values(gift_seq.nextval, #{projectNo}, #{giftPrice}, #{giftSummary})
 	</insert>
 	
 	<!-- 프로젝트 번호와 일치하는 선물 리스트 생성 -->
 	<select id="listByProjectNo" resultType="GiftDto" parameterType="int">
-		select * from gift where project_no = #{projectNo}
+		select * from gift where project_no = #{projectNo} order by gift_no desc
 	</select>
 	
 	<!-- 프로젝트 번호와 일치하는 선물 갯수 -->
@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 선물 데이터 삽입 -->
 	<insert id="insertBySequence" parameterType="GiftDto">
-		insert into gift values(#{giftNo}, #{projectNo}, #{memberNo}, #{giftPrice}, #{giftSummary})
+		insert into gift values(#{giftNo}, #{projectNo}, #{giftPrice}, #{giftSummary})
 	</insert>
 	
 </mapper>

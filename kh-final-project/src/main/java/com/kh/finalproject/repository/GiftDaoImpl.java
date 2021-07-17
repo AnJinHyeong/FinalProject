@@ -60,7 +60,5 @@ public class GiftDaoImpl implements GiftDao {
 	public List<GiftItemVo> list() {
 		return sqlSession.selectList("giftItem.list");
 	}
-	
-	
 
 }

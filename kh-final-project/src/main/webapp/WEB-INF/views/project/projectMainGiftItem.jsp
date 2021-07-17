@@ -70,7 +70,7 @@
 		});
 
 		var itemListHeight = $('#itemList').height();
-		if (itemListHeight < 400) {
+		if (itemListHeight < 490) {
 			$("#scrollDown").hide();
 			$("#scrollUp").hide();
 		}
@@ -134,34 +134,34 @@
 				</div>
 
 				<div
-					class="mt40 w700 h400 right project-background-white project-border-radius">
+					class="mt40 w700 h500 right project-background-white project-border-radius">
 					<form id="projectMainGiftItemInsertForm"
 						action="projectMainGiftItem" method="post">
 						<input type="hidden" value="${projectNo}" name="projectNo">
 						<div class="p50">
 							<div class="w100p mb30">
-								<span class="f16 fBold w100p" style="display: block;">아이템
+								<span class="fs16 fBold w100p" style="display: block;">아이템
 									만들기</span>
 							</div>
 
-							<div class="w100p mt30 pb20">
-								<pre class="f12 w100p"
+							<div class="w100p mt30">
+								<pre class="fs12 w100p"
 									style="white-space: pre-line; line-height: 20px">
 								아이템은 선물에 포함되는 구성 품목을 말합니다.
 								특별한 물건부터 의미있는 경험까지 선물을 구성할 아이템을 만들어 보세요.</pre>
 							</div>
 
-							<div class="w100p mt30">
-								<span class="f12 fBold w100p mb20" style="display: block;">아이템
-									이름</span> <input type="text" class="projcet-insert-input p20 w100p"
+							<div class="w100p mt50">
+								<span class="fs12 fBold w100p mb20" style="display: block;">아이템
+									이름</span> <input type="text" class="inputFocusNone projcet-insert-input p20 w100p"
 									name="itemName" autocomplete="off" placeholder="아이템 이름을 입력해주세요.">
 							</div>
 							<div class="float-container">
-								<p id="textMin" class="f12 pb10 pt10 left fRed">최소 10자 이상
+								<p id="textMin" class="fs12 pb10 pt10 left fRed">최소 10자 이상
 									입력해주세요</p>
-								<p id="textMax" class="f12 pb10 pt10 left fRed">최대 50자 이하로
+								<p id="textMax" class="fs12 pb10 pt10 left fRed">최대 50자 이하로
 									입력해주세요</p>
-								<p id="textSize" class="f12 pb10 pt10 right">
+								<p id="textSize" class="fs12 pb10 pt10 right">
 									(<span id="textSizeSpan">0</span><span>/50</span>)
 								</p>
 							</div>
