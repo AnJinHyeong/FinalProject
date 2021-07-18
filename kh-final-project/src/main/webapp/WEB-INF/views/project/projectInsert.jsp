@@ -90,19 +90,6 @@
 			}
 		});
 		
-		$("#scrollDown").on("click", function(){
-			$(".scrollBlind").animate({scrollTop:'+=200'}, 200);
-		});
-		$("#scrollUp").on("click", function(){
-			$(".scrollBlind").animate({scrollTop:'-=200'}, 200);
-		});
-		
-		var categoryListHeight = $('#categoryList').height()
-		if(categoryListHeight < 100){
-			$("#scrollDown").hide();
-			$("#scrollUp").hide();
-		}
-		
 		$("#workingProject").on("click", function(){
 			location.href="${root}/project/"+${projectDto.projectNo}+"/projectMain";
 		});
@@ -144,8 +131,8 @@ style="background-image: url('${root}/image/insertBackground.jpg');">
 			</div>
 
 
-			<div class="projectInsert3 mb30 project-border-normal project-background-white project-border-radius">
-				<ul id="categoryList" class="scrollBlind">
+			<div class="projectInsert3 mb30" style="width: 806px;">
+				<ul id="categoryList" class="scrollThin">
 
 					<c:forEach var="categoryDto" items="${categoryApproveList}">
 
@@ -165,15 +152,6 @@ style="background-image: url('${root}/image/insertBackground.jpg');">
 						</li>
 
 				</ul>
-				
-				<div class="float-container">
-					<button id="scrollUp" class="left h20 w50p pRel m0 p0 btnNone project-border-radius">
-						<i class="fas fa-chevron-up pAbs pAbsCenter"></i>
-					</button>
-					<button id="scrollDown" class="right h20 w50p pRel m0 p0 btnNone project-border-radius">
-						<i class="fas fa-chevron-down pAbs pAbsCenter"></i>
-					</button>
-				</div>
 			</div>
 			
 
