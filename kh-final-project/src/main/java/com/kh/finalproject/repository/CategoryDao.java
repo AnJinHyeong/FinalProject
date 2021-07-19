@@ -15,4 +15,6 @@ public interface CategoryDao {
 	String approveCheck(int categoryNo);
 	//카테고리 번호를 이용한 category 조회
 	CategoryDto getByNo(int categoryNo);
+	//자식 카테고리 조회
+	List<CategoryDto> childCategoryList(int categoryNo);
 }

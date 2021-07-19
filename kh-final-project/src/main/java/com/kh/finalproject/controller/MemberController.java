@@ -44,16 +44,17 @@ public class MemberController {
 	
   
 	@PostMapping(value = "/memberInsert")
-	public String memberInsert(@ModelAttribute EmailAuthDto emailAuthDto, RedirectAttributes attr,@ModelAttribute MemberVo memberVo) {
-	boolean result = emailService.checkCertification(emailAuthDto);
-	if(result) {
-		memberDao.memberInsert(memberVo);
-		return "member/joinSuccess";
-	}else {
-		attr.addAttribute("error", "");
-		attr.addAttribute("email", emailAuthDto.getEmail());
-		return "redirect:join";
-	}
+	public String memberInsert(@ModelAttribute EmailAuthDto emailAuthDto, RedirectAttributes attr,@ModelAttribute MemberDto memberDto) {
+		boolean result = emailService.checkCertification(emailAuthDto);
+		if(result) {
+			memberDao.memberInsert(memberDto);
+			return "member/joinSuccess";
+		}
+		else {
+			attr.addAttribute("error", "");
+			attr.addAttribute("email", emailAuthDto.getEmail());
+			return "redirect:join";
+		}
 	
 	}
 	 

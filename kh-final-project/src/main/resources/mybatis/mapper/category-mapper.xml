@@ -7,13 +7,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="category">
 	
 	<select id="approveList" resultType="CategoryDto">
-		select * from category where category_approve = 'Y' order by category_no
+		select * from category where category_approve = 'Y' AND category_super IS NULL order by category_no
 	</select>
 	
 	<select id="userCustomList" resultType="CategoryDto" parameterType="int">
-		select * from category where category_approve = 'Y' or category_no = #{categoryNo}
+		select * from category where category_approve = 'Y' AND category_super IS NULL OR (category_no = #{categoryNo} AND category_super IS NULL)
 	</select>
-	
 	
 	<select id="sequence" resultType="int">
 		select category_seq.nextval from dual
@@ -36,6 +35,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from category where category_no = #{categoryNo}
 	</select>
 	
+	<select id="childCategoryList" resultType="CategoryDto" parameterType="int">
+		SELECT * FROM category WHERE category_super = #{categoryNo} AND CATEGORY_APPROVE = 'Y' AND category_super IS NOT NULL
+	</select>
+	
+	<select id="childCategory" resultType="CategoryDto" parameterType="int">
+		SELECT * FROM category WHERE category_super = #{categoryNo} AND CATEGORY_APPROVE = 'Y' AND category_super IS NOT NULL
+	</select>
 	
 </mapper>
 
