@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 프로젝트 대표 이미지 -->
-	<select id="get" resultType="ImageDto" parameterType="int">
+	<select id="getProjectMain" resultType="ImageDto" parameterType="int">
 		select * from image_file where image_no = #{imageNo} and project_state = 'Y'
 	</select>
 	
@@ -25,11 +25,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from image_file where project_no = #{projectNo} and project_state = 'Y'
 	</select>
 	
-	<select id="confirm" resultType="int" parameterType="int">
+	<select id="confirmProjectMain" resultType="int" parameterType="int">
 		SELECT count(*) FROM image_file WHERE project_no = #{projectNo} and project_state = 'Y'
 	</select>
 	
-	<delete id="delete" parameterType="int">
+	<delete id="deleteProjectMain" parameterType="int">
 		delete image_file WHERE project_no = #{projectNo} and project_state = 'Y'
 	</delete>
 	

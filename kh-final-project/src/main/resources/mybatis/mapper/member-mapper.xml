@@ -7,24 +7,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="member">
 <!--  id 복체크-->
-	<select id = "idCheck" parameterType = "String" resultType = "MemberVo">
+	<select id = "idCheck" parameterType = "String" resultType = "MemberDto">
 	select*from member where member_id = #{memberId}
 	</select>
 
-	<!-- 번호 생성 구문 -->
+<!-- 	 번호 생성 구문
 	<select id="sequence" resultType="int">
 		select member_seq.nextval from dual
-	</select>
+	</select> -->
 
 <!--  가입 구문-->
-	<insert id = "insert" parameterType = "MemberVo" >
-		INSERT INTO member(member_no,member_id,member_pw,member_nick,member_email)
-		VALUES( #{memberNo},#{memberId},#{memberPw},#{memberNick},#{memberEmail})
+	<insert id = "insert" parameterType = "MemberDto">
+		INSERT INTO member(member_no,member_id,member_pw,member_nick,member_email,member_introduce)
+		VALUES(member_seq.nextval,#{memberId},#{memberPw},#{memberNick},#{memberEmail},#{memberIntroduce})
 	</insert>
 	
-		<select id="get" resultType="MemberVo" parameterType="int">
+<!-- 		<select id="get" resultType="MemberDto" parameterType="int">
 		select * from member where member_no = #{memberNo}
-	</select>
+	</select> -->
 	
 <!-- 	로그인 구문 -->
 	<!-- 로그인 -->
@@ -33,4 +33,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where member_id = #{memberId} and member_pw = #{memberPw}
 	</select>
 	
+<!-- 이메일 인증키 저장 구문 -->
+	<insert id="insert2" parameterType="EmailAuthDto">
+		
+		merge into email_auth C using dual on(#{email} = C.email)
+		when matched then
+			update set C.no = #{no} , C.time = sysdate
+		when not matched then
+			insert(email, no, time) values(#{email}, #{no}, sysdate)
+	</insert>
+	<!-- 유효키 검사 -->
+	<select id="check" parameterType="EmailAuthDto" resultType="EmailAuthDto">
+		<![CDATA[
+			select * from email_auth 
+			where 
+				email = #{email} 
+				and 
+				no = #{no} 
+				and 
+				time >= sysdate - 5 / 24 / 60
+		]]>
+	</select>
+	
+	<!-- 시간지나면 삭제 -->
+	<delete id="deleteByEmail" parameterType="string">
+		delete email_auth where email = #{email}
+	</delete>
+	
+	<delete id="deleteByTime">
+		<![CDATA[ 
+			delete email_auth where time < sysdate - 5/24/60
+		]]>
+	</delete>
 </mapper>

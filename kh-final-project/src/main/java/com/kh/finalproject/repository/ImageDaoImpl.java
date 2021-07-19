@@ -39,8 +39,8 @@ public class ImageDaoImpl implements ImageDao{
 	}
 	
 	@Override
-	public ImageDto get(int imageNo) {
-		return sqlSession.selectOne("imageFile.get", imageNo);
+	public ImageDto getProjectMain(int imageNo) {
+		return sqlSession.selectOne("imageFile.getProjectMain", imageNo);
 	}
 
 	@Override
@@ -57,13 +57,13 @@ public class ImageDaoImpl implements ImageDao{
 	}
 
 	@Override
-	public int confirm(int projectNo) {
-		return sqlSession.selectOne("imageFile.confirm", projectNo);
+	public int confirmProjectMain(int projectNo) {
+		return sqlSession.selectOne("imageFile.confirmProjectMain", projectNo);
 	}
 
 	@Override
-	public boolean delete(int projectNo) {
-		int count = sqlSession.delete("imageFile.delete",projectNo);
+	public boolean deleteProjectMain(int projectNo) {
+		int count = sqlSession.delete("imageFile.deleteProjectMain",projectNo);
 		return count > 0;
 	}
 	

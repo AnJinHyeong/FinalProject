@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="giftItem">
+	
+	<!-- 선물에 등록된 아이템 정보 입력 -->
+	<insert id="insert" parameterType="list">
+			insert into giftItem values(
+				giftItem_seq.nextval,
+				#{giftNo},
+				#{itemNo},
+				#{itemQuantity}
+			)
+	</insert>
+	
+	<!-- 선물에 등록된 아이템 전체 리스트 가져오기 -->
+	<select id="list" resultType="GiftItemVo">
+		select G.*, I.project_no, I.item_name from giftItem G inner join item I on G.item_no = I.item_no
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

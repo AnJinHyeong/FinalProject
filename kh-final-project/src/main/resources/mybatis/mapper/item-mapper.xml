@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="item">
 	
 	<select id="list" resultType="ItemDto" parameterType="int">
-		select * from item where project_no = #{projectNo}
+		select * from item where project_no = #{projectNo} order by item_no desc
 	</select>
 	
 	<select id="insert" parameterType="ItemDto">
@@ -21,6 +21,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="delete" parameterType="int">
 		delete item where item_No = #{itemNo}
 	</delete>
+	
+	<!-- 아이템번호를 이용해서 아이템 객체 가져오기 -->
+	<select id="get" parameterType="int" resultType="ItemDto">
+		select * from item where item_no = #{itemNo}
+	</select>
 	
 </mapper>
 

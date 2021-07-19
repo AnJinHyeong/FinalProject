@@ -2,7 +2,7 @@ package com.kh.finalproject.controller;
 
 import java.util.List;
 
-
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.finalproject.entity.EmailAuthDto;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.repository.MemberDao;
-
+import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.service.EmailService;
 
-import com.kh.finalproject.repository.ProjectDao;
-
-import com.kh.finalproject.vo.MemberVo;
 
 @Controller
 @RequestMapping("/member")
@@ -44,9 +44,17 @@ public class MemberController {
 	
   
 	@PostMapping(value = "/memberInsert")
-	public String memberInsert(@ModelAttribute MemberVo memberVo) {
-	memberDao.memberInsert(memberVo);
-	return "member/joinSuccess";
+	public String memberInsert(@ModelAttribute EmailAuthDto emailAuthDto, RedirectAttributes attr,@ModelAttribute MemberDto memberDto) {
+		boolean result = emailService.checkCertification(emailAuthDto);
+		if(result) {
+			memberDao.memberInsert(memberDto);
+			return "member/joinSuccess";
+		}
+		else {
+			attr.addAttribute("error", "");
+			attr.addAttribute("email", emailAuthDto.getEmail());
+			return "redirect:join";
+		}
 	
 	}
 	 
@@ -74,7 +82,7 @@ public class MemberController {
 			
 			return "redirect:/";
 	}
-	
+
 	@Autowired
 	private ProjectDao projectDao;
 	
@@ -88,7 +96,21 @@ public class MemberController {
 		
 		return "member/myProject";
 	}
+
 		
+	@GetMapping("/emailCheck")
+	public String emailCheck() {
+		return "member/emailCheck";
+	}
+	
+	@PostMapping("/emailCheck")
+	public String emailCheck(@RequestParam String email, RedirectAttributes attr) throws MessagingException {
+		emailService.sendEmail(email);
+		
+		attr.addAttribute("email", email);
+		return "redirect:join";
+	}
+
 
 }
 

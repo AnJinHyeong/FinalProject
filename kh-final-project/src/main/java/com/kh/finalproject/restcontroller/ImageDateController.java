@@ -46,7 +46,7 @@ public class ImageDateController {
 	@GetMapping("/project/download/{imageNo}")
 	public ResponseEntity<ByteArrayResource> download(@PathVariable int imageNo) throws IOException {
 		
-		ImageDto imageDto = projectImageDao.get(imageNo); 
+		ImageDto imageDto = projectImageDao.getProjectMain(imageNo); 
 		ByteArrayResource resource = projectImageDao.getFile(imageDto.getImageSaveName());
 		String fileName = URLEncoder.encode(imageDto.getImageUploadName(), "UTF-8");
 
@@ -67,12 +67,12 @@ public class ImageDateController {
 	
 	@PostMapping("/project/confirm/{projectNo}")
 	public int confirm(@PathVariable int projectNo) {
-		return projectImageDao.confirm(projectNo);
+		return projectImageDao.confirmProjectMain(projectNo);
 	}
 	
 	@PostMapping("/project/delete/{projectNo}")
 	public void delete(@PathVariable int projectNo) {
-		projectImageDao.delete(projectNo);
+		projectImageDao.deleteProjectMain(projectNo);
 	}
 	
 }
