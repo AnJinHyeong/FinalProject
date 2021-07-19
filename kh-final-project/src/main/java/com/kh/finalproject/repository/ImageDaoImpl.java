@@ -23,9 +23,9 @@ public class ImageDaoImpl implements ImageDao{
 	
 	@Override
 	public ImageDto insertProjectMain(ImageDto imageDto) {
-		int profileNo = sqlSession.selectOne("imageFile.sequence");
-		imageDto.setImageNo(profileNo);
-		imageDto.setImageSaveName(String.valueOf(profileNo));
+		int imageNo = sqlSession.selectOne("imageFile.sequence");
+		imageDto.setImageNo(imageNo);
+		imageDto.setImageSaveName(String.valueOf(imageNo));
 
 		sqlSession.insert("imageFile.insertProjectMain",imageDto);
 		
@@ -66,7 +66,38 @@ public class ImageDaoImpl implements ImageDao{
 		int count = sqlSession.delete("imageFile.deleteProjectMain",projectNo);
 		return count > 0;
 	}
+
+	@Override
+	public ImageDto insertMember(ImageDto imageDto) {
+		int imageNo = sqlSession.selectOne("imageFile.sequence");
+		imageDto.setImageNo(imageNo);
+		imageDto.setImageSaveName(String.valueOf(imageNo));
+
+		sqlSession.insert("imageFile.insertMember",imageDto);
+		
+		return imageDto;
+	}
+
+	@Override
+	public ImageDto getByMemberNo(int memberNo) {
+		return sqlSession.selectOne("imageFile.getByMemberNo", memberNo);
+	}
 	
+	@Override
+	public int confirmMember(int memberNo) {
+		return sqlSession.selectOne("imageFile.confirmMember", memberNo);
+	}
+	
+	@Override
+	public boolean deleteMember(int memberNo) {
+		int count = sqlSession.delete("imageFile.deleteMember",memberNo);
+		return count > 0;
+	}
+	
+	@Override
+	public ImageDto getImage(int imageNo) {
+		return sqlSession.selectOne("imageFile.getImage", imageNo);
+	}
 	
 	
 }

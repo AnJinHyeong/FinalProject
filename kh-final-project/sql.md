@@ -20,7 +20,7 @@ project_title varchar2(300),
 project_content varchar2(4000),
 project_target_amount NUMBER(19),
 project_percente NUMBER(5),
-project_state char(1) CHECK (project_state IN ('X','Y','N')) NOT NULL,
+project_state char(1) CHECK (project_state IN ('1','2','3','X')) NOT NULL,
 project_regist_date DATE DEFAULT sysdate NOT NULL,
 project_start_date DATE,
 project_end_date DATE,
@@ -28,6 +28,8 @@ project_stop_caues varchar2(4000),
 project_summary varchar2(150) not null,
 member_no references member(member_no) on delete SET NULL,
 category_no REFERENCES category(category_no) ON DELETE SET NULL
+member_info_nick varchar2(30),
+member_info_content varchar2(1000)
 );
 
 CREATE SEQUENCE project_seq;

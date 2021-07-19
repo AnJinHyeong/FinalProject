@@ -17,13 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.finalproject.entity.CategoryDto;
 import com.kh.finalproject.entity.GiftDto;
 import com.kh.finalproject.entity.ItemDto;
+import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.ProjectDto;
-import com.kh.finalproject.entity.ImageDto;
 import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.repository.GiftDao;
-import com.kh.finalproject.repository.ItemDao;
-import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.repository.ImageDao;
+import com.kh.finalproject.repository.ItemDao;
+import com.kh.finalproject.repository.MemberDao;
+import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.vo.GiftSelectedItemVo;
 import com.kh.finalproject.vo.ItemListVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
@@ -88,9 +89,6 @@ public class ProjectController {
 		return "project/projectMain";
 	}
 	
-	@Autowired
-	private ImageDao imageDao;
-	
 	@GetMapping("/{projectNo}/projectMainDefault")
 	public String projectMainDefault(@PathVariable int projectNo, HttpSession session, Model model) {
 
@@ -102,7 +100,7 @@ public class ProjectController {
 		//프로젝트 카테고리의 정보 조회
 		CategoryDto categoryDto = categoryDao.getByNo(find.getCategoryNo());
 		model.addAttribute("category", categoryDto);
-
+		
 		return "project/projectMainDefault";
 	}
 
@@ -110,17 +108,12 @@ public class ProjectController {
 	public String projectMainDefault(@PathVariable int projectNo, @ModelAttribute ProjectDto projectDto) {
 		boolean result = projectDao.projectDefaultUpdate(projectDto);
 
-		if (result) {
-			return "redirect:projectMainDefault";
-		} else {
-			return "redirect:projectMainDefautlt?error";
-		}
+		return "redirect:projectMainDefault";
 
 	}
 
 	@GetMapping("/{projectNo}/projectMainFunding")
 	public String projectFunding(@PathVariable int projectNo, HttpSession session, Model model) {
-
 		int memberNo = (int) session.getAttribute("memberNo");
 		ProjectDto projectDto = ProjectDto.builder().projectNo(projectNo).memberNo(memberNo).build();
 		ProjectDto find = projectDao.get(projectDto);
@@ -137,9 +130,7 @@ public class ProjectController {
 	@PostMapping("/{projectNo}/projectMainFunding")
 	public String projectMainFunding(@PathVariable int projectNo, @ModelAttribute ProjectDto projectDto) {
 		projectDao.projectFundingUpdate(projectDto);
-
 		return "redirect:projectMainFunding";
-
 	}
 
 	@Autowired
@@ -198,6 +189,37 @@ public class ProjectController {
 	public String projectMainGiftItemDelete(@PathVariable int projectNo, @RequestParam int itemNo) {
 		itemDao.delete(itemNo);
 		return "redirect:projectMainGiftItem";
+	}
+	
+	@Autowired
+	private MemberDao MemberDao;
+	
+	@Autowired
+	private ImageDao imageDao;
+	
+	@GetMapping("/{projectNo}/projectMainMember")
+	public String projectMainMember(
+			HttpSession session,
+			@PathVariable int projectNo,
+			Model model) {
+		int memberNo = (int) session.getAttribute("memberNo");
+		ProjectDto projectDto = ProjectDto.builder().projectNo(projectNo).memberNo(memberNo).build();
+		ProjectDto find = projectDao.get(projectDto);
+		model.addAttribute("projectDto", find);
+
+		MemberDto memberDto = MemberDao.getByMemberNo(find.getMemberNo());
+		model.addAttribute("memberDto", memberDto);
+		
+		int count = imageDao.confirmMember(memberNo);
+		model.addAttribute("count", count);
+		
+		return "project/projectMainMember";
+	}
+	
+	@PostMapping("/{projectNo}/projectMainMember")
+	public String projectMainMember(@ModelAttribute ProjectDto projectDto ,@PathVariable int projectNo) {
+		projectDao.projectMemberUpdate(projectDto);
+		return "redirect:projectMainMember";
 	}
 
 }

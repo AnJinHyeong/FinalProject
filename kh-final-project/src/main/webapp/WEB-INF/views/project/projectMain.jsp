@@ -5,6 +5,36 @@
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<script>
+	
+	$(function(){
+		
+		//페이지 로딩 시 프로젝트 이미지가 있으면 화면에 송출
+		$.ajax({
+			url :"${pageContext.request.contextPath}/image/project/confirm/${projectDto.projectNo}",
+			type: "post",
+			success : function(resp){
+				if(resp == 1){
+					$.ajax({
+						url :"${pageContext.request.contextPath}/image/project/getByProjectNo/${projectDto.projectNo}",
+						type: "get",
+						processData : false,
+						contentType : false,
+						success : function(resp){
+							var url = "${pageContext.request.contextPath}/image/project/projectMainDownload/"+resp.imageNo;
+							document.getElementById("projectMainImage").style.backgroundImage = "url("+url+")";
+						}
+					
+					});				
+				}
+			}
+			
+		});
+		
+	});
+	
+
+</script>
 
 <section class="main-row topLine">
 	<div class="section-project-row">
@@ -18,7 +48,7 @@
 			</div>
 			
 			<div class="project-main-div2">
-				<div class="project-main-img"></div>
+				<div class="project-main-img" id="projectMainImage"></div>
 				<div>
 					<c:choose>
 						<c:when test="${projectDto.projectTitle != null}">
@@ -108,22 +138,13 @@
 						<span class="project-main-span">10% 작성완료</span>
 					</p>
 				</a>
-				<a class="project-main-link" href="#">
+				<a class="project-main-link" href="${pageContext.request.contextPath}/project/${projectNo}/projectMainMember">
 					<div style="margin: 0px 0px 70px;">
 						<p class="fRed fBold f16"><i class="fas fa-smile"></i></i></p>
 					</div>
 					<p>
 						<strong>창작자 정보</strong>
 						<span class="project-main-span">10% 작성완료</span>
-					</p>
-				</a>
-				<a class="project-main-link" href="#">
-					<div style="margin: 0px 0px 70px;">
-						<p class="fRed fBold f16"><i class="fas fa-shield-alt"></i></i></p>
-					</div>
-					<p>
-						<strong>신뢰와 안전</strong>
-						<span class="project-main-span">20% 작성완료</span>
 					</p>
 				</a>
 			</div>

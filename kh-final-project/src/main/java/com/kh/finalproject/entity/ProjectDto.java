@@ -23,4 +23,7 @@ public class ProjectDto {
 	
 	private int memberNo;
 	private int categoryNo;
+	
+	private String memberInfoNick;
+	private String memberInfoContent;
 }
