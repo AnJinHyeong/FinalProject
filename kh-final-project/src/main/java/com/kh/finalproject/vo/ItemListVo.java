@@ -1,4 +1,4 @@
-package com.kh.finalproject.entity;
+package com.kh.finalproject.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,9 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class GiftDto {
+public class ItemListVo {
 	private int giftNo;
-	private int projectNo;
-	private int giftPrice;
-	private String giftSummary;
+	private int itemNo;
+	private int itemQuantity;
 }

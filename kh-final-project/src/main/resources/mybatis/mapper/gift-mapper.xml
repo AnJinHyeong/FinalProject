@@ -8,18 +8,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 선물 데이터 삽입 -->
 	<insert id="insert" parameterType="GiftDto">
-		insert into gift values(gift_seq.nextval, #{projectNo}, #{memberNo}, #{giftPrice}, #{giftSummary})
+		insert into gift values(gift_seq.nextval, #{projectNo}, #{giftPrice}, #{giftSummary})
 	</insert>
 	
 	<!-- 프로젝트 번호와 일치하는 선물 리스트 생성 -->
 	<select id="listByProjectNo" resultType="GiftDto" parameterType="int">
-		select * from gift where project_no = #{projectNo}
+		select * from gift where project_no = #{projectNo} order by gift_no desc
 	</select>
 	
 	<!-- 프로젝트 번호와 일치하는 선물 갯수 -->
 	<select id="count" resultType="int" parameterType="int">
 		select count(*) from gift where project_no = #{projectNo}
 	</select>
+	
+	<!-- 선물 번호를 이용해서 선물 제거 -->
+	<delete id="delete" parameterType="int">
+		delete gift where gift_no = #{giftNo}
+	</delete>
+	
+	<!-- 선물 번호를 이용 -->
+	<insert id="selectedItemInsertToGift" parameterType="GiftSelectedItemVo">
+		insert into giftItem values(giftItem_seq.nextval, #{giftNo}, #{itemNo}, #{itemCount})
+	</insert>
+	
+	<!-- 시퀀스 생성하기 -->
+	<select id="getSequence" resultType="int">
+		select gift_seq.nextval from dual
+	</select>
+	
+	<!-- 선물 데이터 삽입 -->
+	<insert id="insertBySequence" parameterType="GiftDto">
+		insert into gift values(#{giftNo}, #{projectNo}, #{giftPrice}, #{giftSummary})
+	</insert>
 	
 </mapper>
 

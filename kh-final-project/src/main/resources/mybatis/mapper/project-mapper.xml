@@ -38,6 +38,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where project_no = #{projectNo}
 	</update>
 	
+	<update id="projectDefaultProgress" parameterType="int">
+		SELECT PROJECT_TITLE , PROJECT_SUMMARY, CATEGORY_NO FROM project WHERE project_no = #{projectNo}
+	</update>
+	
 	<update id="projectFundingUpdate" parameterType="ProjectDto">
 		update project 
 		set project_target_amount = #{projectTargetAmount}, project_start_date = #{projectStartDate}, project_end_date = #{projectEndDate}
@@ -59,6 +63,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			)TMP
 		) where rn = 1
 	</select>
+	
+	<update id="projectMemberUpdate" parameterType="ProjectDto">
+		update project 
+		set member_info_nick = #{memberInfoNick}, member_info_content = #{memberInfoContent}
+		where project_no = #{projectNo}
+	</update>
+	<!-- 프로젝트 스토리 업데이트 -->
+	<update id="projectStoryUpdate" parameterType="projectDto">
+		update project set project_content = #{projectContent} where project_no = #{projectNo}
+	</update>
 	
 </mapper>
 

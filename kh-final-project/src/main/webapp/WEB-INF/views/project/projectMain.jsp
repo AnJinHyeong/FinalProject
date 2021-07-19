@@ -5,6 +5,36 @@
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<script>
+	
+	$(function(){
+		
+		//페이지 로딩 시 프로젝트 이미지가 있으면 화면에 송출
+		$.ajax({
+			url :"${pageContext.request.contextPath}/image/project/confirm/${projectDto.projectNo}",
+			type: "post",
+			success : function(resp){
+				if(resp == 1){
+					$.ajax({
+						url :"${pageContext.request.contextPath}/image/project/getByProjectNo/${projectDto.projectNo}",
+						type: "get",
+						processData : false,
+						contentType : false,
+						success : function(resp){
+							var url = "${pageContext.request.contextPath}/image/project/projectMainDownload/"+resp.imageNo;
+							document.getElementById("projectMainImage").style.backgroundImage = "url("+url+")";
+						}
+					
+					});				
+				}
+			}
+			
+		});
+		
+	});
+	
+
+</script>
 
 <section class="main-row topLine">
 	<div class="section-project-row">
@@ -18,7 +48,7 @@
 			</div>
 			
 			<div class="project-main-div2">
-				<div class="project-main-img"></div>
+				<div class="project-main-img" id="projectMainImage"></div>
 				<div>
 					<c:choose>
 						<c:when test="${projectDto.projectTitle != null}">
@@ -28,7 +58,13 @@
 							<p style="font-size: 35px;"><strong>프로젝트의 이름을 작성해주세요.</strong></p>
 						</c:otherwise>
 					</c:choose>
-					<p style="font-size: 14px; line-height: 24px; letter-spacing: -0.015em; color: rgb(109, 109, 109);">${categoryDto.categoryTheme}<p>
+					
+						<p style="font-size: 14px; line-height: 24px; letter-spacing: -0.015em; color: rgb(109, 109, 109);">
+							<c:if test="${categoryDto2.categoryTheme != null}">
+							${categoryDto2.categoryTheme} • 
+							</c:if>
+							${categoryDto.categoryTheme}
+						<p>
 				</div>
 			</div>
 		
@@ -66,7 +102,7 @@
 			
 			
 			<div style="width: 100%; display: flex; -webkit-box-pack: justify; justify-content: space-between; padding: 20px 0;">
-				<a class="project-main-link" href="${pageContext.request.contextPath}/project/${projectNo}/projectMainDefault">
+				<a class="project-main-link" href="${root}/project/${projectNo}/projectMainDefault">
 					<div style="margin: 0px 0px 70px;">
 						<p class="fRed fBold f16"><i class="fas fa-pen"></i></p>
 					</div>
@@ -75,7 +111,7 @@
 						<span class="project-main-span">71% 작성완료</span>
 					</p>
 				</a>
-				<a class="project-main-link" href="${pageContext.request.contextPath}/project/${projectNo}/projectMainFunding">
+				<a class="project-main-link" href="${root}/project/${projectNo}/projectMainFunding">
 					<div style="margin: 0px 0px 70px;">
 						<p class="fRed fBold f16"><i class="fas fa-money-check-alt"></i></p>
 					</div>
@@ -84,7 +120,7 @@
 						<span class="project-main-span">0% 작성완료</span>
 					</p>
 				</a>
-				<a class="project-main-link" href="${pageContext.request.contextPath}/project/${projectNo}/projectMainGift">
+				<a class="project-main-link" href="${root}/project/${projectNo}/projectMainGift">
 					<div style="margin: 0px 0px 70px;">
 						<p class="fRed fBold f16"><i class="fas fa-gift"></i></i></p>
 					</div>
@@ -93,7 +129,7 @@
 						<span class="project-main-span">0% 작성완료</span>
 					</p>
 				</a>
-				<a class="project-main-link" href="#">
+				<a class="project-main-link" href="${root}/project/${projectNo}/projectMainStory">
 					<div style="margin: 0px 0px 70px;">
 						<p class="fRed fBold f16"><i class="fas fa-book"></i></i></p>
 					</div>
@@ -102,22 +138,13 @@
 						<span class="project-main-span">10% 작성완료</span>
 					</p>
 				</a>
-				<a class="project-main-link" href="#">
+				<a class="project-main-link" href="${pageContext.request.contextPath}/project/${projectNo}/projectMainMember">
 					<div style="margin: 0px 0px 70px;">
 						<p class="fRed fBold f16"><i class="fas fa-smile"></i></i></p>
 					</div>
 					<p>
 						<strong>창작자 정보</strong>
 						<span class="project-main-span">10% 작성완료</span>
-					</p>
-				</a>
-				<a class="project-main-link" href="#">
-					<div style="margin: 0px 0px 70px;">
-						<p class="fRed fBold f16"><i class="fas fa-shield-alt"></i></i></p>
-					</div>
-					<p>
-						<strong>신뢰와 안전</strong>
-						<span class="project-main-span">20% 작성완료</span>
 					</p>
 				</a>
 			</div>

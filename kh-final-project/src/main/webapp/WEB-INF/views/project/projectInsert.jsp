@@ -90,22 +90,11 @@
 			}
 		});
 		
-		$("#scrollDown").on("click", function(){
-			$(".scrollBlind").animate({scrollTop:'+=200'}, 200);
-		});
-		$("#scrollUp").on("click", function(){
-			$(".scrollBlind").animate({scrollTop:'-=200'}, 200);
-		});
-		
-		var categoryListHeight = $('#categoryList').height()
-		if(categoryListHeight < 100){
-			$("#scrollDown").hide();
-			$("#scrollUp").hide();
-		}
-		
 		$("#workingProject").on("click", function(){
-			location.href="${root}/project/"+${projectDto.projectNo}+"/projectMain";
+			location.href="${root}/project/${projectDto.projectNo}/projectMain";
 		});
+		
+		
     
 	});
 </script>
@@ -120,22 +109,30 @@ style="background-image: url('${root}/image/insertBackground.jpg');">
 	<div class="projectInsert1 section-row section-opacity">
 
 		<div class="projectInsert2 container-800 pt20">
+			
+			<c:if test="${projectDto.projectNo != null}">
+				<div class="projectInsert3 mb30">
+					<p class="fRed fBold f16 pb10">
+						<i class="fas fa-exclamation-circle"></i> 작성 중인 프로젝트가 있습니다.
+					</p>
+						
+					<button class="btn btn-hover w100p h80" id="workingProject">
+						<div class="project-main-img w80 h100p"></div>
+						<c:choose>
+							<c:when test="${projectDto.projectTitle != null}">
+								<div class="btn-text">${projectDto.projectTitle}</div>
+							</c:when>
+							<c:otherwise>
+								<div class="btn-text">프로젝트 명이 설정되지 않았습니다.</div>
+							</c:otherwise>
+						</c:choose>
+						<div class="btn-progress w140 h100p">
+							<div class="btn-text">기획중 - 8% 완료</div>
+						</div>
+					</button>
+				</div>
+			</c:if>
 
-			<div class="projectInsert3 mb30">
-
-				<p class="fRed fBold f16 pb10">
-					<i class="fas fa-exclamation-circle"></i> 작성 중인 프로젝트가 있습니다.
-				</p>
-					
-				<button class="btn btn-hover w100p h80" id="workingProject">
-					<div class="project-main-img w80 h100p"></div>
-					<div class="btn-text">${projectDto.projectTitle}</div>
-					<div class="btn-progress w140 h100p">
-						<div class="btn-text">기획중 - 8% 완료</div>
-					</div>
-				</button>
-
-			</div>
 
 			<div>
 				<p class="f24 fBold pb10">멋진 아이디어가 있으시군요!</p>
@@ -144,8 +141,8 @@ style="background-image: url('${root}/image/insertBackground.jpg');">
 			</div>
 
 
-			<div class="projectInsert3 mb30 project-border-normal project-background-white project-border-radius">
-				<ul id="categoryList" class="scrollBlind">
+			<div class="projectInsert3 mb30" style="width: 806px;">
+				<ul id="categoryList" class="scrollThin">
 
 					<c:forEach var="categoryDto" items="${categoryApproveList}">
 
@@ -165,15 +162,6 @@ style="background-image: url('${root}/image/insertBackground.jpg');">
 						</li>
 
 				</ul>
-				
-				<div class="float-container">
-					<button id="scrollUp" class="left h20 w50p pRel m0 p0 btnNone project-border-radius">
-						<i class="fas fa-chevron-up pAbs pAbsCenter"></i>
-					</button>
-					<button id="scrollDown" class="right h20 w50p pRel m0 p0 btnNone project-border-radius">
-						<i class="fas fa-chevron-down pAbs pAbsCenter"></i>
-					</button>
-				</div>
 			</div>
 			
 
@@ -184,7 +172,7 @@ style="background-image: url('${root}/image/insertBackground.jpg');">
 				</div>
 				
 				<form id="projectInsertForm" action="projectInsert" method="post">
-				
+					
 					<div class="bottomLine mb10">
 						<textarea name="projectSummary" placeholder="프로젝트 요약을 입력해주세요." class="w100p h120 textarea-fix project-normal-border" required></textarea>
 						<div class="float-container">

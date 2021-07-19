@@ -10,13 +10,13 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>FUN‿ding</title>
+	<title>FUN‿ding - 즐거움의 시작</title>
 	<link rel="stylesheet" type="text/css" href="${root}/css/template.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/common.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/project.css">
 	
 	<link rel="stylesheet" type="text/css" href="${root}/css/yb.css">
-	<link rel="stylesheet" type="text/css" href="${root}/css/w_h_m_p_f.css">
+	<link rel="stylesheet" type="text/css" href="${root}/css/yongbo.css">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 
@@ -46,7 +46,7 @@
 				<a href="${root}/project/${projectNo}/projectMain"><img src="${pageContext.request.contextPath}/image/back.svg" width="25" height="25"></a>
 				<div>
 					<button class="project-btn btn1 project-btn-hover">미리보기</button>
-					<button style="text-decoration: none;" class="project-btn btn2">기획중·43% 완료</button>
+					<button style="text-decoration: none;" class="project-btn btn2 font-12">기획중· <span id="progress" class="font-12">0</span> % 완료</button>
 				</div>
 			</div>
 		</div>
@@ -63,9 +63,8 @@
 					<li class="project-main-li"><a href="${root}/project/${projectNo}/projectMainDefault" class="main-li-a">기본정보</a></li>
 					<li class="project-main-li"><a href="${root}/project/${projectNo}/projectMainFunding" class="main-li-a">펀딩 계획</a></li>
 					<li class="project-main-li"><a href="${root}/project/${projectNo}/projectMainGift" class="main-li-a">선물 구성</a></li>
-					<li class="project-main-li"><a href="#" class="main-li-a">스토리</a></li>
-					<li class="project-main-li"><a href="#" class="main-li-a">창작자 정보</a></li>
-					<li class="project-main-li"><a href="#" class="main-li-a">신뢰와 안전</a></li>
+					<li class="project-main-li"><a href="${root}/project/${projectNo}/projectMainStory" class="main-li-a">스토리</a></li>
+					<li class="project-main-li"><a href="${root}/project/${projectNo}/projectMainMember" class="main-li-a">창작자 정보</a></li>
 				</ul>
 			</div>
 		</div>

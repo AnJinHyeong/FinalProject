@@ -68,12 +68,17 @@
 
 .project-main-link{
 	margin-bottom: 0px; 
-	width: 168px; 
+	width: 210px; 
 	height: 188px; 
 	isplay: block; 
 	background: #fff; 
 	padding: 20px 0 0 20px;
-	
+	border: 1px solid #F2F2F2;
+}
+
+.project-main-link:hover{
+	box-shadow: rgb(0 0 0 / 15%) 0px 2px 4px, rgb(0 0 0 / 10%) 0px 1px 0px;
+    border-radius: 8px;
 }
 
 .project-main-ul{
@@ -90,6 +95,7 @@
 	list-style: none; 
 	margin-right: 32px;
 	padding-bottom: 10px;
+	
 }
 
 .project-main-li2{
@@ -167,7 +173,8 @@
 }
 
 .project-main-img{
-	background: center center / 50% no-repeat rgb(252, 252, 252) url("../image/insertBackground.jpg");
+	background: center center / 50% no-repeat rgb(252, 252, 252) ;
+	background: url("../image/imageNull.png");
 	background-size: 100% 100%;
     margin: 0px 32px 20px 0px;
     box-shadow: rgb(0 0 0 / 15%) 0px 2px 4px, rgb(0 0 0 / 10%) 0px 1px 0px;
@@ -307,6 +314,12 @@
 }
 
 .project-insert-select{
+	width: 300px; 
+	height: 40px; 
+	border: 1px solid rgb(240, 240, 240);
+}
+
+.project-insert-select-2{
 	width: 300px; 
 	height: 40px; 
 	border: 1px solid rgb(240, 240, 240);
@@ -513,13 +526,33 @@
 }
 
 .project-itemList{
-	max-height: 400px;
+	max-height: 500px;
+	overflow-y: auto;
+}
+
+.project-giftList{
+	max-height: 830px;
 	overflow-y: auto;
 }
 
 .project-insert-item-list{
 	width: 100%;
-	height: 80px;
+	height: 110px;
+	margin-bottom: 15px;
+	background: white; 
+	border-radius: 8px;
+	padding: 30px;
+	font-weight: 400; 
+	color: rgb(109, 109, 109); 
+	font-size: 12px !important;
+	display: inline-block;
+	text-align: justify;
+	word-break: break-all;
+}
+
+.project-insert-gift-list{
+	width: 100%;
+	min-height: 120px;
 	margin-bottom: 15px;
 	background: white; 
 	border-radius: 8px;
@@ -548,9 +581,8 @@
 }
 
 .project-gift-item-list{
-	max-height: 300px;
-	overflow-y: scroll;
-	overflow-x: hidden;
+	max-height: 250px;
+	overflow-y: auto;
 }
 
 .project-item-checkbox{
@@ -640,7 +672,7 @@
 }
 
 .projectInsert3>ul{
-	max-height: 170px;
+	max-height: 250px;
 	list-style:none;
     margin:0px;
     padding:0px;
@@ -759,4 +791,21 @@
 .project-input-money{
 	text-align: inherit; 
 	border: none;
+}
+
+
+.project-gift-item-delete-btn:hover{
+	background-color: rgb(248, 100, 83);
+	transition: background-color 0.2s ease-in-out;
+	color: white;
+}
+
+.font-12{
+	font-size: 12px;
+}
+
+
+.font-12.red{
+	color: rgb(248, 100, 83); 
+	font-size: 12px;
 }
