@@ -33,15 +33,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete image_file WHERE project_no = #{projectNo} and project_state = 'Y'
 	</delete>
 	
+	<!-- 회원 대표이미지 설정 -->
+	<insert id="insertMember" parameterType="ImageDto">
+		insert into image_file(image_no, image_upload_name, image_save_name, image_content_type, image_size, member_no) 
+		values(#{imageNo}, #{imageUploadName}, #{imageSaveName}, #{imageContentType}, #{imageSize}, #{memberNo})
+	</insert>
+	
+	<select id="getByMemberNo" resultType="ImageDto" parameterType="int">
+		select * from image_file where member_no = #{memberNo}
+	</select>
+	
+	<select id="confirmMember" resultType="int" parameterType="int">
+		SELECT count(*) FROM image_file WHERE member_no = #{memberNo}
+	</select>
+	
+	<delete id="deleteMember" parameterType="int">
+		delete image_file WHERE member_no = #{memberNo}
+	</delete>
+	
+	<select id="getImage" resultType="ImageDto" parameterType="int">
+		select * from image_file where image_no = #{imageNo}
+	</select>
+	
 	<!-- 프로젝트 스토리 이미지 -->
 	<insert id="insertProjectMainStory" parameterType="ImageDto">
 		insert into image_file(image_no, image_upload_name, image_save_name, image_content_type, image_size, project_no) 
 		values(#{imageNo}, #{imageUploadName}, #{imageSaveName}, #{imageContentType}, #{imageSize}, #{projectNo})
 	</insert>
-	
-	<select id="getProjectMainStory" resultType="ImageDto" parameterType="int">
-		select * from image_file where image_no = #{imageNo}
-	</select>
 	
 </mapper>
 

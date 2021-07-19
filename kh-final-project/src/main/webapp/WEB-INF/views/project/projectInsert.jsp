@@ -172,7 +172,7 @@ style="background-image: url('${root}/image/insertBackground.jpg');">
 				</div>
 				
 				<form id="projectInsertForm" action="projectInsert" method="post">
-				
+					
 					<div class="bottomLine mb10">
 						<textarea name="projectSummary" placeholder="프로젝트 요약을 입력해주세요." class="w100p h120 textarea-fix project-normal-border" required></textarea>
 						<div class="float-container">

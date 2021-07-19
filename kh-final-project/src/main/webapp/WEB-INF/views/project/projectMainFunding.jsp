@@ -12,6 +12,26 @@
 	
 	$(function(){
 		
+		$(document).ready(function(){
+			var inVal = $("input[name=projectTargetAmount]").val();
+			var regexVal = /^[0-9]{6,20}$/;
+			
+			if (regexVal.test(inVal)) {
+				if(inVal >= 500000){
+					$(".font-on").text("");
+				}
+				else{
+					$(this).val("");
+					$(".font-on").text("50만원 이상의 금액을 입력해주세요.");
+				}
+			}			
+			else {
+				$(this).val("");
+				$(".font-on").text("50만원 이상의 금액을 입력해주세요.");
+			}
+		});
+		
+		
 		//펀딩 금액 
 		$("input[name=projectTargetAmount]").blur(function(){
 			var inVal = $(this).val();
@@ -30,7 +50,7 @@
 				$(this).val("");
 				$(".font-on").text("50만원 이상의 금액을 입력해주세요.");
 			
-			 }	
+			}	
 			
 		});
 		
@@ -138,37 +158,31 @@
 		});
 		
 		
-// 		console.log(${projectDto.projectTargetAmount});
-// 		console.log(${projectDto.projectStartDate});
-// 		console.log(${projectDto.projectEndDate});
+		console.log($("input[name=projectTargetAmount]").val());
+		console.log($("input[name=projectStartDate]").val());
 		
-		if(${projectDto.projectTargetAmount} == 0){
-			var pta = 0;
-		}
-		else{
+		
+		if($("input[name=projectTargetAmount]").val()){
 			var pta = 1;
 		}
-		
-		if(${projectDto.projectStartDate} == 0){
+		else{
+			var pta = 0;
+		}
+		if($("input[name=projectStartDate]").val() == null || $("input[name=projectStartDate]").val() == ""){
 			var psd = 0;
 		}
 		else{
 			var psd = 1;
 		}
-		
-		if(${projectDto.projectEndDate} == 0){
+		if($("input[name=projectEndDate]").val() == null || $("input[name=projectEndDate]").val() == ""){
 			var ped = 0;
 		}
 		else{
 			var ped = 1;
 		}
 		
-// 		console.log(pta);
-// 		console.log(psd);
-// 		console.log(ped);
 		
 		$("#progress").text(33*(pta+psd+ped)+1);
-					
 		
 		
 	});
@@ -288,8 +302,6 @@
 			</form>
 			
 		</div>
-		
-		
 		
 	</div>
 

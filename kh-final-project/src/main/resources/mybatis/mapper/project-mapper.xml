@@ -64,6 +64,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) where rn = 1
 	</select>
 	
+	<update id="projectMemberUpdate" parameterType="ProjectDto">
+		update project 
+		set member_info_nick = #{memberInfoNick}, member_info_content = #{memberInfoContent}
+		where project_no = #{projectNo}
+	</update>
 	<!-- 프로젝트 스토리 업데이트 -->
 	<update id="projectStoryUpdate" parameterType="projectDto">
 		update project set project_content = #{projectContent} where project_no = #{projectNo}
