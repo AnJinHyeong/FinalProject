@@ -12,7 +12,7 @@ member_address VARCHAR2(200)
 
 CREATE SEQUENCE member_seq;
 );
-
+ 
 
 #project table
 CREATE TABLE project(
