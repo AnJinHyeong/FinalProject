@@ -37,7 +37,7 @@ CREATE SEQUENCE project_seq;
 create table category(
 category_no number(19) primary key,
 category_theme varchar2(60) not null unique,
-category_super number(19),
+category_super references category(category_no),
 category_approve char(1) check (category_approve in ('Y'))
 );
 

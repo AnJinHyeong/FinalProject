@@ -54,6 +54,11 @@ public class CategoryDaoImpl implements CategoryDao{
 		return sqlSession.selectOne("category.getByNo",categoryNo);
 	}
 
+	@Override
+	public List<CategoryDto> childCategoryList(int categoryNo) {
+		return sqlSession.selectList("category.childCategoryList",categoryNo);
+	}
+
 	
 	
 }

@@ -10,7 +10,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>FUN‿ding</title>
+	<title>FUN‿ding - 즐거움의 시작</title>
 	<link rel="stylesheet" type="text/css" href="${root}/css/template.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/common.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/project.css">
@@ -45,7 +45,7 @@
 				<a href="${root}/project/${projectNo}/projectMain"><img src="${pageContext.request.contextPath}/image/back.svg" width="25" height="25"></a>
 				<div>
 					<button class="project-btn btn1 project-btn-hover">미리보기</button>
-					<button style="text-decoration: none;" class="project-btn btn2">기획중·43% 완료</button>
+					<button style="text-decoration: none;" class="project-btn btn2">기획중· <span id="progress">0</span> % 완료</button>
 				</div>
 			</div>
 		</div>

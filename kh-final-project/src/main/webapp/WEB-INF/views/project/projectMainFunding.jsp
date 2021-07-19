@@ -84,24 +84,6 @@
 			var endDate = document.getElementById("startDate").setAttribute("max", startDateVal);
 		});
 		
-		//종료일 입력 시 시작일과 종료일 차이 계산
-		$("#endDate").on("input",function(){
-			var sdd = document.getElementById("startDate").value;
-			var edd = document.getElementById("endDate").value;
-		   	var ar1 = sdd.split('-');
-		   	var ar2 = edd.split('-');
-		   	var da1 = new Date(ar1[0], ar1[1], ar1[2]);
-	   		var da2 = new Date(ar2[0], ar2[1], ar2[2]);
-		   	var dif = da2 - da1;
-		   	var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
-		   	var cMonth = cDay * 30;// 월 만듬
-		   	var cYear = cMonth * 12; // 년 만듬
-		 	if(sdd && edd){
-			    document.getElementById('funding-date').text = parseInt(dif/cDay);
-			    $("#funding-date").text(parseInt(dif/cDay)+" 일");
-		 	}
-		});
-		
 		//시작일 입력 시 시작일과 종료일 차이 계산
 		$("#startDate").on("input",function(){
 			var sdd = document.getElementById("startDate").value;
@@ -120,7 +102,73 @@
 		 	}
 		});
 		
+		//종료일 입력 시 시작일과 종료일 차이 계산
+		$("#endDate").on("input",function(){
+			var sdd = document.getElementById("startDate").value;
+			var edd = document.getElementById("endDate").value;
+		   	var ar1 = sdd.split('-');
+		   	var ar2 = edd.split('-');
+		   	var da1 = new Date(ar1[0], ar1[1], ar1[2]);
+	   		var da2 = new Date(ar2[0], ar2[1], ar2[2]);
+		   	var dif = da2 - da1;
+		   	var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
+		   	var cMonth = cDay * 30;// 월 만듬
+		   	var cYear = cMonth * 12; // 년 만듬
+		 	if(sdd && edd){
+			    document.getElementById('funding-date').text = parseInt(dif/cDay);
+			    $("#funding-date").text(parseInt(dif/cDay)+" 일");
+		 	}
+		});
 		
+		
+		$("#projectMainFunding").on("submit", function(e){
+			if($("input[name=projectTargetAmount]").val() < 500000){
+				$("input[name=projectTargetAmount]").focus();
+				e.preventDefault();
+			}
+			if($("input[name=projectStartDate]").val() == ""){
+				$("input[name=projectStartDate]").focus();
+				e.preventDefault();
+			}
+			if($("input[name=projectEndDate]").val() == ""){
+				$("input[name=projectEndDate]").focus();
+				e.preventDefault();
+			}
+			
+		});
+		
+		
+// 		console.log(${projectDto.projectTargetAmount});
+// 		console.log(${projectDto.projectStartDate});
+// 		console.log(${projectDto.projectEndDate});
+		
+		if(${projectDto.projectTargetAmount} == 0){
+			var pta = 0;
+		}
+		else{
+			var pta = 1;
+		}
+		
+		if(${projectDto.projectStartDate} == 0){
+			var psd = 0;
+		}
+		else{
+			var psd = 1;
+		}
+		
+		if(${projectDto.projectEndDate} == 0){
+			var ped = 0;
+		}
+		else{
+			var ped = 1;
+		}
+		
+// 		console.log(pta);
+// 		console.log(psd);
+// 		console.log(ped);
+		
+		$("#progress").text(33*(pta+psd+ped)+1);
+					
 		
 		
 	});
@@ -133,7 +181,7 @@
 		
 		<div class="section-row" style=" padding-top: 10px;">
 			
-			<form action="projectMainFunding" method="post">
+			<form action="projectMainFunding" method="post" id="projectMainFunding">
 			
 				<div class="project-insert-div" style="height: 300px;">
 					<dl class="project-insert-dl">
