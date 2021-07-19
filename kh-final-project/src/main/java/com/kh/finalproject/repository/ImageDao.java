@@ -23,4 +23,9 @@ public interface ImageDao {
 	int confirmProjectMain(int projectNo);
 	//프로젝트 이미지 삭제
 	boolean deleteProjectMain(int projectNo);
+	
+	// 프로젝트 스토리 이미지 등록
+	ImageDto insertProjectMainStory(ImageDto imageDto);
+	// 프로젝트 스토리 이미지 뿔러오기
+	ImageDto getProjectMainStory(int imageNo);
 }

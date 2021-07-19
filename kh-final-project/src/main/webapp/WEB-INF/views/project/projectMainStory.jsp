@@ -10,45 +10,62 @@
 <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
 
 <script>
-	$(function(){
-		$("#inputArea").on("click", function(){
-			$("#inputAreaText").focus();
-			console.log("DDD");
-		});
+	$(function() {
+		var i = 0;
 		
-		$("#inputAreaText").blur("input", function(){
-			$("input[name=projectContent]").val($(this).text());
-		});
-		
-		$("#inputAreaText").on("input", function() {
-			$("#textSizeSpan").text($(this).text().length);
-			if ($(this).val().length > 50) {
-				$("#textSize").css("color", "red");
-				$("#textMax").show();
-			} else {
-				$("#textSize").css("color", "black");
-				$("#textMax").hide();
-			}
+		$("#addImageBtn").on("click", function() {
+			var template = $("#addFileTemplate").html();
+			template = template.replace("{{i}}", i);
+			$("#inputArea").append(template);
+			$("input[name=" + i + "]").click();
+			i = i + 1;
+
+			$(".projectStoryFile").on("input", function() {
+				var files = this.files;
+				var filesLength = this.files.length > 0;
+				var files0 = this.files[0];
+
+				if (files && filesLength) {
+					var fd = new FormData();
+					fd.append("f", files0);
+					var that = this;
+
+					$.ajax({
+						url : "${pageContext.request.contextPath}/image/project/upload/story/${projectNo}",
+						type : "post",
+						processData : false,
+						contentType : false,
+						data : fd,
+						success : function(resp) {
+							var url = "${pageContext.request.contextPath}/image/project/download/story/" + resp.imageNo;
+							$(that).siblings("img").attr("src", url);
+							$(that).siblings("img").on("click", function(){
+								$(that).click();
+							});
+						},
+						error : function(resp) {
+							window.alert("업로드 실패!");
+						}
+					});
+				}
+			});
 		});
 
-		$("#projectMainGiftInsertForm").on("submit", function(e) {
-			if ($("input[name=giftSummary]").val().length > 50) {
-				$("input[name=giftSummary]").focus();
-				e.preventDefault();
-			}
-			var giftPrice = $("input[name=giftPrice]").val();
-			var regexPw = /^[1-9][0-9]{0,8}$/;
-			if(!regexPw.test(giftPrice) || giftPrice == 0){
-				$("input[name=giftPrice]").focus();
-				e.preventDefault();
-			}
+		$("#inputArea").blur("input", function() {
+			$("textarea[name=projectContent]").val($("#inputArea").html());
 		});
-		
-		$("#addImageBtn").on("click",function(){
-			$("#addImage").click();
-		});
-	});	
+
+	});
 </script>
+
+
+<script id="addFileTemplate" type="text/template">
+	<div>
+		<input type="file" name="{{i}}" class="mt10 mb10 projectStoryFile w100p dpNone" style="margin-left:200px;">
+		<img class="w700" style="margin: 50px 100px;">
+	</div>
+</script>
+
 
 <section class="main-row topLine" style="background-color: #f8f8f8;">
 
@@ -64,22 +81,22 @@
 					<div class="project-insert-dd mb30">
 						<p>프로젝트를 소개하고, 창작자의 시선에서 준비하는 과정에서 후원자에게 들려주고 싶었던 이야기를 진솔하게 전달해주세요.</p>
 					</div>
-					<button id="addImageBtn">사진 추가</button>
-					<input id="addImage" type="file">
-					<div class="w100p h400 bacWhite scrollThin p30" id="inputArea">
-						<div id="inputAreaText" class="inputFocusNone" contenteditable="true">
-							{{<img alt="" src="" width="200px" height="100px">}}
+					<button id="addImageBtn" class="project-btn btn3 project-btn-hover mb20">사진 추가</button>
+
+					<form action="#" method="post">
+
+						<div class="w100p h500 bacWhite scrollThin" style="padding: 50px 150px;" id="inputArea" contenteditable="true">
+							${projectDto.projectContent}
 						</div>
-					</div>
-					<div class="float-container">
-						<p id="textSize" class="fs12 pb10 pt10 right">
-							(<span id="textSizeSpan">0</span><span>/4000</span>)
-						</p>
-					</div>
-					<input type="text" name="projectContent">
-					<div class="project-insert-div3">
-						<input class="project-btn btn3 project-btn-hover mr0" type="submit" value="저장">
-					</div>
+						
+						<textarea name="projectContent" class="w100p h200 dpNone"></textarea>
+
+						<div class="project-insert-div3">
+							<input id="inputStory" class="project-btn btn3 project-btn-hover mr0" type="submit" value="저장">
+						</div>
+
+					</form>
+
 				</div>
 			</div>
 

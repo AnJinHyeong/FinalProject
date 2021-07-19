@@ -67,5 +67,10 @@ public class ProjectDaoImpl implements ProjectDao{
 	public ProjectDto workingProject(int memberNo) {
 		return sqlSession.selectOne("project.workingProject",memberNo);
 	}
+
+	@Override
+	public boolean projectStoryUpdate(ProjectDto projectDto) {
+		return sqlSession.update("project.projectStoryUpdate",projectDto) > 0;
+	}
 	
 }
