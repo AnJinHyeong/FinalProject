@@ -48,6 +48,14 @@
 				e.preventDefault();
 			}
 		});
+		
+		if($("#itemName").text() == null || $("#itemName").text() == ""){
+			$("#progress").text(0);
+		}
+		else{
+			$("#progress").text(100);
+		}
+		
 
 	});
 </script>

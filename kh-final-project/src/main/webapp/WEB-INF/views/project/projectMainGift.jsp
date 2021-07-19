@@ -151,7 +151,14 @@
 				e.preventDefault();
 			}
 		});
-
+		
+		if($("#giftPrice").text() == null || $("#giftPrice").text() == ""){
+			$("#progress").text(0);
+		}
+		else{
+			$("#progress").text(100);
+		}
+		
 	});
 </script>
 

@@ -65,4 +65,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			delete email_auth where time < sysdate - 5/24/60
 		]]>
 	</delete>
+	
+	<select id="getByMemberNo" resultType="MemberDto" parameterType="int">
+		select * from member where member_no = #{memberNo}
+	</select>
+	
 </mapper>

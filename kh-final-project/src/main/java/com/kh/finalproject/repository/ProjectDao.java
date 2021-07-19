@@ -29,6 +29,8 @@ public interface ProjectDao {
 	String projectEndDatePlus14(int projectNo);
 	//작업 진행중인 프로젝트 조회
 	ProjectDto workingProject(int memberNo);
+	//프로젝트 member(창작자) 업데이트
+	boolean projectMemberUpdate(ProjectDto projectDto);
 	// 프로젝트 Story 업데이트
 	boolean projectStoryUpdate(ProjectDto projectDto);
 	
