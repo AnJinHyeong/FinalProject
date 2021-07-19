@@ -38,6 +38,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where project_no = #{projectNo}
 	</update>
 	
+	<update id="projectDefaultProgress" parameterType="int">
+		SELECT PROJECT_TITLE , PROJECT_SUMMARY, CATEGORY_NO FROM project WHERE project_no = #{projectNo}
+	</update>
+	
 	<update id="projectFundingUpdate" parameterType="ProjectDto">
 		update project 
 		set project_target_amount = #{projectTargetAmount}, project_start_date = #{projectStartDate}, project_end_date = #{projectEndDate}

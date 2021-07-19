@@ -91,8 +91,10 @@
 		});
 		
 		$("#workingProject").on("click", function(){
-			location.href="${root}/project/"+${projectDto.projectNo}+"/projectMain";
+			location.href="${root}/project/${projectDto.projectNo}/projectMain";
 		});
+		
+		
     
 	});
 </script>
@@ -107,22 +109,30 @@ style="background-image: url('${root}/image/insertBackground.jpg');">
 	<div class="projectInsert1 section-row section-opacity">
 
 		<div class="projectInsert2 container-800 pt20">
+			
+			<c:if test="${projectDto.projectNo != null}">
+				<div class="projectInsert3 mb30">
+					<p class="fRed fBold f16 pb10">
+						<i class="fas fa-exclamation-circle"></i> 작성 중인 프로젝트가 있습니다.
+					</p>
+						
+					<button class="btn btn-hover w100p h80" id="workingProject">
+						<div class="project-main-img w80 h100p"></div>
+						<c:choose>
+							<c:when test="${projectDto.projectTitle != null}">
+								<div class="btn-text">${projectDto.projectTitle}</div>
+							</c:when>
+							<c:otherwise>
+								<div class="btn-text">프로젝트 명이 설정되지 않았습니다.</div>
+							</c:otherwise>
+						</c:choose>
+						<div class="btn-progress w140 h100p">
+							<div class="btn-text">기획중 - 8% 완료</div>
+						</div>
+					</button>
+				</div>
+			</c:if>
 
-			<div class="projectInsert3 mb30">
-
-				<p class="fRed fBold f16 pb10">
-					<i class="fas fa-exclamation-circle"></i> 작성 중인 프로젝트가 있습니다.
-				</p>
-					
-				<button class="btn btn-hover w100p h80" id="workingProject">
-					<div class="project-main-img w80 h100p"></div>
-					<div class="btn-text">${projectDto.projectTitle}</div>
-					<div class="btn-progress w140 h100p">
-						<div class="btn-text">기획중 - 8% 완료</div>
-					</div>
-				</button>
-
-			</div>
 
 			<div>
 				<p class="f24 fBold pb10">멋진 아이디어가 있으시군요!</p>

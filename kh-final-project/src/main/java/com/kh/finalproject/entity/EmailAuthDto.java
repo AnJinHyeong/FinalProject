@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class EmailAuthDto {
 	
-	private int auth_no;
-	private String auth_key;
-	private Date auth_date;
+	private String email;
+	private String no;
+	private Date time;
 
 }
