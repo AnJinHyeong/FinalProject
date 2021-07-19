@@ -37,7 +37,7 @@ CREATE SEQUENCE project_seq;
 create table category(
 category_no number(19) primary key,
 category_theme varchar2(60) not null unique,
-category_super number(19),
+category_super references category(category_no),
 category_approve char(1) check (category_approve in ('Y'))
 );
 
@@ -98,3 +98,17 @@ item_count number(19) not null
 );
 
 create sequence giftItem_seq;
+
+#image_file table
+CREATE TABLE image_file(
+image_no NUMBER(19) PRIMARY KEY,
+image_upload_name varchar2(256) NOT NULL,
+image_save_name varchar2(256) NOT NULL,
+image_content_type varchar2(30),
+image_size number(19) DEFAULT 0 NOT NULL,
+project_no REFERENCES project(project_no) ON DELETE CASCADE,
+project_state char(1) CHECK (project_state IN ('Y')) ,
+member_no REFERENCES member(member_no) ON DELETE CASCADE
+);
+
+CREATE SEQUENCE image_file_seq;

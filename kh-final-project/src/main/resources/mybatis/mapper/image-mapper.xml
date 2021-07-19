@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="imageFile">
+	
+	
+	<select id="sequence" resultType="int">
+		select image_file_seq.nextval from dual		
+	</select>
+	
+	<!-- 프로젝트 대표 이미지 -->
+	<insert id="insertProjectMain" parameterType="ImageDto">
+		insert into image_file(image_no, image_upload_name, image_save_name, image_content_type, image_size, project_no, project_state) 
+		values(#{imageNo}, #{imageUploadName}, #{imageSaveName}, #{imageContentType}, #{imageSize}, #{projectNo}, 'Y')
+	</insert>
+	
+	<select id="getProjectMain" resultType="ImageDto" parameterType="int">
+		select * from image_file where image_no = #{imageNo} and project_state = 'Y'
+	</select>
+	
+	<select id="getProjectMainByProjectNo" resultType="ImageDto" parameterType="int">
+		select * from image_file where project_no = #{projectNo} and project_state = 'Y'
+	</select>
+	
+	<select id="confirmProjectMain" resultType="int" parameterType="int">
+		SELECT count(*) FROM image_file WHERE project_no = #{projectNo} and project_state = 'Y'
+	</select>
+	
+	<delete id="deleteProjectMain" parameterType="int">
+		delete image_file WHERE project_no = #{projectNo} and project_state = 'Y'
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

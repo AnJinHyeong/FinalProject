@@ -18,10 +18,12 @@ import com.kh.finalproject.entity.CategoryDto;
 import com.kh.finalproject.entity.GiftDto;
 import com.kh.finalproject.entity.ItemDto;
 import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.entity.ImageDto;
 import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.repository.GiftDao;
 import com.kh.finalproject.repository.ItemDao;
 import com.kh.finalproject.repository.ProjectDao;
+import com.kh.finalproject.repository.ImageDao;
 import com.kh.finalproject.vo.GiftSelectedItemVo;
 import com.kh.finalproject.vo.ItemListVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
@@ -78,12 +80,17 @@ public class ProjectController {
 		model.addAttribute("projectDto", find);
 
 		CategoryDto theme = categoryDao.getByNo(find.getCategoryNo());
-
+		CategoryDto theme2 = categoryDao.getByNo(theme.getCategorySuper());
+		
 		model.addAttribute("categoryDto", theme);
-
+		model.addAttribute("categoryDto2", theme2);
+		
 		return "project/projectMain";
 	}
-
+	
+	@Autowired
+	private ImageDao imageDao;
+	
 	@GetMapping("/{projectNo}/projectMainDefault")
 	public String projectMainDefault(@PathVariable int projectNo, HttpSession session, Model model) {
 
@@ -91,9 +98,10 @@ public class ProjectController {
 		ProjectDto projectDto = ProjectDto.builder().projectNo(projectNo).memberNo(memberNo).build();
 		ProjectDto find = projectDao.get(projectDto);
 		model.addAttribute("projectDto", find);
-
-		model.addAttribute("categoryDto", categoryDao.userCustomList(find.getCategoryNo()));
-		model.addAttribute("category", categoryDao.getByNo(find.getCategoryNo()));
+		
+		//프로젝트 카테고리의 정보 조회
+		CategoryDto categoryDto = categoryDao.getByNo(find.getCategoryNo());
+		model.addAttribute("category", categoryDto);
 
 		return "project/projectMainDefault";
 	}

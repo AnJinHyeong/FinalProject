@@ -65,8 +65,7 @@ public class MemberController {
 		attr.addAttribute("error", "");
 		attr.addAttribute("email", emailAuthDto.getEmail());
 		return "redirect:join";
-	}
-	
+	}	
 	}
 	 
 	@GetMapping("/login")

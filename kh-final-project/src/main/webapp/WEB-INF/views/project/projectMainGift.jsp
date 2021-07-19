@@ -17,10 +17,6 @@
 			$(this).siblings("i").toggleClass("reverse");
 			$("#itemList").toggle('fast');
 			$("#itemListAddBtn").toggle('fast');
-			if (itemListHeight >= 229) {
-				$("#scrollDown2").toggle('fast');
-				$("#scrollUp2").toggle('fast');
-			}
 		});
 
 		if ($("#giftCount").html() > 0) {
@@ -61,43 +57,32 @@
 							});
 							itemSelectAjax(selectedItems);
 						});
-						
-						$(".itemCountMinus").on("click", function(){
+
+						$(".itemCountMinus").on("click", function() {
 							var currentValue = $(this).siblings("input[type=number]").val();
 							currentValue = Number(currentValue) - 1;
-							if(currentValue < 1){
+							if (currentValue < 1) {
 								currentValue = 1;
 							}
 							$(this).siblings("input[type=number]").val(currentValue);
 						});
-						
-						$(".itemCountPlus").on("click", function(){
+
+						$(".itemCountPlus").on("click", function() {
 							var currentValue = $(this).siblings("input[type=number]").val();
 							currentValue = Number(currentValue) + 1;
-							if(currentValue > 1000){
+							if (currentValue > 1000) {
 								currentValue = 1000;
 							}
 							$(this).siblings("input[type=number]").val(currentValue);
 						});
-						
+
 					},
 					error : function() {
 						$("#search-result").empty();
-					},
-					complete : function() {
-						if ($("#search-result").height() == 300) {
-							$("#scrollDown3").show();
-							$("#scrollUp3").show();
-						} else {
-							$("#scrollDown3").hide();
-							$("#scrollUp3").hide();
-						}
 					}
 				});
 			} else {
 				$("#search-result").empty();
-				$("#scrollDown3").hide();
-				$("#scrollUp3").hide();
 			}
 		}
 		;
@@ -113,28 +98,9 @@
 				itemSelectAjax(selectedItems);
 			} else {
 				$("#search-result").empty();
-				$("#scrollDown3").hide();
-				$("#scrollUp3").hide();
 			}
 
 		});
-
-		$(".scrollDown").on("click", function() {
-			$(this).parents().siblings(".scrollBlind").animate({
-				scrollTop : '+=200'
-			}, 200);
-		});
-		$(".scrollUp").on("click", function() {
-			$(this).parents().siblings(".scrollBlind").animate({
-				scrollTop : '-=200'
-			}, 200);
-		});
-
-		var giftListHeight = $('#giftList').height();
-		if (giftListHeight < 790) {
-			$("#scrollDown").hide();
-			$("#scrollUp").hide();
-		}
 
 		$(".modalX").on("click", function() {
 			$("input[name=giftNo]").val($(this).parents().siblings("#giftNo").html());
@@ -152,7 +118,8 @@
 
 		$("input[name=giftPrice]").blur("input", function() {
 			var giftPrice = $(this).val();
-			var regexPw = /^[1-9][0-9]{0,8}/;
+			var regexPw = /^[1-9][0-9]{0,8}$/;
+			console.log(regexPw.test(giftPrice));
 			if (regexPw.test(giftPrice) || (giftPrice == 0)) {
 				$("#priceError").hide();
 			} else {
@@ -160,19 +127,28 @@
 				$("#priceError").show();
 			}
 		});
-		
+
 		$("input[name=giftSummary]").on("input", function() {
 			$("#textSizeSpan").text($(this).val().length);
 			if ($(this).val().length > 50) {
 				$("#textSize").css("color", "red");
 				$("#textMax").show();
-			} else if ($(this).val().length < 10 && $(this).val().length > 0) {
-				$("#textSize").css("color", "red");
-				$("#textMin").show();
 			} else {
 				$("#textSize").css("color", "black");
-				$("#textMin").hide();
 				$("#textMax").hide();
+			}
+		});
+
+		$("#projectMainGiftInsertForm").on("submit", function(e) {
+			if ($("input[name=giftSummary]").val().length > 50) {
+				$("input[name=giftSummary]").focus();
+				e.preventDefault();
+			}
+			var giftPrice = $("input[name=giftPrice]").val();
+			var regexPw = /^[1-9][0-9]{0,8}$/;
+			if(!regexPw.test(giftPrice) || giftPrice == 0){
+				$("input[name=giftPrice]").focus();
+				e.preventDefault();
 			}
 		});
 
@@ -229,7 +205,7 @@
 						<p>만든 선물이 없습니다</p>
 					</div>
 
-					<div id="giftList" class="project-giftList scrollBlind">
+					<div id="giftList" class="project-giftList scrollThin">
 
 						<div id="giftListBasic" class="project-insert-gift-list float-container p30 h140">
 							<div>
@@ -270,20 +246,9 @@
 						</c:forEach>
 					</div>
 
-					<div class="float-container">
-						<button id="scrollUp" class="scrollUp left h20 w50p pRel m0 p0 btnNone project-background-white project-border-radius">
-							<i class="fas fa-chevron-up pAbs pAbsCenter"></i>
-						</button>
-						<button id="scrollDown" class="scrollDown right h20 w50p pRel m0 p0 btnNone project-background-white project-border-radius">
-							<i class="fas fa-chevron-down pAbs pAbsCenter"></i>
-						</button>
-					</div>
-
 				</div>
 
 				<div class="mt40 w700 right project-background-white project-border-radius">
-					<!-- 					<form id="projectMainGiftInsertForm" -->
-					<!-- 						action="projectMainGift" method="post"> -->
 					<input type="hidden" value="${projectNo}" name="projectNo">
 					<div class="p50">
 						<div class="w100p mb30">
@@ -313,7 +278,7 @@
 										</div>
 									</div>
 
-									<div id="itemList" class="topLine displayNone w100p project-gift-item-list scrollBlind pt20 mt20">
+									<div id="itemList" class="displayNone w100p project-gift-item-list scrollThin pt20 mt20">
 										<div>
 											<ul>
 												<c:forEach var="itemDto" items="${itemList}">
@@ -332,48 +297,26 @@
 										</div>
 									</div>
 
-									<div class="float-container">
-										<button id="scrollUp2" class="scrollUp displayNone left h20 w50p pRel m0 p0 btnNone project-background-white project-border-radius">
-											<i class="fas fa-chevron-up pAbs pAbsCenter"></i>
-										</button>
-										<button id="scrollDown2" class="scrollDown displayNone right h20 w50p pRel m0 p0 btnNone project-background-white project-border-radius">
-											<i class="fas fa-chevron-down pAbs pAbsCenter"></i>
-										</button>
-									</div>
-
 									<div id="itemListAddBtn" class="h60 displayNone bottomLine">
 										<div class="project-insert-div3">
 											<button id="itemSelectBtn" class="project-btn btn3 project-btn-hover" style="margin-right: 0px">선택완료</button>
 										</div>
 									</div>
 
-									<form action="projectMainGift" method="post">
+									<form action="projectMainGift" method="post" id="projectMainGiftInsertForm">
 
-										<div id="search-result" class="scrollBlind oyAuto hMax300 mt20"></div>
-										<div class="float-container">
-											<button type="button" id="scrollUp3"
-												class="scrollUp displayNone left h20 w50p pRel m0 p0 btnNone project-background-white project-border-radius"
-											>
-												<i class="fas fa-chevron-up pAbs pAbsCenter"></i>
-											</button>
-											<button type="button" id="scrollDown3"
-												class="scrollDown displayNone right h20 w50p pRel m0 p0 btnNone project-background-white project-border-radius"
-											>
-												<i class="fas fa-chevron-down pAbs pAbsCenter"></i>
-											</button>
-										</div>
+										<div id="search-result" class="scrollThin oyAuto hMax300 mt20"></div>
 
 										<div class="mt30">
 											<p class="fBold fs12 mb20">선물 설명</p>
 											<p class="fs12">선물에 대한 설명을 입력해주세요.</p>
 											<div class="w100p h40 taRight mt20">
-												<input type="text" class="inputFocusNone boc230 bosSolid bow1 h40 w100p pl20 fc120" name="giftSummary" autocomplete="off" placeholder="ex. 선물세트A, 배송비 포함" required>
+												<input type="text" class="inputFocusNone boc230 bosSolid bow1 h40 w100p pl20 fc120" name="giftSummary" autocomplete="off"
+													placeholder="ex. 선물세트A, 배송비 포함" required
+												>
 											</div>
 											<div class="float-container">
-												<p id="textMin" class="fs12 pb10 pt10 left fRed displayNone">최소 10자 이상
-													입력해주세요</p>
-												<p id="textMax" class="fs12 pb10 pt10 left fRed displayNone">최대 50자 이하로
-													입력해주세요</p>
+												<p id="textMax" class="fs12 pb10 pt10 left fRed displayNone">최대 50자 이하로 입력해주세요</p>
 												<p id="textSize" class="fs12 pb10 pt10 right">
 													(<span id="textSizeSpan">0</span><span>/50</span>)
 												</p>
@@ -385,7 +328,9 @@
 											<p class="fs12">배송이 필요한 선물은 배송비를 포함해주세요.</p>
 											<div class="project-insert-div3">
 												<div class="displayFlex">
-													<input type="text" class="inputFocusNone boc230 bosSolid bow1 h40 w95p taRight brNone pr10 fc120" name="giftPrice" autocomplete="off" placeholder="0" required><span class="blNone boc230 bosSolid bow1 w5p dpFlex dpFlexCenter fc120">원</span>
+													<input type="text" class="inputFocusNone boc230 bosSolid bow1 h40 w95p taRight brNone pr10 fc120" name="giftPrice" autocomplete="off"
+														placeholder="0" required
+													><span class="blNone boc230 bosSolid bow1 w5p dpFlex dpFlexCenter fc120">원</span>
 												</div>
 												<span id="priceError" class="fs12 pt10 fRed displayNone taLeft">0 ~ 999999999 사이의 값을 입력해주세요.</span>
 											</div>
