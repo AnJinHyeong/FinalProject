@@ -55,6 +55,12 @@
 			$("textarea[name=projectContent]").val($("#inputArea").html());
 		});
 
+		if(("#inputArea").text() != null && ("#inputArea").text() != ""){
+			$("#progress").text(100);
+		} else{
+			$("#progress").text(0);
+		}
+		
 	});
 </script>
 
@@ -83,7 +89,7 @@
 					</div>
 					<button id="addImageBtn" class="project-btn btn3 project-btn-hover mb20">사진 추가</button>
 
-					<form action="#" method="post">
+					<form action="projectMainStory" method="post">
 
 						<div class="w100p h500 bacWhite scrollThin" style="padding: 50px 150px;" id="inputArea" contenteditable="true">
 							${projectDto.projectContent}
