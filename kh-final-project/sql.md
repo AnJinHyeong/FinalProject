@@ -13,6 +13,7 @@ member_address VARCHAR2(200)
 CREATE SEQUENCE member_seq;
 );
 
+
 #project table
 CREATE TABLE project(
 project_no NUMBER(19) PRIMARY KEY,
