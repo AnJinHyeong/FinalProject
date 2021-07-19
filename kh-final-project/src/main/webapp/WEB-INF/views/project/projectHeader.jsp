@@ -63,7 +63,7 @@
 					<li class="project-main-li"><a href="${root}/project/${projectNo}/projectMainDefault" class="main-li-a">기본정보</a></li>
 					<li class="project-main-li"><a href="${root}/project/${projectNo}/projectMainFunding" class="main-li-a">펀딩 계획</a></li>
 					<li class="project-main-li"><a href="${root}/project/${projectNo}/projectMainGift" class="main-li-a">선물 구성</a></li>
-					<li class="project-main-li"><a href="#" class="main-li-a">스토리</a></li>
+					<li class="project-main-li"><a href="${root}/project/${projectNo}/projectMainStory" class="main-li-a">스토리</a></li>
 					<li class="project-main-li"><a href="#" class="main-li-a">창작자 정보</a></li>
 					<li class="project-main-li"><a href="#" class="main-li-a">신뢰와 안전</a></li>
 				</ul>

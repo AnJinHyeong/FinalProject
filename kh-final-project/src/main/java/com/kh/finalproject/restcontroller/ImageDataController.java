@@ -1,6 +1,5 @@
 package com.kh.finalproject.restcontroller;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 
@@ -22,7 +21,7 @@ import com.kh.finalproject.repository.ImageDao;
 
 @RequestMapping("/image")
 @RestController
-public class ImageDateController {
+public class ImageDataController {
 	
 	@Autowired
 	private ImageDao projectImageDao;
@@ -41,6 +40,36 @@ public class ImageDateController {
 		
 		projectImageDao.save(imageDto.getImageSaveName(), f);
 		return result;
+	}
+	
+	@PostMapping("/project/upload/story/{projectNo}")
+	public ImageDto uploadStory(@PathVariable int projectNo, @RequestParam MultipartFile f) throws IllegalStateException, IOException {
+		ImageDto imageDto = ImageDto.builder()
+				.imageUploadName(f.getOriginalFilename())
+				.imageContentType(f.getContentType())
+				.imageSize(f.getSize())
+				.projectNo(projectNo)
+				.build();
+		
+		ImageDto result = projectImageDao.insertProjectMainStory(imageDto);
+		
+		projectImageDao.save(imageDto.getImageSaveName(), f);
+		return result;
+	}
+	
+	@GetMapping("/project/download/story/{imageNo}")
+	public ResponseEntity<ByteArrayResource> downloadStory(@PathVariable int imageNo) throws IOException {
+		ImageDto imageDto = projectImageDao.getProjectMainStory(imageNo); 
+		ByteArrayResource resource = projectImageDao.getFile(imageDto.getImageSaveName());
+		String fileName = URLEncoder.encode(imageDto.getImageUploadName(), "UTF-8");
+
+		return ResponseEntity.ok()
+								.contentType(MediaType.APPLICATION_OCTET_STREAM)
+								.contentLength(imageDto.getImageSize())
+								.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
+								.header(HttpHeaders.CONTENT_DISPOSITION, 
+										"attachment; filename=\""+fileName+"\"")
+								.body(resource);
 	}
 	
 	@GetMapping("/project/download/{imageNo}")
