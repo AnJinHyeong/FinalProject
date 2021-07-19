@@ -158,9 +158,6 @@
 		});
 		
 		
-		console.log($("input[name=projectTargetAmount]").val());
-		console.log($("input[name=projectStartDate]").val());
-		
 		
 		if($("input[name=projectTargetAmount]").val()){
 			var pta = 1;

@@ -277,14 +277,12 @@
 				url :"${pageContext.request.contextPath}/image/project/confirm/${projectDto.projectNo}",
 				type: "post",
 				success : function(resp){
-					console.log(resp);
 					if(resp == 1){//등록된 이미지가 있을경우 지우고 다시 등록
 						//이미지 삭제
 						$.ajax({
 							url :"${pageContext.request.contextPath}/image/project/delete/${projectDto.projectNo}",
 							type: "post",
 							success : function(resp){
-								console.log(resp);
 							}
 						});
 
@@ -324,8 +322,6 @@
 					
 					}
 					else{//등록된 이미지가 없을 경우 등록
-						console.log(files);
-						console.log(filesLength);
 						if(files && filesLength){//파일 저장소 존재 및 0번 위치에 파일 존재
 							console.log("파일이 선택되었습니다");
 						
