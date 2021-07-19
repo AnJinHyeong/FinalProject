@@ -211,7 +211,6 @@ public class ProjectController {
 
 	@PostMapping("/{projectNo}/projectMainStory")
 	public String projectMainStory(@PathVariable int projectNo, @ModelAttribute ProjectDto projectDto) {
-		log.info(projectDto.toString());
 		projectDto.setProjectNo(projectNo);
 		projectDao.projectStoryUpdate(projectDto);
 		return "redirect:projectMainStory";
