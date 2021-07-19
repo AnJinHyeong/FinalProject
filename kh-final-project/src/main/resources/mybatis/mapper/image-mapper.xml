@@ -11,12 +11,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select image_file_seq.nextval from dual		
 	</select>
 	
+	<!-- 프로젝트 대표 이미지 -->
 	<insert id="insertProjectMain" parameterType="ImageDto">
 		insert into image_file(image_no, image_upload_name, image_save_name, image_content_type, image_size, project_no, project_state) 
 		values(#{imageNo}, #{imageUploadName}, #{imageSaveName}, #{imageContentType}, #{imageSize}, #{projectNo}, 'Y')
 	</insert>
 	
-	<!-- 프로젝트 대표 이미지 -->
 	<select id="getProjectMain" resultType="ImageDto" parameterType="int">
 		select * from image_file where image_no = #{imageNo} and project_state = 'Y'
 	</select>
