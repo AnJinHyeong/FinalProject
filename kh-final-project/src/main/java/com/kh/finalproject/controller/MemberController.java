@@ -41,21 +41,31 @@ public class MemberController {
 	public String myPage() {
 		return "member/myPage";
 	}
+	@RequestMapping("/myMsg")
+	public String myMsg() {
+		return "member/myMsg";
+	}
+	@RequestMapping("/myPw")
+	public String myPw() {
+		return "member/myPw";
+	}
+	@RequestMapping("myId")
+	public String myId() {
+		return "member/myId";
+	}
 	
   
 	@PostMapping(value = "/memberInsert")
 	public String memberInsert(@ModelAttribute EmailAuthDto emailAuthDto, RedirectAttributes attr,@ModelAttribute MemberDto memberDto) {
-		boolean result = emailService.checkCertification(emailAuthDto);
-		if(result) {
-			memberDao.memberInsert(memberDto);
-			return "member/joinSuccess";
-		}
-		else {
-			attr.addAttribute("error", "");
-			attr.addAttribute("email", emailAuthDto.getEmail());
-			return "redirect:join";
-		}
-	
+	boolean result = emailService.checkCertification(emailAuthDto);
+	if(result) {
+		memberDao.memberInsert(memberDto);
+		return "member/joinSuccess";
+	}else {
+		attr.addAttribute("error", "");
+		attr.addAttribute("email", emailAuthDto.getEmail());
+		return "redirect:join";
+	}	
 	}
 	 
 	@GetMapping("/login")
