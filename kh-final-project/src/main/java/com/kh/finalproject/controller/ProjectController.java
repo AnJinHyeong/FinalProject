@@ -191,5 +191,10 @@ public class ProjectController {
 		itemDao.delete(itemNo);
 		return "redirect:projectMainGiftItem";
 	}
+	
+	@GetMapping("/{projectNo}/projectMainStory")
+	public String projectMainStory(@PathVariable int projectNo) {
+		return "project/projectMainStory";
+	}
 
 }

@@ -66,7 +66,7 @@
 			
 			
 			<div style="width: 100%; display: flex; -webkit-box-pack: justify; justify-content: space-between; padding: 20px 0;">
-				<a class="project-main-link" href="${pageContext.request.contextPath}/project/${projectNo}/projectMainDefault">
+				<a class="project-main-link" href="${root}/project/${projectNo}/projectMainDefault">
 					<div style="margin: 0px 0px 70px;">
 						<p class="fRed fBold f16"><i class="fas fa-pen"></i></p>
 					</div>
@@ -75,7 +75,7 @@
 						<span class="project-main-span">71% 작성완료</span>
 					</p>
 				</a>
-				<a class="project-main-link" href="${pageContext.request.contextPath}/project/${projectNo}/projectMainFunding">
+				<a class="project-main-link" href="${root}/project/${projectNo}/projectMainFunding">
 					<div style="margin: 0px 0px 70px;">
 						<p class="fRed fBold f16"><i class="fas fa-money-check-alt"></i></p>
 					</div>
@@ -84,7 +84,7 @@
 						<span class="project-main-span">0% 작성완료</span>
 					</p>
 				</a>
-				<a class="project-main-link" href="${pageContext.request.contextPath}/project/${projectNo}/projectMainGift">
+				<a class="project-main-link" href="${root}/project/${projectNo}/projectMainGift">
 					<div style="margin: 0px 0px 70px;">
 						<p class="fRed fBold f16"><i class="fas fa-gift"></i></i></p>
 					</div>
@@ -93,7 +93,7 @@
 						<span class="project-main-span">0% 작성완료</span>
 					</p>
 				</a>
-				<a class="project-main-link" href="#">
+				<a class="project-main-link" href="${root}/project/${projectNo}/projectMainStory">
 					<div style="margin: 0px 0px 70px;">
 						<p class="fRed fBold f16"><i class="fas fa-book"></i></i></p>
 					</div>
