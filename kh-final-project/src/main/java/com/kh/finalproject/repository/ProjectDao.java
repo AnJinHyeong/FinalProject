@@ -31,5 +31,7 @@ public interface ProjectDao {
 	ProjectDto workingProject(int memberNo);
 	//프로젝트 member(창작자) 업데이트
 	boolean projectMemberUpdate(ProjectDto projectDto);
+	// 프로젝트 Story 업데이트
+	boolean projectStoryUpdate(ProjectDto projectDto);
 	
 }

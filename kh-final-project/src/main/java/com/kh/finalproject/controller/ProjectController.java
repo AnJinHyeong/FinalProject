@@ -221,5 +221,20 @@ public class ProjectController {
 		projectDao.projectMemberUpdate(projectDto);
 		return "redirect:projectMainMember";
 	}
+	@GetMapping("/{projectNo}/projectMainStory")
+	public String projectMainStory(@PathVariable int projectNo, HttpSession session, Model model) {
+		int memberNo = (int) session.getAttribute("memberNo");
+		ProjectDto projectDto = ProjectDto.builder().projectNo(projectNo).memberNo(memberNo).build();
+		ProjectDto find = projectDao.get(projectDto);
+		model.addAttribute("projectDto", projectDao.get(find));
+		return "project/projectMainStory";
+	}
 
+	@PostMapping("/{projectNo}/projectMainStory")
+	public String projectMainStory(@PathVariable int projectNo, @ModelAttribute ProjectDto projectDto) {
+		log.info(projectDto.toString());
+		projectDto.setProjectNo(projectNo);
+		projectDao.projectStoryUpdate(projectDto);
+		return "redirect:projectMainStory";
+	}
 }

@@ -35,5 +35,8 @@ public interface ImageDao {
 	//이미지 불러오기
 	ImageDto getImage(int imageNo);
 	
-	
+	// 프로젝트 스토리 이미지 등록
+	ImageDto insertProjectMainStory(ImageDto imageDto);
+	// 프로젝트 스토리 이미지 뿔러오기
+	ImageDto getProjectMainStory(int imageNo);
 }

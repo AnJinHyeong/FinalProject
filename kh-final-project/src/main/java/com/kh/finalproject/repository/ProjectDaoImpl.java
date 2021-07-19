@@ -74,4 +74,9 @@ public class ProjectDaoImpl implements ProjectDao{
 		return count > 0;
 	}
 	
+	@Override
+	public boolean projectStoryUpdate(ProjectDto projectDto) {
+		return sqlSession.update("project.projectStoryUpdate",projectDto) > 0;
+	}
+	
 }

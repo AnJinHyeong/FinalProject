@@ -18,8 +18,8 @@ public class ImageDaoImpl implements ImageDao{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private final File baseDir = new File("/Users/anjinhyeong/sts-workspace/upload/project_image");//저장 경로 //안진형
-//	private final File baseDir = new File("경로 적어주세요.");//저장 경로
+//	private final File baseDir = new File("/Users/anjinhyeong/sts-workspace/upload/project_image");//저장 경로 //안진형
+	private final File baseDir = new File("D:/upload/finalproject");//저장 경로
 	
 	@Override
 	public ImageDto insertProjectMain(ImageDto imageDto) {
@@ -84,6 +84,18 @@ public class ImageDaoImpl implements ImageDao{
 	}
 	
 	@Override
+	public ImageDto insertProjectMainStory(ImageDto imageDto) {
+		int profileNo = sqlSession.selectOne("imageFile.sequence");
+		imageDto.setImageNo(profileNo);
+		imageDto.setImageSaveName(String.valueOf(profileNo));
+
+		sqlSession.insert("imageFile.insertProjectMainStory",imageDto);
+		
+		return imageDto;
+	}
+
+	
+	@Override
 	public int confirmMember(int memberNo) {
 		return sqlSession.selectOne("imageFile.confirmMember", memberNo);
 	}
@@ -99,5 +111,8 @@ public class ImageDaoImpl implements ImageDao{
 		return sqlSession.selectOne("imageFile.getImage", imageNo);
 	}
 	
+	public ImageDto getProjectMainStory(int imageNo) {
+		return sqlSession.selectOne("imageFile.getImage", imageNo);
+	}
 	
 }
