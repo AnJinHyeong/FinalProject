@@ -7,7 +7,7 @@ member_nick varchar2(30) not null,
 member_have_point number(19) default 0,
 member_email varchar2(30) not null unique,
 member_introduce varchar2(1000),
-member_grade varchar2(30) check (member_grade in('관리자','사용자','블랙')),   
+member_grade varchar2(30) default '사용자' check (member_grade in('관리자','사용자','블랙')) ,   
 member_address VARCHAR2(200)
 
 CREATE SEQUENCE member_seq;
@@ -69,7 +69,6 @@ create sequence item_seq;
 create table gift(
 gift_no number(19) primary key,
 project_no references project(project_no) on delete set null,
-member_no references member(member_no) on delete set null,
 gift_price number(19) default 0 not null check(gift_price >= 0),
 gift_summary varchar2(150)
 );
@@ -80,7 +79,9 @@ create sequence gift_seq;
 DROP TABLE pay;
 CREATE TABLE pay(
 pay_no NUMBER(19) PRIMARY KEY,
-pay_money VARCHAR2(30) NOT NULL,
+pay_tid VARCHAR2(30) NOT NULL,
+pay_price NUMBER(19) NOT NULL,
+pay_status VARCHAR2(20) CHECK(pay_status IN ('결제 요청','결제 완료')) NOT NULL,
 pay_date DATE,
 member_no REFERENCES member(member_no) ON DELETE SET NULL
 );
@@ -88,3 +89,12 @@ DROP SEQUENCE pay_seq;
 CREATE SEQUENCE pay_seq;
 
 
+#giftItem table
+create table giftItem(
+giftItem_no number(19) primary key,
+gift_no references gift(gift_no) on delete cascade,
+item_no references item(item_no) on delete cascade,
+item_count number(19) not null
+);
+
+create sequence giftItem_seq;

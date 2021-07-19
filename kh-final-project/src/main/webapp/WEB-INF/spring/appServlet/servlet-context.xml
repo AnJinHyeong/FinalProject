@@ -55,6 +55,7 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/project/**"/>
+			<mapping path="/member/myPage"/>
 			<exclude-mapping path="/project/projectHeader"/>
 			<beans:bean class="com.kh.finalproject.interceptor.MemberLoginInterceptor"></beans:bean>
 		</interceptor>

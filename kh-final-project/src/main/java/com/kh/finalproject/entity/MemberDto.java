@@ -12,7 +12,6 @@ public class MemberDto {
 	private String memberPw;
 	private String memberNick;
 	private int memberHavePoint;
-	private int memberUsePoint;
 	private String memberEmail;
 	private String memberIntroduce;
 	private String memberGrade;

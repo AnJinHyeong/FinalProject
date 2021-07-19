@@ -19,12 +19,9 @@ import com.kh.finalproject.entity.EmailAuthDto;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.repository.MemberDao;
-
+import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.service.EmailService;
 
-import com.kh.finalproject.repository.ProjectDao;
-
-import com.kh.finalproject.vo.MemberVo;
 
 @Controller
 @RequestMapping("/member")
@@ -84,7 +81,7 @@ public class MemberController {
 			
 			return "redirect:/";
 	}
-	
+
 	@Autowired
 	private ProjectDao projectDao;
 	
@@ -98,7 +95,7 @@ public class MemberController {
 		
 		return "member/myProject";
 	}
-	
+
 		
 	@GetMapping("/emailCheck")
 	public String emailCheck() {
@@ -112,6 +109,7 @@ public class MemberController {
 		attr.addAttribute("email", email);
 		return "redirect:join";
 	}
+
 
 }
 
