@@ -54,12 +54,10 @@
 		$("#inputArea").blur("input", function() {
 			$("textarea[name=projectContent]").val($("#inputArea").html());
 		});
-
-		if(("#inputArea").text() != null && ("#inputArea").text() != ""){
+		
+		if($("#inputArea").html().length > 15){
 			$("#progress").text(100);
-		} else{
-			$("#progress").text(0);
-		}
+		};
 		
 	});
 </script>
@@ -68,7 +66,7 @@
 <script id="addFileTemplate" type="text/template">
 	<div>
 		<input type="file" name="{{i}}" class="mt10 mb10 projectStoryFile w100p dpNone" style="margin-left:200px;">
-		<img class="w700" style="margin: 50px 100px;">
+		<img class="w700" style="margin: 0 100px;">
 	</div>
 </script>
 
@@ -91,7 +89,7 @@
 
 					<form action="projectMainStory" method="post">
 
-						<div class="w100p h500 bacWhite scrollThin" style="padding: 50px 150px;" id="inputArea" contenteditable="true">
+						<div class="w100p h500 bacWhite scrollThin inputFocusNone" style="padding: 50px 150px;" id="inputArea" contenteditable="true">
 							${projectDto.projectContent}
 						</div>
 						
