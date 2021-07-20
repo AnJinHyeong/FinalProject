@@ -312,6 +312,12 @@
 	border: 1px solid rgb(240, 240, 240);
 }
 
+.project-insert-select-2{
+	width: 300px; 
+	height: 40px; 
+	border: 1px solid rgb(240, 240, 240);
+}
+
 .project-insert-font{
 	font-size:23px;
 	color: red;
@@ -513,12 +519,12 @@
 }
 
 .project-itemList{
-	max-height: 490px;
+	max-height: 500px;
 	overflow-y: auto;
 }
 
 .project-giftList{
-	max-height: 810px;
+	max-height: 830px;
 	overflow-y: auto;
 }
 
@@ -659,7 +665,7 @@
 }
 
 .projectInsert3>ul{
-	max-height: 170px;
+	max-height: 250px;
 	list-style:none;
     margin:0px;
     padding:0px;

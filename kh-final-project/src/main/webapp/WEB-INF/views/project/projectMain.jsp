@@ -28,7 +28,13 @@
 							<p style="font-size: 35px;"><strong>프로젝트의 이름을 작성해주세요.</strong></p>
 						</c:otherwise>
 					</c:choose>
-					<p style="font-size: 14px; line-height: 24px; letter-spacing: -0.015em; color: rgb(109, 109, 109);">${categoryDto.categoryTheme}<p>
+					
+						<p style="font-size: 14px; line-height: 24px; letter-spacing: -0.015em; color: rgb(109, 109, 109);">
+							<c:if test="${categoryDto2.categoryTheme != null}">
+							${categoryDto2.categoryTheme} • 
+							</c:if>
+							${categoryDto.categoryTheme}
+						<p>
 				</div>
 			</div>
 		
