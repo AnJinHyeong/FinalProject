@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class KakaoPayAmountVO {
+public class PayAmountVO {
 	private int total;				//전체 결제 금액
 	private int tax_free;		//비과세 금액
 	private int vat;				//부가세 금액

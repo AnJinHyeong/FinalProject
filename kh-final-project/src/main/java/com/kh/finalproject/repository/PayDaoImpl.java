@@ -26,6 +26,14 @@ public class PayDaoImpl implements PayDao{
 	public void approve(int payNo) {
 		sqlSession.update("pay.approve", payNo);
 	}
+
+	@Override
+	public void plus(int payNo) {
+		sqlSession.update("pay.plus", payNo);
+		
+	}
+	
+	
 //	
 //	@Override
 //	public List<PaymentDto> list(int paymentBuyer) {
