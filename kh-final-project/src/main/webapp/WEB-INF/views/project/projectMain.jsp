@@ -34,6 +34,17 @@
 			$("#modalBackground").toggle();
 			$('body').toggleClass('scrollNone');
 		});
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath}/project/data/progress",
+			type : 'post',
+			data : {
+				"projectNo" : "${projectDto.projectNo}"
+			},
+			success : function(resp) {
+				$("#progress").text(resp);
+			}
+		});
 
 	});
 </script>
@@ -44,7 +55,7 @@
 		<div class="project-main-div1">
 			<button class="project-btn btn1 project-btn-hover">미리보기</button>
 			<div style="text-decoration: none; height: 40px;">
-				<button class="project-btn btn2">기획중·43% 완료</button>
+				<button class="project-btn btn2">기획중·<span id="progress"></span>% 완료</button>
 			</div>
 
 		</div>
