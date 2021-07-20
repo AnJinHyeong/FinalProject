@@ -118,7 +118,7 @@ private PayDao payDao;
 		log.debug("approveVO = {}", approveVO);
 		
 		//[7] DB의 결제정보를 승인으로 변경
-		payDao.approve(Integer.parseInt(payApprovePrepareVO.getPartner_order_id()));
+//		payDao.approve(Integer.parseInt(payApprovePrepareVO.getPartner_order_id()));
 		
 		return approveVO;
 	}

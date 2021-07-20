@@ -21,11 +21,16 @@ public class PayDaoImpl implements PayDao{
 	public void ready(PayDto payDto) {
 		sqlSession.insert("pay.ready", payDto);
 	}
-	
+
 	@Override
-	public void approve(int payNo) {
-		sqlSession.update("pay.approve", payNo);
+	public boolean approve(PayDto payDto) {
+		int count = sqlSession.selectOne("pay.get",payDto);
+		return count > 0;
 	}
+	
+	
+	
+	
 //	
 //	@Override
 //	public List<PaymentDto> list(int paymentBuyer) {
@@ -33,8 +38,8 @@ public class PayDaoImpl implements PayDao{
 //	}
 //	
 //	@Override
-//	public PaymentDto get(int paymentNo) {
-//		return sqlSession.selectOne("payment.get", paymentNo);
+//	public PayDto get(int payNo) {
+//		return sqlSession.selectOne("pay.get", payNo);
 //	}
 //	
 //	@Override

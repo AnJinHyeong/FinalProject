@@ -33,5 +33,9 @@ public interface ProjectDao {
 	boolean projectMemberUpdate(ProjectDto projectDto);
 	// 프로젝트 Story 업데이트
 	boolean projectStoryUpdate(ProjectDto projectDto);
+	// 프로젝트 state 업데이트 1 -> 2
+	boolean projectApprovalUpdate2(int projectNo);
+	// 프로젝트 state 업데이트 2 -> 1
+	boolean projectApprovalUpdate1(int projectNo);
 	
 }

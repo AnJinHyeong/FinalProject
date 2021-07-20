@@ -91,9 +91,11 @@
 					<div id="itemList" class="project-itemList scrollThin">
 						<c:forEach var="itemDto" items="${itemList}">
 							<div class="project-insert-item-list float-container">
-								<span id="itemName" class="left w280 fBold">${itemDto.itemName}</span> <span id="itemNo" class="yb hidden">${itemDto.itemNo}</span> <span
-									class="yb modalX right"
-								> <i class="fas fa-times"></i></span>
+								<span id="itemName" class="left w280 fBold">${itemDto.itemName}</span> 
+								<span id="itemNo" class="yb hidden">${itemDto.itemNo}</span> 
+								<c:if test="${projectDto.projectState != '2'}">
+									<span class="yb modalX right"> <i class="fas fa-times"></i></span>
+								</c:if>
 							</div>
 						</c:forEach>
 					</div>
@@ -125,9 +127,13 @@
 									(<span id="textSizeSpan">0</span><span>/50</span>)
 								</p>
 							</div>
-							<div class="project-insert-div3">
-								<input class="project-btn btn3 project-btn-hover" style="margin-right: 0px" type="submit" value="등록">
-							</div>
+							
+							<c:if test="${projectDto.projectState != '2'}">
+								<div class="project-insert-div3">
+									<input class="project-btn btn3 project-btn-hover" style="margin-right: 0px" type="submit" value="등록">
+								</div>
+							</c:if>
+							
 						</div>
 					</form>
 				</div>

@@ -8,9 +8,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="insert" parameterType="ProjectCategoryVo">
 		insert into project
-			(project_no, project_state, project_regist_date, project_summary, member_no, category_no)
+			(project_no, project_regist_date, project_summary, member_no, category_no, project_state)
 		values
-			(project_seq.nextval, 'X', sysdate, #{projectSummary}, #{memberNo}, #{categoryNo})
+			(project_seq.nextval, sysdate, #{projectSummary}, #{memberNo}, #{categoryNo}, '1')
 	</select>
 	
 	<select id="list" parameterType="int" resultType="ProjectDto">
@@ -23,9 +23,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="insertBySequence" parameterType="ProjectCategoryVo">
 		insert into project
-			(project_no, project_state, project_regist_date, project_summary, member_no, category_no)
+			(project_no, project_regist_date, project_summary, member_no, category_no, project_state)
 		values
-			(#{projectNo}, 'X', sysdate, #{projectSummary}, #{memberNo}, #{categoryNo})
+			(#{projectNo}, sysdate, #{projectSummary}, #{memberNo}, #{categoryNo}, '1')
 	</select>
 	
 	<select id="sequence" resultType="int">
@@ -72,6 +72,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 프로젝트 스토리 업데이트 -->
 	<update id="projectStoryUpdate" parameterType="projectDto">
 		update project set project_content = #{projectContent} where project_no = #{projectNo}
+	</update>
+	
+	<update id="projectApprovalUpdate2" parameterType="int">
+		update project set project_state = '2' where project_no = #{projectNo}
+	</update>
+	
+	<update id="projectApprovalUpdate1" parameterType="int">
+		update project set project_state = '1' where project_no = #{projectNo}
 	</update>
 	
 </mapper>

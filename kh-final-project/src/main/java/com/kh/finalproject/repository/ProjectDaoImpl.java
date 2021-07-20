@@ -78,5 +78,18 @@ public class ProjectDaoImpl implements ProjectDao{
 	public boolean projectStoryUpdate(ProjectDto projectDto) {
 		return sqlSession.update("project.projectStoryUpdate",projectDto) > 0;
 	}
+
+	@Override
+	public boolean projectApprovalUpdate2(int projectNo) {
+		int count = sqlSession.update("project.projectApprovalUpdate2",projectNo);
+		return count > 0;
+	}
+	
+	@Override
+	public boolean projectApprovalUpdate1(int projectNo) {
+		int count = sqlSession.update("project.projectApprovalUpdate1",projectNo);
+		return count > 0;
+	}
+	
 	
 }
