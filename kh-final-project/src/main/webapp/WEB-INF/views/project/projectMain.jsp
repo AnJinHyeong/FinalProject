@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
@@ -25,10 +24,8 @@
 		$("#total-project").text(20*(pd+pf+pgi+ps+pm));
 	}
 	
-	$(function(){
-		
-		
-		
+
+	$(function() {
 		
 		$.ajax({
 			url :"${pageContext.request.contextPath}/project/data/${projectDto.projectNo}/getProject",
@@ -171,9 +168,12 @@
 			
 		});
 		
+		$("#examineModalBtn, #modalBackground, #examineXBtn, #examineCheckBtn").on("click", function() {
+			$("#examineModal").toggle();
+			$("#modalBackground").toggle();
+			$('body').toggleClass('scrollNone');
+		});
 	});
-	
-	
 </script>
 
 <section class="main-row topLine">
@@ -235,7 +235,7 @@
 		
 		<div class="section-project-row" style="padding: 25px 0 200px 0;" >
 			<div style="width: 100%; text-align: right;">
-				<button class="project-btn btn1 project-btn-hover" style="margin: 0;">심사기준</button>
+				<button id="examineModalBtn" class="project-btn btn1 project-btn-hover" style="margin: 0;">심사기준</button>
 			</div>
 			
 			
@@ -291,6 +291,56 @@
 		
 		
 	</div>
+
+	<div id="examineModal" class="ybModal h800 w1000 p30 bora10">
+
+		<div class="float-container h5p">
+			<span id="examineXBtn" class="ybModalX right"><i class="fas fa-times"></i></span>
+		</div>
+
+		<div class="taCenter h15p">
+			<pre class="fBold fs24 mb10">Fun_ding의 프로젝트 심사기준을 확인해주세요.</pre>
+			<pre>심사 기준을 준수하면 보다 빠른 프로젝트 승인이 가능합니다.</pre>
+		</div>
+
+		<div class="float-container h70p pb50">
+			<div class="left w40p bac250 h100p bora10 ml60 boc240 bosSolid bow1 taCenter p40">
+				<div class="fGreen fs24 mb10">
+					<i class="fas fa-check-circle"></i>
+				</div>
+				<pre class="fs18 mb40">승인 가능 프로젝트</pre>
+				<div class="taLeft ybUl">
+					<ul class="small">
+						<li>기존에 없던 새로운 시도</li>
+						<li>기존에 없던 작품, 제품, 디지털 콘텐츠, 활동, 행사</li>
+						<li>창작자의 이전 제품 및 콘텐츠는 새로운 선물에 부수적으로 제공 가능</li>
+					</ul>
+				</div>
+			</div>
+			<div class="right w40p bac250 h100p bora10 mr60 boc240 bosSolid bow1 taCenter p40">
+				<div class="fRed fs24 mb10">
+					<i class="fas fa-times-circle"></i>
+				</div>
+				<pre class="fs18 mb40">반려 대상 프로젝트</pre>
+				<div class="taLeft ybUl">
+					<ul class="small">
+						<li>기존 상품· 콘텐츠의 판매 및 홍보</li>
+						<li>제3자에 후원금 또는 물품 기부</li>
+						<li>시중에 판매 및 유통되었던 제품·콘텐츠 제공</li>
+						<li>현금, 주식, 지분, 복권, 사이버머니, 상품권 등 수익성 상품 제공</li>
+						<li>추첨을 통해서만 제공되는 선물</li>
+						<li>성인용 제품·콘텐츠, 무기, 군용장비, 라이터 등 위험 품목</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="taCenter h10p">
+			<button id="examineCheckBtn" class="project-btn btn1 project-btn-hover w50p">확인</button>
+		</div>
+	</div>
+
+	<div id="modalBackground" class="ybModalBackground"></div>
 
 </section>
 
