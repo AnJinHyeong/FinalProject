@@ -94,7 +94,16 @@
 			location.href="${root}/project/${projectDto.projectNo}/projectMain";
 		});
 		
-		
+		$.ajax({
+			url : "${pageContext.request.contextPath}/project/data/progress",
+			type : 'post',
+			data : {
+				"projectNo" : "${projectDto.projectNo}"
+			},
+			success : function(resp) {
+				$("#progress").text(resp);
+			}
+		});
     
 	});
 </script>
@@ -127,7 +136,7 @@ style="background-image: url('${root}/image/insertBackground.jpg');">
 							</c:otherwise>
 						</c:choose>
 						<div class="btn-progress w140 h100p">
-							<div class="btn-text">기획중 - 8% 완료</div>
+							<div class="btn-text">기획중 - <span id="progress"></span>% 완료</div>
 						</div>
 					</button>
 				</div>

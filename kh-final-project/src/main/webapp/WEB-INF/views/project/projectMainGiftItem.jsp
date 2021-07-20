@@ -34,12 +34,13 @@
 			$("#modal-target").text($(this).siblings("#itemName").html());
 			$("#modal").toggle();
 			$("#modalBackground").toggle();
-			$('body').toggleClass('scrollOff');
+			$('body').toggleClass('scrollNone');
 		});
 
 		$("#modalBackground").on("click", function() {
 			$("#modal").hide();
 			$("#modalBackground").hide();
+			$('body').toggleClass('scrollNone');
 		});
 
 		$("#projectMainGiftItemInsertForm").on("submit", function(e) {
@@ -141,7 +142,7 @@
 				</div>
 
 				<div class="modal-body">
-					<pre id="modal-target"></pre>
+					<pre id="modal-target" style="word-break: break-all;"></pre>
 					<pre>이 아이템을 삭제하시겠습니까?</pre>
 					<pre>삭제하면 해당 아이템이 포함된 0개의 선물에서도 삭제됩니다.</pre>
 				</div>

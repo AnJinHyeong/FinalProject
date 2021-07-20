@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.kh.finalproject.entity.ItemDto;
 import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.repository.ItemDao;
+import com.kh.finalproject.repository.ProjectDao;
+import com.kh.finalproject.vo.ProjectProgressVo;
 
 @RequestMapping("/project/data")
 @RestController
@@ -41,6 +44,14 @@ public class ProjectDataController {
 			selectedItemList.add(itemDto);
 		}
 		return selectedItemList;
+	}
+	
+	@Autowired
+	private ProjectDao projectDao;
+	
+	@PostMapping("/progress")
+	public int progress(@RequestParam int projectNo){
+		return projectDao.calculateProjectProgress(projectNo);
 	}
 
 }
