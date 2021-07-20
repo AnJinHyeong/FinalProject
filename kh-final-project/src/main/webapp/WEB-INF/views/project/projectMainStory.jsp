@@ -73,9 +73,9 @@
 
 <section class="main-row topLine" style="background-color: #f8f8f8;">
 
-	<div class="project-back-color" style="height: 1600px;">
+	<div class="project-back-color" style="height: 900px;">
 
-		<div class="section-row" style="padding-top: 10px;">
+		<div class="section-row" style="padding-top: 10px; min-height: 900px;">
 
 			<div class="project-insert-div h130">
 				<div class="w100p">
@@ -95,10 +95,12 @@
 						
 						<textarea name="projectContent" class="w100p h200 dpNone"></textarea>
 
-						<div class="project-insert-div3">
-							<input id="inputStory" class="project-btn btn3 project-btn-hover mr0" type="submit" value="저장">
-						</div>
-
+						<c:if test="${projectDto.projectState != '2'}">
+							<div class="project-insert-div3">
+								<input id="inputStory" class="project-btn btn3 project-btn-hover mr0" type="submit" value="저장">
+							</div>
+						</c:if>
+						
 					</form>
 
 				</div>

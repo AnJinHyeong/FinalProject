@@ -118,7 +118,6 @@ private PayDao payDao;
 				template.postForObject(uri, entity, PayApproveVO.class);
 		
 		//[7] DB의 결제정보를 승인으로 변경
-
 		payDao.approve(Integer.parseInt(payApprovePrepareVO.getPartner_user_id()));
 		
 		return approveVO;

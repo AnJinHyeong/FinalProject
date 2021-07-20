@@ -158,9 +158,6 @@
 		});
 		
 		
-		console.log($("input[name=projectTargetAmount]").val());
-		console.log($("input[name=projectStartDate]").val());
-		
 		
 		if($("input[name=projectTargetAmount]").val()){
 			var pta = 1;
@@ -295,10 +292,12 @@
 					</div>
 				</div>
 				
-				<div class="project-insert-div3">
-					<input class="project-btn btn3 project-btn-hover" type="submit" value="저장">
-				</div>
-			
+				<c:if test="${projectDto.projectState != '2'}">
+					<div class="project-insert-div3">
+						<input class="project-btn btn3 project-btn-hover" type="submit" value="저장">
+					</div>
+				</c:if>
+				
 			</form>
 			
 		</div>
