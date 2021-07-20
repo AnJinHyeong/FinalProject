@@ -37,7 +37,7 @@ public class PayController {
 		//결제 준비 요청을 보낸다
 		int memberNo = (int)session.getAttribute("memberNo");//회원번호 추출
 		prepareVO.setPartner_user_id(String.valueOf(memberNo));
-		
+
 		//DB실행
 		PayReadyVO readyVO = payService.ready(prepareVO);
 
@@ -54,6 +54,7 @@ public class PayController {
 	public String success(
 			HttpSession session,
 			@ModelAttribute PayApprovePrepareVO prepareVO) throws URISyntaxException {
+		
 		//세션에서 데이터를 추출 후 삭제
 		prepareVO.setPartner_order_id((String)session.getAttribute("partner_order_id"));
 		prepareVO.setPartner_user_id((String)session.getAttribute("partner_user_id"));
@@ -62,25 +63,22 @@ public class PayController {
 		session.removeAttribute("partner_order_id");
 		session.removeAttribute("partner_user_id");
 		session.removeAttribute("tid");
-		
+
+
 		PayApproveVO approveVO = payService.approve(prepareVO);
 		
 		//결제 승인이 완료된 시점 : 승인 정보(PayApproveVO)를 DB에 저장하는 등의 작업을 수행
 		
 		//결제 정보 조회 페이지 또는 결제 성공 알림페이지로 리다이렉트 한다
-		return "redirect: /pay/success";
+		return "redirect:result_success";
 	}
 	
-//	@GetMapping("/result_success")
-//	public String resultSuccess(
-//			@RequestParam String tid,
-//			Model model) throws URISyntaxException {
-//		PaySearchVO searchVO = payService.search(tid);
-//		model.addAttribute("searchVO", searchVO);
-//		return "pay/resultSuccess";//"/WEB-INF/views/pay/resultSuccess.jsp"
-//	}
-	
-////	@GetMapping("/cancel")
-////	@GetMapping("/fail")
+	@GetMapping("/result_success")
+	public String resultSuccess() {
+		return "pay/resultSuccess";//"/WEB-INF/views/pay/resultSuccess.jsp"
+	}
+//	
+//	@GetMapping("/cancel")
+//	@GetMapping("/fail")
 //	
 }

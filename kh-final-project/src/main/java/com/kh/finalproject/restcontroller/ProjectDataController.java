@@ -21,6 +21,7 @@ import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.repository.GiftDao;
 import com.kh.finalproject.repository.ItemDao;
 import com.kh.finalproject.repository.ProjectDao;
+import com.kh.finalproject.vo.ProjectProgressVo;
 
 @RequestMapping("/project/data")
 @RestController
@@ -81,5 +82,9 @@ public class ProjectDataController {
 		return getGiftList;
 	}
 	
+	@PostMapping("/progress")
+	public int progress(@RequestParam int projectNo){
+		return projectDao.calculateProjectProgress(projectNo);
+	}
 
 }

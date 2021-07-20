@@ -19,7 +19,7 @@ project_no NUMBER(19) PRIMARY KEY,
 project_title varchar2(300),
 project_content clob default empty_clob(),
 project_target_amount NUMBER(19),
-project_percente NUMBER(5),
+project_percent NUMBER(5),
 project_state char(1) CHECK (project_state IN ('1','2','3','X')) NOT NULL,
 project_regist_date DATE DEFAULT sysdate NOT NULL,
 project_start_date DATE,
@@ -85,6 +85,7 @@ pay_tid VARCHAR2(30) NOT NULL,
 pay_price NUMBER(19) NOT NULL,
 pay_status VARCHAR2(20) CHECK(pay_status IN ('결제 요청','결제 완료')) NOT NULL,
 pay_date DATE,
+pay_all_price NUMBER(19) DEFALUT 0,
 member_no REFERENCES member(member_no) ON DELETE SET NULL
 );
 DROP SEQUENCE pay_seq;

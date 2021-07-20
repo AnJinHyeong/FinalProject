@@ -22,13 +22,24 @@ public class PayDaoImpl implements PayDao{
 		sqlSession.insert("pay.ready", payDto);
 	}
 
+
+	@Override
+	public void plus(int payNo) {
+		sqlSession.update("pay.plus", payNo);
+		
+	}
+
+	@Override
+	public void approve(int payNo) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
 	public boolean approve(PayDto payDto) {
-		int count = sqlSession.selectOne("pay.get",payDto);
-		return count > 0;
+		// TODO Auto-generated method stub
+		return false;
 	}
-	
-	
 	
 	
 //	

@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class KakaoPayCardInfoVO {
+public class PayCardInfoVO {
 	private String purchase_corp;								//매입 카드사 한글명
 	private String purchase_corp_code;						//매입 카드사 코드
 	private String issuer_corp;										//카드 발급사 한글명

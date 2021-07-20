@@ -239,7 +239,7 @@
 					</dl>
 					<div class="projcet-insert-div2">
 						<div style="width: 630px;">
-							<ul style="margin: 0; padding: 0; list-style-position: inherit;">
+							<ul style="margin: 0; padding: 0; list-style-position: outside;">
 								<li class="project-funding-li">
 									<div style="width: 630px;">
 										<p class="project-insert-p">시작일</p>
