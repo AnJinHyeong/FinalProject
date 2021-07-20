@@ -18,8 +18,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{payTid},
 			#{payPrice},
 			'결제 요청',
-			sysdate,
-			#{memberNo}
+			 systimestamp,
+			#{memberNo},
+			0
 		)
 	</insert>
 	
@@ -31,10 +32,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 승인 데이터 등록 -->
 	<update id="approve" parameterType="int">
 		update pay
-		set pay_status='승인'
+		set pay_status='결제 완료'
 		where pay_no = #{payNo}
 	</update>
 	
+<!-- 기존포인트와 입력한 포인트 더하기 -->
+	<update id = "plus" parameterType="int">
+UPDATE MEMBER 
+SET member_have_point = 
+member_have_point + #{pay_price};
+	</update>
+	
+<!-- 	<update id = "plusResult">
+	UPDATE member 
+	SET	member_have_point =(
+	SELECT pay_all_price
+	FROM pay
+	WHERE pay.pay_no = pay.pay_no
+	)
+	</update> -->
+
 	<!-- 취소 데이터 등록 -->
 	<update id="cancel" parameterType="int">
 		update pay
@@ -47,12 +64,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		1. 회원 1명의 전체 결제내역 조회
 		2. 결제내역 1개에 대한 단일조회
 	-->
-	<select id="list" resultType="PaymentDto" parameterType="int">
+<!-- 	<select id="list" resultType="PaymentDto" parameterType="int">
 		select * from payment 
 		where payment_buyer = #{paymentBuyer}
 		order by payment_no desc
-	</select>
-	
+	</select> -->
 
-	
 </mapper>

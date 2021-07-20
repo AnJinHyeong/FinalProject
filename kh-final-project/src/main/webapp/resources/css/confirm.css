@@ -1,0 +1,47 @@
+#payTitle{
+		text-align: center;
+}
+
+#payContent{
+		text-align:left;
+}
+
+#payForm{
+	text-align: center;
+		padding-top:150px;
+}
+
+#form{
+/* 	position:absolute;
+	left: 50%; transform: translateX(-50%);
+	top:500px; */
+	background: black;
+	color: white;
+	padding : 10px;
+	border: none;
+}
+
+#joinBorder{			
+				width : 500px;
+			height: 500px;
+			border: 2px solid #FFC58C;
+			padding-top: 15px;
+			padding-left : 30px;
+			padding-right : 30px;
+			margin-top:20px;
+			margin-bottom:20px;
+}
+
+#10underName{
+	padding-bottom: 200px;
+}
+
+#10upName{
+		padding-bottom: 200px;
+}
+#10underMoney{
+	left: 300px;
+}
+#10upMoney{
+	left: 300px;
+}
