@@ -809,3 +809,76 @@
 	color: rgb(248, 100, 83); 
 	font-size: 12px;
 }
+
+.project-approval-font-span{
+	list-style: none;
+    color: rgb(109, 109, 109);
+    padding-left: 10px;
+    margin-bottom: 10px;
+    font-weight: 400;
+    font-size: 13px !important;
+    line-height: 20px !important;
+}
+
+.project-approval-i{
+	color: #F86453; 
+	margin-top: 10px; 
+	font-size: 14px;
+}
+
+.project-approval-btn{
+	height: 40px; width: 300px; 
+	margin-top: 100px; 
+	border: 1px solid rgb(240, 240, 240); 
+	background-color: white;
+    border-radius: 8px;
+}
+
+.project-approval-btn:hover {
+	background-color: rgb(248, 100, 83);
+	transition: background-color 0.2s ease-in-out;
+	color: white;
+	cursor: pointer;
+}
+
+.project-approval-btn2{
+	height: 40px; width: 300px; 
+	margin-top: 100px; 
+	border: 1px solid rgb(240, 240, 240); 
+	background-color: rgb(248, 100, 83);
+	color: white;
+    border-radius: 8px;
+}
+
+.project-approval-btn2:hover{
+	background-color: white;
+	transition: background-color 0.2s ease-in-out;
+	color: black;
+	cursor: pointer;
+}
+
+
+
+.project-approval-div{
+	display: flex; 
+	justify-content: center; 
+	background: #f9f9f9; 
+	margin: 100px auto; 
+	width: 900px; 
+	border: 1px solid #dCdCdC; 
+	padding: 30px;
+}
+
+.project-approval-div-d{
+	width: 400px; 
+	height: 300px;
+}
+
+.project-approval-top-p{
+	font-weight: 700; 
+	font-size: 20px !important; 
+	line-height: 36px !important; 
+	margin-top: 10px;
+}
+
+

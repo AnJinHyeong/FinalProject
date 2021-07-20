@@ -80,6 +80,18 @@ public class ProjectDaoImpl implements ProjectDao{
 	}
 
 	@Override
+	public boolean projectApprovalUpdate2(int projectNo) {
+		int count = sqlSession.update("project.projectApprovalUpdate2",projectNo);
+		return count > 0;
+	}
+	
+	@Override
+	public boolean projectApprovalUpdate1(int projectNo) {
+		int count = sqlSession.update("project.projectApprovalUpdate1",projectNo);
+		return count > 0;
+	}
+	
+	@Override
 	public int calculateProjectProgress(int projectNo) {
 		ProjectProgressVo target = sqlSession.selectOne("project.getProjectProgress", projectNo);
 		boolean default1 = target.getCategoryNo() != null;
