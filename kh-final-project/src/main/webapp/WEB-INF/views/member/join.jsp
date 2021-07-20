@@ -54,7 +54,7 @@
 				<input type="hidden" name="email" value="${param.email}">
 				<label for = "memberEmail">이메일</label>
 				<input type = "text" name="memberEmail" id = "memeberEmail" required class = "form-input form-input-underline2"
-							value = "${param.email}">
+							value = "${param.email}" readonly>
 			</div>
 			
 			<div class = "row text-left">

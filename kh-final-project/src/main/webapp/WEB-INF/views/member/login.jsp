@@ -118,9 +118,9 @@
 				</div>
 				<hr>
 				<div class="text-center subDiv">
-					<div><a href="#">아이디를 잊으셨나요?</a></div>
+					<div><a href="${pageContext.request.contextPath}/member/myId">아이디를 잊으셨나요?</a></div>
 					
-					<div><a href="#">비밀번호를 잊으셨나요?</a></div>
+					<div><a href="${pageContext.request.contextPath}/member/myPw">비밀번호를 잊으셨나요?</a></div>
 				</div>
 			
 			</div>

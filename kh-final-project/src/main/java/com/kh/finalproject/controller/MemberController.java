@@ -49,12 +49,11 @@ public class MemberController {
 	public String myPw() {
 		return "member/myPw";
 	}
-	@RequestMapping("myId")
+	@RequestMapping("/myId")
 	public String myId() {
 		return "member/myId";
 	}
-	
-  
+
 	@PostMapping(value = "/memberInsert")
 	public String memberInsert(@ModelAttribute EmailAuthDto emailAuthDto, RedirectAttributes attr,@ModelAttribute MemberDto memberDto) {
 	boolean result = emailService.checkCertification(emailAuthDto);
