@@ -61,6 +61,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{imageNo}, #{imageUploadName}, #{imageSaveName}, #{imageContentType}, #{imageSize}, #{projectNo})
 	</insert>
 	
+	<!-- 프로젝트 스토리 이미지 갯수 -->
+	<select id="getCountProjectStoryImage" resultType="int" parameterType="int">
+		select count(*) from image_file where project_no = #{projectNo} and project_state is null and member_no is null
+	</select>
+	
+	<!-- 스토리 이미지 리스트 제외하고 전부 제거 -->
+	<delete id="deleteProjectStoryNotCurrentImage" parameterType="map">
+		delete image_file 
+			where 
+				project_no = #{projectNo}
+			and 
+				substr(image_save_name, instr(image_save_name, '(') + 1, instr(image_save_name, ')') - instr(image_save_name, '(') - 1) 
+					not in
+						<foreach collection="fileNoList" item="fileNo" separator="," open="(" close=")">
+							#{fileNo}
+						</foreach>
+<!-- 					(3, 4, 5) -->
+			and 
+				project_state is null 
+			and 
+				member_no is null
+	</delete>
+	
+	<!-- 스토리 이미지 전부 제거 -->
+	<delete id="deleteProjectStoryAllImage">
+		delete image_file where project_no = #{projectNo} and project_state is null and member_no is null
+	</delete>
+	
 </mapper>
 
 

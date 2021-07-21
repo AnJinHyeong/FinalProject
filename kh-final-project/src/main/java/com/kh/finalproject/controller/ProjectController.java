@@ -230,12 +230,14 @@ public class ProjectController {
 		projectDao.projectMemberUpdate(projectDto);
 		return "redirect:projectMainMember";
 	}
+	
 	@GetMapping("/{projectNo}/projectMainStory")
 	public String projectMainStory(@PathVariable int projectNo, HttpSession session, Model model) {
 		int memberNo = (int) session.getAttribute("memberNo");
 		ProjectDto projectDto = ProjectDto.builder().projectNo(projectNo).memberNo(memberNo).build();
 		ProjectDto find = projectDao.get(projectDto);
 		model.addAttribute("projectDto", projectDao.get(find));
+		model.addAttribute("getCountProjectStoryImage", imageDao.getCountProjectStoryImage(projectNo));
 		return "project/projectMainStory";
 	}
 
