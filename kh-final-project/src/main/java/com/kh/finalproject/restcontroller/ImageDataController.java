@@ -1,8 +1,8 @@
 package com.kh.finalproject.restcontroller;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -132,7 +132,7 @@ public class ImageDataController {
 	}
 	
 	@PostMapping("/project/upload/story/{projectNo}")
-	public ImageDto uploadStory(@PathVariable int projectNo, @RequestParam MultipartFile f) throws IllegalStateException, IOException {
+	public ImageDto uploadStory(@PathVariable int projectNo, @RequestParam MultipartFile f, @RequestParam int fileNo) throws IllegalStateException, IOException {
 		ImageDto imageDto = ImageDto.builder()
 				.imageUploadName(f.getOriginalFilename())
 				.imageContentType(f.getContentType())
@@ -140,7 +140,7 @@ public class ImageDataController {
 				.projectNo(projectNo)
 				.build();
 		
-		ImageDto result = imageDao.insertProjectMainStory(imageDto);
+		ImageDto result = imageDao.insertProjectMainStory(imageDto, projectNo, fileNo);
 		
 		imageDao.save(imageDto.getImageSaveName(), f);
 		return result;
@@ -161,5 +161,14 @@ public class ImageDataController {
 								.body(resource);
 	}
 	
+	@GetMapping("/project/deleteFileList/story/{projectNo}")
+	public void deleteProjectStoryNotCurrentImage(@PathVariable int projectNo, @RequestParam(value="fileNoList[]") List<Integer> fileNoList) {
+		imageDao.deleteProjectStoryNotCurrentImage(projectNo, fileNoList);
+	}
+	
+	@GetMapping("/project/deleteFileAll/story/{projectNo}")
+	public void deleteProjectStoryAllImage(@PathVariable int projectNo) {
+		imageDao.deleteProjectStoryAllImage(projectNo);
+	}
 	
 }

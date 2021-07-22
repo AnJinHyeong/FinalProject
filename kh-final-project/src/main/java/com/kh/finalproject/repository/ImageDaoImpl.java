@@ -2,6 +2,9 @@ package com.kh.finalproject.repository;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -84,10 +87,10 @@ public class ImageDaoImpl implements ImageDao{
 	}
 	
 	@Override
-	public ImageDto insertProjectMainStory(ImageDto imageDto) {
-		int profileNo = sqlSession.selectOne("imageFile.sequence");
-		imageDto.setImageNo(profileNo);
-		imageDto.setImageSaveName(String.valueOf(profileNo));
+	public ImageDto insertProjectMainStory(ImageDto imageDto, int projectNo, int i) {
+		int imageNo = sqlSession.selectOne("imageFile.sequence");
+		imageDto.setImageNo(imageNo);
+		imageDto.setImageSaveName(String.valueOf(projectNo) + "(" + i + ")");
 
 		sqlSession.insert("imageFile.insertProjectMainStory",imageDto);
 		
@@ -113,6 +116,25 @@ public class ImageDaoImpl implements ImageDao{
 	
 	public ImageDto getProjectMainStory(int imageNo) {
 		return sqlSession.selectOne("imageFile.getImage", imageNo);
+	}
+
+	@Override
+	public int getCountProjectStoryImage(int projectNo) {
+		return sqlSession.selectOne("imageFile.getCountProjectStoryImage", projectNo);
+	}
+
+	@Override
+	public void deleteProjectStoryNotCurrentImage(int projectNo, List<Integer> fileNoList) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("projectNo", projectNo);
+		map.put("fileNoList", fileNoList);
+		sqlSession.delete("imageFile.deleteProjectStoryNotCurrentImage", map);
+		
+	}
+
+	@Override
+	public void deleteProjectStoryAllImage(int projectNo) {
+		sqlSession.delete("imageFile.deleteProjectStoryAllImage", projectNo);
 	}
 	
 }

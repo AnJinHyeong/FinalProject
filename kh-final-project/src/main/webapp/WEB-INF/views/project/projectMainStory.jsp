@@ -11,8 +11,44 @@
 
 <script>
 	$(function() {
-		var i = 0;
-		
+		// 페이지 이동시 경고
+		var checkUnload = true;
+
+		var ImagesStarted = [];
+		$("input[type=file]").each(function(index, item) {
+			ImagesStarted.push($(this).attr("name"));
+		});
+
+		$(window).on("beforeunload", function() {
+			if (checkUnload) {
+
+				var beforeUnloadTargetUrl;
+				var beforeUnloadTargetData;
+				if (ImagesStarted.length == 0) {
+					beforeUnloadTargetUrl = "${pageContext.request.contextPath}/image/project/deleteFileAll/story/${projectNo}"
+					beforeUnloadTargetData = {};
+				} else {
+					beforeUnloadTargetUrl = "${pageContext.request.contextPath}/image/project/deleteFileList/story/${projectNo}"
+					beforeUnloadTargetData = {
+						fileNoList : ImagesStarted
+					};
+				}
+				$.ajax({
+					url : beforeUnloadTargetUrl,
+					type : "get",
+					data : beforeUnloadTargetData,
+					success : function() {
+					}
+				});
+
+				return "이 페이지를 벗어나면 작성된 내용은 저장되지 않습니다.";
+			} else {
+				return;
+			}
+		});
+
+		var i = Math.max.apply(null, ImagesStarted) + 1;
+
 		$("#addImageBtn").on("click", function() {
 			var template = $("#addFileTemplate").html();
 			template = template.replace("{{i}}", i);
@@ -28,6 +64,7 @@
 				if (files && filesLength) {
 					var fd = new FormData();
 					fd.append("f", files0);
+					fd.append("fileNo", i - 1);
 					var that = this;
 
 					$.ajax({
@@ -39,7 +76,7 @@
 						success : function(resp) {
 							var url = "${pageContext.request.contextPath}/image/project/download/story/" + resp.imageNo;
 							$(that).siblings("img").attr("src", url);
-							$(that).siblings("img").on("click", function(){
+							$(that).siblings("img").on("click", function() {
 								$(that).click();
 							});
 						},
@@ -51,14 +88,37 @@
 			});
 		});
 
-		$("#inputArea").blur("input", function() {
+		$("#inputStory").on("click", function() {
 			$("textarea[name=projectContent]").val($("#inputArea").html());
+			var ImagesBeforeSave = [];
+			$("input[type=file]").each(function(index, item) {
+				ImagesBeforeSave.push($(this).attr("name"));
+			});
+			var inputStoryTargetUrl;
+			var inputStoryTargetData;
+			if (ImagesBeforeSave.length == 0) {
+				inputStoryTargetUrl = "${pageContext.request.contextPath}/image/project/deleteFileAll/story/${projectNo}"
+				inputStoryTargetData = {};
+			} else {
+				inputStoryTargetUrl = "${pageContext.request.contextPath}/image/project/deleteFileList/story/${projectNo}"
+				inputStoryTargetData = {
+					fileNoList : ImagesBeforeSave
+				};
+			}
+			$.ajax({
+				url : inputStoryTargetUrl,
+				type : "get",
+				data : inputStoryTargetData,
+				success : function() {
+				}
+			});
+			checkUnload = false;
 		});
-		
-		if($("#inputArea").html().length > 15){
+
+		if ($("#inputArea").html().length > 15) {
 			$("#progress").text(100);
-		};
-		
+		}
+
 	});
 </script>
 
@@ -90,9 +150,8 @@
 					<form action="projectMainStory" method="post">
 
 						<div class="w100p h500 bacWhite scrollThin inputFocusNone" style="padding: 50px 150px;" id="inputArea" contenteditable="true">
-							${projectDto.projectContent}
-						</div>
-						
+							${projectDto.projectContent}</div>
+
 						<textarea name="projectContent" class="w100p h200 dpNone"></textarea>
 
 						<c:if test="${projectDto.projectState != '2'}">
@@ -100,7 +159,7 @@
 								<input id="inputStory" class="project-btn btn3 project-btn-hover mr0" type="submit" value="저장">
 							</div>
 						</c:if>
-						
+
 					</form>
 
 				</div>
