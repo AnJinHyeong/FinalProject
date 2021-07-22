@@ -1,4 +1,4 @@
-package com.kh.finalproject.entity;
+package com.kh.finalproject.vo;
 
 import java.sql.Date;
 
@@ -8,22 +8,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class ProjectDto {
+public class ProjectProgressVo {
 	private int projectNo;
 	private String projectTitle;
-	private String projectContent;
-	private int projectTargetAmount;
-	private int projectPercent;
-	private String projectState;
-	private Date projectRegistDate;
+	private Integer projectTargetAmount;
 	private Date projectStartDate;
 	private Date projectEndDate;
-	private String projectStopCaues;
 	private String projectSummary;
-	
-	private int memberNo;
-	private int categoryNo;
-	
+	private Integer categoryNo;
 	private String memberInfoNick;
 	private String memberInfoContent;
+	private Integer gCount;
+	private Integer iCount;
+	private Integer iFCount;
+	private String projectContent;
 }

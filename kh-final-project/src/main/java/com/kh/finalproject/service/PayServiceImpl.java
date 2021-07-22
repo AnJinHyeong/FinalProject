@@ -120,6 +120,7 @@ private PayDao payDao;
 		
 		//[7] DB의 결제정보를 승인으로 변경
 
+
 		payDao.approve(Integer.parseInt(payApprovePrepareVO.getPartner_order_id()));
 		
 		PayDto payDto = payDao.get(Integer.parseInt(payApprovePrepareVO.getPartner_order_id()));
@@ -130,6 +131,9 @@ private PayDao payDao;
 		
 		payDao.plus(find);
 		
+
+		payDao.approve(Integer.parseInt(payApprovePrepareVO.getPartner_user_id()));
+
 		
 		return approveVO;
 	}

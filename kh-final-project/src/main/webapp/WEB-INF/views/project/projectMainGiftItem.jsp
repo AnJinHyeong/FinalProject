@@ -34,12 +34,13 @@
 			$("#modal-target").text($(this).siblings("#itemName").html());
 			$("#modal").toggle();
 			$("#modalBackground").toggle();
-			$('body').toggleClass('scrollOff');
+			$('body').toggleClass('scrollNone');
 		});
 
 		$("#modalBackground").on("click", function() {
 			$("#modal").hide();
 			$("#modalBackground").hide();
+			$('body').toggleClass('scrollNone');
 		});
 
 		$("#projectMainGiftItemInsertForm").on("submit", function(e) {
@@ -91,9 +92,11 @@
 					<div id="itemList" class="project-itemList scrollThin">
 						<c:forEach var="itemDto" items="${itemList}">
 							<div class="project-insert-item-list float-container">
-								<span id="itemName" class="left w280 fBold">${itemDto.itemName}</span> <span id="itemNo" class="yb hidden">${itemDto.itemNo}</span> <span
-									class="yb modalX right"
-								> <i class="fas fa-times"></i></span>
+								<span id="itemName" class="left w280 fBold">${itemDto.itemName}</span> 
+								<span id="itemNo" class="yb hidden">${itemDto.itemNo}</span> 
+								<c:if test="${projectDto.projectState != '2'}">
+									<span class="yb modalX right"> <i class="fas fa-times"></i></span>
+								</c:if>
 							</div>
 						</c:forEach>
 					</div>
@@ -125,9 +128,13 @@
 									(<span id="textSizeSpan">0</span><span>/50</span>)
 								</p>
 							</div>
-							<div class="project-insert-div3">
-								<input class="project-btn btn3 project-btn-hover" style="margin-right: 0px" type="submit" value="등록">
-							</div>
+							
+							<c:if test="${projectDto.projectState != '2'}">
+								<div class="project-insert-div3">
+									<input class="project-btn btn3 project-btn-hover" style="margin-right: 0px" type="submit" value="등록">
+								</div>
+							</c:if>
+							
 						</div>
 					</form>
 				</div>
@@ -141,7 +148,7 @@
 				</div>
 
 				<div class="modal-body">
-					<pre id="modal-target"></pre>
+					<pre id="modal-target" style="word-break: break-all;"></pre>
 					<pre>이 아이템을 삭제하시겠습니까?</pre>
 					<pre>삭제하면 해당 아이템이 포함된 0개의 선물에서도 삭제됩니다.</pre>
 				</div>

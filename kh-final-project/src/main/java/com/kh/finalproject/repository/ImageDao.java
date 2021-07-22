@@ -1,6 +1,7 @@
 package com.kh.finalproject.repository;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,7 +37,19 @@ public interface ImageDao {
 	ImageDto getImage(int imageNo);
 	
 	// 프로젝트 스토리 이미지 등록
-	ImageDto insertProjectMainStory(ImageDto imageDto);
-	// 프로젝트 스토리 이미지 뿔러오기
-	ImageDto getProjectMainStory(int imageNo);
+	ImageDto insertProjectMainStory(ImageDto imageDto, int projectNo, int i);
+	// 프로젝트 스토리 이미지 이미지 번호로 뿔러오기
+	ImageDto getProjectMainStoryByImageNo(int imageNo);
+	// 프로젝트 스토리 이미지 저장 이름으로 뿔러오기
+	ImageDto getImageByImageSaveName(String imageSaveName);
+	// 프로젝트 스토리 이미지 갯수
+	int getCountProjectStoryImage(int projectNo);
+	// 프로젝트 스토리에서 List로 데이터 삭제
+	void deleteProjectStoryNotCurrentImage(int projectNo, List<Integer> fileNoList);
+	// 프로젝트 스토리 데이터 전부 삭제
+	void deleteProjectStoryAllImage(int projectNo);
+	// 이미지 저장 이름으로 이미지 삭제
+	void deleteImageByImageSaveName(int projectNo, String imageSaveName);
+	// 프로젝트 번호와 이미지 저장 이름으로 이미지 확인 (>1: 이미지 o / =0: 이미지 x)
+	int confirmProjectMainStoryByImageSaveName(int projectNo, String imageSaveName);
 }

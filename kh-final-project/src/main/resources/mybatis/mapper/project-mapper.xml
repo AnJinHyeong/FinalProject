@@ -8,9 +8,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="insert" parameterType="ProjectCategoryVo">
 		insert into project
-			(project_no, project_state, project_regist_date, project_summary, member_no, category_no)
+			(project_no, project_regist_date, project_summary, member_no, category_no, project_state)
 		values
-			(project_seq.nextval, 'X', sysdate, #{projectSummary}, #{memberNo}, #{categoryNo})
+			(project_seq.nextval, sysdate, #{projectSummary}, #{memberNo}, #{categoryNo}, '1')
 	</select>
 	
 	<select id="list" parameterType="int" resultType="ProjectDto">
@@ -21,11 +21,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from project where member_no = #{memberNo} and project_no = #{projectNo}
 	</select>
 	
+	<select id="getByProjectNo" parameterType="ProjectDto" resultType="ProjectDto">
+		select * from project where project_no = #{projectNo}
+	</select>
+	
 	<select id="insertBySequence" parameterType="ProjectCategoryVo">
 		insert into project
-			(project_no, project_state, project_regist_date, project_summary, member_no, category_no)
+			(project_no, project_regist_date, project_summary, member_no, category_no, project_state)
 		values
-			(#{projectNo}, 'X', sysdate, #{projectSummary}, #{memberNo}, #{categoryNo})
+			(#{projectNo}, sysdate, #{projectSummary}, #{memberNo}, #{categoryNo}, '1')
 	</select>
 	
 	<select id="sequence" resultType="int">
@@ -74,6 +78,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update project set project_content = #{projectContent} where project_no = #{projectNo}
 	</update>
 	
+	<update id="projectApprovalUpdate2" parameterType="int">
+		update project set project_state = '2' where project_no = #{projectNo}
+	</update>
+	
+	<update id="projectApprovalUpdate1" parameterType="int">
+		update project set project_state = '1' where project_no = #{projectNo}
+	</update>
+	
+	<!-- CLOB 가져오기 위한 설정 -->
+	<resultMap id="progress" type="ProjectProgressVo" >
+	    <result property="projectContent" column="project_content" jdbcType="CLOB" javaType="java.lang.String" />
+	</resultMap>
+
+	<!-- 항목 전체 가져오기 -->
+	<select id="getProjectProgress" parameterType="int" resultMap="progress">
+		select * from(
+		    select PROJECT.*, GIFT.gCount, ITEM.iCount, IMAGE.iFCount from project PROJECT
+		        left outer join
+		            (select P.project_no, count(G.gift_no) gCount from project P
+		            inner join gift G on P.project_no = G.project_no
+		            group by P.project_no)
+		            GIFT on PROJECT.project_no = GIFT.project_no
+		        left outer join
+		            (select P.project_no, count(I.item_no) iCount from project P
+		            inner join item I on P.project_no = I.project_no
+		            group by P.project_no) ITEM on PROJECT.project_no = ITEM.project_no
+		        left outer join
+		            (select P.project_no, count(IF.image_no) iFCount from project P
+		            inner join image_file IF on P.project_no = IF.project_no where IF.project_state = 'Y'
+		            group by P.project_no) IMAGE on PROJECT.project_no = IMAGE.project_no
+		    )
+		where project_no = #{projectNo}
+	</select>
+	
+	<delete id="projectDelete" parameterType="ProjectDto">
+		delete project where project_no = #{projectNo} and member_no = #{memberNo}
+	</delete>
 </mapper>
 
 

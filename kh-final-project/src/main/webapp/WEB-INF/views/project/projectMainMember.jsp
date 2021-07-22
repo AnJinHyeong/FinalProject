@@ -63,41 +63,12 @@
 						success : function(resp){
 							var url = "${pageContext.request.contextPath}/image/member/memberDownload/"+resp.imageNo;
 							$("#preview").attr("src",url);
-							
-							if($("input[name=memberInfoNick]").val() == null || $("input[name=memberInfoNick]").val() == ""){
-								var min = 0;
-							}
-							else{
-								var min = 1;
-							}
-							if($("textarea[name=memberInfoContent]").val() == null || $("textarea[name=memberInfoContent]").val() == ""){
-								var mic = 0;
-							}
-							else{
-								var mic = 1;
-							}
-							
-							$("#progress").text(33*(min+mic+1)+1);
-							
 						}
 						
 					});				
 				}
 				else{
-					if($("input[name=memberInfoNick]").val() == null || $("input[name=memberInfoNick]").val() == ""){
-						var min = 0;
-					}
-					else{
-						var min = 1;
-					}
-					if($("textarea[name=memberInfoContent]").val() == null || $("textarea[name=memberInfoContent]").val() == ""){
-						var mic = 0;
-					}
-					else{
-						var mic = 1;
-					}
-					
-					$("#progress").text(33*(min+mic)+1);
+					$("#preview").attr("src","${pageContext.request.contextPath}/image/memberImageNull.png");
 				}
 			}
 		
@@ -235,24 +206,11 @@
 		});
 		
 		
-		
-// 		console.log($("input[name=memberInfoNick]").val() == "");
-// 		console.log(${count});
-// 		console.log($("textarea[name=memberInfoContent]").val());
-		console.log($("#preview").src);
-		
-		
 		if($("input[name=memberInfoNick]").val() == null || $("input[name=memberInfoNick]").val() == ""){
 			var min = 0;
 		}
 		else{
 			var min = 1;
-		}
-		if(${count} != 0){
-			var img = 1;
-		}
-		else{
-			var img = 0;
 		}
 		if($("textarea[name=memberInfoContent]").val() == null || $("textarea[name=memberInfoContent]").val() == ""){
 			var mic = 0;
@@ -261,7 +219,9 @@
 			var mic = 1;
 		}
 		
-		$("#progress").text(33*(min+img+mic)+1);
+		$("#progress").text(33*(min+mic)+34);
+		
+		
 		 
 		 
 	});
@@ -365,11 +325,12 @@
 				</div>
 				
 				
+				<c:if test="${projectDto.projectState != '2'}">
+					<div class="project-insert-div3">
+						<input class="project-btn btn3 project-btn-hover" type="submit" value="저장">
+					</div>
+				</c:if>
 				
-				<div class="project-insert-div3">
-					<input class="project-btn btn3 project-btn-hover" type="submit" value="저장">
-				</div>
-			
 			</form>
 			
 		</div>
