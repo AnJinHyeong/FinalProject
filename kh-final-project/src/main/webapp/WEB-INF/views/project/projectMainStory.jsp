@@ -204,7 +204,9 @@
 
 					<form action="projectMainStory" method="post">
 
+
 						<div class="w100p h500 bacWhite scrollThin inputFocusNone" style="padding: 50px 200px;" id="inputArea" contenteditable="true">
+
 							${projectDto.projectContent}
 						</div>
 						<div class="mt10 ml10">

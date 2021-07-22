@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class SponsorDto {
 	private int sponsorNo;
 	private int memberNo;
-	private int giftNo;
+	private Integer giftNo;
 	private int projectNo;
 	private int sponsorAmount;
 	private Date sponsorDate;

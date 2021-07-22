@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insert" parameterType="SponsorDto">
 		insert into sponsor(sponsor_no, member_no, gift_no, project_no, sponsor_amount)
-		values(sponsor_seq.nextval, #{memberNo}, #{giftNo}, #{projectNo}, #{sponsorAmount})
+		values(sponsor_seq.nextval, #{memberNo}, #{giftNo, jdbcType=INTEGER}, #{projectNo}, #{sponsorAmount})
     </insert>	
 	
 </mapper>

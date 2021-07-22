@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
@@ -61,6 +62,12 @@
 					$("#projectMainImage").attr("src","${pageContext.request.contextPath}/image/projectImageNull.png");
 				}
 			}
+		});
+		
+		// 선물 영역 클릭시 가격과 등록버튼 활성화
+		$(".sponsorOn").on("click", function(){
+			$(".projectBoardSponsor").not($(this).parent().find(".projectBoardSponsor")).hide('fast');
+			$(this).parent().find(".projectBoardSponsor").show('fast');
 		});
 		
 		
@@ -212,8 +219,8 @@
 					<c:otherwise>
 						<div id="giftList" class="project-giftList scrollThin">
 						
-							<div id="giftListBasic" class="project-insert-gift-list float-container p30 h140 project-board-item" style="margin-top: 10px;">
-								<div>
+							<div id="giftListBasic" class="project-insert-gift-list float-container p30 hMin140 project-board-item project-border-normal-hover mt10">
+								<div class=" sponsorOn cursorPointer">
 									<div class="mb10">
 										<span class="left w260 fBold fs22">1000원+</span>
 									</div>
@@ -221,34 +228,59 @@
 										<span class="left w260 fs14 fBold">선물을 선택하지 않고 밀어만 줍니다.</span>
 									</div>
 								</div>
+								
+								
+								<div class="projectBoardSponsor mt50 topLine dpNone">
+										<form action="" method="post">
+											<div class="dpFlex mt10">
+												<input name="sponsorAmount" type="text" class="fs14 w90p h40 taRight inputFocusNone boc220 bosSolid bow1 borNone" value="1000">
+												<span class="fs14 w10p h40 boc220 bosSolid bow1 bolNone dpFlex dpFlexCenter">원</span>
+											</div>
+											<button class="w100p h40 boc220 bosSolid bow1 bacWhite mt10 project-btn-normal-hover cursorPointer">후원하기</button>
+										</form>
+									</div>
+								
+								
 							</div>
 						
 							<c:forEach var="giftDto" items="${giftList}">
-								<div class="project-insert-gift-list p30 project-board-item">
-									<div class="mb10 w100p float-container">
-										<span id="giftPrice" class="left w260 fBold fs22">${giftDto.giftPrice}원+</span> 
-										<c:if test="${projectDto.projectState != '2'}">
-										</c:if>
+								<div class="project-insert-gift-list p30 project-board-item project-border-normal-hover">
+									<div class="cursorPointer sponsorOn">
+										<div class="mb10 w100p float-container">
+											<span id="giftPrice" class="left w260 fBold fs22">${giftDto.giftPrice}원+</span> 
+											<c:if test="${projectDto.projectState != '2'}">
+											</c:if>
+										</div>
+										<div>
+											<span id="giftSummary" class="w260 fs14 fBold">${giftDto.giftSummary}</span>
+										</div>
+										<div class="w100p fs12 p10">
+											<ul style="list-style: none;">
+				
+												<c:forEach var="giftItemVo" items="${giftItemVoList}">
+													<c:if test="${giftItemVo.giftNo == giftDto.giftNo}">
+														<li>
+															<div class="float-container w100p mb20">
+																<span class="left w70p">${giftItemVo.itemName}</span> <span class="right w20p">x ${giftItemVo.itemCount}</span>
+															</div>
+														</li>
+													</c:if>
+												</c:forEach>
+				
+											</ul>
+										</div>
 									</div>
-									<div>
-										<span id="giftSummary" class="w260 fs14 fBold">${giftDto.giftSummary}</span>
+										
+									<div class="projectBoardSponsor mt50 topLine dpNone">
+										<form action="" method="post">
+											<input type="hidden" name="giftNo" value="${giftDto.giftNo}">
+											<div class="dpFlex mt10">
+												<input name="sponsorAmount" type="text" class="fs14 w90p h40 taRight inputFocusNone boc220 bosSolid bow1 borNone" value="${giftDto.giftPrice}">
+												<span class="fs14 w10p h40 boc220 bosSolid bow1 bolNone dpFlex dpFlexCenter">원</span>
+											</div>
+											<button class="w100p h40 boc220 bosSolid bow1 bacWhite mt10 project-btn-normal-hover cursorPointer">후원하기</button>
+										</form>
 									</div>
-									<div class="w100p fs12 p10">
-										<ul style="list-style: none;">
-			
-											<c:forEach var="giftItemVo" items="${giftItemVoList}">
-												<c:if test="${giftItemVo.giftNo == giftDto.giftNo}">
-													<li>
-														<div class="float-container w100p mb20">
-															<span class="left w70p">${giftItemVo.itemName}</span> <span class="right w20p">x ${giftItemVo.itemCount}</span>
-														</div>
-													</li>
-												</c:if>
-											</c:forEach>
-			
-										</ul>
-									</div>
-									<span id="giftNo" class="yb hidden">${giftDto.giftNo}</span>
 								</div>
 							</c:forEach>
 						</div>

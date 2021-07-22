@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+#border{			
+				width : 500px;
+			height: 500px;
+			border: 2px solid #FFC58C;
+			padding-top: 15px;
+			padding-left : 30px;
+			padding-right : 30px;
+			margin-top:20px;
+			margin-bottom:20px;
+}

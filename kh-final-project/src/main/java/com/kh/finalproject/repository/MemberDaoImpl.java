@@ -13,11 +13,9 @@ public class MemberDaoImpl implements MemberDao{
 	private SqlSession sqlSession;
 	
 	@Override
-	public MemberDto idCheck(String memberId) {
-		return sqlSession.selectOne("member.idCheck", memberId);
+	public boolean checkId(String memberId) {
+		return sqlSession.selectOne("member.checkId", memberId) != null;
 	}
-	
-
 	
 	@Override
 	public void memberInsert(MemberDto memberDto) {
@@ -32,6 +30,11 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public MemberDto getByMemberNo(int memberNo) {
 		return sqlSession.selectOne("member.getByMemberNo",memberNo);
+	}
+
+	@Override
+	public int selectHavePoint(int memberHavePoint) {
+		return sqlSession.selectOne("member.selectHavePoint", memberHavePoint);
 	}
 
 }

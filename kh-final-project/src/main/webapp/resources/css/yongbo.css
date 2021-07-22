@@ -38,6 +38,7 @@
 .bow1{border-width:1px}
 .bosSolid{border-style:solid}.bosNone{border-style:none}
 .bora5{border-radius:5px}.bora10{border-radius:10px}
+.borNone{border-right: none !important}.bolNone{border-left: none !important}.botNone{border-top: none !important}.bobNone{border-bottom: none !important}
 
 
 /* background-color */

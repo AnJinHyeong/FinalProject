@@ -7,8 +7,8 @@ public interface PayDao {
 	void ready(PayDto payDto);
 	boolean approve(PayDto payDto);
 	void approve(int payNo);
-	void plus(int payNo);
+	boolean plus(PayDto payDto);
 //	List<PaymentDto> list(int paymentBuyer);
-//	PaymentDto get(int paymentNo);
+	PayDto get(int payNo);
 //	void cancel(int paymentNo);
 }
