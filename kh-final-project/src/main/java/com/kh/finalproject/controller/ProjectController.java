@@ -279,6 +279,21 @@ public class ProjectController {
 		return "redirect:projectMainApproval";
 	}
 	
+	@GetMapping("/{projectNo}/projectMainDelete")
+	public String projectMainDelete(
+			@PathVariable int projectNo,
+			HttpSession session) {
+		int memberNo = (int)session.getAttribute("memberNo");
+		ProjectDto projectDto = ProjectDto.builder()
+				.memberNo(memberNo)
+				.projectNo(projectNo)
+				.build();
+		
+		projectDao.projectDelete(projectDto);
+		
+		return "redirect:member/myProject";
+	}
+	
 	
 	
 }

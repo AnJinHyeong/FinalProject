@@ -140,4 +140,15 @@ public class ProjectDaoImpl implements ProjectDao{
 		return result;
 	}
 
+	@Override
+	public ProjectDto getByProjectNo(int projectNo) {
+		return sqlSession.selectOne("project.getByProjectNo",projectNo);
+	}
+
+	@Override
+	public boolean projectDelete(ProjectDto projectDto) {
+		int count = sqlSession.delete("project.projectDelete",projectDto);
+		return count > 0;
+	}
+
 }
