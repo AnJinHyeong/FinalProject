@@ -12,6 +12,7 @@ public class ProjectDto {
 	private int projectNo;
 	private String projectTitle;
 	private String projectContent;
+	private String projectContentFile;
 	private int projectTargetAmount;
 	private int projectPercent;
 	private String projectState;
