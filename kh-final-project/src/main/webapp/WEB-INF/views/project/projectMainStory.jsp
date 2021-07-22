@@ -12,8 +12,12 @@
 <script>
 	$(function() {
 		// 페이지 이동시 경고
-		var checkUnload = true;
-
+		var checkUnload = false;
+		$("#inputArea").one("input", function(){
+			checkUnload = true;
+			console.log("ddd");
+		});	
+		
 		var ImagesStarted = [];
 		$("input[type=file]").each(function(index, item) {
 			ImagesStarted.push($(this).attr("name"));
@@ -55,6 +59,7 @@
 		}
 
 		$("#addImageBtn").on("click", function() {
+			checkUnload = true;
 			var addFileInputTemplate = $("#addFileInputTemplate").html();
 			var addFileImageTemplate = $("#addFileImageTemplate").html();
 			addFileInputTemplate = addFileInputTemplate.replace("{{i}}", i);
@@ -100,11 +105,16 @@
 		});
 
 		$("#inputStory").on("click", function(e) {
-			$("textarea[name=projectContent]").val($("#inputArea").html());
 			var ImagesBeforeSave = [];
-			$("input[type=file]").each(function(index, item) {
+			$("#hiddenFileInput").empty();
+			$("#inputArea").find("img").each(function(index, item) {
 				ImagesBeforeSave.push($(this).attr("name"));
+				var addFileInputTemplate = $("#addFileInputTemplate").html();
+				addFileInputTemplate = addFileInputTemplate.replace("{{i}}", $(this).attr("name"));
+				$("#hiddenFileInput").append(addFileInputTemplate);
 			});
+			$("textarea[name=projectContent]").val($("#inputArea").html());
+			$("textarea[name=projectContentFile]").val($("#hiddenFileInput").html());
 			var inputStoryTargetUrl;
 			var inputStoryTargetData;
 			if (ImagesBeforeSave.length == 0) {
@@ -123,7 +133,6 @@
 				success : function() {
 				}
 			});
-// 			e.preventDefault();
 			checkUnload = false;
 		});
 
@@ -131,8 +140,7 @@
 			$("#progress").text(100);
 		}
 
-		$("#inputArea").find("img").on("click", function(e){
-			e.preventDefault();
+		$("#inputArea").find("img").on("click", function(){
 			$("input[name=" + $(this).attr("name") + "]").click();
 		});
 		
@@ -170,17 +178,11 @@
 
 
 <script id="addFileInputTemplate" type="text/template">
-	<div>
-
-		<input type="file" name="{{i}}" class="dpNone projectStoryFile" style="margin-left:200px;">
-	</div>
+	<input type="file" name="{{i}}" class="projectStoryFile">
 </script>
 
 <script id="addFileImageTemplate" type="text/template">
-	<div>
-		<img name="{{iImage}}" class="w700" style="margin: 0 50px;">
-
-	</div>
+	<img name="{{iImage}}" class="w700" style="margin: 0 50px;">
 </script>
 
 
@@ -206,11 +208,15 @@
 						<div class="w100p h500 bacWhite scrollThin inputFocusNone" style="padding: 50px 200px;" id="inputArea" contenteditable="true">
 
 							${projectDto.projectContent}
-							
-							<div id="hiddenFileInput" class="dpNone"></div>
 						</div>
-
+						<div class="mt10 ml10">
+							<span class="fs12 fRed"><i class="fas fa-exclamation-circle"></i> 이미지를 복사/붙여넣기 할 경우 사진 변경이 원활하지 않을 수 있습니다. 사진 추가 버튼으로 사진을 추가해주세요.</span>
+						</div>
+						<div id="hiddenFileInput" class="dpNone">
+							${projectDto.projectContentFile}
+						</div>
 						<textarea name="projectContent" class="w100p h200 dpNone"></textarea>
+						<textarea name="projectContentFile" class="w100p h200 dpNone"></textarea>
 						
 						<c:if test="${projectDto.projectState != '2'}">
 							<div class="project-insert-div3">

@@ -18,6 +18,7 @@ CREATE TABLE project(
 project_no NUMBER(19) PRIMARY KEY,
 project_title varchar2(300),
 project_content clob default empty_clob(),
+project_content_file clob default empty_clob(),
 project_target_amount NUMBER(19),
 project_percent NUMBER(5),
 project_state char(1) CHECK (project_state IN ('1','2','3','X')) NOT NULL,
@@ -115,3 +116,16 @@ member_no REFERENCES member(member_no) ON DELETE CASCADE
 );
 
 CREATE SEQUENCE image_file_seq;
+
+
+#sponsor table
+create table sponsor(
+sponsor_no number(19) primary key,
+member_no references member(member_no) not null,
+gift_no references gift(gift_no),
+project_no references project(project_no) not null,
+sponsor_amount number(19) not null check(sponsor_amount >= 0),
+sponsor_date date default sysdate not null
+);
+
+create sequence sponsor_seq;

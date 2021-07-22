@@ -14,7 +14,7 @@
 			url :"${pageContext.request.contextPath}/image/project/confirm/${projectDto.projectNo}",
 			type: "post",
 			success : function(resp){
-				if(resp == 1){
+				if(resp == 1){<a href="${pageContext.request.contextPath}/projectBoard/preview/${projectDto.projectNo}"><button class="project-btn btn1 project-btn-hover" id="projectBoard">미리보기</button></a>
 					$.ajax({
 						url :"${pageContext.request.contextPath}/image/project/getByProjectNo/${projectDto.projectNo}",
 						type: "get",
@@ -52,7 +52,7 @@
 	<div class="section-project-row">
 			
 			<div class="project-main-div1">
-				<button class="project-btn btn1 project-btn-hover">미리보기</button>
+				<a href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}"><button class="project-btn btn1 project-btn-hover" id="projectBoard">미리보기</button></a>
 				<div style="text-decoration: none; height: 40px;">
 					<c:choose>
 						<c:when test="${projectDto.projectState == '1'}">
