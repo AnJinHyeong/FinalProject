@@ -32,7 +32,7 @@
 	</div>
 	<input type = "radio" id = "10up"  name ="radio" value = "trueUp">	
 		<label>고액 결제(10만~)</label><br>
-	<input type="text" id = "10upMoney"name="total_amount" required>
+	<input type="text" id = "10upMoney"name="total_amount">
 	<p id = "amountResult"></p>
 		<!--  면세 비율 설정, 사업주에 따라 다르게 설정하기-->
 	<input type="hidden" name="tex_free_amount" value = "0" required>
