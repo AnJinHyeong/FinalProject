@@ -11,36 +11,27 @@ $(function(){
 			var text = $(this).val();
 			var regexText = /^[0-9]{6}$/;
 			if(!regexText.test(text)){
-				$('#amountResult').css("color", "red");
-				$('#amountResult').val("");
-				$('#amountResult').text("십 만원 ~ 백 만원 이하의 숫자만 입력헤주세요");
+				$('#error').val("");
+				$('#error').text("십 만원 ~ 백 만원 이하의 숫자만 입력해주세요");
 				$(this).val("");
 				return false;
 			}
 			else if(text<=100000){
-				$('#amountResult').css("color", "red");
-				$('#amountResult').val("");
-				$('#amountResult').text("십 만원 ~ 백 만원 이하의 숫자만 입력헤주세요");
+				$('#error').val("");
+				$('#error').text("십 만원 ~ 백 만원 이하의 숫자만 입력해주세요");
 				$(this).val("");
 				return false;
 			}
+			else if(text=0){
+				return false;
+			}
 				else{
-					$('#amountResult').css("color", "black");
-					$('#amountResult').text("");
+					$('#error').text("");
 			}
 			
 	});
 
-//	폼전송 막기
-	$('#form').click('submit', function(e){
-		var a = $("#10underMoney").val();
-		var b = $("#10upMoney").val();
-		
-		if(a==false&&b==false){
-			e.preventDefault();
-			window.alert('입력 값이 잘못되었습니다');
-		}
-	});
+
 	
       
 //  10만원 이하 셀렉트부분에 값넣기
@@ -49,12 +40,11 @@ $(function(){
 	  var end = 100000;
 for(var money = 5000; money<=end; money+=start){
   $('#10underMoney').append("<option value = "+money+">"+money+"원"+"</option>");
-	
+}
   
 //10만원 이하 부분
       $("#10under").change( function(){
  		 var a = $(this).val();
-    	
     	  if(a=="trueUnder"){
     		 $("#10underMoney").fadeIn();
      		 $("#10upMoney").fadeOut();
@@ -66,9 +56,8 @@ for(var money = 5000; money<=end; money+=start){
     //10만원 초과 부분
       $("#10up").change( function(){
   		 var a = $(this).val();
-     	
+		   event.preventDefault();
      	  if(a=="trueUp"){
-     		   event.preventDefault();
       		 $("#10upMoney").fadeIn();
      		 $("#10underMoney").fadeOut();
     		  $("#10under option:selected").val("0");
@@ -77,9 +66,16 @@ for(var money = 5000; money<=end; money+=start){
        });
       
 
-      }
+//  	폼전송 막기
+  	$('#form').on('submit', function(e){
+  		var a = $("#10underMoney").val();
+  		var b = $("#10upMoney").val();
+  		a = false;
+  		if(a==0||b==0){
+ 		   e.preventDefault();
+  			window.alert('입력 값이 잘못되었습니다');
+  			return a;
+  		}
+  	});
 
-      
-      
-      
 });

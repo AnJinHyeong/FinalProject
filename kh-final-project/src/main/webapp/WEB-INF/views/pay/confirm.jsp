@@ -8,11 +8,11 @@
 		
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/confirm.js"></script>
-
+<div id = "payAll">
 	<div id ="payBorder">
 <h2 id ="payTitle">결제정보입력</h2><br>
 <div id = "payContent">
-<form action="confirm" method="post" id = formAll onsubmit = "return confirm('결제 전, 금액을 다시 한번 확인하세요')">
+<form action="confirm" method="post" id = formAll onsubmit = "return confirm('결제 전에 한번더 확인해주세요')">
 
 <input type="hidden" name="partner_order_id" value = "펀딩 가맹점 식별번호" required>
 <input type="hidden" name="partner_user_id" value = "${memberNo}"required>
@@ -23,17 +23,17 @@
 	<!--  단일 결제이므로 수량은 1로 고정-->
 	<input type="hidden" name="quantity" value = 1>
 	
-	<p>현재 보유 포인트 : <strong>5000P</strong></p>
-	<p>충전하실 포인트 유형을 선택해주세요 </p>
+	<p class = moneyText>현재 보유 포인트 : <strong>5000P</strong></p><br>
+	<p class = moneyText>충전하실 포인트 유형을 선택해주세요 </p><br>
 	<div >
 	<input type = "radio" id = "10under" name ="radio" value = "trueUnder">	
-	<label>소액 결제</label><br>
-	<select id = "10underMoney" name="total_amount" required></select>
-	</div>
+	<label class = moneyText>소액 결제</label><br>
+	<select id = "10underMoney" name="total_amount"></select>
+	</div><br>
 	<input type = "radio" id = "10up"  name ="radio" value = "trueUp">	
-		<label>고액 결제(10만~)</label><br>
-	<input type="text" id = "10upMoney"name="total_amount">
-	<p id = "amountResult"></p>
+		<label class = moneyText>고액 결제(10만~)</label><br>
+	<input type="text" id = "10upMoney" name="total_amount">
+	<p id = "error"></p>
 		<!--  면세 비율 설정, 사업주에 따라 다르게 설정하기-->
 	<input type="hidden" name="tex_free_amount" value = "0" required>
 
@@ -43,6 +43,6 @@
 </form>
 </div>
 </div>
-
+</div>
 </html>   
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
