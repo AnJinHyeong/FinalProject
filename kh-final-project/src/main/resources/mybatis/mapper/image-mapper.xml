@@ -89,6 +89,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete image_file where project_no = #{projectNo} and project_state is null and member_no is null
 	</delete>
 	
+	<!-- 저장 이름으로 이미지 불러오기 -->
+	<select id="getImageByImageSaveName" resultType="ImageDto" parameterType="String">
+		select * from image_file where image_save_name = #{imageSaveName}
+	</select>
+	
+	<!-- 저장 이름으로 이미지 삭제 -->
+	<delete id="deleteImageByImageSaveName" parameterType="map">
+		delete image_file where project_no = #{projectNo} and project_state is null and member_no is null and image_save_name = #{imageSaveName}
+	</delete>
+	
+	<!-- 프로젝트 번호와 파일 저장 이름으로 탐색 -->
+	<select id="confirmProjectMainStoryByImageSaveName" resultType="int" parameterType="map">
+		SELECT count(*) FROM image_file WHERE project_no = #{projectNo} and project_state is null and member_No is null and image_save_name = #{imageSaveName}
+	</select>
+	
 </mapper>
 
 
