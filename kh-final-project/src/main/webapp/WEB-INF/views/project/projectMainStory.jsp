@@ -11,12 +11,56 @@
 
 <script>
 	$(function() {
-		var i = 0;
-		
+		// 페이지 이동시 경고
+		var checkUnload = true;
+
+		var ImagesStarted = [];
+		$("input[type=file]").each(function(index, item) {
+			ImagesStarted.push($(this).attr("name"));
+		});
+
+		$(window).on("beforeunload", function() {
+			if (checkUnload) {
+
+				var beforeUnloadTargetUrl;
+				var beforeUnloadTargetData;
+				if (ImagesStarted.length == 0) {
+					beforeUnloadTargetUrl = "${pageContext.request.contextPath}/image/project/deleteFileAll/story/${projectNo}"
+					beforeUnloadTargetData = {};
+				} else {
+					beforeUnloadTargetUrl = "${pageContext.request.contextPath}/image/project/deleteFileList/story/${projectNo}"
+					beforeUnloadTargetData = {
+						fileNoList : ImagesStarted
+					};
+				}
+				$.ajax({
+					url : beforeUnloadTargetUrl,
+					type : "get",
+					data : beforeUnloadTargetData,
+					success : function() {
+					}
+				});
+
+				return "이 페이지를 벗어나면 작성된 내용은 저장되지 않습니다.";
+			} else {
+				return;
+			}
+		});
+
+		var i;
+		if (ImagesStarted.length == 0) {
+			i = 0;
+		} else {
+			i = Math.max.apply(null, ImagesStarted) + 1;
+		}
+
 		$("#addImageBtn").on("click", function() {
-			var template = $("#addFileTemplate").html();
-			template = template.replace("{{i}}", i);
-			$("#inputArea").append(template);
+			var addFileInputTemplate = $("#addFileInputTemplate").html();
+			var addFileImageTemplate = $("#addFileImageTemplate").html();
+			addFileInputTemplate = addFileInputTemplate.replace("{{i}}", i);
+			addFileImageTemplate = addFileImageTemplate.replace("{{iImage}}", i);
+			$("#hiddenFileInput").append(addFileInputTemplate);
+			$("#inputArea").append(addFileImageTemplate);
 			$("input[name=" + i + "]").click();
 			i = i + 1;
 
@@ -28,8 +72,9 @@
 				if (files && filesLength) {
 					var fd = new FormData();
 					fd.append("f", files0);
+					fd.append("fileNo", i - 1);
 					var that = this;
-
+					
 					$.ajax({
 						url : "${pageContext.request.contextPath}/image/project/upload/story/${projectNo}",
 						type : "post",
@@ -37,36 +82,102 @@
 						contentType : false,
 						data : fd,
 						success : function(resp) {
-							var url = "${pageContext.request.contextPath}/image/project/download/story/" + resp.imageNo;
-							$(that).siblings("img").attr("src", url);
-							$(that).siblings("img").on("click", function(){
-								$(that).click();
-							});
+							var url = "${pageContext.request.contextPath}/image/project/download/story/" + resp.imageSaveName;
+							$("img[name=" + $(that).attr("name") + "]").attr("src", url);
 						},
 						error : function(resp) {
 							window.alert("업로드 실패!");
+						},
+						complete: function(){
+							$("img[name=" + $(that).attr("name") + "]").on("click", function(){
+								$(that).click();
+							})
 						}
 					});
 				}
 			});
+
 		});
 
-		$("#inputArea").blur("input", function() {
+		$("#inputStory").on("click", function(e) {
 			$("textarea[name=projectContent]").val($("#inputArea").html());
+			var ImagesBeforeSave = [];
+			$("input[type=file]").each(function(index, item) {
+				ImagesBeforeSave.push($(this).attr("name"));
+			});
+			var inputStoryTargetUrl;
+			var inputStoryTargetData;
+			if (ImagesBeforeSave.length == 0) {
+				inputStoryTargetUrl = "${pageContext.request.contextPath}/image/project/deleteFileAll/story/${projectNo}"
+				inputStoryTargetData = {};
+			} else {
+				inputStoryTargetUrl = "${pageContext.request.contextPath}/image/project/deleteFileList/story/${projectNo}"
+				inputStoryTargetData = {
+					fileNoList : ImagesBeforeSave
+				};
+			}
+			$.ajax({
+				url : inputStoryTargetUrl,
+				type : "get",
+				data : inputStoryTargetData,
+				success : function() {
+				}
+			});
+// 			e.preventDefault();
+			checkUnload = false;
+		});
+
+		if ($("#inputArea").html().length > 15) {
+			$("#progress").text(100);
+		}
+
+		$("#inputArea").find("img").on("click", function(e){
+			e.preventDefault();
+			$("input[name=" + $(this).attr("name") + "]").click();
 		});
 		
-		if($("#inputArea").html().length > 15){
-			$("#progress").text(100);
-		};
-		
+		$("input[type=file]").on("input", function(){
+			var fileNo = $(this).attr("name");
+			var files = this.files;
+			var filesLength = this.files.length > 0;
+			var files0 = this.files[0];
+
+			if (files && filesLength) {
+				var fd = new FormData();
+				fd.append("f", files0);
+				fd.append("fileNo", fileNo);
+				var that = this;
+				
+				$.ajax({
+					url : "${pageContext.request.contextPath}/image/project/upload/story/${projectNo}",
+					type : "post",
+					processData : false,
+					contentType : false,
+					data : fd,
+					success : function(resp) {
+						var url = "${pageContext.request.contextPath}/image/project/download/story/" + resp.imageSaveName;
+						$("img[name=" + $(that).attr("name") + "]").attr("src", url);
+					},
+					error : function(resp) {
+						window.alert("이미지 변경 실패!");
+					}
+				});
+			}
+		});
+
 	});
 </script>
 
 
-<script id="addFileTemplate" type="text/template">
+<script id="addFileInputTemplate" type="text/template">
 	<div>
-		<input type="file" name="{{i}}" class="mt10 mb10 projectStoryFile w100p dpNone" style="margin-left:200px;">
-		<img class="w700" style="margin: 0 100px;">
+		<input type="file" name="{{i}}" class="dpNone projectStoryFile" style="margin-left:200px;">
+	</div>
+</script>
+
+<script id="addFileImageTemplate" type="text/template">
+	<div>
+		<img name="{{iImage}}" class="w700" style="margin: 0 50px;">
 	</div>
 </script>
 
@@ -89,18 +200,20 @@
 
 					<form action="projectMainStory" method="post">
 
-						<div class="w100p h500 bacWhite scrollThin inputFocusNone" style="padding: 50px 150px;" id="inputArea" contenteditable="true">
+						<div class="w100p h500 bacWhite scrollThin inputFocusNone" style="padding: 50px 200px;" id="inputArea" contenteditable="true">
 							${projectDto.projectContent}
+							
+							<div id="hiddenFileInput" class="dpNone"></div>
 						</div>
-						
-						<textarea name="projectContent" class="w100p h200 dpNone"></textarea>
 
+						<textarea name="projectContent" class="w100p h200 dpNone"></textarea>
+						
 						<c:if test="${projectDto.projectState != '2'}">
 							<div class="project-insert-div3">
 								<input id="inputStory" class="project-btn btn3 project-btn-hover mr0" type="submit" value="저장">
 							</div>
 						</c:if>
-						
+
 					</form>
 
 				</div>

@@ -85,7 +85,6 @@
 				$("#search-result").empty();
 			}
 		}
-		;
 
 		$("#itemSelectBtn").on("click", function() {
 			var selectedItems = [];
