@@ -8,5 +8,7 @@
 <hr>
 
 <h2>결제 상세 내역</h2>
+
+<button onclick = "location.href = '../'">홈으로 돌아가기</button>
 </html>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
