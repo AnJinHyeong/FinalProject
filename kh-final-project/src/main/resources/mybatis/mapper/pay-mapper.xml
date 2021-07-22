@@ -46,7 +46,7 @@ UPDATE member
 SET member_have_point = 
 member_have_point + #{payPrice}
 WHERE member_no = #{memberNo}
-
+	</update>
 
 	<!-- <update id = "plusResult"> UPDATE member SET member_have_point =( SELECT 
 		pay_all_price FROM pay WHERE pay.pay_no = pay.pay_no ) </update> -->
