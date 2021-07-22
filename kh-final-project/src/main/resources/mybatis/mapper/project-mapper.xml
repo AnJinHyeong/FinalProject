@@ -21,6 +21,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from project where member_no = #{memberNo} and project_no = #{projectNo}
 	</select>
 	
+	<select id="getByProjectNo" parameterType="ProjectDto" resultType="ProjectDto">
+		select * from project where project_no = #{projectNo}
+	</select>
+	
 	<select id="insertBySequence" parameterType="ProjectCategoryVo">
 		insert into project
 			(project_no, project_regist_date, project_summary, member_no, category_no, project_state)
@@ -108,6 +112,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where project_no = #{projectNo}
 	</select>
 	
+	<delete id="projectDelete" parameterType="ProjectDto">
+		delete project where project_no = #{projectNo} and member_no = #{memberNo}
+	</delete>
 </mapper>
 
 

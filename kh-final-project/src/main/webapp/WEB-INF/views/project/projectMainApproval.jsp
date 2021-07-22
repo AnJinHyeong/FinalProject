@@ -31,6 +31,18 @@
 			
 		});
 		
+		$.ajax({
+			url : "${pageContext.request.contextPath}/project/data/progress",
+			type : 'post',
+			data : {
+				"projectNo" : "${projectDto.projectNo}"
+			},
+			success : function(resp) {
+				$("#progress").text(resp);
+			}
+		});
+		
+		
 	});
 	
 
@@ -44,7 +56,7 @@
 				<div style="text-decoration: none; height: 40px;">
 					<c:choose>
 						<c:when test="${projectDto.projectState == '1'}">
-							<button class="project-btn btn2">기획중·43% 완료</button>
+							<button class="project-btn btn2">기획중·<span id="progress"></span>% 완료</button>
 						</c:when>
 						<c:when test="${projectDto.projectState == '2'}">
 							<button class="project-btn btn2">프로젝트 심사중</button>

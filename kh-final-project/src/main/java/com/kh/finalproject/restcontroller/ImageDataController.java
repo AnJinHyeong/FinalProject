@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.finalproject.entity.ImageDto;
+import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.repository.ImageDao;
+import com.kh.finalproject.repository.ProjectDao;
 
 @RequestMapping("/image")
 @RestController
@@ -159,6 +161,23 @@ public class ImageDataController {
 								.header(HttpHeaders.CONTENT_DISPOSITION, 
 										"attachment; filename=\""+fileName+"\"")
 								.body(resource);
+	}
+	
+	//프로젝트 보드 화면
+	@Autowired
+	private ProjectDao projectDao;
+	
+	@PostMapping("/member/confirmMemberImage/{projectNo}")
+	public int confirmMemberImage(@PathVariable int projectNo) {
+		ProjectDto find = projectDao.getByProjectNo(projectNo);
+		return imageDao.confirmMember(find.getMemberNo());
+	}
+	
+	@GetMapping("/member/getByMemberNoImage/{projectNo}")
+	public ImageDto getByMemberNoImage(@PathVariable int projectNo) throws IOException {
+		ProjectDto find = projectDao.getByProjectNo(projectNo);
+		ImageDto imageDto = imageDao.getByMemberNo(find.getMemberNo()); 
+		return imageDto;
 	}
 	
 	@GetMapping("/project/deleteFileList/story/{projectNo}")

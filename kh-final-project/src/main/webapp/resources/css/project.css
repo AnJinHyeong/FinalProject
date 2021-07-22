@@ -24,7 +24,7 @@
 
 .project-btn.btn1{
 	background-color: #fff; 
-	color: black; 
+	color: black;
 	border: 1px solid rgb(240, 240, 240);
 	cursor: pointer; 
 }
@@ -174,7 +174,7 @@
 
 .project-main-img{
 	background: center center / 50% no-repeat rgb(252, 252, 252) ;
-	background: url("../image/imageNull.png");
+	background: url("../image/projectImageNull.png");
 	background-size: 100% 100%;
     margin: 0px 32px 20px 0px;
     box-shadow: rgb(0 0 0 / 15%) 0px 2px 4px, rgb(0 0 0 / 10%) 0px 1px 0px;
