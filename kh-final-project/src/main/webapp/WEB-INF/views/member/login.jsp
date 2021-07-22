@@ -59,7 +59,8 @@
 	}
 	.mainDiv{
 		width:50%;
-		min-height: 600px;
+		margin-top: 50px;
+		min-height: 720px;
 		padding:50px;
 	}
 	.subDiv{

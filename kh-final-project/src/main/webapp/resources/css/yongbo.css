@@ -26,7 +26,7 @@
 /* font */
 .fs2{font-size:2px}.fs4{font-size:4px}.fs6{font-size:6px}.fs8{font-size:8px}.fs10{font-size:10px}.fs12{font-size:12px}.fs14{font-size:14px}.fs16{font-size:16px}.fs18{font-size:18px}.fs20{font-size:20px}.fs22{font-size:22px}.fs24{font-size:24px}.fs26{font-size:26px}.fs28{font-size:28px}.fs30{font-size:30px}.fs32{font-size:32px}.fs34{font-size:34px}.fs36{font-size:36px}.fs38{font-size:38px}.fs40{font-size:40px}
 .fc5{color:#050505}.fc10{color:#0a0a0a}.fc15{color:#0f0f0f}.fc20{color:#141414}.fc25{color:#191919}.fc30{color:#1e1e1e}.fc35{color:#232323}.fc40{color:#282828}.fc45{color:#2d2d2d}.fc50{color:#323232}.fc55{color:#373737}.fc60{color:#3c3c3c}.fc65{color:#414141}.fc70{color:#464646}.fc75{color:#4b4b4b}.fc80{color:#505050}.fc85{color:#555}.fc90{color:#5a5a5a}.fc95{color:#5f5f5f}.fc100{color:#646464}.fc105{color:#696969}.fc110{color:#6e6e6e}.fc115{color:#737373}.fc120{color:#787878}.fc125{color:#7d7d7d}.fc130{color:#828282}.fc135{color:#878787}.fc140{color:#8c8c8c}.fc145{color:#919191}.fc150{color:#969696}.fc155{color:#9b9b9b}.fc160{color:#a0a0a0}.fc165{color:#a5a5a5}.fc170{color:#aaa}.fc175{color:#afafaf}.fc180{color:#b4b4b4}.fc185{color:#b9b9b9}.fc190{color:#bebebe}.fc195{color:#c3c3c3}.fc200{color:#c8c8c8}.fc205{color:#cdcdcd}.fc210{color:#d2d2d2}.fc215{color:#d7d7d7}.fc220{color:#dcdcdc}.fc225{color:#e1e1e1}.fc230{color:#e6e6e6}.fc235{color:#ebebeb}.fc240{color:#f0f0f0}.fc245{color:#f5f5f5}.fc250{color:#fafafa}
-.fBold{font-weight: bold}.fRed{color: red}.fBlack{color:black}.fWhite{color:white}
+.fBold{font-weight: bold}.fRed{color: red}.fBlack{color:black}.fWhite{color:white}.fGreen{color:green}
 
 /* border */
 .boc5{border-color:#050505}.boc10{border-color:#0a0a0a}.boc15{border-color:#0f0f0f}.boc20{border-color:#141414}.boc25{border-color:#191919}.boc30{border-color:#1e1e1e}.boc35{border-color:#232323}.boc40{border-color:#282828}.boc45{border-color:#2d2d2d}.boc50{border-color:#323232}.boc55{border-color:#373737}.boc60{border-color:#3c3c3c}.boc65{border-color:#414141}.boc70{border-color:#464646}.boc75{border-color:#4b4b4b}.boc80{border-color:#505050}.boc85{border-color:#555}.boc90{border-color:#5a5a5a}.boc95{border-color:#5f5f5f}.boc100{border-color:#646464}.boc105{border-color:#696969}.boc110{border-color:#6e6e6e}.boc115{border-color:#737373}.boc120{border-color:#787878}.boc125{border-color:#7d7d7d}.boc130{border-color:#828282}.boc135{border-color:#878787}.boc140{border-color:#8c8c8c}.boc145{border-color:#919191}.boc150{border-color:#969696}.boc155{border-color:#9b9b9b}.boc160{border-color:#a0a0a0}.boc165{border-color:#a5a5a5}.boc170{border-color:#aaa}.boc175{border-color:#afafaf}.boc180{border-color:#b4b4b4}.boc185{border-color:#b9b9b9}.boc190{border-color:#bebebe}.boc195{border-color:#c3c3c3}.boc200{border-color:#c8c8c8}.boc205{border-color:#cdcdcd}.boc210{border-color:#d2d2d2}.boc215{border-color:#d7d7d7}.boc220{border-color:#dcdcdc}.boc225{border-color:#e1e1e1}.boc230{border-color:#e6e6e6}.boc235{border-color:#ebebeb}.boc240{border-color:#f0f0f0}.boc245{border-color:#f5f5f5}.boc250{border-color:#fafafa}
@@ -37,6 +37,7 @@
 .bocBlack{border-color:black}.bocWhite{border-color:white}.bolcBlack{border-color:black}.bolcWhite{border-color:white}.borcBlack{border-color:black}.borcWhite{border-color:white}.botcBlack{border-color:black}.botcWhite{border-color:white}.bobcBlack{border-color:black}.bobcWhite{border-color:white}
 .bow1{border-width:1px}
 .bosSolid{border-style:solid}.bosNone{border-style:none}
+.bora5{border-radius:5px}.bora10{border-radius:10px}
 
 
 /* background-color */
@@ -60,13 +61,18 @@
 
 .cursorPointer{cursor:pointer}
 
-.scrollHide{overflow-y:auto}
-.scrollHide::-webkit-scrollbar{display:none}
+.scrollHide{overflow-y:auto}.scrollHide::-webkit-scrollbar{display:none}
 .scrollNone{overflow:hidden}
-.scrollThin{overflow-y:auto}
-.scrollThin{overflow-x:hidden}
-.scrollThin::-webkit-scrollbar{width:8px}
-.scrollThin::-webkit-scrollbar-thumb{background-color:rgb(220,220,220);border-radius:5px;background-clip:padding-box;border:2px solid transparent;}
-.scrollThin::-webkit-scrollbar-track{background-color:transparent;}
+.scrollThin{overflow-y:auto}.scrollThin{overflow-x:hidden}.scrollThin::-webkit-scrollbar{width:8px}.scrollThin::-webkit-scrollbar-thumb{background-color:rgb(220,220,220);border-radius:5px;background-clip:padding-box;border:2px solid transparent;}.scrollThin::-webkit-scrollbar-track{background-color:transparent;}
 
 pre.oneLine{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+pre.wordBreak{word-break: break-all}
+
+.ybModal{position: fixed;background-color: white;top: 50%;left: 50%;transform: translate(-50%, -50%);z-index: 102;display: none;}
+.ybModalBackground{position: fixed;background-color: rgba(0, 0, 0, 0.2);height: 100%;width: 100%;top: 0;left: 0;z-index: 101;display: none;}
+.ybModalX{cursor: pointer;}
+.ybModal pre{white-space: pre-line;word-break: break-all;}
+
+.ybUl>ul.lsNone{list-style:none}
+.ybUl>ul>li{margin-bottom:15px;font-size:15px;}
+.ybUl>ul.small>li::marker{font-size:12px}

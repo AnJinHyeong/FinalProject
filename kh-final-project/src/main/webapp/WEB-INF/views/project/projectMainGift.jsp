@@ -151,7 +151,14 @@
 				e.preventDefault();
 			}
 		});
-
+		
+		if($("#giftPrice").text() == null || $("#giftPrice").text() == ""){
+			$("#progress").text(0);
+		}
+		else{
+			$("#progress").text(100);
+		}
+		
 	});
 </script>
 
@@ -221,7 +228,10 @@
 						<c:forEach var="giftDto" items="${giftList}">
 							<div class="project-insert-gift-list p30">
 								<div class="mb10 w100p float-container">
-									<span id="giftPrice" class="left w260 fBold fs22">${giftDto.giftPrice}원+</span> <span class="yb modalX right"> <i class="fas fa-times"></i></span>
+									<span id="giftPrice" class="left w260 fBold fs22">${giftDto.giftPrice}원+</span> 
+									<c:if test="${projectDto.projectState != '2'}">
+										<span class="yb modalX right"> <i class="fas fa-times"></i></span>
+									</c:if>
 								</div>
 								<div>
 									<span id="giftSummary" class="w260 fs14 fBold">${giftDto.giftSummary}</span>
@@ -335,13 +345,14 @@
 												<span id="priceError" class="fs12 pt10 fRed displayNone taLeft">0 ~ 999999999 사이의 값을 입력해주세요.</span>
 											</div>
 										</div>
-
-										<c:if test="${itemCount != 0}">
-											<div class="project-insert-div3 mt50">
-												<input class="project-btn btn3 project-btn-hover" style="margin-right: 0px" type="submit" value="등록">
-											</div>
+										
+										<c:if test="${projectDto.projectState != '2'}">
+											<c:if test="${itemCount != 0}">
+												<div class="project-insert-div3 mt50">
+													<input class="project-btn btn3 project-btn-hover" style="margin-right: 0px" type="submit" value="등록">
+												</div>
+											</c:if>
 										</c:if>
-
 									</form>
 
 								</c:otherwise>

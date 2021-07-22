@@ -1,11 +1,10 @@
 package com.kh.finalproject.repository;
 
-import java.sql.Date;
 import java.util.List;
 
 import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.vo.ProjectCategoryVo;
-import com.kh.finalproject.vo.ProjectDatePlusVo;
+import com.kh.finalproject.vo.ProjectProgressVo;
 
 public interface ProjectDao {
 	
@@ -29,6 +28,15 @@ public interface ProjectDao {
 	String projectEndDatePlus14(int projectNo);
 	//작업 진행중인 프로젝트 조회
 	ProjectDto workingProject(int memberNo);
-	
+	//프로젝트 member(창작자) 업데이트
+	boolean projectMemberUpdate(ProjectDto projectDto);
+	// 프로젝트 Story 업데이트
+	boolean projectStoryUpdate(ProjectDto projectDto);
+	// 프로젝트 state 업데이트 1 -> 2
+	boolean projectApprovalUpdate2(int projectNo);
+	// 프로젝트 state 업데이트 2 -> 1
+	boolean projectApprovalUpdate1(int projectNo);
+	// 프로젝트 항목 전체 가져와서 달성도 계산
+	int calculateProjectProgress(int projectNo);
 	
 }

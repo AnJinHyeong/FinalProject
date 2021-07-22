@@ -17,13 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.finalproject.entity.CategoryDto;
 import com.kh.finalproject.entity.GiftDto;
 import com.kh.finalproject.entity.ItemDto;
+import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.ProjectDto;
-import com.kh.finalproject.entity.ImageDto;
 import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.repository.GiftDao;
-import com.kh.finalproject.repository.ItemDao;
-import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.repository.ImageDao;
+import com.kh.finalproject.repository.ItemDao;
+import com.kh.finalproject.repository.MemberDao;
+import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.vo.GiftSelectedItemVo;
 import com.kh.finalproject.vo.ItemListVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
@@ -72,8 +73,7 @@ public class ProjectController {
 	}
 
 	@GetMapping("/{projectNo}/projectMain")
-	public String projectMain(@ModelAttribute ProjectDto projectDto, @PathVariable int projectNo, HttpSession session,
-			Model model) {
+	public String projectMain(@ModelAttribute ProjectDto projectDto, @PathVariable int projectNo, HttpSession session, Model model) {
 		int memberNo = (int) session.getAttribute("memberNo");
 		projectDto = ProjectDto.builder().projectNo(projectNo).memberNo(memberNo).build();
 		ProjectDto find = projectDao.get(projectDto);
@@ -88,9 +88,6 @@ public class ProjectController {
 		return "project/projectMain";
 	}
 	
-	@Autowired
-	private ImageDao imageDao;
-	
 	@GetMapping("/{projectNo}/projectMainDefault")
 	public String projectMainDefault(@PathVariable int projectNo, HttpSession session, Model model) {
 
@@ -102,7 +99,7 @@ public class ProjectController {
 		//프로젝트 카테고리의 정보 조회
 		CategoryDto categoryDto = categoryDao.getByNo(find.getCategoryNo());
 		model.addAttribute("category", categoryDto);
-
+		
 		return "project/projectMainDefault";
 	}
 
@@ -110,17 +107,12 @@ public class ProjectController {
 	public String projectMainDefault(@PathVariable int projectNo, @ModelAttribute ProjectDto projectDto) {
 		boolean result = projectDao.projectDefaultUpdate(projectDto);
 
-		if (result) {
-			return "redirect:projectMainDefault";
-		} else {
-			return "redirect:projectMainDefautlt?error";
-		}
+		return "redirect:projectMainDefault";
 
 	}
 
 	@GetMapping("/{projectNo}/projectMainFunding")
 	public String projectFunding(@PathVariable int projectNo, HttpSession session, Model model) {
-
 		int memberNo = (int) session.getAttribute("memberNo");
 		ProjectDto projectDto = ProjectDto.builder().projectNo(projectNo).memberNo(memberNo).build();
 		ProjectDto find = projectDao.get(projectDto);
@@ -137,16 +129,19 @@ public class ProjectController {
 	@PostMapping("/{projectNo}/projectMainFunding")
 	public String projectMainFunding(@PathVariable int projectNo, @ModelAttribute ProjectDto projectDto) {
 		projectDao.projectFundingUpdate(projectDto);
-
 		return "redirect:projectMainFunding";
-
 	}
 
 	@Autowired
 	private GiftDao giftDao;
 
 	@GetMapping("/{projectNo}/projectMainGift")
-	public String projectMainGift(@PathVariable int projectNo, Model model) {
+	public String projectMainGift(HttpSession session,@PathVariable int projectNo, Model model) {
+		int memberNo = (int) session.getAttribute("memberNo");
+		ProjectDto projectDto = ProjectDto.builder().projectNo(projectNo).memberNo(memberNo).build();
+		ProjectDto find = projectDao.get(projectDto);
+		model.addAttribute("projectDto", find);
+		
 		model.addAttribute("itemCount", itemDao.count(projectNo));
 		model.addAttribute("itemList", itemDao.list(projectNo));
 		model.addAttribute("giftCount", giftDao.count(projectNo));
@@ -156,7 +151,12 @@ public class ProjectController {
 	}
 
 	@GetMapping("/{projectNo}/projectMainGiftItem")
-	public String projectMainGiftItem(@PathVariable int projectNo, Model model) {
+	public String projectMainGiftItem(HttpSession session, @PathVariable int projectNo, Model model) {
+		int memberNo = (int) session.getAttribute("memberNo");
+		ProjectDto projectDto = ProjectDto.builder().projectNo(projectNo).memberNo(memberNo).build();
+		ProjectDto find = projectDao.get(projectDto);
+		model.addAttribute("projectDto", find);
+		
 		model.addAttribute("itemCount", itemDao.count(projectNo));
 		model.addAttribute("itemList", itemDao.list(projectNo));
 		return "project/projectMainGiftItem";
@@ -199,5 +199,86 @@ public class ProjectController {
 		itemDao.delete(itemNo);
 		return "redirect:projectMainGiftItem";
 	}
+	
+	@Autowired
+	private MemberDao MemberDao;
+	
+	@Autowired
+	private ImageDao imageDao;
+	
+	@GetMapping("/{projectNo}/projectMainMember")
+	public String projectMainMember(
+			HttpSession session,
+			@PathVariable int projectNo,
+			Model model) {
+		int memberNo = (int) session.getAttribute("memberNo");
+		ProjectDto projectDto = ProjectDto.builder().projectNo(projectNo).memberNo(memberNo).build();
+		ProjectDto find = projectDao.get(projectDto);
+		model.addAttribute("projectDto", find);
 
+		MemberDto memberDto = MemberDao.getByMemberNo(find.getMemberNo());
+		model.addAttribute("memberDto", memberDto);
+		
+		int count = imageDao.confirmMember(memberNo);
+		model.addAttribute("count", count);
+		
+		return "project/projectMainMember";
+	}
+	
+	@PostMapping("/{projectNo}/projectMainMember")
+	public String projectMainMember(@ModelAttribute ProjectDto projectDto ,@PathVariable int projectNo) {
+		projectDao.projectMemberUpdate(projectDto);
+		return "redirect:projectMainMember";
+	}
+	@GetMapping("/{projectNo}/projectMainStory")
+	public String projectMainStory(@PathVariable int projectNo, HttpSession session, Model model) {
+		int memberNo = (int) session.getAttribute("memberNo");
+		ProjectDto projectDto = ProjectDto.builder().projectNo(projectNo).memberNo(memberNo).build();
+		ProjectDto find = projectDao.get(projectDto);
+		model.addAttribute("projectDto", projectDao.get(find));
+		return "project/projectMainStory";
+	}
+
+	@PostMapping("/{projectNo}/projectMainStory")
+	public String projectMainStory(@PathVariable int projectNo, @ModelAttribute ProjectDto projectDto) {
+		projectDto.setProjectNo(projectNo);
+		projectDao.projectStoryUpdate(projectDto);
+		return "redirect:projectMainStory";
+	}
+	
+	@GetMapping("/{projectNo}/projectMainApproval")
+	public String projectMainApproval(
+			@PathVariable int projectNo,
+			HttpSession session,
+			@ModelAttribute ProjectDto projectDto,
+			Model model) {
+		
+		int memberNo = (int) session.getAttribute("memberNo");
+		projectDto = ProjectDto.builder().projectNo(projectNo).memberNo(memberNo).build();
+		ProjectDto find = projectDao.get(projectDto);
+		model.addAttribute("projectDto", find);
+
+		CategoryDto theme = categoryDao.getByNo(find.getCategoryNo());
+		CategoryDto theme2 = categoryDao.getByNo(theme.getCategorySuper());
+		
+		model.addAttribute("categoryDto", theme);
+		model.addAttribute("categoryDto2", theme2);
+		
+		return "project/projectMainApproval";
+	}
+	
+	@PostMapping("/{projectNo}/projectMainApproval")
+	public String projectMainApproval(@PathVariable int projectNo) {
+		projectDao.projectApprovalUpdate2(projectNo);
+		return "redirect:projectMainApproval";
+	}
+	
+	@PostMapping("/{projectNo}/projectMainApprovalCancel")
+	public String projectMainApprovalCancel(@PathVariable int projectNo) {
+		projectDao.projectApprovalUpdate1(projectNo);
+		return "redirect:projectMainApproval";
+	}
+	
+	
+	
 }

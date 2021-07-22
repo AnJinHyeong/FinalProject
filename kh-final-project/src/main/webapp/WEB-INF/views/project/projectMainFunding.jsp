@@ -12,6 +12,26 @@
 	
 	$(function(){
 		
+		$(document).ready(function(){
+			var inVal = $("input[name=projectTargetAmount]").val();
+			var regexVal = /^[0-9]{6,20}$/;
+			
+			if (regexVal.test(inVal)) {
+				if(inVal >= 500000){
+					$(".font-on").text("");
+				}
+				else{
+					$(this).val("");
+					$(".font-on").text("50만원 이상의 금액을 입력해주세요.");
+				}
+			}			
+			else {
+				$(this).val("");
+				$(".font-on").text("50만원 이상의 금액을 입력해주세요.");
+			}
+		});
+		
+		
 		//펀딩 금액 
 		$("input[name=projectTargetAmount]").blur(function(){
 			var inVal = $(this).val();
@@ -30,7 +50,7 @@
 				$(this).val("");
 				$(".font-on").text("50만원 이상의 금액을 입력해주세요.");
 			
-			 }	
+			}	
 			
 		});
 		
@@ -138,37 +158,28 @@
 		});
 		
 		
-// 		console.log(${projectDto.projectTargetAmount});
-// 		console.log(${projectDto.projectStartDate});
-// 		console.log(${projectDto.projectEndDate});
 		
-		if(${projectDto.projectTargetAmount} == 0){
-			var pta = 0;
-		}
-		else{
+		if($("input[name=projectTargetAmount]").val()){
 			var pta = 1;
 		}
-		
-		if(${projectDto.projectStartDate} == 0){
+		else{
+			var pta = 0;
+		}
+		if($("input[name=projectStartDate]").val() == null || $("input[name=projectStartDate]").val() == ""){
 			var psd = 0;
 		}
 		else{
 			var psd = 1;
 		}
-		
-		if(${projectDto.projectEndDate} == 0){
+		if($("input[name=projectEndDate]").val() == null || $("input[name=projectEndDate]").val() == ""){
 			var ped = 0;
 		}
 		else{
 			var ped = 1;
 		}
 		
-// 		console.log(pta);
-// 		console.log(psd);
-// 		console.log(ped);
 		
 		$("#progress").text(33*(pta+psd+ped)+1);
-					
 		
 		
 	});
@@ -228,7 +239,7 @@
 					</dl>
 					<div class="projcet-insert-div2">
 						<div style="width: 630px;">
-							<ul style="margin: 0; padding: 0; list-style-position: inherit;">
+							<ul style="margin: 0; padding: 0; list-style-position: outside;">
 								<li class="project-funding-li">
 									<div style="width: 630px;">
 										<p class="project-insert-p">시작일</p>
@@ -281,15 +292,15 @@
 					</div>
 				</div>
 				
-				<div class="project-insert-div3">
-					<input class="project-btn btn3 project-btn-hover" type="submit" value="저장">
-				</div>
-			
+				<c:if test="${projectDto.projectState != '2'}">
+					<div class="project-insert-div3">
+						<input class="project-btn btn3 project-btn-hover" type="submit" value="저장">
+					</div>
+				</c:if>
+				
 			</form>
 			
 		</div>
-		
-		
 		
 	</div>
 

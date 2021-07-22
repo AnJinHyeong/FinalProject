@@ -35,6 +35,9 @@ private PayDao payDao;
 	@Override
 	public PayReadyVO ready(PayReadyPrepareVO payReadyPrepareVO) throws URISyntaxException {
 		
+		int payNo = payDao.getSequence();//주문번호 생성
+		payReadyPrepareVO.setPartner_order_id(String.valueOf(payNo));
+		
 		//[1] 요청 도구 생성
 		RestTemplate template = new RestTemplate();
 		
@@ -53,9 +56,9 @@ private PayDao payDao;
 		body.add("total_amount", String.valueOf(payReadyPrepareVO.getTotal_amount()));//총 구매금액
 		body.add("tax_free_amount", String.valueOf(payReadyPrepareVO.getTax_free_amount()));//면세금액(없으면 0)
 		
-		body.add("approval_url", "http://localhost:8080/kh-final-project/pay/success");//사용자 결제 성공시 신호를 받을 주소
-		body.add("cancel_url", "http://localhost:8080/kh-final-project/pay/cancel");//사용자 결제 취소시 신호를 받을 주소
-		body.add("fail_url", "http://localhost:8080/kh-final-project/pay/fail");//사용자 결제 실패시 신호를 받을 주소
+		body.add("approval_url", "http://localhost:8080/finalproject/pay/success");//사용자 결제 성공시 신호를 받을 주소
+		body.add("cancel_url", "http://localhost:8080/finalproject/pay/cancel");//사용자 결제 취소시 신호를 받을 주소
+		body.add("fail_url", "http://localhost:8080/finalproject/pay/fail");//사용자 결제 실패시 신호를 받을 주소
 		
 		//[4] Http Header / Body 합성
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
@@ -71,20 +74,18 @@ private PayDao payDao;
 		
 		//DB 등록 작업 수행
 
-		
 		PayDto payDto = PayDto.builder()
 												.payNo(Integer.parseInt(payReadyPrepareVO.getPartner_order_id()))
 												.payTid(readyVO.getTid())
 												.payPrice(payReadyPrepareVO.getTotal_amount())
-												.memberNo(40)
+												.memberNo(Integer.parseInt(payReadyPrepareVO.getPartner_user_id()))
 											.build();
-		payDao.getSequence();
 		payDao.ready(payDto);
 		
 		//컨트롤러에서 사용할 수 있도록 추가 데이터를 세팅하여 반환
 		readyVO.setPartner_order_id(payReadyPrepareVO.getPartner_order_id());
-		readyVO.setPartner_user_id(payReadyPrepareVO.getPartner_order_id());
-		readyVO.setMember_no(payReadyPrepareVO.getMemberNo());
+		readyVO.setPartner_user_id(payReadyPrepareVO.getPartner_user_id());
+//		readyVO.setMember_no(payReadyPrepareVO.getMemberNo());
 		return readyVO;
 	}
 	
@@ -115,10 +116,9 @@ private PayDao payDao;
 		//[6] 전송
 		PayApproveVO approveVO = 
 				template.postForObject(uri, entity, PayApproveVO.class);
-		log.debug("approveVO = {}", approveVO);
 		
 		//[7] DB의 결제정보를 승인으로 변경
-		payDao.approve(Integer.parseInt(payApprovePrepareVO.getPartner_order_id()));
+		payDao.approve(Integer.parseInt(payApprovePrepareVO.getPartner_user_id()));
 		
 		return approveVO;
 	}
@@ -126,8 +126,9 @@ private PayDao payDao;
 //	@Override
 //	public PayReadyVO sequence(PayReadyPrepareVO PayReadyPrepareVO) throws URISyntaxException {
 //		return sqlSession.selectOne("member.get, pa");
-		
-	}
+//		
+//	}
+
 
 //	@Override
 //	public KakaoPaySearchVO search(String tid) throws URISyntaxException {
@@ -194,83 +195,4 @@ private PayDao payDao;
 //		
 //		return cancelVO;
 //	}
-//	
-//	@Autowired
-//	private PaymentDetailDao paymentDetailDao;
-//	
-//	@Autowired
-//	private ProductDao productDao;
-//
-//	@Override
-//	public KakaoPayReadyVO ready2(KakaoPayReadyPrepareVO prepareVO) throws URISyntaxException {
-//		//기존의 작업에 추가로 데이터베이스에 세부내역을 저장해야한다.
-//		int paymentNo = paymentDao.getSequence();//주문번호 생성
-//		
-//		prepareVO.setPartner_order_id(String.valueOf(paymentNo));
-//		
-//		//[1] 요청 도구 생성
-//		RestTemplate template = new RestTemplate();
-//		
-//		//[2] Http Header 생성(ex : 편지봉투)
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.add("Authorization", kakaoAk);
-//		headers.add("Content-type", contentType);
-//		
-//		//[3] Http Body 생성(ex : 편지내용)
-//		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-//		body.add("cid", cid);//가맹점ID(사업자 제휴 시 발급, 테스트용 ID 사용)
-//		body.add("partner_order_id", prepareVO.getPartner_order_id());//판매자 구분 ID
-//		body.add("partner_user_id", prepareVO.getPartner_user_id());//구매자 구분 ID
-//		body.add("item_name", prepareVO.getItem_name());//명세서에 표시될 구매 내역(다건 구매일 경우 ???외 ?건 형식)
-//		body.add("quantity", String.valueOf(prepareVO.getQuantity()));//구매수량
-//		body.add("total_amount", String.valueOf(prepareVO.getTotal_amount()));//총 구매금액
-//		body.add("tax_free_amount", String.valueOf(prepareVO.getTax_free_amount()));//면세금액(없으면 0)
-//		
-//		body.add("approval_url", "http://localhost:8080/spring21/shop/success");//사용자 결제 성공시 신호를 받을 주소
-//		body.add("cancel_url", "http://localhost:8080/spring21/shop/cancel");//사용자 결제 취소시 신호를 받을 주소
-//		body.add("fail_url", "http://localhost:8080/spring21/shop/fail");//사용자 결제 실패시 신호를 받을 주소
-//		
-//		//[4] Http Header / Body 합성
-//		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
-//		
-//		//[5] 목적지 주소 작성
-//		URI uri = new URI("https://kapi.kakao.com/v1/payment/ready");
-//		
-//		//[6] 전송
-//		KakaoPayReadyVO readyVO = template.postForObject(uri, entity, KakaoPayReadyVO.class);
-//		log.debug("readyVO = {}", readyVO);
-//		log.debug("url = {}", readyVO.getNext_redirect_pc_url());
-//		log.debug("tid = {}", readyVO.getTid());
-//		
-//		//DB 등록 작업 수행
-//		PaymentDto paymentDto = PaymentDto.builder()
-//												.paymentNo(Integer.parseInt(prepareVO.getPartner_order_id()))
-//												.paymentTid(readyVO.getTid())
-//												.paymentBuyer(Integer.parseInt(prepareVO.getPartner_user_id()))
-//												.paymentProduct(prepareVO.getNo())
-//											.build();
-//		paymentDao.ready(paymentDto);
-//		
-////		상세 정보에 대한 등록 처리 코드
-//		List<PaymentDetailDto> list = new ArrayList<>();
-//		List<ProductDto> products = prepareVO.getProduct();
-//		List<ChunkVO> chunks = prepareVO.getChunk();
-//		for(int i=0; i < products.size(); i++) {
-//			list.add(PaymentDetailDto.builder()
-//							.paymentDetailProduct(chunks.get(i).getNo())
-//							.paymentDetailQuantity(chunks.get(i).getQuantity())
-//							.paymentDetailAmount(products.get(i).getPrice() * chunks.get(i).getQuantity())
-//							.paymentDetailOrigin(paymentNo)//대표결제번호
-//						.build());
-//		}
-//		
-//		paymentDetailDao.add(list);//insert 구문 반복
-////		paymentDetailDao.addAll(list);//insert all 구문(Error)
-//		
-//		//컨트롤러에서 사용할 수 있도록 추가 데이터를 세팅하여 반환
-//		readyVO.setPartner_order_id(prepareVO.getPartner_order_id());
-//		readyVO.setPartner_user_id(prepareVO.getPartner_user_id());
-//		
-//		return readyVO;
-//	}
-//}
+}

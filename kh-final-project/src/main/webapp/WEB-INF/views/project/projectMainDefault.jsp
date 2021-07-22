@@ -207,6 +207,8 @@
 			}
 		});
 		
+		
+		
 		//페이지 로딩 시 프로젝트 이미지가 있으면 화면에 송출
 		$.ajax({
 			url :"${pageContext.request.contextPath}/image/project/confirm/${projectDto.projectNo}",
@@ -214,20 +216,57 @@
 			success : function(resp){
 				if(resp == 1){
 					$.ajax({
-						url :"${pageContext.request.contextPath}/image/project/getByProject/${projectDto.projectNo}",
+						url :"${pageContext.request.contextPath}/image/project/getByProjectNo/${projectDto.projectNo}",
 						type: "get",
 						processData : false,
 						contentType : false,
 						success : function(resp){
-							var url = "${pageContext.request.contextPath}/image/project/download/"+resp.imageNo;
+							var url = "${pageContext.request.contextPath}/image/project/projectMainDownload/"+resp.imageNo;
 							$("#preview").attr("src",url);
+							
+							//진행률 계산
+							if($("input[name=projectTitle]").val() == null || $("input[name=projectTitle]").val() ==""){
+								var pt = 0;
+							}
+							else{
+								var pt = 1;
+							}
+							
+							if($("#projectSummary-text").text() == null || $("#projectSummary-text").text() ==""){
+								var ps = 0;
+							}
+							else{
+								var ps = 1;
+							}
+							
+							$("#progress").text(25*(2+pt+ps));
+							
 						}
 					
 					});				
 				}
+				else{
+					//진행률 계산
+					if($("input[name=projectTitle]").val() == null || $("input[name=projectTitle]").val() ==""){
+						var pt = 0;
+					}
+					else{
+						var pt = 1;
+					}
+					
+					if($("#projectSummary-text").text() == null || $("#projectSummary-text").text() ==""){
+						var ps = 0;
+					}
+					else{
+						var ps = 1;
+					}
+					
+					$("#progress").text(25*(1+pt+ps));
+				}
 			}
 		
 		});
+		
 		
 		//프로젝트 사진 등록 후 보여주기
 		$("#projectImage").on("input",function(){
@@ -238,15 +277,12 @@
 				url :"${pageContext.request.contextPath}/image/project/confirm/${projectDto.projectNo}",
 				type: "post",
 				success : function(resp){
-					console.log(resp);
 					if(resp == 1){//등록된 이미지가 있을경우 지우고 다시 등록
-						var fileOn = 1;
 						//이미지 삭제
 						$.ajax({
 							url :"${pageContext.request.contextPath}/image/project/delete/${projectDto.projectNo}",
 							type: "post",
 							success : function(resp){
-								console.log(resp);
 							}
 						});
 
@@ -273,7 +309,7 @@
 								data: fd,
 								success : function(resp){
 									$("#preview").empty();
-									var url = "${pageContext.request.contextPath}/image/project/download/"+resp.imageNo;
+									var url = "${pageContext.request.contextPath}/image/project/projectMainDownload/"+resp.imageNo;
 									$("#preview").attr("src",url);
 								},
 								error :function(resp){
@@ -286,8 +322,6 @@
 					
 					}
 					else{//등록된 이미지가 없을 경우 등록
-						console.log(files);
-						console.log(filesLength);
 						if(files && filesLength){//파일 저장소 존재 및 0번 위치에 파일 존재
 							console.log("파일이 선택되었습니다");
 						
@@ -310,7 +344,7 @@
 								contentType : false,
 								data: fd,
 								success : function(resp){
-									var url = "${pageContext.request.contextPath}/image/project/download/"+resp.imageNo;
+									var url = "${pageContext.request.contextPath}/image/project/projectMainDownload/"+resp.imageNo;
 									$("#preview").attr("src",url);
 								},
 								error :function(resp){
@@ -338,36 +372,6 @@
 			}
 			
 		});
-		
-// 		console.log(${projectDto.categoryNo});
-// 		console.log($("input[name=projectTitle]").val());
-// 		console.log($("#projectSummary-text").text());
-		
-		if(${projectDto.categoryNo} == 0){
-			var ctg = 0;
-		}
-		else{
-			var ctg = 1;
-		}
-		
-		if($("input[name=projectTitle]").val() == null || $("input[name=projectTitle]").val() ==""){
-			var pt = 0;
-		}
-		else{
-			var pt = 1;
-		}
-		
-		if($("#projectSummary-text").text() == null || $("#projectSummary-text").text() ==""){
-			var ps = 0;
-		}
-		else{
-			var ps = 1;
-		}
-		
-		
-		
-		$("#progress").text(25*(ctg+pt+ps));
-		
 		
 		
 	});
@@ -401,7 +405,7 @@
 					<dd class="project-insert-dd">
 						<p>프로젝트 성격과 가장 일치하는 카테고리를 선택해주세요. 적합하지 않을 경우 운영자에 의해 조정될 수 있습니다.</p>
 						<br>
-						<p style="color: rgb(248, 100, 83); font-size: 12px;"><i class="fas fa-exclamation-circle"></i> 심사 중인 카테고리는 심사가 끝나기 전 변경 시 목록에서 지워집니다.</p>
+						<p class="font-12 red"><i class="fas fa-exclamation-circle"></i> 심사 중인 카테고리는 심사가 끝나기 전 변경 시 목록에서 지워집니다.</p>
 					</dd>
 				</dl>
 				<div class="projcet-insert-div2">
@@ -454,9 +458,9 @@
 						<p class="project-insert-p">요약 내용</p>
 						<textarea class="project-insert-text" rows="1" id="projectSummary-text" name="projectSummary" required>${projectDto.projectSummary}</textarea>
 						<div>
-							<p id="textMin" class="f12 pb10 pt10 left fRed">최소 10자 이상 입력해주세요</p>
-							<p id="textMax" class="f12 pb10 pt10 left fRed">최대 50자 이하로 입력해주세요</p>
-							<p id="textSize" class="f12 pb10 pt10 right">(<span id="textSizeSpan">0</span><span>/50</span>)</p>
+							<p id="textMin" class="f12 pb10 pt10 left fRed font-12">최소 10자 이상 입력해주세요</p>
+							<p id="textMax" class="f12 pb10 pt10 left fRed font-12">최대 50자 이하로 입력해주세요</p>
+							<p id="textSize" class="f12 pb10 pt10 right font-12">(<span id="textSizeSpan" class="font-12">0</span><span class="font-12">/50</span>)</p>
 						</div>
 					</div>
 				</div>
@@ -485,9 +489,11 @@
 			</div>
 			
 			
-			<div class="project-insert-div3">
-				<input class="project-btn btn3 project-btn-hover" type="submit" value="저장">
-			</div>
+			<c:if test="${projectDto.projectState != '2'}">
+				<div class="project-insert-div3">
+					<input class="project-btn btn3 project-btn-hover" type="submit" value="저장">
+				</div>
+			</c:if>
 			
 			</form>
 			
