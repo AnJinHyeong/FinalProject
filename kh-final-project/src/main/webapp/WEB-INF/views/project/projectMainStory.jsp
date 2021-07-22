@@ -171,6 +171,7 @@
 
 <script id="addFileInputTemplate" type="text/template">
 	<div>
+
 		<input type="file" name="{{i}}" class="dpNone projectStoryFile" style="margin-left:200px;">
 	</div>
 </script>
@@ -178,6 +179,7 @@
 <script id="addFileImageTemplate" type="text/template">
 	<div>
 		<img name="{{iImage}}" class="w700" style="margin: 0 50px;">
+
 	</div>
 </script>
 
@@ -200,7 +202,9 @@
 
 					<form action="projectMainStory" method="post">
 
+
 						<div class="w100p h500 bacWhite scrollThin inputFocusNone" style="padding: 50px 200px;" id="inputArea" contenteditable="true">
+
 							${projectDto.projectContent}
 							
 							<div id="hiddenFileInput" class="dpNone"></div>

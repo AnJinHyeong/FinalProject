@@ -1,6 +1,12 @@
 //결제 창
 $(function(){
+	
+//  결제관련 금액입력, 금액선택 부분 가리기
+	 $("#10underMoney").hide();
+	 $("#10upMoney").hide();
+	
 
+//  10만원 이상 입력박스
 	$('#10upMoney').blur('input', function(){
 			var text = $(this).val();
 			var regexText = /^[0-9]{6}$/;
@@ -37,11 +43,14 @@ $(function(){
 	});
 	
       
-//      결제관련 금액입력, 금액선택 부분 가리기
-		 $("#10underMoney").hide();
-		 $("#10upMoney").hide();
-		 
-		 
+//  10만원 이하 셀렉트부분에 값넣기
+
+	  var start = 5000;
+	  var end = 100000;
+for(var money = 5000; money<=end; money+=start){
+  $('#10underMoney').append("<option value = "+money+">"+money+"원"+"</option>");
+	
+  
 //10만원 이하 부분
       $("#10under").change( function(){
  		 var a = $(this).val();
@@ -59,6 +68,7 @@ $(function(){
   		 var a = $(this).val();
      	
      	  if(a=="trueUp"){
+     		   event.preventDefault();
       		 $("#10upMoney").fadeIn();
      		 $("#10underMoney").fadeOut();
     		  $("#10under option:selected").val("0");
@@ -66,12 +76,7 @@ $(function(){
        }
        });
       
-//      셀렉트부분에 값넣기
 
-    	  var start = 5000;
-    	  var end = 100000;
-      for(var money = 5000; money<=end; money+=start){
-          $('#10underMoney').append("<option value = "+money+">"+money+"원"+"</option>");
       }
 
       

@@ -11,17 +11,22 @@
 		padding-top:150px;
 }
 
+#formAll{
+	padding-top: 50px;
+	
+	
+}
 #form{
-/* 	position:absolute;
+	position:absolute;
 	left: 50%; transform: translateX(-50%);
-	top:500px; */
+	top:500px; 
 	background: black;
 	color: white;
 	padding : 10px;
 	border: none;
 }
 
-#joinBorder{			
+#payBorder{			
 				width : 500px;
 			height: 500px;
 			border: 2px solid #FFC58C;

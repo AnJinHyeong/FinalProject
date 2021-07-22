@@ -5,35 +5,40 @@ $(function () {
 	$('#memberId').blur('input', function () {
 		var id = $(this).val();
 		var regexId = /^[a-zA-Z0-9]{8,20}$/;
-		if (regexId.test(id)) {
-			$('#idResult').css("color", "black")
-			$('#idResult').text('');
-		}			
-		 else {
-			$('#idResult').css("color", "red")
-			$('#idResult').text('잘못된 형식의 아이디 입니다');
-			return false;
-		}
 		
-//아이디중복 확인		
+		//아이디 중복확인
 		$.ajax({
-			url: "${pageContext.request.contextPath}/idCheck",
+			url: "../check/id",
 			data:{
-				memberId : id	
-				},
-				success:function(resp){
-					if(resp === "Y"){
-						$("#idResult").next().text("사용가능한 아이디입니다")
+				memberId : id
+			},
+			type : "get",
+			success:function(resp){
+				if (resp==="N"){
+					$('#checkId').css("color", "red")
+						$("#checkId").text("이미 사용중인 아이디입니다")						
 					}
-					else if (resp==="N"){
-						$("#idResult").next().text("이미 사용중인 아이디입니다")
-						
-					}
+				
+				else{
+					$("#checkId").css("color", "black")
+					$("#checkId").text('');
+					
+					//아이디 형식체크
+					if (regexId.test(id)) {
+						$('#idResult').css("color", "black")
+						$('#idResult').text('');
+					}			
+					 else {
+						$('#idResult').css("color", "red")
+						$('#idResult').text('잘못된 형식의 아이디 입니다');
+						return false;
+					
 				}
-			
-		})
+				}
+			}
+			});
+		});
 		
-	});
 	
 	// 비밀번호 입력
 	$('#memberPw').blur('input', function () {

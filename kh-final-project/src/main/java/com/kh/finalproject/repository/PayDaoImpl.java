@@ -24,9 +24,9 @@ public class PayDaoImpl implements PayDao{
 
 
 	@Override
-	public void plus(int payNo) {
-		sqlSession.update("pay.plus", payNo);
-		
+	public boolean plus(PayDto payDto) {
+		 int count = sqlSession.update("pay.plus", payDto);
+		 return count > 0;
 	}
 
 	@Override
@@ -42,16 +42,12 @@ public class PayDaoImpl implements PayDao{
 	}
 	
 	
-//	
-//	@Override
-//	public List<PaymentDto> list(int paymentBuyer) {
-//		return sqlSession.selectList("payment.list", paymentBuyer);
-//	}
-//	
-//	@Override
-//	public PayDto get(int payNo) {
-//		return sqlSession.selectOne("pay.get", payNo);
-//	}
+
+	@Override
+	public PayDto get(int payNo) {
+		return sqlSession.selectOne("pay.get", payNo);
+	}
+
 //	
 //	@Override
 //	public void cancel(int paymentNo) {
