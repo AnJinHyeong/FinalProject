@@ -85,6 +85,7 @@ private PayDao payDao;
 		//컨트롤러에서 사용할 수 있도록 추가 데이터를 세팅하여 반환
 		readyVO.setPartner_order_id(payReadyPrepareVO.getPartner_order_id());
 		readyVO.setPartner_user_id(payReadyPrepareVO.getPartner_user_id());
+		readyVO.setTotal_amount(payReadyPrepareVO.getTotal_amount());
 //		readyVO.setMember_no(payReadyPrepareVO.getMemberNo());
 		return readyVO;
 	}
@@ -119,7 +120,16 @@ private PayDao payDao;
 		
 		//[7] DB의 결제정보를 승인으로 변경
 
-		payDao.approve(Integer.parseInt(payApprovePrepareVO.getPartner_user_id()));
+		payDao.approve(Integer.parseInt(payApprovePrepareVO.getPartner_order_id()));
+		
+		PayDto payDto = payDao.get(Integer.parseInt(payApprovePrepareVO.getPartner_order_id()));
+		PayDto find = PayDto.builder()
+				.payPrice(payDto.getPayPrice())
+				.memberNo(payDto.getMemberNo())
+				.build();
+		
+		payDao.plus(find);
+		
 		
 		return approveVO;
 	}

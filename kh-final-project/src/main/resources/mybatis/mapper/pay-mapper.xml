@@ -37,10 +37,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 <!-- 기존포인트와 입력한 포인트 더하기 -->
-	<update id = "plus" parameterType="int">
-UPDATE MEMBER 
+	<update id = "plus" parameterType="PayDto">
+UPDATE member
 SET member_have_point = 
-member_have_point + #{pay_price};
+member_have_point + #{payPrice}
+WHERE member_no = #{memberNo}
 	</update>
 	
 <!-- 	<update id = "plusResult">
