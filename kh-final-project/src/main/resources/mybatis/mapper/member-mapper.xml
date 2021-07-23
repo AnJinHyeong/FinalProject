@@ -71,9 +71,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 보유 포인트 조회 -->
-	<select id = "selectHavePoint" resultType = "int" parameterType ="int">
-	SELECT member_have_point FROM member WHERE member_no = #{memberNo}
+	<select id = "getMemberHavePoint" resultType = "int" parameterType ="int">
+		SELECT member_have_point FROM member WHERE member_no = #{memberNo}
 	</select>
 	
+	<!-- 결제시 포인트 감소 -->
+	<update id="usePoint" parameterType="SponsorDto">
+		update member set member_have_point = member_have_point - #{sponsorAmount} where member_no = #{memberNo} 
+	</update>
 	
 </mapper>

@@ -52,7 +52,7 @@
 	<div class="section-project-row">
 			
 			<div class="project-main-div1">
-				<button class="project-btn btn1 project-btn-hover">미리보기</button>
+				<a href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}"><button class="project-btn btn1 project-btn-hover" id="projectBoard">미리보기</button></a>
 				<div style="text-decoration: none; height: 40px;">
 					<c:choose>
 						<c:when test="${projectDto.projectState == '1'}">
