@@ -115,6 +115,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="projectDelete" parameterType="ProjectDto">
 		delete project where project_no = #{projectNo} and member_no = #{memberNo}
 	</delete>
+	
+	<!-- 프로젝트 달성도 변경 -->
+	<update id="setPercent" parameterType="ProjectDto">
+		update project set project_percent = #{projectPercent} where project_no = #{projectNo}
+	</update>
+	
 </mapper>
 
 

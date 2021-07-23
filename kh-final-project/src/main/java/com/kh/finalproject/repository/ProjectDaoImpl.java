@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.vo.ProjectCategoryVo;
+import com.kh.finalproject.vo.ProjectInformationVo;
 import com.kh.finalproject.vo.ProjectProgressVo;
 
 @Repository
@@ -149,6 +150,11 @@ public class ProjectDaoImpl implements ProjectDao{
 	public boolean projectDelete(ProjectDto projectDto) {
 		int count = sqlSession.delete("project.projectDelete",projectDto);
 		return count > 0;
+	}
+
+	@Override
+	public void setPercent(ProjectDto projectDto) {
+		sqlSession.update("project.setPercent", projectDto);
 	}
 
 }

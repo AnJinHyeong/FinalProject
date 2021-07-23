@@ -14,7 +14,7 @@
 			url :"${pageContext.request.contextPath}/image/project/confirm/${projectDto.projectNo}",
 			type: "post",
 			success : function(resp){
-				if(resp == 1){<a href="${pageContext.request.contextPath}/projectBoard/preview/${projectDto.projectNo}"><button class="project-btn btn1 project-btn-hover" id="projectBoard">미리보기</button></a>
+				if(resp == 1){
 					$.ajax({
 						url :"${pageContext.request.contextPath}/image/project/getByProjectNo/${projectDto.projectNo}",
 						type: "get",

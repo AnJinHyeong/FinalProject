@@ -16,7 +16,7 @@ CREATE SEQUENCE member_seq;
 #project table
 CREATE TABLE project(
 project_no NUMBER(19) PRIMARY KEY,
-project_title varchar2(300),
+project_title varchar2(90),
 project_content clob default empty_clob(),
 project_content_file clob default empty_clob(),
 project_target_amount NUMBER(19),
