@@ -34,6 +34,7 @@
 					template = template.replace("{{sumSponsorAmountByOne}}", resp.sumSponsorAmountByOne);
 					
 					
+					
 					$("#projectSummarize").append(template);
 				}
 			});
@@ -48,13 +49,17 @@
 
 		<div class="h200">
 		
-			<pre class="wordBreak preWrap fs18 fBold mb10 h80">{{projectTitle}}</pre>
+			<pre class="wordBreak preWrap fs18 fBold h80">{{projectTitle}}</pre>
 
 			<pre class="fs12 fBold mb30 taRight"> {{projectStartDateString}} ~ {{projectEndDateString}}</pre>
 		
-			<pre class="fs12 fBold">목표금액/달성액(%)</pre>
+			<pre class="fs12 fBold mb10">목표금액 / 달성액 (%)</pre>
 
-			<pre>{{projectTargetAmount}}/{{sumCurrentAmountByAll}}({{projectPercent}})</pre>
+			<div class="boc240 bosSolid bow1 w100p dpFlex" style="padding: 5px; background:linear-gradient(90deg,red 80%,white 20%);">
+				<pre class="fs12 fBold w70p">{{projectTargetAmount}} / {{sumCurrentAmountByAll}}</pre>
+				<pre class="fs12 fBold w30p taRight">({{projectPercent}}%)</pre>
+			</div>
+
 		</div>		
 
 		<div class="bac220 w100p h360">
