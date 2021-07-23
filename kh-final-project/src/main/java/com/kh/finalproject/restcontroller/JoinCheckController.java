@@ -1,21 +1,23 @@
 package com.kh.finalproject.restcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.finalproject.repository.MemberDao;
 
 @RestController
-public class IdCheckController {
+@RequestMapping("/head")
+public class JoinCheckController {
 	
 	@Autowired
 	MemberDao memberDao;
 	
-	@PostMapping("/idCheck")
-	public String idCheck(@RequestParam String memberId){
-		if(memberDao.idCheck(memberId) != null) return "N";
+	@GetMapping("/id")
+	public String checkId(@RequestParam String memberId){
+		if(memberDao.checkId(memberId)) return "N";
 			else return "Y";
 	}
 	

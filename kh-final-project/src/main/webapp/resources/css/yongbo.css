@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /* width */
-.w10{width:10px}.w20{width:20px}.w30{width:30px}.w40{width:40px}.w50{width:50px}.w60{width:60px}.w70{width:70px}.w80{width:80px}.w90{width:90px}.w100{width:100px}.w110{width:110px}.w120{width:120px}.w130{width:130px}.w140{width:140px}.w150{width:150px}.w160{width:160px}.w170{width:170px}.w180{width:180px}.w190{width:190px}.w200{width:200px}.w210{width:210px}.w220{width:220px}.w230{width:230px}.w240{width:240px}.w250{width:250px}.w260{width:260px}.w270{width:270px}.w280{width:280px}.w290{width:290px}.w300{width:300px}.w310{width:310px}.w320{width:320px}.w330{width:330px}.w340{width:340px}.w350{width:350px}.w360{width:360px}.w370{width:370px}.w380{width:380px}.w390{width:390px}.w400{width:400px}.w410{width:410px}.w420{width:420px}.w430{width:430px}.w440{width:440px}.w450{width:450px}.w460{width:460px}.w470{width:470px}.w480{width:480px}.w490{width:490px}.w500{width:500px}.w510{width:510px}.w520{width:520px}.w530{width:530px}.w540{width:540px}.w550{width:550px}.w560{width:560px}.w570{width:570px}.w580{width:580px}.w590{width:590px}.w600{width:600px}.w610{width:610px}.w620{width:620px}.w630{width:630px}.w640{width:640px}.w650{width:650px}.w660{width:660px}.w670{width:670px}.w680{width:680px}.w690{width:690px}.w700{width:700px}.w710{width:710px}.w720{width:720px}.w730{width:730px}.w740{width:740px}.w750{width:750px}.w760{width:760px}.w770{width:770px}.w780{width:780px}.w790{width:790px}.w800{width:800px}.w810{width:810px}.w820{width:820px}.w830{width:830px}.w840{width:840px}.w850{width:850px}.w860{width:860px}.w870{width:870px}.w880{width:880px}.w890{width:890px}.w900{width:900px}.w910{width:910px}.w920{width:920px}.w930{width:930px}.w940{width:940px}.w950{width:950px}.w960{width:960px}.w970{width:970px}.w980{width:980px}.w990{width:990px}.w1000{width:1000px}
+.w10{width:10px}.w20{width:20px}.w30{width:30px}.w40{width:40px}.w50{width:50px}.w60{width:60px}.w70{width:70px}.w80{width:80px}.w90{width:90px}.w100{width:100px}.w110{width:110px}.w120{width:120px}.w130{width:130px}.w140{width:140px}.w150{width:150px}.w160{width:160px}.w170{width:170px}.w180{width:180px}.w190{width:190px}.w200{width:200px}.w210{width:210px}.w220{width:220px}.w230{width:230px}.w240{width:240px}.w250{width:250px}.w260{width:260px}.w270{width:270px}.w280{width:280px}.w290{width:290px}.w300{width:300px}.w310{width:310px}.w320{width:320px}.w330{width:330px}.w340{width:340px}.w350{width:350px}.w360{width:360px}.w370{width:370px}.w380{width:380px}.w390{width:390px}.w400{width:400px}.w410{width:410px}.w420{width:420px}.w430{width:430px}.w440{width:440px}.w450{width:450px}.w460{width:460px}.w470{width:470px}.w480{width:480px}.w490{width:490px}.w500{width:500px}.w510{width:510px}.w520{width:520px}.w530{width:530px}.w540{width:540px}.w550{width:550px}.w560{width:560px}.w570{width:570px}.w580{width:580px}.w590{width:590px}.w600{width:600px}.w610{width:610px}.w620{width:620px}.w630{width:630px}.w640{width:640px}.w650{width:650px}.w660{width:660px}.w670{width:670px}.w680{width:680px}.w690{width:690px}.w700{width:700px}.w710{width:710px}.w720{width:720px}.w730{width:730px}.w740{width:740px}.w750{width:750px}.w760{width:760px}.w770{width:770px}.w780{width:780px}.w790{width:790px}.w800{width:800px}.w810{width:810px}.w820{width:820px}.w830{width:830px}.w840{width:840px}.w850{width:850px}.w860{width:860px}.w870{width:870px}.w880{width:880px}.w890{width:890px}.w900{width:900px}.w910{width:910px}.w920{width:920px}.w930{width:930px}.w940{width:940px}.w950{width:950px}.w960{width:960px}.w970{width:970px}.w980{width:980px}.w990{width:990px}.w1000{width:1000px}.w1200{width:1200px}
 .w0p{width:0%}.w5p{width:5%}.w10p{width:10%}.w15p{width:15%}.w20p{width:20%}.w25p{width:25%}.w30p{width:30%}.w35p{width:35%}.w40p{width:40%}.w45p{width:45%}.w50p{width:50%}.w55p{width:55%}.w60p{width:60%}.w65p{width:65%}.w70p{width:70%}.w75p{width:75%}.w80p{width:80%}.w85p{width:85%}.w90p{width:90%}.w95p{width:95%}.w98p{width:98%}.w100p{width:100%}
 
 /* height */
@@ -38,6 +38,7 @@
 .bow1{border-width:1px}
 .bosSolid{border-style:solid}.bosNone{border-style:none}
 .bora5{border-radius:5px}.bora10{border-radius:10px}
+.borNone{border-right: none !important}.bolNone{border-left: none !important}.botNone{border-top: none !important}.bobNone{border-bottom: none !important}
 
 
 /* background-color */
@@ -48,8 +49,10 @@
 .taLeft{text-align:left}.taRight{text-align:right}.taCenter{text-align:center}
 
 /* display */
-.dpNone{display:none}.dpFlex{display:flex}.dpBlock{display:block}.dpInline{display:inline}.diIB{display:inline-block}
+.dpNone{display:none}.dpFlex{display:flex}.dpBlock{display:block}.dpInline{display:inline}.dpInlineBlock{display:inline-block}
 
+/* position */
+.poAbsolute{position:absolute}.poFixed{position:fixed}.poRelative{position:relative}
 
 /* etc */
 .dpFlex.dpFlexCenter{align-items:center}
@@ -67,8 +70,10 @@
 
 pre.oneLine{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 pre.wordBreak{word-break: break-all}
+pre.preWrap{white-space:pre-wrap}
 
-.ybModal{position: fixed;background-color: white;top: 50%;left: 50%;transform: translate(-50%, -50%);z-index: 102;display: none;}
+.ybModal{
+: fixed;background-color: white;top: 50%;left: 50%;transform: translate(-50%, -50%);z-index: 102;display: none;}
 .ybModalBackground{position: fixed;background-color: rgba(0, 0, 0, 0.2);height: 100%;width: 100%;top: 0;left: 0;z-index: 101;display: none;}
 .ybModalX{cursor: pointer;}
 .ybModal pre{white-space: pre-line;word-break: break-all;}

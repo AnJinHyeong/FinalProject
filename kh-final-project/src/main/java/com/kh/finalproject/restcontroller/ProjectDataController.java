@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,13 +21,16 @@ import com.kh.finalproject.repository.GiftDao;
 import com.kh.finalproject.repository.ItemDao;
 import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.vo.IndexProjectVo;
+import com.kh.finalproject.repository.SponsorDao;
+import com.kh.finalproject.vo.ProjectInformationVo;
+import com.kh.finalproject.vo.SponsorVo;
+
+import lombok.extern.slf4j.Slf4j;
 
 @RequestMapping("/project/data")
 @RestController
+@Slf4j
 public class ProjectDataController {
-
-	@Autowired
-	private SqlSession sqlSession;
 
 	@Autowired
 	private CategoryDao categoryDao;
@@ -87,6 +89,34 @@ public class ProjectDataController {
 		return projectDao.calculateProjectProgress(projectNo);
 	}
 	
+	@Autowired
+	private SponsorDao sponsorDao;
+	
+	@PostMapping("/projectInformation")
+	public ProjectInformationVo projectInformation(HttpSession session, @RequestParam int projectNo) {
+		ProjectDto projectDto = projectDao.getByProjectNo(projectNo);
+		int currentMemberNo = (int)session.getAttribute("memberNo");
+		int sumSponsorAmountByOne = sponsorDao.sponsorAmountByProjectNoAndMemberNo(SponsorVo.builder()
+											.memberNo(currentMemberNo)
+											.projectNo(projectNo)
+											.build());
+		int sumCurrentAmountByAll = sponsorDao.currentAmount(projectNo);
+		
+		return ProjectInformationVo.builder()
+				.projectNo(projectNo)
+				.projectTitle(projectDto.getProjectTitle())
+				.projectTargetAmount(projectDto.getProjectTargetAmount())
+				.projectPercent(projectDto.getProjectPercent())
+				.projectState(projectDto.getProjectState())
+				.projectStartDateString(String.valueOf(projectDto.getProjectStartDate()))
+				.projectEndDateString(String.valueOf(projectDto.getProjectEndDate()))
+				.memberNo(projectDto.getMemberNo())
+				.categoryNo(projectDto.getCategoryNo())
+				.memberInfoNick(projectDto.getMemberInfoNick())
+				.sumSponsorAmountByOne(sumSponsorAmountByOne)
+				.sumCurrentAmountByAll(sumCurrentAmountByAll)
+				.build();
+	}
 
 	@GetMapping("/index/indexProjectMain")
 	public List<IndexProjectVo> indexProjectMain(){

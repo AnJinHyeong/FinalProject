@@ -49,7 +49,6 @@
 
 						$(".itemDeselect").on("click", function() {
 							var target = $(this).parent().siblings().find(".itemNo").val();
-							console.log(target);
 							$('input[value=' + target + ']').prop("checked", false);
 							var selectedItems = [];
 							$("input[name=selectedItemList]:checked").each(function(index, item) {
@@ -118,7 +117,6 @@
 		$("input[name=giftPrice]").blur("input", function() {
 			var giftPrice = $(this).val();
 			var regexPw = /^[1-9][0-9]{0,8}$/;
-			console.log(regexPw.test(giftPrice));
 			if (regexPw.test(giftPrice) || (giftPrice == 0)) {
 				$("#priceError").hide();
 			} else {

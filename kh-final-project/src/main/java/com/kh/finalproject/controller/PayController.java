@@ -59,11 +59,12 @@ public class PayController {
 		prepareVO.setPartner_order_id((String)session.getAttribute("partner_order_id"));
 		prepareVO.setPartner_user_id((String)session.getAttribute("partner_user_id"));
 		prepareVO.setTid((String)session.getAttribute("tid"));
+		prepareVO.setTotal_amount((String)session.getAttribute("total_amount"));
 		
 		session.removeAttribute("partner_order_id");
 		session.removeAttribute("partner_user_id");
 		session.removeAttribute("tid");
-
+		session.removeAttribute("total_amount");
 
 		PayApproveVO approveVO = payService.approve(prepareVO);
 		

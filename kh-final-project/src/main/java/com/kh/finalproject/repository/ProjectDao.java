@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
+import com.kh.finalproject.vo.ProjectInformationVo;
 
 public interface ProjectDao {
 	
@@ -44,5 +45,6 @@ public interface ProjectDao {
 	boolean projectDelete(ProjectDto projectDto);
 	//index화면 프로젝트 리스트 
 	List<IndexProjectVo> indexProjectMain();
-	
+	// 프로젝트 달성도 업데이트
+	void setPercent(ProjectDto projectDto);
 }
