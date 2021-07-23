@@ -3,17 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
 <html>
 	<link rel="stylesheet" type="text/css" href="${root}/css/confirm.css">
 		
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/confirm.js"></script>
-
 <div id = "payAll">
-
 	<div id ="payBorder">
-	<div id ="payTitle"><h2>결제 입력</h2></div>
+<h2 id ="payTitle">결제정보입력</h2><br>
 <div id = "payContent">
 
 <form action="confirm" method="post" id = formAll onsubmit = "return confirm('결제 전에 한번더 확인해주세요')">
@@ -27,15 +24,15 @@
 	<!--  단일 결제이므로 수량은 1로 고정-->
 	<input type="hidden" name="quantity" value = 1>
 	
-	<p class = moneyText>현재 보유 포인트 : <strong>5000P</strong></p>
-	<p class = moneyText>충전하실 포인트 유형을 선택해주세요 </p>
+	<p class = moneyText>현재 보유 포인트 : <strong>5000P</strong></p><br>
+	<p class = moneyText>충전하실 포인트 유형을 선택해주세요 </p><br>
 	<div >
 	<input type = "radio" id = "10under" name ="radio" value = "trueUnder">	
-	<label class = moneyText>소액 결제</label>
+	<label class = moneyText>소액 결제</label><br>
 	<select id = "10underMoney" name="total_amount"></select>
-	</div>
+	</div><br>
 	<input type = "radio" id = "10up"  name ="radio" value = "trueUp">	
-		<label class = moneyText>고액 결제(10만~)</label>
+		<label class = moneyText>고액 결제(10만~)</label><br>
 	<input type="text" id = "10upMoney" name="total_amount">
 	<p id = "error"></p>
 		<!--  면세 비율 설정, 사업주에 따라 다르게 설정하기-->
@@ -48,21 +45,6 @@
 </form>
 
 </div>
-</div>
-
-<div id = "payAll">
-
-<br>
-<div class = nomalBorder> 
-	<div id ="payTitle" style = "float:left" ><h2>결제 조회</h2></div>
-	<button class = "nomalButton" >조회</button>
-
-
-<br>
-<div class = nomalBorder> 
-	<div id ="payTitle" style = "float:left" ><h2>결제 취소</h2></div>
-	<button class = "nomalButton" >취소</button>
-	</div>
 </div>
 </div>
 </html>   

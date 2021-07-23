@@ -71,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 보유 포인트 조회 -->
-	<select id = "selectHavePoint" resultType = "MemberDto" parameterType ="int">
+	<select id = "selectHavePoint" resultType = "int" parameterType ="int">
 	SELECT member_have_point FROM member WHERE member_no = #{memberNo}
 	</select>
 	
