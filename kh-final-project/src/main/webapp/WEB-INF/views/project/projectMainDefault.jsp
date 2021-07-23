@@ -176,11 +176,11 @@
 		//요약 내용 JS
 		var textSize = $("textarea[name=projectSummary]").val().length;
 		$("#textSizeSpan").text(textSize);
-		if($(this).val().length > 50){
+		if(textSize > 50){
 			$("#textSize").css("color", "red");
 			$("#textMax").show();
 		}
-		else if($(this).val().length < 10 && $(this).val().length > 0){
+		else if(textSize < 10 && textSize > 0){
 			$("#textSize").css("color", "red");
 			$("#textMin").show();
 		}
@@ -204,6 +204,31 @@
 				$("#textSize").css("color", "black");
 				$("#textMin").hide();
 				$("#textMax").hide();
+			}
+		});
+		
+		//projectTitle 글자 수 제한
+		var textSizeTitle = $("input[name=projectTitle]").val().length;
+		$("#textSizeSpanTitle").text(textSizeTitle);
+		if(textSizeTitle > 30){
+			$("#textSizeTitle").css("color", "red");
+			$("#textMaxTitle").show();
+		}
+		else{
+			$("#textSizeTitle").css("color", "black");
+			$("#textMaxTitle").hide();
+		}
+		
+		
+		$("input[name=projectTitle]").on("input", function(){
+			$("#textSizeSpanTitle").text($(this).val().length);
+			if($(this).val().length > 30){
+				$("#textSizeTitle").css("color", "red");
+				$("#textMaxTitle").show();
+			}
+			else{
+				$("#textSizeTitle").css("color", "black");
+				$("#textMaxTitle").hide();
 			}
 		});
 		
@@ -370,10 +395,14 @@
 				$("textarea[name=projectSummary]").focus();
 				e.preventDefault();
 			}
+			if($("input[name=projectTitle]").val().length > 30){
+				$("input[name=projectTitle]").focus();
+				e.preventDefault();
+			}
 			
 		});
 		
-		
+		console.log($(".projcet-insert-input").val().length);
 	});
 	
 	
@@ -437,7 +466,9 @@
 				<div class="projcet-insert-div2">
 					<div>
 						<p class="project-insert-p">제목</p>
-						<input type="text" name="projectTitle" class="projcet-insert-input" value="${projectDto.projectTitle}">
+						<input type="text" name="projectTitle" class="projcet-insert-input" max="30" autocomplete="none" value="${projectDto.projectTitle}">
+						<p id="textMaxTitle" class="f12 pb10 pt10 left fRed font-12">최대 30자 이하로 입력해주세요</p>
+						<p id="textSizeTitle" class="f12 pb10 pt10 right font-12">(<span id="textSizeSpanTitle" class="font-12">0</span><span class="font-12">/30</span>)</p>
 					</div>
 				</div>
 			</div>

@@ -86,7 +86,7 @@ pay_tid VARCHAR2(30) NOT NULL,
 pay_price NUMBER(19) NOT NULL,
 pay_status VARCHAR2(20) CHECK(pay_status IN ('결제 요청','결제 완료')) NOT NULL,
 pay_date DATE,
-pay_all_price NUMBER(19) DEFALUT 0,
+pay_all_price NUMBER(19) DEFAULT 0,
 member_no REFERENCES member(member_no) ON DELETE SET NULL
 );
 DROP SEQUENCE pay_seq;

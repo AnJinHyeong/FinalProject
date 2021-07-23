@@ -20,6 +20,7 @@ import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.repository.GiftDao;
 import com.kh.finalproject.repository.ItemDao;
 import com.kh.finalproject.repository.ProjectDao;
+import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.repository.SponsorDao;
 import com.kh.finalproject.vo.ProjectInformationVo;
 import com.kh.finalproject.vo.SponsorVo;
@@ -117,4 +118,9 @@ public class ProjectDataController {
 				.build();
 	}
 
+	@GetMapping("/index/indexProjectMain")
+	public List<IndexProjectVo> indexProjectMain(){
+		return projectDao.indexProjectMain();
+	}
+	
 }

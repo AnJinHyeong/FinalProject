@@ -17,6 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="${root}/css/yb.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/yongbo.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/projectBoard.css">
+	<link rel="stylesheet" type="text/css" href="${root}/css/templateSection.css">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <style>
