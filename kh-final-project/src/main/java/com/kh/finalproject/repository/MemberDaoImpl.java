@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.MemberDto;
+import com.kh.finalproject.entity.SponsorDto;
 
 @Repository
 public class MemberDaoImpl implements MemberDao{
@@ -33,8 +34,13 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public int selectHavePoint(int memberHavePoint) {
-		return sqlSession.selectOne("member.selectHavePoint", memberHavePoint);
+	public int getMemberHavePoint(int memberNo) {
+		return sqlSession.selectOne("member.getMemberHavePoint", memberNo);
+	}
+
+	@Override
+	public void usePoint(SponsorDto sponsorDto) {
+		sqlSession.update("member.usePoint", sponsorDto);
 	}
 
 }

@@ -128,14 +128,14 @@
 						</div>
 						<div style="margin: 0px 0px 1.75rem; letter-spacing: 0.5px;">
 							<div style="font-size: 30px;">
-								<span>0</span>
+								<span>${currentAmount}</span>
 								<span style="font-size: 1rem;">원 펀딩</span>
-								<span style="font-size: 20px;"><span>0</span>%</span>
+								<span class="fBold fs20">${projectPercent}%</span>
 							</div>
 						</div>
 						<div style="margin: 0px 0px 1.75rem; letter-spacing: 0.5px;">
 							<div style="font-size: 30px;">
-								<span>0</span>
+								<span>${currentSponsorMemberCount}</span>
 								<span style="font-size: 1rem;">명의 참여자</span>
 							</div>
 						</div>
@@ -233,7 +233,8 @@
 								<div class="projectBoardSponsor mt50 topLine dpNone">
 										<form action="" method="post">
 											<div class="dpFlex mt10">
-												<input name="sponsorAmount" type="text" class="fs14 w90p h40 taRight inputFocusNone boc220 bosSolid bow1 borNone" value="1000">
+												<input name="sponsorAmount" type="number" class="inputNumberNone fs14 w90p h40 taRight inputFocusNone boc220 bosSolid bow1 borNone"
+												value="1000" min="${giftDto.giftPrice}">
 												<span class="fs14 w10p h40 boc220 bosSolid bow1 bolNone dpFlex dpFlexCenter">원</span>
 											</div>
 											<button class="w100p h40 boc220 bosSolid bow1 bacWhite mt10 project-btn-normal-hover cursorPointer">후원하기</button>
@@ -275,7 +276,8 @@
 										<form action="" method="post">
 											<input type="hidden" name="giftNo" value="${giftDto.giftNo}">
 											<div class="dpFlex mt10">
-												<input name="sponsorAmount" type="text" class="fs14 w90p h40 taRight inputFocusNone boc220 bosSolid bow1 borNone" value="${giftDto.giftPrice}">
+												<input name="sponsorAmount" type="number" class="inputNumberNone fs14 w90p h40 taRight inputFocusNone boc220 bosSolid bow1 borNone"
+												value="${giftDto.giftPrice}" min="${giftDto.giftPrice}">
 												<span class="fs14 w10p h40 boc220 bosSolid bow1 bolNone dpFlex dpFlexCenter">원</span>
 											</div>
 											<button class="w100p h40 boc220 bosSolid bow1 bacWhite mt10 project-btn-normal-hover cursorPointer">후원하기</button>
