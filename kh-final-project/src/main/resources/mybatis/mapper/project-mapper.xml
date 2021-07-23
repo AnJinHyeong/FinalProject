@@ -115,6 +115,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="projectDelete" parameterType="ProjectDto">
 		delete project where project_no = #{projectNo} and member_no = #{memberNo}
 	</delete>
+	
+	
+	<!-- main 화면 project join구문 -->
+	<select id="indexProjectMain" resultType="IndexProjectVo">
+		select * from(
+			select rownum rn, TMP.* from(
+					select
+					    P.project_no,P.PROJECT_TITLE, P.PROJECT_PERCENT, P.MEMBER_INFO_NICK, P.PROJECT_STATE,
+					    I.image_no,
+					    C.CATEGORY_NO ,C.CATEGORY_THEME 
+					from Project P
+					    inner join image_file I on P.project_no = I.project_no 
+						INNER JOIN category C ON P.category_no = C.category_no    
+					WHERE I.project_state = 'Y' AND P.PROJECT_STATE = 3 ORDER BY P.project_percent DESC
+				)TMP
+			) where rn between 1 and 8
+	</select>
+	
+	
 </mapper>
 
 

@@ -64,12 +64,136 @@
 		});
 		
 		
+		
+		//좋아요 기능
+// 		$.ajax({
+// 			url :"${pageContext.request.contextPath}/projectCommunityLike/likeCount",
+// 			type: "get",
+// 			data: {
+// 				projectCommunityNo : $(".project-board-community-like-btn").attr("id")
+// 			},
+// 			success : function(resp){
+// 				var likeCount = $(".likeCount").attr("id");
+// 				$("#likeCount").text(resp);
+// 			}
+		
+// 		});
+		
+		
+// 		$.ajax({
+// 			url :"${pageContext.request.contextPath}/projectCommunityLike/likeConfirm",
+// 			type: "get",
+// 			data: {
+// 				projectCommunityNo : $(".project-board-community-like-btn").attr("id")
+// 			},
+// 			success : function(resp){
+// 				if(resp == 1){
+// 					$(".likeOn").show();
+// 					$(".likeOff").hide();
+// 				}
+// 				else{
+// 					$(".likeOn").hide();
+// 					$(".likeOff").show();
+// 				}
+// 			}
+		
+// 		});
+		
+// 		$(".project-board-community-like-btn").on("click",function(){
+// 			var likeId = $(this).attr("id");
+// 			console.log(likeId);
+// 			$.ajax({
+// 				url :"${pageContext.request.contextPath}/projectCommunityLike/likeConfirm",
+// 				type: "get",
+// 				data: {
+// 					projectCommunityNo : likeId
+// 				},
+// 				success : function(resp){
+// 					if(resp == 1){
+// 						$.ajax({
+// 							url :"${pageContext.request.contextPath}/projectCommunityLike/likeDelete",
+// 							type: "get",
+// 							data: {
+// 								projectCommunityNo : likeId
+// 							},
+// 							success : function(resp){
+// 								$.ajax({
+// 									url :"${pageContext.request.contextPath}/projectCommunityLike/likeCount",
+// 									type: "get",
+// 									data: {
+// 										projectCommunityNo : likeId
+// 									},
+// 									success : function(resp){
+// 										console.log(resp);
+// 										$(".likeCount").text(resp);
+// 										$(".likeOn").hide();
+// 										$(".likeOff").show();
+// 									}
+								
+// 								});
+// 							}
+						
+// 						});
+// 					}
+// 					else{
+// 						$.ajax({
+// 							url :"${pageContext.request.contextPath}/projectCommunityLike/likeAdd",
+// 							type: "get",
+// 							data: {
+// 								projectCommunityNo : likeId
+// 							},
+// 							success: function(resp){
+// 								$.ajax({
+// 									url :"${pageContext.request.contextPath}/projectCommunityLike/likeCount",
+// 									type: "get",
+// 									data: {
+// 										projectCommunityNo : likeId
+// 									},
+// 									success : function(resp){
+// 										console.log(resp);
+// 										$(".likeCount").text(resp);
+// 										$(".likeOn").show();
+// 										$(".likeOff").hide();
+// 									}
+								
+// 								});
+// 							}
+						
+// 						});
+// 					}
+// 				}
+			
+// 			});
+			
+// 		});
+		
+		
 	});
 		
 	
 </script>
 
+<script id="likeTemplate" type="text/template">
+<div class="project-board-community-row">
+	<div class="project-board-community-row100" style="padding: 10px;">
+		<div style="width: 100%; height: 30px;">
+			<span style="font-weight: bold; font-size: 18px;">{{memberNick}}</span>
+		</div>
+	</div>
+	<div class="project-board-community-row100" style="padding: 10px; height: 50px; font-size: 15px;">
+		{{projectCommunityContent}}
+	</div>
+	<div class="project-board-community-row100 topLine" style="padding: 0 10px; height: 30px; text-align: right; line-height: 2;"> 
+		
+	</div>
+</div>
+</script>
+
+
 <section class="main-row topLine">
+<!-- <em class="likeCount" id="{{projectCommunityNo}}likeCount">0</em> -->
+<!-- <button class="project-board-community-like-btn likeOn" id="{{projectCommunityNo}}"><i class="fas fa-heart"></i></button> -->
+<!-- <button class="project-board-community-like-btn likeOff" id="{{projectCommunityNo}}"><i class="far fa-heart"></i></button> -->
 
 	<div class="project-board-top bottomLine">
 		<div class="project-board-div">
@@ -156,18 +280,64 @@
 	<div class="bottomLine" style="height: 50px; box-shadow: rgb(0 0 0 / 10%) 0px 2px 3px;">
 		<div class="project-board-mid">
 			<div class="project-board-mid-div">
-				<a class="project-board-mid-a on" href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}">스토리</a>
-				<a class="project-board-mid-a" href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}/projectBoardCommunity">커뮤니티</a>
+				<a class="project-board-mid-a" href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}">스토리</a>
+				<a class="project-board-mid-a on" href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}/projectBoardCommunity">커뮤니티</a>
 			</div>
 		</div>
 	</div>
 	
 	<div class="project-board-content">
 		<div class="project-board-content-div">
-			<!-- 스토리 내용 div -->
+			<!-- 커뮤니티 내용 div -->
 			<div class="project-board-content-div1">
-				<div class="project-board-content-row1 scrollThin">
-					${projectDto.projectContent}
+				<div class="project-board-community-row1 scrollThin">
+					<div class="project-board-community-top" style="width: 100%; height: 40px; border: 1px solid #dcdcdc; border-radius: 3px; font-weight: bold; font-size: 18px; margin-bottom: 10px; background-color: #fff; padding: 7px 5px;">
+						<p><span style="color: #ff3a3a;"><i class="fas fa-comments"></i></span> 프로젝트를 향한 응원의 메세지를 남겨주세요.</p>
+					</div>
+				
+					<form action="projectBoardCommunity" method="post">
+						<div class="project-board-community-row-form">
+							<div class="project-board-community-row100">
+								<div style="width: 100%; height: 30px;">
+<!-- 									<img class="project-board-community-memberImage" id="myMemberImage"> -->
+									<span>${memberDto.memberNick}</span>
+								</div>
+							</div>
+							<div class="project-board-community-row100"> 
+								<textarea class="project-board-community-text" name="projectCommunityContent"></textarea>
+							</div>
+							<div class="project-board-community-row100" style="text-align: right;">
+								<button class="project-board-community-btn">등록</button>
+							</div>
+						</div>
+					</form>
+					
+					<!-- 커뮤니티 내용들 -->
+					<c:forEach var="communityList" items="${communityList}">
+						<div class="project-board-community-row">
+							<div class="project-board-community-row100" style="padding: 10px;">
+								<div style="width: 100%; height: 30px; display: flex;">
+									<c:choose>
+										<c:when test="${projectDto.memberNo == communityList.memberNo}">
+											<span style="font-weight: bold; font-size: 18px;  width: 15%;">${projectDto.memberInfoNick}</span>
+										</c:when>
+										<c:otherwise>
+											<span style="font-weight: bold; font-size: 18px;  width: 15%;">${communityList.memberNick}</span>
+										</c:otherwise>
+									</c:choose>
+									<c:if test="${memberDto.memberNo == communityList.memberNo}">
+										<div style="text-align: right; width: 85%">
+											<a href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}/projectBoardCommunityDelete?projectCommunityNo=${communityList.projectCommunityNo}"><span class="font-12 red"><i class="fas fa-times"></i></span></a>
+										</div>
+									</c:if>
+								</div>
+							</div>
+							
+							<div class="project-board-community-row100" style="padding: 10px; height: 50px; font-size: 15px;">
+								${communityList.projectCommunityContent}
+							</div>
+						</div>
+					</c:forEach>
 				</div>
 			</div>
 			

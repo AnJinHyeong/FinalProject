@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
 import com.kh.finalproject.vo.ProjectProgressVo;
 
@@ -149,6 +150,11 @@ public class ProjectDaoImpl implements ProjectDao{
 	public boolean projectDelete(ProjectDto projectDto) {
 		int count = sqlSession.delete("project.projectDelete",projectDto);
 		return count > 0;
+	}
+
+	@Override
+	public List<IndexProjectVo> indexProjectMain() {
+		return sqlSession.selectList("project.indexProjectMain");
 	}
 
 }

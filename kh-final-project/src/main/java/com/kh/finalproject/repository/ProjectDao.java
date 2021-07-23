@@ -3,8 +3,8 @@ package com.kh.finalproject.repository;
 import java.util.List;
 
 import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
-import com.kh.finalproject.vo.ProjectProgressVo;
 
 public interface ProjectDao {
 	
@@ -42,4 +42,7 @@ public interface ProjectDao {
 	ProjectDto getByProjectNo(int projectNo);
 	//프로젝트 삭제(memberNo, projectNo 를 이용)
 	boolean projectDelete(ProjectDto projectDto);
+	//index화면 프로젝트 리스트 
+	List<IndexProjectVo> indexProjectMain();
+	
 }

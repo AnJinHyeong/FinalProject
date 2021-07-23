@@ -881,4 +881,47 @@
 	margin-top: 10px;
 }
 
+.project-approval-btn3{
+	height: 40px; width: 300px; 
+	margin-top: 100px; 
+	border: none; 
+	background-color: #ff8989;
+	color: white;
+    border-radius: 8px;
+}
 
+.project-community-div{
+	display: flex;
+    padding-bottom: 48px;
+    margin-bottom: 56px;
+    margin-top: 50px;
+    -webkit-box-pack: justify;
+    justify-content: space-between; 
+    height: 670px;
+}
+	
+.project-community-row1{
+   	background-color: #F8F8F8;
+    margin: 20px 0;
+    height: 600px;
+    max-height: 600px;
+    width: 600px;
+    -webkit-tap-highlight-color: transparent;
+    padding: 10px;
+    border: 1px solid #dcdcdc;
+    box-shadow: rgb(0 0 0 / 15%) 0px 2px 4px, rgb(0 0 0 / 10%) 0px 1px 0px;
+    border-radius: 10px;
+}
+
+.project-community-row2{
+	background-color: #F8F8F8;
+    margin: 20px 0;
+    height: 300px;
+    max-height: 300px;
+    width: 550px;
+    -webkit-tap-highlight-color: transparent;
+    padding: 10px;
+    border: 1px solid #dcdcdc;
+    box-shadow: rgb(0 0 0 / 15%) 0px 2px 4px, rgb(0 0 0 / 10%) 0px 1px 0px;
+    border-radius: 10px;
+}
