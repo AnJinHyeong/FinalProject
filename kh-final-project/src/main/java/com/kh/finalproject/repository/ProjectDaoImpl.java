@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
-import com.kh.finalproject.vo.ProjectInformationVo;
 import com.kh.finalproject.vo.ProjectProgressVo;
+import com.kh.finalproject.vo.ProjectVo;
 
 @Repository
 public class ProjectDaoImpl implements ProjectDao{
@@ -32,6 +32,11 @@ public class ProjectDaoImpl implements ProjectDao{
 	@Override
 	public ProjectDto get(ProjectDto projectDto) {
 		return sqlSession.selectOne("project.get",projectDto);
+	}
+	
+	@Override
+	public ProjectVo getProjectVoByProjectNo(int projectNo) {
+		return sqlSession.selectOne("project.getProjectVoByProjectNo", projectNo);
 	}
 	
 	public void insertBySequence(ProjectCategoryVo projectCategoryVo) {

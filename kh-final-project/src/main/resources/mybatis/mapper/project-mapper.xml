@@ -25,6 +25,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from project where project_no = #{projectNo}
 	</select>
 	
+	<select id="getProjectVoByProjectNo" parameterType="int" resultType="ProjectVo">
+		select project_no, project_title, project_content, project_target_amount, project_percent, to_char(project_regist_date) project_regist_date, 
+		to_char(project_start_date) project_start_date, to_char(project_end_date) project_end_date, project_stop_causes, project_summary, 
+		member_no, category_no, member_info_nick, member_info_content, project_state, project_content_file 
+		from project where project_no = #{projectNo}
+	</select>
+	
 	<select id="insertBySequence" parameterType="ProjectCategoryVo">
 		insert into project
 			(project_no, project_regist_date, project_summary, member_no, category_no, project_state)

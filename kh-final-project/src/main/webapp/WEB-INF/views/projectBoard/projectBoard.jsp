@@ -70,6 +70,20 @@
 			$(this).parent().find(".projectBoardSponsor").show('fast');
 		});
 		
+		// 후원하기 버튼 누르면 후원버튼으로 포커스
+		$("#sponsorFocusBtn").on("click", function(){
+
+			var scrollPosition = $("#giftListBasic").offset().top;
+
+			$("html, body").animate({
+				scrollTop: scrollPosition - 200
+			}, 300);
+			
+			$("#giftListBasic").children("div").click();
+			
+			$("input[name=sponsorAmount]").focus();
+			
+		});
 		
 	});
 		
@@ -152,7 +166,7 @@
 					<div class="project-board-flex-div4">
 						<button class="project-board-div4-like">좋아요</button>
 						<button class="project-board-div4-like">신고하기</button>
-						<button class="project-board-div4-funding">프로젝트 후원</button>
+						<button id="sponsorFocusBtn" class="project-board-div4-funding">프로젝트 후원</button>
 					</div>
 				</div>
 				
@@ -234,7 +248,7 @@
 										<form action="" method="post">
 											<div class="dpFlex mt10">
 												<input name="sponsorAmount" type="number" class="inputNumberNone fs14 w90p h40 taRight inputFocusNone boc220 bosSolid bow1 borNone"
-												value="1000" min="${giftDto.giftPrice}">
+												value="1000" min="1000">
 												<span class="fs14 w10p h40 boc220 bosSolid bow1 bolNone dpFlex dpFlexCenter">원</span>
 											</div>
 											<button class="w100p h40 boc220 bosSolid bow1 bacWhite mt10 project-btn-normal-hover cursorPointer">후원하기</button>

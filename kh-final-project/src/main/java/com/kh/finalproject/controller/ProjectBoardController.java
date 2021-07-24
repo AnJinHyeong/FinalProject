@@ -153,8 +153,6 @@ public class ProjectBoardController {
 		int targetAmount = projectDao.getByProjectNo(projectNo).getProjectTargetAmount();
 		int percent = currentAmount * 100 / targetAmount;
 		
-		log.info(String.valueOf(percent));
-		
 		projectDao.setPercent(ProjectDto.builder()
 				.projectNo(projectNo)
 				.projectPercent(percent)
