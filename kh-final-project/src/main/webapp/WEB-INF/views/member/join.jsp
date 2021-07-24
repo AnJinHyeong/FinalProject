@@ -13,8 +13,11 @@
 	<script src="<%=request.getContextPath()%>/js/join.js"></script>
 <br><br>
 <script>
-
-
+	var email = $("#memberEmail").val();  
+	$(".mail_check_button").click(function(){
+		
+		
+	});
 </script>
 <body>
 	<div class = "container joinBorder">
