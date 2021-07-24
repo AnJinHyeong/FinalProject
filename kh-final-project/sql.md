@@ -25,7 +25,7 @@ project_state char(1) CHECK (project_state IN ('1','2','3','X')) NOT NULL,
 project_regist_date DATE DEFAULT sysdate NOT NULL,
 project_start_date DATE,
 project_end_date DATE,
-project_stop_caues varchar2(4000),
+project_stop_causes varchar2(4000),
 project_summary varchar2(150) not null,
 member_no references member(member_no) on delete SET NULL,
 category_no REFERENCES category(category_no) ON DELETE SET NULL
@@ -125,7 +125,8 @@ member_no references member(member_no) not null,
 gift_no references gift(gift_no),
 project_no references project(project_no) not null,
 sponsor_amount number(19) not null check(sponsor_amount >= 0),
-sponsor_date date default sysdate not null
+sponsor_date date default sysdate not null,
+sponsor_cancel char(1) check (sponsor_cancel ='Y')
 );
 
 create sequence sponsor_seq;
