@@ -1,16 +1,14 @@
 package com.kh.finalproject.restcontroller;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+//github.com/AnJinHyeong/FinalProject.git
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.finalproject.repository.MemberDao;
 
 @RestController
-@RequestMapping("/header")
 public class HeaderController {
 	
 	@Autowired
@@ -21,5 +19,4 @@ public class HeaderController {
 		int memberNo = (int)session.getAttribute("memberNo");
 		return memberDao.getMemberHavePoint(memberNo); 
 	}
-	
 }

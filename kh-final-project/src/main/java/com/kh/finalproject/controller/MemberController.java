@@ -120,7 +120,7 @@ public class MemberController {
 		attr.addAttribute("email", email);
 		return "redirect:join";
 	}
-
+	
+	
 
 }
-
