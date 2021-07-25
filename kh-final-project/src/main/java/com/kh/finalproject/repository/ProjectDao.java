@@ -49,4 +49,13 @@ public interface ProjectDao {
 	List<IndexProjectVo> indexProjectMain();
 	// 프로젝트 달성도 업데이트
 	void setPercent(ProjectDto projectDto);
+	// 키워드 검색
+	List<IndexProjectVo> projectSearch(String keyword);
+	// 키워드 검색 갯수
+	int projectSearchCount(String keyword);
+	// 키워드 카테고리 검색
+	List<IndexProjectVo> projectCategorySearch(String keyword);
+	// 키워드 카테고리 검색 갯수
+	int projectCategorySearchCount(String keyword);
+	
 }

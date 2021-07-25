@@ -47,7 +47,7 @@
 			if($(this).hasClass("on")){
 				$(".inputToggleContainer,.inputToggleBtn,.inputToggleBtnX").toggleClass('on');
 				$(".inputToggleContainer,.inputToggleBtn,.inputToggleBtnX").toggleClass('off');
-				$("input[name=keyword]").val("");
+				$("#headerSearchForm").find("input[name=keyword]").val("");
 				e.preventDefault();
 			}
 		});
@@ -70,9 +70,9 @@
 			<div class="header-right">
 			
 				<div class="float-container">
-					<form action="#" class="right">
+					<form action="${root}/project/projectSearch" class="right" method="post" id="headerSearchForm">
 						<div class="inputToggleContainer off">
-							<input class="inputToggleText fs18 pl10" type="text" name="keyword" placeholder="검색어를 입력해주세요.">
+							<input class="inputToggleText fs18 pl10" type="text" name="keyword" placeholder="검색어를 입력해주세요." autocomplete="off">
 							<button class="inputToggleBtn off bacInherit zi1 cursorPointer"><i class="fas fa-search bacWhite"></i></button>
 							<button class="inputToggleBtnX off bacInherit cursorPointer"><i class="fas fa-times"></i></button>
 						</div>

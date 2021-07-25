@@ -168,4 +168,30 @@ public class ProjectDaoImpl implements ProjectDao{
 		sqlSession.update("project.setPercent", projectDto);
 	}
 
+	@Override
+	public List<IndexProjectVo> projectSearch(String keyword) {
+		return sqlSession.selectList("project.projectSearch", keyword);
+	}
+
+	@Override
+	public int projectSearchCount(String keyword) {
+		if(sqlSession.selectOne("project.projectSearchCount", keyword) == null) {
+			return 0;
+		}
+		return sqlSession.selectOne("project.projectSearchCount", keyword);
+	}
+
+	@Override
+	public List<IndexProjectVo> projectCategorySearch(String keyword) {
+		return sqlSession.selectList("project.projectCategorySearch", keyword);
+	}
+
+	@Override
+	public int projectCategorySearchCount(String keyword) {
+		if(sqlSession.selectOne("project.projectCategorySearchCount", keyword) == null) {
+			return 0;
+		}
+		return sqlSession.selectOne("project.projectCategorySearchCount", keyword);
+	}
+
 }

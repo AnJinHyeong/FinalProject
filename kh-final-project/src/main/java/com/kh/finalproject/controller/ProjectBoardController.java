@@ -20,6 +20,7 @@ import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.ProjectCommunityDto;
 import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.entity.SponsorDto;
+import com.kh.finalproject.error.PercentCalcFailException;
 import com.kh.finalproject.error.SponFailException;
 import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.repository.GiftDao;
@@ -142,15 +143,16 @@ public class ProjectBoardController {
 		
 		MemberDto target = memberDao.getByMemberNo(memberNo);
 		if(target.getMemberHavePoint() < sponsorDto.getSponsorAmount()) {
-			System.out.println("sponfailException111111111111111");
-			throw new SponFailException("보유 포인트가 부족합니다.");
+			throw new SponFailException("후원 프로젝트 번호:" + projectNo + ", 보유 포인트가 부족합니다.");
 		}
-		System.out.println("sponfailException333333333333333333333");
 		sponsorDao.insert(sponsorDto);
 		memberDao.usePoint(sponsorDto);
 		
 		int currentAmount = sponsorDao.currentAmount(projectNo);
 		int targetAmount = projectDao.getByProjectNo(projectNo).getProjectTargetAmount();
+		if(targetAmount == 0) {
+			throw new PercentCalcFailException("후원 프로젝트 번호:" + projectNo + ", 목표금액이 정해지지 않았습니다.");
+		}
 		int percent = currentAmount * 100 / targetAmount;
 		
 		projectDao.setPercent(ProjectDto.builder()
