@@ -134,7 +134,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					from Project P
 					    inner join image_file I on P.project_no = I.project_no 
 						INNER JOIN category C ON P.category_no = C.category_no    
-					WHERE I.project_state = 'Y' AND P.PROJECT_STATE = 3 ORDER BY P.project_percent DESC
+					WHERE I.project_state = 'Y' AND P.PROJECT_STATE = '3' ORDER BY P.project_percent DESC
 				)TMP
 			) where rn between 1 and 8
 	</select>
@@ -143,6 +143,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="setPercent" parameterType="ProjectDto">
 		update project set project_percent = #{projectPercent} where project_no = #{projectNo}
 	</update>
+	
+	<!-- 키워드 검색 -->
+	<select id="projectSearch" parameterType="String" resultType="projectDto">
+		<![CDATA[
+			select * from project 
+			    where 
+			        instr(project_title, #{keyword}) > 0 
+			    or
+			        instr(project_content, #{keyword}) > 0
+			    or
+			        instr(project_summary, #{keyword}) > 0
+			    or
+			        instr(member_info_nick, #{keyword}) > 0
+		]]>
+	</select>
+	
+	<!-- 키워드 검색 갯수 -->
+	<select id="projectSearchCount" parameterType="String" resultType="int">
+		<![CDATA[
+			select count(*) from project 
+			    where 
+			        instr(project_title, #{keyword}) > 0 
+			    or
+			        instr(project_content, #{keyword}) > 0
+			    or
+			        instr(project_summary, #{keyword}) > 0
+			    or
+			        instr(member_info_nick, #{keyword}) > 0
+		]]>
+	</select>
+	
+	<!-- 키워드 검색 카테고리 -->
+	<select id="projectCategorySearch" parameterType="String" resultType="projectDto">
+		<![CDATA[
+			select * from project where category_no = (select category_no from category where instr(category_theme, #{keyword}) > 0)
+		]]>
+	</select>
+	
+	<!-- 키워드 검색 카테고리 갯수 -->
+	<select id="projectCategorySearchCount" parameterType="String" resultType="int">
+		<![CDATA[
+			select count(*) from project where category_no = (select category_no from category where instr(category_theme, #{keyword}) > 0)
+		]]>
+	</select>
 	
 </mapper>
 
