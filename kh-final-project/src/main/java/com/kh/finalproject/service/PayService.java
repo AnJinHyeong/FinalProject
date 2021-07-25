@@ -6,6 +6,7 @@ import com.kh.finalproject.vo.pay.PayApprovePrepareVO;
 import com.kh.finalproject.vo.pay.PayApproveVO;
 import com.kh.finalproject.vo.pay.PayReadyPrepareVO;
 import com.kh.finalproject.vo.pay.PayReadyVO;
+import com.kh.finalproject.vo.pay.PaySearchVO;
 
 public interface PayService {
 	//시퀀스 생성
@@ -18,7 +19,7 @@ public interface PayService {
 //	PayReadyVO sequence(PayReadyPrepareVO PayReadyPrepareVO) throws URISyntaxException;
 	
 //	//결제 조회 기능
-//	PaySearchVO search(String tid) throws URISyntaxException;
+	PaySearchVO search(String tid) throws URISyntaxException;
 //	//결제 취소 기능 
 //	PayCancelVO cancel(PayCancelPrepareVO prepareVO) throws URISyntaxException;
 }

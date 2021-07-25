@@ -8,7 +8,7 @@
 
 <!DOCTYPE html>
 <html>
-<head>
+<head>	
 <meta charset="UTF-8">
 <title>FüN‿ding - 즐거움의 시작</title>
 	<link rel="stylesheet" type="text/css" href="${root}/css/template.css">

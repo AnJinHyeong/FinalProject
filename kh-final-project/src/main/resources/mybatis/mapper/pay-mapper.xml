@@ -57,7 +57,13 @@ WHERE member_no = #{memberNo}
 		set pay_status='취소'
 		where pay_no = #{paymentNo}
 	</update>
-
+	
+	<select id = "list" resultType = "PayDto" parameterType ="int">
+	SELECT * FROM pay 
+	WHERE member_no = #{memberNo}
+	ORDER BY pay_no DESC
+	</select>
+	
 	<!-- 조회 1. 회원 1명의 전체 결제내역 조회 2. 결제내역 1개에 대한 단일조회 -->
 	<!-- <select id="list" resultType="PaymentDto" parameterType="int"> select 
 		* from payment where payment_buyer = #{paymentBuyer} order by payment_no 
