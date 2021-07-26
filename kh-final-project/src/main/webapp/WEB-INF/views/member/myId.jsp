@@ -70,19 +70,13 @@
 		<div class="text-left titleDiv">
 			<h1>아이디 찾기</h1>
 		</div>
-	<form action="idSearch" method="post">
+	<form action="getId" method="post">
 		<div>이메일 주소</div>
 		<input type="text" name="memberEmail" required class="form-input form-underline radius-b" placeholder="가입하신 이메일 입력해주세요.">
 		<br><br>
 		<button type="submit" class="idBtn">아이디 찾기</button>
 			
-		<div>
-					<c:if test="${param.error != null}">
-					<div class="row">
-						<h5 class="error">정보가 일치하지 않습니다</h5>
-					</div>
-					</c:if>
-		</div>
+		
 	
 	</form>
 	

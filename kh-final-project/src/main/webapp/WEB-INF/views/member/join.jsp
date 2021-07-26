@@ -13,30 +13,57 @@
 	<script src="<%=request.getContextPath()%>/js/join.js"></script>
 <br><br>
 <script>
-
-
+	var email = $("#memberEmail").val();  
+	$(".mail_check_button").click(function(){
+		
+		
+	});
 </script>
+<style>
+	.mainDiv{
+		width:50%;
+		margin-top: 50px;
+		min-height: 720px;
+		padding:50px;
+	}
+.joinForm{
+		width: 80%;
+		margin-top : 20px;
+		margin:0 auto;
+		border:1px groove #E4E4E4;
+		padding:40px;
+		border-radius:10px;
+		border-color:#E4E4E4;
+	
+	}
+.radius-b{
+		height:60px;
+		border-radius:5px;
+	}
+</style>
 <body>
-	<div class = "container joinBorder">
+	<div class = "container-800 mainDiv">
+		<div class="joinForm">
 		<div class = "row text-center">
 			<h2>회원 가입</h2>
 		</div>
 		
+		
 		<form action = "memberInsert" id = "form" method = "post" class="join-form">
 			<div class = "row text-left">
 				<label for = "memberId">아이디</label>
-				<input type = "text" name="memberId" id = "memberId" required class = "form-input form-input-underline2" placeholder = "8~20자 이내의 영문 소대문자, 숫자 조합가능">
+				<input type = "text" name="memberId" id = "memberId" required class = "form-input form-underline radius-b" placeholder = "8~20자 이내의 영문 소대문자, 숫자 조합가능">
 				<div id = "idResult"></div>
 				<div id = "checkId"></div>
 				
 			</div>
 			<div class = "row text-left">
 				<label for = "memberPw">비밀번호</label>
-				<input type = "password" name="memberPw" id = "memberPw" required class = "form-input form-input-underline2"
-							placeholder = "8~16자 이내의 영문 소대문자, 숫자, 특수문자(!@#$%^&*)조합 가능">
+				<input type = "password" name="memberPw" id = "memberPw" required class = "form-input form-underline radius-b"
+							placeholder = "8~16 영문 소대문자, 숫자, 특수문자(!@#$%^&*)조합 가능">
 
 							
-				<input type = "password" id = "memberPw2" required class = "form-input form-input-underline2 padding-t"
+				<input type = "password" id = "memberPw2" required class = "form-input form-underline radius-b"
 							placeholder = "비밀번호 재입력">
 					<div id = "pwResult"></div>
 					<div id = "pwResult2"></div>
@@ -45,7 +72,7 @@
 			
 			<div class = "row text-left">
 				<label for = "memberNick">닉네임</label>
-				<input type = "text" name="memberNick" id = "memberNick" required class= "form-input form-input-underline2"
+				<input type = "text" name="memberNick" id = "memberNick" required class= "form-input form-underline radius-b"
 							placeholder = "한 글자 이상 최대 열 글자, 단모음과 단자음 사용불가 ">
 									<div id = "nickResult"></div>
 			</div>
@@ -54,13 +81,13 @@
 			<div class = "row text-left">
 				<input type="hidden" name="email" value="${param.email}">
 				<label for = "memberEmail">이메일</label>
-				<input type = "text" name="memberEmail" id = "memeberEmail" required class = "form-input form-input-underline2"
-							value = "${param.email}">
+				<input type = "text" name="memberEmail" id = "memeberEmail" required class = "form-input form-underline radius-b"
+							value = "${param.email}" readonly>
 			</div>
 			
 			<div class = "row text-left">
 				<label for = "authKey">이메일</label>
-				<input type = "text" name="no" id = "no" required class = "form-input form-input-underline2"
+				<input type = "text" name="no" id = "no" required class = "form-input form-underline radius-b"
 							placeholder = "인증번호입력">
 			</div>
 			
@@ -68,7 +95,7 @@
 			 
 			<div class = "row text-left">
 				<label for = "memberIntroduce">자기소개</label>
-				<input type="text" name = "memberIntroduce" class= "form-input form-input-underline2"  placeholder = "(선택) 간단한 자기소개를 입력해주세요">
+				<input type="text" name = "memberIntroduce" class= "form-input form-underline radius-b"  placeholder = "(선택) 간단한 자기소개를 입력해주세요">
 				
 			</div>
 			<div class = "row text-center">
@@ -76,6 +103,7 @@
 			</div>
 
 		</form>
+		</div>
 	</div>
 </body>
 <br><br>
