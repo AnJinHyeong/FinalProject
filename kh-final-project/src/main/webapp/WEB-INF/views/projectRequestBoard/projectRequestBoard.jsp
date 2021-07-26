@@ -36,24 +36,20 @@
 		</div>
 	</div>
 	
-	<div class="container-1200" style="margin: 0 auto; height: 700px;">
+	<div class="container-1200" style="margin: 0 auto; height: 700px; display: flex; flex-wrap: wrap;">
 	
-		<div class="container-800 hMax600 mt30 mb30 scrollThin">
-	
-			<c:forEach var="likeList" items="${likeList}">
-				
-				<div class="projectInsert3 w100p pb30">
-					<button class="btn btn-hover w100p h80 myLikeProject" id="${likeList.projectNo}">
-						<div class="project-main-img w80 h100p"></div>
-						<div class="btn-text projectTitle">${likeList.projectTitle}</div>
-						<div class="dpNone projectNo">${likeList.projectNo}</div>
-					</button>
-				</div>
-				
-			</c:forEach>
+		<div class="container-700 hMax600 mt30 mb30 scrollThin" style="border: 1px solid #dcdcdc;">
+			
 		
 		</div>
 		
+		<div class="container-400 hMax600 mt30 mb30" style="border: 1px solid #dcdcdc;">
+		
+			<div >
+			
+			</div>
+			
+		</div>
 	</div>
 	
 </section>

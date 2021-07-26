@@ -82,15 +82,6 @@
 
 		</div>
 		
-		<div style="width: 1200px; height: 50px; margin: 20px auto; text-align: center;">
-			페이지 네이션 자리<i class="fab fa-waze" style="font-size: 30px;"></i><i class="fas fa-poop" style="font-size: 30px; color: orange;"></i><i class="fas fa-bomb" style="font-size: 30px; color: orange;"></i><i class="fas fa-guitar"></i><i class="fas fa-brain"></i><i class="fas fa-music"></i>
-			<br>
-			<i class="fas fa-battery-empty" style="margin-right: 5px; font-size: 15px; color: #ffadad"></i>
-			<i class="fas fa-battery-quarter" style="margin-right: 5px; font-size: 15px; color: #ffdb72"></i>
-			<i class="fas fa-battery-half" style="margin-right: 5px; font-size: 15px; color: #aaffb8"></i>
-			<i class="fas fa-battery-three-quarters" style="margin-right: 5px; font-size: 15px; color: #84ff84"></i>
-			<i class="fas fa-battery-full" style="margin-right: 5px; font-size: 15px; color: #00ff2e"></i>
-		</div>
 		
 		
 	</div>
