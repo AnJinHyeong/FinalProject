@@ -11,7 +11,6 @@
 			url : "${pageContext.request.contextPath}/project/data/index/indexProjectMain",
 			type : 'get',
 			success : function(resp) {
-				console.log(resp);
 				$("#sectionProjectMain1").empty();
 				var option = $("#option").html();
 				$("#sectionProjectMain1").append(option);

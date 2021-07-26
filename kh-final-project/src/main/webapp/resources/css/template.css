@@ -35,15 +35,13 @@ textarea:focus{outline:none}
 	-webkit-box-pack: justify;
 	justify-content: space-between;
 	position: relative;
-	height: 60px;;
-	max-height: 70px;
+	height: 80px;
 	width: 1200px;
 	margin: 0 auto;
 }
 
 .header-left {
 	display: flex;
-	flex: 1 0 25%;
 	text-align: center;
 	height: 60px;
 }

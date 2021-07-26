@@ -73,7 +73,7 @@
 		// 후원하기 버튼 누르면 후원버튼으로 포커스
 		$("#sponsorFocusBtn").on("click", function(){
 
-			var scrollPosition = $("#giftListBasic").offset().top;
+			var scrollPosition = $("#giftList").offset().top;
 
 			$("html, body").animate({
 				scrollTop: scrollPosition - 200
