@@ -11,7 +11,6 @@
 			url : "${pageContext.request.contextPath}/project/data/index/indexProjectMain",
 			type : 'get',
 			success : function(resp) {
-				console.log(resp);
 				$("#sectionProjectMain1").empty();
 				for(var i=0; i < resp.length; i++){
 					var template = $("#projectMaindiv").html();
