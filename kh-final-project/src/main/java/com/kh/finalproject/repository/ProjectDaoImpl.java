@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
-import com.kh.finalproject.vo.ProjectInformationVo;
 import com.kh.finalproject.vo.ProjectProgressVo;
+import com.kh.finalproject.vo.ProjectVo;
 
 @Repository
 public class ProjectDaoImpl implements ProjectDao{
@@ -32,6 +32,11 @@ public class ProjectDaoImpl implements ProjectDao{
 	@Override
 	public ProjectDto get(ProjectDto projectDto) {
 		return sqlSession.selectOne("project.get",projectDto);
+	}
+	
+	@Override
+	public ProjectVo getProjectVoByProjectNo(int projectNo) {
+		return sqlSession.selectOne("project.getProjectVoByProjectNo", projectNo);
 	}
 	
 	public void insertBySequence(ProjectCategoryVo projectCategoryVo) {
@@ -161,6 +166,32 @@ public class ProjectDaoImpl implements ProjectDao{
 	@Override
 	public void setPercent(ProjectDto projectDto) {
 		sqlSession.update("project.setPercent", projectDto);
+	}
+
+	@Override
+	public List<IndexProjectVo> projectSearch(String keyword) {
+		return sqlSession.selectList("project.projectSearch", keyword);
+	}
+
+	@Override
+	public int projectSearchCount(String keyword) {
+		if(sqlSession.selectOne("project.projectSearchCount", keyword) == null) {
+			return 0;
+		}
+		return sqlSession.selectOne("project.projectSearchCount", keyword);
+	}
+
+	@Override
+	public List<IndexProjectVo> projectCategorySearch(String keyword) {
+		return sqlSession.selectList("project.projectCategorySearch", keyword);
+	}
+
+	@Override
+	public int projectCategorySearchCount(String keyword) {
+		if(sqlSession.selectOne("project.projectCategorySearchCount", keyword) == null) {
+			return 0;
+		}
+		return sqlSession.selectOne("project.projectCategorySearchCount", keyword);
 	}
 
 }

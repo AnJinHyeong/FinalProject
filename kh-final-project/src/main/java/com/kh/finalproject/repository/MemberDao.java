@@ -29,5 +29,4 @@ public interface MemberDao {
 	// 후원 취소, 보유포인트 환급
 	void addPointBySponsorCancel(SponsorDto sponsorDto);
 
-
 }
