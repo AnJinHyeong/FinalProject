@@ -22,7 +22,9 @@ import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.MessageDao;
 import com.kh.finalproject.repository.ProjectDao;
+import com.kh.finalproject.repository.ProjectLikeDao;
 import com.kh.finalproject.service.EmailService;
+import com.kh.finalproject.vo.ProjectLikeVo;
 
 
 @Controller
@@ -240,6 +242,22 @@ public class MemberController {
 		attr.addAttribute("email", email);
 		return "redirect:join";
 	}
+	
+	@Autowired
+	private ProjectLikeDao projectLikeDao;
+	
+	@GetMapping("/myLikeProject")
+	public String myLikeProject(
+			HttpSession session,
+			Model model) {
+		int memberNo = (int)session.getAttribute("memberNo");
+		
+		List<ProjectLikeVo> likeList = projectLikeDao.myLikeProjectList(memberNo);
+		model.addAttribute("likeList", likeList);
+		
+		return "member/myLikeProject";
+	}
+
 	
 
 	@PostMapping("/getId")

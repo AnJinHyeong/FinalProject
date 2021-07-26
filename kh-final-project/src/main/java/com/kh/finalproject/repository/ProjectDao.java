@@ -47,6 +47,8 @@ public interface ProjectDao {
 	boolean projectDelete(ProjectDto projectDto);
 	//index화면 프로젝트 리스트 
 	List<IndexProjectVo> indexProjectMain();
+	//index화면 프로젝트 리스트 
+	List<IndexProjectVo> indexProjectMain2();
 	// 프로젝트 달성도 업데이트
 	void setPercent(ProjectDto projectDto);
 	// 키워드 검색

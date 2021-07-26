@@ -291,7 +291,7 @@
 					</dl>
 					<div class="projcet-insert-div2">
 						<div>
-							<textarea class="project-insert-text" rows="1" name="memberInfoContent">${projectDto.memberInfoContent}</textarea>
+							<textarea class="project-insert-text" rows="1" name="memberInfoContent" autocomplete="off">${projectDto.memberInfoContent}</textarea>
 							<div>
 								<p id="textMax" class="f12 pb10 pt10 left fRed font-12">최대 300자 이하로 입력해주세요</p>
 								<p id="textSize" class="f12 pb10 pt10 right font-12">(<span id="textSizeSpan" class="font-12">0</span><span class="font-12">/300</span>)</p>

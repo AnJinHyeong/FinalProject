@@ -169,6 +169,10 @@ public class ProjectDaoImpl implements ProjectDao{
 	}
 
 	@Override
+	public List<IndexProjectVo> indexProjectMain2() {
+		return sqlSession.selectList("project.indexProjectMain2");
+	}	
+	@Override
 	public List<IndexProjectVo> projectSearch(String keyword) {
 		return sqlSession.selectList("project.projectSearch", keyword);
 	}
