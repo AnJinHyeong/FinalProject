@@ -158,4 +158,15 @@ public class ProjectDataController {
 		return projectDao.projectCategorySearch(keyword);
 	}
 	
+	@PostMapping("/projectSearchAll")
+	public List<IndexProjectVo> projectSearchAll(@RequestParam String keyword){
+		return projectDao.projectSearchAll(keyword);
+	}
+	
+	@PostMapping("/projectCategorySearchAll")
+	public List<IndexProjectVo> projectCategorySearchAll(@RequestParam String keyword){
+		return projectDao.projectCategorySearchAll(keyword);
+	}
+	
+	
 }

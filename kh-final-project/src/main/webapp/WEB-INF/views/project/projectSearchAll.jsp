@@ -9,7 +9,7 @@
 	$(function(){
 		
 		$.ajax({
-			url : "${pageContext.request.contextPath}/project/data/projectSearch",
+			url : "${pageContext.request.contextPath}/project/data/projectSearchAll",
 			type : 'post',
 			data : {
 				keyword : "${keyword}"
@@ -33,46 +33,10 @@
 					var projectNo = $(this).attr("id");
 					location.href="${pageContext.request.contextPath}/projectBoard/"+projectNo+"";
 				});
-				
 			}
 		});
 		
-		$.ajax({
-			url : "${pageContext.request.contextPath}/project/data/projectCategorySearch",
-			type : 'post',
-			data : {
-				keyword : "${keyword}"
-			},
-			success : function(resp) {
-				for(var i = 0 ; i < resp.length ; i++){
-					var template = $("#projectSearchListTemplate").html();
-					template = template.replace("{{categoryTheme}}", resp[i].categoryTheme);
-					template = template.replace("{{memberInfoNick}}", resp[i].memberInfoNick);
-					template = template.replace("{{projectTitle}}", resp[i].projectTitle);
-					template = template.replace("{{projectPercent}}", resp[i].projectPercent);
-					template = template.replace("{{projectNo}}", resp[i].projectNo);
-					
-					var url = "${pageContext.request.contextPath}/image/project/projectMainDownload/"+resp[i].imageNo;
-					template = template.replace("{{projectImage}}", url);
-					
-					$("#sectionProjectMain2").append(template);
-				}
-				
-				$(".section-project-image").on("click",function(){
-					var projectNo = $(this).attr("id");
-					location.href="${pageContext.request.contextPath}/projectBoard/"+projectNo+"";
-				});
-				
-			}
-		});
 		
-		$("#search-plus1").on("click",function(){
-			location.href="${pageContext.request.contextPath}/project/projectSearchAll/${keyword}";
-		});
-		
-		$("#search-plus2").on("click",function(){
-			location.href="${pageContext.request.contextPath}/project/projectCategorySearchAll/${keyword}";
-		});
 		
 		
 	});
@@ -107,41 +71,28 @@
 
 	<div class="section-row">
 
-		<div class="section-project-rrr">
+		<div class="section-project-rrr" style="height: 1000px;">
 
 			<div class="section-project-search-row-div">
-				<p class="mb20 project-search-p">
-				<span>${projectSearchCount}</span>
-					개의 프로젝트가 있습니다.
-					<c:if test="${projectSearchCount > 0}">
-						<span class="font-12 red-hover-cursor p-search-margin" id="search-plus1">더 보기 <i class="fas fa-angle-double-right"></i></span>
-					</c:if>
-				</p>
+				<p class="mb20 project-search-p"><span>${projectSearchCount}</span>개의 프로젝트가 있습니다.</p>
 				<c:if test="${projectSearchCount > 0}">
 					<div class="section-project-main-search" id="sectionProjectMain1"></div>
 				</c:if>
 			</div>
 
-			<div class="section-project-search-row-div">
-				<p class="project-search-p">
-					<span>${projectCategorySearchCount}</span>
-					개의 카테고리가 있습니다.
-					<c:if test="${projectCategorySearchCount > 0}">
-						<span class="font-12 red-hover-cursor p-search-margin" id="search-plus2">더 보기 <i class="fas fa-angle-double-right"></i></span>
-					</c:if>
-				</p>
-				<c:if test="${projectCategorySearchCount > 0}">
-					<div class="section-project-main-search" id="sectionProjectMain2"></div>
-				</c:if>
-			</div>
-			
-			<div class="section-project-search-row-div">
-				<p class="project-search-p"><span></span>개의 커뮤니티 게시글이 있습니다.<span class="font-12 red-hover-cursor p-search-margin" id="search-plus3" style="margin-left: 930px;">더 보기 <i class="fas fa-angle-double-right"></i></span></p>
-				<div class="section-project-main-search" id="sectionProjectMain2"></div>
-			</div>
-
 		</div>
-	
+		
+		<div style="width: 1200px; height: 50px; margin: 20px auto; text-align: center;">
+			페이지 네이션 자리<i class="fab fa-waze" style="font-size: 30px;"></i><i class="fas fa-poop" style="font-size: 30px; color: orange;"></i><i class="fas fa-bomb" style="font-size: 30px; color: orange;"></i><i class="fas fa-guitar"></i><i class="fas fa-brain"></i><i class="fas fa-music"></i>
+			<br>
+			<i class="fas fa-battery-empty" style="margin-right: 5px; font-size: 15px; color: #ffadad"></i>
+			<i class="fas fa-battery-quarter" style="margin-right: 5px; font-size: 15px; color: #ffdb72"></i>
+			<i class="fas fa-battery-half" style="margin-right: 5px; font-size: 15px; color: #aaffb8"></i>
+			<i class="fas fa-battery-three-quarters" style="margin-right: 5px; font-size: 15px; color: #84ff84"></i>
+			<i class="fas fa-battery-full" style="margin-right: 5px; font-size: 15px; color: #00ff2e"></i>
+		</div>
+		
+		
 	</div>
 
 </div>

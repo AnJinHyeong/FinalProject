@@ -365,4 +365,27 @@ public class ProjectController {
 		return "project/projectSearch";
 	}
 	
+	
+	@GetMapping("/projectSearchAll/{keyword}")
+	public String projectSearchAll(Model model, @PathVariable String keyword) {
+		if(keyword == null || keyword.equals("")) {
+			return "redirect:/";
+		}
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("projectSearchCount", projectDao.projectSearchCount(keyword));
+		return "project/projectSearchAll";
+	}
+	
+	@GetMapping("/projectCategorySearchAll/{keyword}")
+	public String projectCategorySearchAll(Model model, @PathVariable String keyword) {
+		if(keyword == null || keyword.equals("")) {
+			return "redirect:/";
+		}
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("projectCategorySearchCount", projectDao.projectCategorySearchCount(keyword));
+		return "project/projectCategorySearchAll";
+	}
+	
+	
+	
 }

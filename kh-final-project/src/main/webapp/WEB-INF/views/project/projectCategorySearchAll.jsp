@@ -9,36 +9,7 @@
 	$(function(){
 		
 		$.ajax({
-			url : "${pageContext.request.contextPath}/project/data/projectSearch",
-			type : 'post',
-			data : {
-				keyword : "${keyword}"
-			},
-			success : function(resp) {
-				for(var i = 0 ; i < resp.length ; i++){
-					var template = $("#projectSearchListTemplate").html();
-					template = template.replace("{{categoryTheme}}", resp[i].categoryTheme);
-					template = template.replace("{{memberInfoNick}}", resp[i].memberInfoNick);
-					template = template.replace("{{projectTitle}}", resp[i].projectTitle);
-					template = template.replace("{{projectPercent}}", resp[i].projectPercent);
-					template = template.replace("{{projectNo}}", resp[i].projectNo);
-					
-					var url = "${pageContext.request.contextPath}/image/project/projectMainDownload/"+resp[i].imageNo;
-					template = template.replace("{{projectImage}}", url);
-					
-					$("#sectionProjectMain1").append(template);
-				}
-				
-				$(".section-project-image").on("click",function(){
-					var projectNo = $(this).attr("id");
-					location.href="${pageContext.request.contextPath}/projectBoard/"+projectNo+"";
-				});
-				
-			}
-		});
-		
-		$.ajax({
-			url : "${pageContext.request.contextPath}/project/data/projectCategorySearch",
+			url : "${pageContext.request.contextPath}/project/data/projectCategorySearchAll",
 			type : 'post',
 			data : {
 				keyword : "${keyword}"
@@ -64,14 +35,6 @@
 				});
 				
 			}
-		});
-		
-		$("#search-plus1").on("click",function(){
-			location.href="${pageContext.request.contextPath}/project/projectSearchAll/${keyword}";
-		});
-		
-		$("#search-plus2").on("click",function(){
-			location.href="${pageContext.request.contextPath}/project/projectCategorySearchAll/${keyword}";
 		});
 		
 		
@@ -110,38 +73,12 @@
 		<div class="section-project-rrr">
 
 			<div class="section-project-search-row-div">
-				<p class="mb20 project-search-p">
-				<span>${projectSearchCount}</span>
-					개의 프로젝트가 있습니다.
-					<c:if test="${projectSearchCount > 0}">
-						<span class="font-12 red-hover-cursor p-search-margin" id="search-plus1">더 보기 <i class="fas fa-angle-double-right"></i></span>
-					</c:if>
-				</p>
-				<c:if test="${projectSearchCount > 0}">
-					<div class="section-project-main-search" id="sectionProjectMain1"></div>
-				</c:if>
-			</div>
-
-			<div class="section-project-search-row-div">
-				<p class="project-search-p">
-					<span>${projectCategorySearchCount}</span>
-					개의 카테고리가 있습니다.
-					<c:if test="${projectCategorySearchCount > 0}">
-						<span class="font-12 red-hover-cursor p-search-margin" id="search-plus2">더 보기 <i class="fas fa-angle-double-right"></i></span>
-					</c:if>
-				</p>
-				<c:if test="${projectCategorySearchCount > 0}">
-					<div class="section-project-main-search" id="sectionProjectMain2"></div>
-				</c:if>
-			</div>
-			
-			<div class="section-project-search-row-div">
-				<p class="project-search-p"><span></span>개의 커뮤니티 게시글이 있습니다.<span class="font-12 red-hover-cursor p-search-margin" id="search-plus3" style="margin-left: 930px;">더 보기 <i class="fas fa-angle-double-right"></i></span></p>
+				<p class="project-search-p"><span>${projectCategorySearchCount}</span>개의 카테고리가 있습니다.</p>
 				<div class="section-project-main-search" id="sectionProjectMain2"></div>
 			</div>
 
 		</div>
-	
+
 	</div>
 
 </div>

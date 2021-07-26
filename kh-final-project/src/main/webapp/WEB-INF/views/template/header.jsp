@@ -130,7 +130,7 @@ $(document).ready(function(){
 				
 				<c:choose>
 					<c:when test="${isLogin}">
-						<a class="header-link" href="${root}/pay/confirm" style="margin: 0 10px;"><span id="memberHavePoint"></span>p</a>
+						<a class="header-link" href="${root}/pay/confirm" style="margin: 0 10px;"><span id="memberHavePoint" style="font-size: 16px;"></span><span style="color: #ffd700; font-size: 16px; padding-left: 5px;"><i class="fas fa-coins"></i></span></a>
 						<ul id="top_menu" style="list-style:none;"> 
 
 							<li>
@@ -145,7 +145,7 @@ $(document).ready(function(){
 
 										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="#">내 프로젝트</a></li>
 
-										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="#">좋아한 프로젝트</a></li>
+										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="${root}/member/myLikeProject">좋아한 프로젝트</a></li>
 
 										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="${root}/member/mySettings">내 정보 수정</a></li>
 
