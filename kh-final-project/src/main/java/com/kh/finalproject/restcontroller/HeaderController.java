@@ -1,22 +1,22 @@
 package com.kh.finalproject.restcontroller;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+//github.com/AnJinHyeong/FinalProject.git
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.finalproject.repository.MemberDao;
 
 @RestController
-public class IdCheckController {
+public class HeaderController {
 	
 	@Autowired
 	MemberDao memberDao;
 	
-	@PostMapping("/idCheck")
-	public String idCheck(@RequestParam String memberId){
-		if(memberDao.idCheck(memberId) != null) return "N";
-			else return "Y";
+	@PostMapping("/getMemberHavePoint")
+	public int getMemberHavePoint(HttpSession session){
+		int memberNo = (int)session.getAttribute("memberNo");
+		return memberDao.getMemberHavePoint(memberNo); 
 	}
-	
 }

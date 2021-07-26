@@ -14,6 +14,7 @@
 
 </style>
 
+
 <section class="section-setting">
 	<hr>
 	<div style="font-size:40px; margin-top:50px; margin-bottom:70px;color:#3D3D3D;"><strong>내가 만든 프로젝트</strong></div>
@@ -38,6 +39,25 @@
 			</div>	
 		</c:otherwise>
 	</c:choose>
+
+
+<!-- <section class="main-row topLine"> -->
+
+<!-- 	<div style="margin: 0 auto; width: 1200px; height: 800px;"> -->
+<!-- 		<span>내가 만든 프로젝트</span> -->
+		
+<%-- 		<c:forEach var="projectDto" items="${projectDto}"> --%>
+<!-- 			<div style="height: 60px; width: 100%; border: 1px solid black; margin: 10px 0;"> -->
+<%-- 				<p>${projectDto.projectNo}</p> --%>
+<%-- 				<p>${projectDto.projectTitle}</p> --%>
+<%-- 				<a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMain">수정</a> --%>
+<%-- 				<a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainDelete">삭제</a> --%>
+<!-- 			</div> -->
+		
+<%-- 		</c:forEach> --%>
+	
+<!-- 	</div> -->
+
 
 
 </section>

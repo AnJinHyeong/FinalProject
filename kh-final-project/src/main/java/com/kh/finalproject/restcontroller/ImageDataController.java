@@ -1,8 +1,8 @@
 package com.kh.finalproject.restcontroller;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.finalproject.entity.ImageDto;
+import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.repository.ImageDao;
+import com.kh.finalproject.repository.ProjectDao;
 
 @RequestMapping("/image")
 @RestController
@@ -132,7 +134,7 @@ public class ImageDataController {
 	}
 	
 	@PostMapping("/project/upload/story/{projectNo}")
-	public ImageDto uploadStory(@PathVariable int projectNo, @RequestParam MultipartFile f) throws IllegalStateException, IOException {
+	public ImageDto uploadStory(@PathVariable int projectNo, @RequestParam MultipartFile f, @RequestParam int fileNo) throws IllegalStateException, IOException {
 		ImageDto imageDto = ImageDto.builder()
 				.imageUploadName(f.getOriginalFilename())
 				.imageContentType(f.getContentType())
@@ -140,15 +142,15 @@ public class ImageDataController {
 				.projectNo(projectNo)
 				.build();
 		
-		ImageDto result = imageDao.insertProjectMainStory(imageDto);
+		ImageDto result = imageDao.insertProjectMainStory(imageDto, projectNo, fileNo);
 		
-		imageDao.save(imageDto.getImageSaveName(), f);
+		imageDao.save(result.getImageSaveName(), f);
 		return result;
 	}
 	
-	@GetMapping("/project/download/story/{imageNo}")
-	public ResponseEntity<ByteArrayResource> downloadStory(@PathVariable int imageNo) throws IOException {
-		ImageDto imageDto = imageDao.getProjectMainStory(imageNo); 
+	@GetMapping("/project/download/story/{imageSaveName}")
+	public ResponseEntity<ByteArrayResource> downloadStory(@PathVariable String imageSaveName) throws IOException {
+		ImageDto imageDto = imageDao.getImageByImageSaveName(imageSaveName); 
 		ByteArrayResource resource = imageDao.getFile(imageDto.getImageSaveName());
 		String fileName = URLEncoder.encode(imageDto.getImageUploadName(), "UTF-8");
 
@@ -161,5 +163,31 @@ public class ImageDataController {
 								.body(resource);
 	}
 	
+	//프로젝트 보드 화면
+	@Autowired
+	private ProjectDao projectDao;
+	
+	@PostMapping("/member/confirmMemberImage/{projectNo}")
+	public int confirmMemberImage(@PathVariable int projectNo) {
+		ProjectDto find = projectDao.getByProjectNo(projectNo);
+		return imageDao.confirmMember(find.getMemberNo());
+	}
+	
+	@GetMapping("/member/getByMemberNoImage/{projectNo}")
+	public ImageDto getByMemberNoImage(@PathVariable int projectNo) throws IOException {
+		ProjectDto find = projectDao.getByProjectNo(projectNo);
+		ImageDto imageDto = imageDao.getByMemberNo(find.getMemberNo()); 
+		return imageDto;
+	}
+	
+	@GetMapping("/project/deleteFileList/story/{projectNo}")
+	public void deleteProjectStoryNotCurrentImage(@PathVariable int projectNo, @RequestParam(value="fileNoList[]") List<Integer> fileNoList) {
+		imageDao.deleteProjectStoryNotCurrentImage(projectNo, fileNoList);
+	}
+	
+	@GetMapping("/project/deleteFileAll/story/{projectNo}")
+	public void deleteProjectStoryAllImage(@PathVariable int projectNo) {
+		imageDao.deleteProjectStoryAllImage(projectNo);
+	}
 	
 }

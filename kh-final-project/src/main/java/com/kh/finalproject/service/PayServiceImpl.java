@@ -17,6 +17,7 @@ import com.kh.finalproject.vo.pay.PayApprovePrepareVO;
 import com.kh.finalproject.vo.pay.PayApproveVO;
 import com.kh.finalproject.vo.pay.PayReadyPrepareVO;
 import com.kh.finalproject.vo.pay.PayReadyVO;
+import com.kh.finalproject.vo.pay.PaySearchVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -85,6 +86,7 @@ private PayDao payDao;
 		//컨트롤러에서 사용할 수 있도록 추가 데이터를 세팅하여 반환
 		readyVO.setPartner_order_id(payReadyPrepareVO.getPartner_order_id());
 		readyVO.setPartner_user_id(payReadyPrepareVO.getPartner_user_id());
+		readyVO.setTotal_amount(payReadyPrepareVO.getTotal_amount());
 //		readyVO.setMember_no(payReadyPrepareVO.getMemberNo());
 		return readyVO;
 	}
@@ -118,7 +120,21 @@ private PayDao payDao;
 				template.postForObject(uri, entity, PayApproveVO.class);
 		
 		//[7] DB의 결제정보를 승인으로 변경
+
+
+		payDao.approve(Integer.parseInt(payApprovePrepareVO.getPartner_order_id()));
+		
+		PayDto payDto = payDao.get(Integer.parseInt(payApprovePrepareVO.getPartner_order_id()));
+		PayDto find = PayDto.builder()
+				.payPrice(payDto.getPayPrice())
+				.memberNo(payDto.getMemberNo())
+				.build();
+		
+		payDao.plus(find);
+		
+
 		payDao.approve(Integer.parseInt(payApprovePrepareVO.getPartner_user_id()));
+
 		
 		return approveVO;
 	}
@@ -130,33 +146,33 @@ private PayDao payDao;
 //	}
 
 
-//	@Override
-//	public KakaoPaySearchVO search(String tid) throws URISyntaxException {
-//		//[1] 요청 도구 생성
-//		RestTemplate template = new RestTemplate();
-//		
-//		//[2] Http Header 생성(ex : 편지봉투)
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.add("Authorization", kakaoAk);
-//		headers.add("Content-type", contentType);
-//		
-//		//[3] Http Body 생성(ex : 편지내용)
-//		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-//		body.add("cid", cid);
-//		body.add("tid", tid);
-//		
-//		//[4] Http Header / Body 합성
-//		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
-//		
-//		//[5] 목적지 주소 작성
-//		URI uri = new URI("https://kapi.kakao.com/v1/payment/order");
-//		
-//		//[6] 전송
-//		KakaoPaySearchVO searchVO = template.postForObject(uri, entity, KakaoPaySearchVO.class);
-//		log.debug("searchVo = {}", searchVO);
-//		
-//		return searchVO;
-//	}
+	@Override
+	public PaySearchVO search(String tid) throws URISyntaxException {
+		//[1] 요청 도구 생성
+		RestTemplate template = new RestTemplate();
+		
+		//[2] Http Header 생성(ex : 편지봉투)
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", kakaoAk);
+		headers.add("Content-type", contentType);
+		
+		//[3] Http Body 생성(ex : 편지내용)
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+		body.add("cid", cid);
+		body.add("tid", tid);
+		
+		//[4] Http Header / Body 합성
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+		
+		//[5] 목적지 주소 작성
+		URI uri = new URI("https://kapi.kakao.com/v1/payment/order");
+		
+		//[6] 전송
+		PaySearchVO searchVO = template.postForObject(uri, entity, PaySearchVO.class);
+		log.debug("searchVo = {}", searchVO);
+		
+		return searchVO;
+	}
 //
 //	@Override
 //	public KakaoPayCancelVO cancel(KakaoPayCancelPrepareVO prepareVO) throws URISyntaxException {

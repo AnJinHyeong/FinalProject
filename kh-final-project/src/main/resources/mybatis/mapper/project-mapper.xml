@@ -21,6 +21,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from project where member_no = #{memberNo} and project_no = #{projectNo}
 	</select>
 	
+	<select id="getByProjectNo" parameterType="ProjectDto" resultType="ProjectDto">
+		select * from project where project_no = #{projectNo}
+	</select>
+	
 	<select id="insertBySequence" parameterType="ProjectCategoryVo">
 		insert into project
 			(project_no, project_regist_date, project_summary, member_no, category_no, project_state)
@@ -71,7 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<!-- 프로젝트 스토리 업데이트 -->
 	<update id="projectStoryUpdate" parameterType="projectDto">
-		update project set project_content = #{projectContent} where project_no = #{projectNo}
+		update project set project_content = #{projectContent}, project_content_file = #{projectContentFile} where project_no = #{projectNo}
 	</update>
 	
 	<update id="projectApprovalUpdate2" parameterType="int">
@@ -107,6 +111,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    )
 		where project_no = #{projectNo}
 	</select>
+	
+	<delete id="projectDelete" parameterType="ProjectDto">
+		delete project where project_no = #{projectNo} and member_no = #{memberNo}
+	</delete>
+	
+	<!-- main 화면 project join구문 -->
+	<select id="indexProjectMain" resultType="IndexProjectVo">
+		select * from(
+			select rownum rn, TMP.* from(
+					select
+					    P.project_no,P.PROJECT_TITLE, P.PROJECT_PERCENT, P.MEMBER_INFO_NICK, P.PROJECT_STATE,
+					    I.image_no,
+					    C.CATEGORY_NO ,C.CATEGORY_THEME 
+					from Project P
+					    inner join image_file I on P.project_no = I.project_no 
+						INNER JOIN category C ON P.category_no = C.category_no    
+					WHERE I.project_state = 'Y' AND P.PROJECT_STATE = 3 ORDER BY P.project_percent DESC
+				)TMP
+			) where rn between 1 and 8
+	</select>
+	
+	<!-- 프로젝트 달성도 변경 -->
+	<update id="setPercent" parameterType="ProjectDto">
+		update project set project_percent = #{projectPercent} where project_no = #{projectNo}
+	</update>
 	
 </mapper>
 

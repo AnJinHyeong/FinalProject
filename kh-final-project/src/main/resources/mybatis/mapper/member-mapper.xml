@@ -6,9 +6,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 <mapper namespace="member">
-<!--  id 복체크-->
-	<select id = "idCheck" parameterType = "String" resultType = "MemberDto">
-	select*from member where member_id = #{memberId}
+<!--  id 중복체크-->
+	<select id = "checkId" parameterType = "String" resultType = "MemberDto">
+	select * from member where member_id = #{memberId}
 	</select>
 
 <!-- 	 번호 생성 구문
@@ -100,7 +100,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getByMemberNo" resultType="MemberDto" parameterType="int">
 		select * from member where member_no = #{memberNo}
 	</select>
-	
+
 	<update id="upEmail" parameterType="MemberDto">
 		update member set member_email = #{memberEmail} where member_no =#{memberNo}
 	</update>
@@ -112,4 +112,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="upIntro" parameterType="MemberDto">
 		update member set member_introduce = #{memberIntroduce} where member_no=#{memberNo}
 	</update>
+
+	<!-- 보유 포인트 조회 -->
+	<select id = "getMemberHavePoint" resultType = "int" parameterType ="int">
+		SELECT member_have_point FROM member WHERE member_no = #{memberNo}
+	</select>
+	
+	<!-- 결제시 포인트 감소 -->
+	<update id="usePoint" parameterType="SponsorDto">
+		update member set member_have_point = member_have_point - #{sponsorAmount} where member_no = #{memberNo} 
+	</update>
+	
+	<!-- 후원 취소시 포인트 증가 -->
+	<update id="addPointBySponsorCancel" parameterType="SponsorDto">
+		update member set member_have_point = member_have_point + #{sponsorAmount} where member_no = #{memberNo} 
+	</update>
+	
+
 </mapper>

@@ -241,6 +241,7 @@ public class MemberController {
 		return "redirect:join";
 	}
 	
+
 	@PostMapping("/getId")
 	public String getId(@RequestParam String memberEmail, Model model){
 		MemberDto findId = memberDao.getByMemberEmail(memberEmail);
@@ -259,5 +260,5 @@ public class MemberController {
 		
 	}
 
-}
 
+}

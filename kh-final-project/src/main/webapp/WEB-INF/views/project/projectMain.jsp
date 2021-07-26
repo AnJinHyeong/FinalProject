@@ -5,33 +5,6 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <script>
-	//비동기 작업이 완료되면 calculationFlag를 1씩 증가
-	var calculationFlag = 0;
-	function calculateTotalPercent() {
-		//calculation code
-		if ($("#projectDefault").text() == 100)
-			var pd = 1;
-		else
-			var pd = 0;
-		if ($("#projectFunding").text() == 100)
-			var pf = 1;
-		else
-			var pf = 0;
-		if ($("#projectGiftItem").text() == 100)
-			var pgi = 1;
-		else
-			var pgi = 0;
-		if ($("#projectStory").text() == 100)
-			var ps = 1;
-		else
-			var ps = 0;
-		if ($("#projectMember").text() == 100)
-			var pm = 1;
-		else
-			var pm = 0;
-
-		$("#total-project").text(20 * (pd + pf + pgi + ps + pm));
-	}
 
 	$(function() {
 
@@ -81,11 +54,6 @@
 
 							$("#projectDefault").text(25 * (categoryNo + projectTitle + projectSummary));
 						}
-						calculationFlag++;
-						if (calculationFlag == 5) {
-							setTimeout(calculateTotalPercent, 10);
-						}
-
 					}
 
 				});
@@ -107,12 +75,7 @@
 					projectEndDate = 0;
 				else
 					projectEndDate = 1;
-				$("#projectFunding").text(33 * (projectTargetAmount + projectStartDate + projectEndDate) + 1);
-
-				calculationFlag++;
-				if (calculationFlag == 5) {
-					setTimeout(calculateTotalPercent, 10);
-				}
+				$("#projectFunding").text((34 * projectTargetAmount) + (33 * (projectStartDate + projectEndDate)));
 
 				//스토리 진행률
 				var projectContent;
@@ -122,10 +85,6 @@
 					;
 				} else {
 					$("#projectStory").text(100);
-				}
-				calculationFlag++;
-				if (calculationFlag == 5) {
-					setTimeout(calculateTotalPercent, 10);
 				}
 
 				//창작자 정보
@@ -142,11 +101,6 @@
 					memberInfoContent = 1;
 
 				$("#projectMember").text(33 * (memberInfoNick + memberInfoContent + 1) + 1);
-
-				calculationFlag++;
-				if (calculationFlag == 5) {
-					setTimeout(calculateTotalPercent, 10);
-				}
 
 			}
 
@@ -177,10 +131,6 @@
 				} else {//아이템 x
 					$("#projectGiftItem").text(0);
 				}
-				calculationFlag++;
-				if (calculationFlag == 5) {
-					setTimeout(calculateTotalPercent, 10);
-				}
 			}
 
 		});
@@ -201,7 +151,8 @@
 				$("#progress").text(resp);
 			}
 		});
-
+		
+		
 	});
 </script>
 
@@ -209,11 +160,29 @@
 	<div class="section-project-row">
 
 		<div class="project-main-div1">
-			<button class="project-btn btn1 project-btn-hover">미리보기</button>
+			<c:choose>
+				<c:when test="${projectDto.projectState == '1' || projectDto.projectState == '2'}">
+					<a href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}"><button class="project-btn btn1 project-btn-hover" id="projectBoard">미리보기</button></a>
+				</c:when>
+				<c:otherwise>
+					<a href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}"><button class="project-btn btn1 project-btn-hover" id="projectBoard">프로젝트 확인</button></a>
+				</c:otherwise>
+			</c:choose>
 			<div style="text-decoration: none; height: 40px;">
-				<button class="project-btn btn2">
-					기획중·<span id="total-project">0</span>% 완료
-				</button>
+				<c:choose>
+					<c:when test="${projectDto.projectState == '1'}">
+						<button class="project-btn btn2">기획중·<span id="progress"></span>% 완료</button>
+					</c:when>
+					<c:when test="${projectDto.projectState == '2'}">
+						<button class="project-btn btn2">프로젝트 심사중</button>
+					</c:when>
+					<c:when test="${projectDto.projectState == '3'}">
+						<button class="project-btn btn2">프로젝트 펀딩</button>
+					</c:when>
+					<c:otherwise>
+						<button class="project-btn btn2">기획중·<span id="progress"></span>% 완료</button>
+					</c:otherwise>
+				</c:choose>
 			</div>
 
 		</div>
@@ -247,30 +216,18 @@
 			<c:choose>
 				<c:when test="${projectDto.projectState == '3' || projectDto.projectState == 'X'}">
 					<ul class="project-main-ul">
-						<li class="project-main-li main-li-on"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMain"
-							class="main-li-a"
-						>프로젝트 기획</a></li>
-						<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainApproval"
-							class="main-li-a "
-						>승인심사 요청</a></li>
-						<li class="project-main-li"><a href="#" class="main-li-a">커뮤니티</a></li>
+						<li class="project-main-li main-li-on"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMain" class="main-li-a">프로젝트 기획</a></li>
+						<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainApproval" class="main-li-a ">승인심사 요청</a></li>
+						<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainCommunity" class="main-li-a">커뮤니티</a></li>
 						<li class="project-main-li"><a href="#" class="main-li-a">후원자 관리</a></li>
 					</ul>
 				</c:when>
 				<c:otherwise>
 					<ul class="project-main-ul">
-						<li class="project-main-li main-li-on"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMain"
-							class="main-li-a"
-						>프로젝트 기획</a></li>
-						<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainApproval"
-							class="main-li-a"
-						>승인심사 요청</a></li>
-						<li class="project-main-li"><a href="#" class="main-li-a project-disable">커뮤니티<i class="fas fa-lock"
-								style="margin-left: 5px; font-size: 12px;"
-							></i></a></li>
-						<li class="project-main-li"><a href="#" class="main-li-a project-disable">후원자 관리<i class="fas fa-lock"
-								style="margin-left: 5px; font-size: 12px;"
-							></i></a></li>
+						<li class="project-main-li main-li-on"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMain" class="main-li-a">프로젝트 기획</a></li>
+						<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainApproval" class="main-li-a">승인심사 요청</a></li>
+						<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainCommunity" class="main-li-a project-disable">커뮤니티<i class="fas fa-lock" style="margin-left: 5px; font-size: 12px;"></i></a></li>
+						<li class="project-main-li"><a href="#" class="main-li-a project-disable">후원자 관리<i class="fas fa-lock" style="margin-left: 5px; font-size: 12px;"></i></a></li>
 					</ul>
 				</c:otherwise>
 			</c:choose>

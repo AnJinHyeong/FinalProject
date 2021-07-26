@@ -54,6 +54,7 @@
 				<label for = "memberId">아이디</label>
 				<input type = "text" name="memberId" id = "memberId" required class = "form-input form-underline radius-b" placeholder = "8~20자 이내의 영문 소대문자, 숫자 조합가능">
 				<div id = "idResult"></div>
+				<div id = "checkId"></div>
 				
 			</div>
 			<div class = "row text-left">

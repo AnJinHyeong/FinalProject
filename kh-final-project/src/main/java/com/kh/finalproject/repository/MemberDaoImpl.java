@@ -1,22 +1,20 @@
 package com.kh.finalproject.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.MemberDto;
+import com.kh.finalproject.entity.PayDto;
+import com.kh.finalproject.entity.SponsorDto;
 
 @Repository
 public class MemberDaoImpl implements MemberDao{
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
-	@Override
-	public MemberDto idCheck(String memberId) {
-		return sqlSession.selectOne("member.idCheck", memberId);
-	}
-	
 
 	
 	@Override
@@ -74,4 +72,43 @@ public class MemberDaoImpl implements MemberDao{
 		return count > 0;
 	}
 
+
+
+	@Override
+	public boolean checkId(String memberId) {
+		return sqlSession.selectOne("member.checkId", memberId) != null;
+	}
+
+
+
+	@Override
+	public int selectHavePoint(int memberNo) {
+		return sqlSession.selectOne("member.selectHavePoint", memberNo);
+	}
+
+
+
+	@Override
+	public List<PayDto> list(int memberNo) {
+		return sqlSession.selectList("pay.list",memberNo);
+	}
+
+
+	public int getMemberHavePoint(int memberNo) {
+		return sqlSession.selectOne("member.getMemberHavePoint", memberNo);
+	}
+
+
+
+
+	@Override
+	public void usePoint(SponsorDto sponsorDto) {
+		sqlSession.update("member.usePoint", sponsorDto);
+	}
+
+	@Override
+	public void addPointBySponsorCancel(SponsorDto sponsorDto) {
+		sqlSession.update("member.addPointBySponsorCancel", sponsorDto);
+		
+	}
 }

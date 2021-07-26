@@ -31,6 +31,18 @@
 			
 		});
 		
+		$.ajax({
+			url : "${pageContext.request.contextPath}/project/data/progress",
+			type : 'post',
+			data : {
+				"projectNo" : "${projectDto.projectNo}"
+			},
+			success : function(resp) {
+				$("#progress").text(resp);
+			}
+		});
+		
+		
 	});
 	
 
@@ -40,17 +52,27 @@
 	<div class="section-project-row">
 			
 			<div class="project-main-div1">
-				<button class="project-btn btn1 project-btn-hover">미리보기</button>
+				<c:choose>
+					<c:when test="${projectDto.projectState == '1' || projectDto.projectState == '2'}">
+						<a href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}"><button class="project-btn btn1 project-btn-hover" id="projectBoard">미리보기</button></a>
+					</c:when>
+					<c:otherwise>
+						<a href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}"><button class="project-btn btn1 project-btn-hover" id="projectBoard">프로젝트 확인</button></a>
+					</c:otherwise>
+				</c:choose>
 				<div style="text-decoration: none; height: 40px;">
 					<c:choose>
 						<c:when test="${projectDto.projectState == '1'}">
-							<button class="project-btn btn2">기획중·43% 완료</button>
+							<button class="project-btn btn2">기획중·<span id="progress"></span>% 완료</button>
 						</c:when>
 						<c:when test="${projectDto.projectState == '2'}">
 							<button class="project-btn btn2">프로젝트 심사중</button>
 						</c:when>
+						<c:when test="${projectDto.projectState == '3'}">
+							<button class="project-btn btn2">프로젝트 펀딩</button>
+						</c:when>
 						<c:otherwise>
-							<button class="project-btn btn2">기획중·43% 완료</button>
+							<button class="project-btn btn2">기획중·<span id="progress"></span>% 완료</button>
 						</c:otherwise>
 					</c:choose>
 				</div>
@@ -84,7 +106,7 @@
 						<ul class="project-main-ul">
 							<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMain" class="main-li-a">프로젝트 기획</a></li>
 							<li class="project-main-li main-li-on"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainApproval" class="main-li-a ">승인심사 요청</a></li>
-							<li class="project-main-li"><a href="#" class="main-li-a">커뮤니티</a></li>
+							<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainCommunity" class="main-li-a">커뮤니티</a></li>
 							<li class="project-main-li"><a href="#" class="main-li-a">후원자 관리</a></li>
 						</ul>
 					</c:when>
@@ -92,7 +114,7 @@
 						<ul class="project-main-ul">
 							<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMain" class="main-li-a">프로젝트 기획</a></li>
 							<li class="project-main-li main-li-on"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainApproval" class="main-li-a">승인심사 요청</a></li>
-							<li class="project-main-li"><a href="#" class="main-li-a project-disable">커뮤니티<i class="fas fa-lock" style="margin-left: 5px; font-size: 12px;"></i></a></li>
+							<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainCommunity" class="main-li-a project-disable">커뮤니티<i class="fas fa-lock" style="margin-left: 5px; font-size: 12px;"></i></a></li>
 							<li class="project-main-li"><a href="#" class="main-li-a project-disable">후원자 관리<i class="fas fa-lock" style="margin-left: 5px; font-size: 12px;"></i></a></li>
 						</ul>
 					</c:otherwise>
@@ -125,6 +147,13 @@
 								<p class="font-12" style="margin-top: 10px; color: #F86453;">승인 심사 요청시 프로젝트 등록,수정이 불가능 합니다.</p>
 							</div>
 						</form>
+					</c:when>
+					<c:when test="${projectDto.projectState == '3'}">
+						<div class="project-approval-div-d" style="text-align: center;">
+							<button class="project-approval-btn3"><span style="font-size: 13px;">심사완료</span></button>	
+							<p class="font-12" style="margin-top: 10px; color: #F86453;"><i class="fas fa-exclamation-circle"></i> 현재 프로젝트의 심사가 완료되었습니다.</p>
+							<p class="font-12" style="margin-top: 10px; color: #F86453;">설정하신 펀딩 시작일부터 펀딩이 시작됩니다.</p>
+						</div>
 					</c:when>
 					<c:otherwise>
 						

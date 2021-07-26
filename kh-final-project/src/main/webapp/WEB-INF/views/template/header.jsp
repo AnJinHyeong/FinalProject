@@ -8,7 +8,7 @@
 
 <!DOCTYPE html>
 <html>
-<head>
+<head>	
 <meta charset="UTF-8">
 <title>FüN‿ding - 즐거움의 시작</title>
 	<link rel="stylesheet" type="text/css" href="${root}/css/template.css">
@@ -16,6 +16,8 @@
 	<link rel="stylesheet" type="text/css" href="${root}/css/project.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/yb.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/yongbo.css">
+	<link rel="stylesheet" type="text/css" href="${root}/css/projectBoard.css">
+	<link rel="stylesheet" type="text/css" href="${root}/css/templateSection.css">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 
@@ -72,7 +74,18 @@ $(document).ready(function(){
 	
 
 });
+
+	$(function(){
+		$.ajax({
+			url :"${pageContext.request.contextPath}/header/getMemberHavePoint",
+			type: "post",
+			success : function(resp){
+				$("#memberHavePoint").text(resp);
+			}
+		});
+	});
 </script>
+
 </head>
 <body class="align-column">
 
@@ -89,8 +102,7 @@ $(document).ready(function(){
 				<img src="${root}/image/search.svg" width="20" height="20">
 				<c:choose>
 					<c:when test="${isLogin}">
-						<a class="header-link" href="${root}/member/logout" style="width: 95px; text-align: center;">로그아웃</a>
-						<a class="header-link" href="${root}/pay/confirm" style="margin: 0 10px;">5000p</a>
+						<a class="header-link" href="${root}/pay/confirm" style="margin: 0 10px;"><span id="memberHavePoint"></span>p</a>
 						<ul id="top_menu" style="list-style:none;"> 
 
 							<li>
@@ -116,6 +128,8 @@ $(document).ready(function(){
 							</li>
 
 						</ul>
+
+						
 					</c:when>
 					<c:otherwise>
 						<a class="header-link" href="${root}/member/login" style="width: 120px; margin: 0 35px;">로그인/회원가입</a>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="projectCommunity">
+	
+	<insert id="insert" parameterType="ProjectCommunityDto">
+		insert into project_community values(project_community_seq.nextval, #{projectCommunityContent}, sysdate, #{memberNo}, #{projectNo})
+	</insert>
+	
+	<select id="listByProjectNo" parameterType="int" resultType="ProjectCommunityDto">
+		select * from project_community where project_no = #{projectNo} order by project_no desc
+	</select>
+	
+	<select id="listByProjectNo2" parameterType="int" resultType="ProjectCommunityMemberVo">
+		select 
+			PC.*,M.member_nick 
+		from
+			project_community PC
+			inner join member M on PC.member_no = M.member_no
+		WHERE PC.project_no = #{projectNo} order by project_no desc
+	</select>
+	
+	<delete id="delete" parameterType="ProjectCommunityDto">
+		delete project_community where project_community_no = #{projectCommunityNo} and member_no = #{memberNo}
+	</delete>
+	
+	<delete id="deleteByProjectNo" parameterType="ProjectCommunityDto">
+		delete project_community where project_community_no = #{projectCommunityNo} and project_no = #{projectNo} 
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

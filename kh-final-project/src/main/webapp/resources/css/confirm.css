@@ -1,43 +1,71 @@
-#payTitle{
-		text-align: center;
+#payMain{
+	padding: 32px 16px 18px;
+	text-align: left;
+}
+
+#payAll{
+	    width: 450px;
+    padding: 30px 0px 72px;
+    margin: 0px auto 12px;
+    height: 350px;
+	text-align: left;
+}
+
+#payBorder{		
+
+    padding: 32px;
+    border-radius: 5px;
+    border: 1px solid rgb(228, 228, 228);
+    	left:0px;
 }
 
 #payContent{
-		text-align:left;
+text-align:left;
 }
+
+#payTitle{
+    padding: 0px 0px 0px;
+}
+
+
 
 #payForm{
-	text-align: center;
-		padding-top:150px;
+		padding-top:20px;
 }
 
+#formAll{
+	padding-top: 20px;
+	
+}
 #form{
-/* 	position:absolute;
-	left: 50%; transform: translateX(-50%);
-	top:500px; */
-	background: black;
-	color: white;
-	padding : 10px;
-	border: none;
-}
-
-#joinBorder{			
-				width : 500px;
-			height: 500px;
-			border: 2px solid #FFC58C;
-			padding-top: 15px;
-			padding-left : 30px;
-			padding-right : 30px;
-			margin-top:20px;
-			margin-bottom:20px;
+    width: 100%;
+    cursor: pointer;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    height: 52px;
+    white-space: nowrap;
+    border-radius: 4px;
+    margin: 0px;
+    border: 0px;
+    outline: none;
+    font-weight: bold;
+    box-sizing: border-box;
+    padding: 0px 24px;
+    background-color: rgb(255, 87, 87);
+    color: rgb(255, 255, 255);
 }
 
 #10underName{
-	padding-bottom: 200px;
+    color: rgb(61, 61, 61);
+    margin: 0px 0px 10px;
 }
 
 #10upName{
-		padding-bottom: 200px;
+    color: rgb(61, 61, 61);
+    margin: 0px 0px 10px;
 }
 #10underMoney{
 	left: 300px;
@@ -45,3 +73,46 @@
 #10upMoney{
 	left: 300px;
 }
+
+#error{
+	margin: 8px 0px 0px;
+    color: rgb(255, 87, 87);
+    font-size: 13px;
+    line-height: 20px;
+    letter-spacing: -0.015em;
+}
+
+.moneyText{
+	color: rgb(61, 61, 61);
+    margin: 0px 0px 10px;
+}
+
+.nomalBorder{		
+    padding: 32px;
+    border-radius: 5px;
+    border: 1px solid rgb(228, 228, 228);
+    height: 100px;
+}
+
+.nomalButton{
+	float:left
+	    width: 100%;
+    cursor: pointer;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    height: 52px;
+    white-space: nowrap;
+    border-radius: 4px;
+    margin: 0px;
+    border: 0px;
+    outline: none;
+    font-weight: bold;
+    box-sizing: border-box;
+    padding: 0px 24px;
+    background-color: rgb(255, 87, 87);
+    color: rgb(255, 255, 255);
+}
+	

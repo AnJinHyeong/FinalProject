@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sponsor">
+	
+	<!-- 후원정보 등록 -->
+	<insert id="insert" parameterType="SponsorDto">
+		insert into sponsor(sponsor_no, member_no, gift_no, project_no, sponsor_amount)
+		values(sponsor_seq.nextval, #{memberNo}, #{giftNo, jdbcType=INTEGER}, #{projectNo}, #{sponsorAmount})
+    </insert>
+    
+    <!-- 프로젝트 후원모금 합 -->
+    <select id="currentAmount" parameterType="int" resultType="int">
+    	select sum(sponsor_amount) from sponsor where project_no = #{projectNo}
+    </select>
+    
+    <!-- 프로젝트 후원자 수 -->
+    <select id="currentSponsorMemberCount" parameterType="int" resultType="int">
+    	select count(*) from
+    		(select member_no from sponsor where project_no = #{projectNo} group by member_no)
+    </select>
+	
+	<!-- 내가 후원한 후원 프로젝트 목록/후원금액 -->
+	<select id="sponsorProjectListByMemberNo" resultType="SponsorVo" parameterType="int">
+		select project_no, project_title, sum(sponsor_amount) sum_sponsor_amount from(
+			select P.project_no, P.project_title, S.sponsor_amount
+			    from sponsor S
+			left outer join project P on P.project_no = S.project_no
+			    where S.member_no = #{memberNo}
+			) group by project_title, project_no
+	</select>
+	
+	<!-- 내가 후원한 특정 프로젝트 후원금액 -->
+	<select id="sponsorAmountByProjectNoAndMemberNo" resultType="int" parameterType="SponsorVo">
+		select sum(sponsor_amount) sponsor_amount from sponsor where member_no = #{memberNo} and project_no = #{projectNo} group by project_no, member_no
+	</select>
+	
+</mapper>
+

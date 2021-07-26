@@ -1,5 +1,7 @@
 package com.kh.finalproject.repository;
 
+import java.util.List;
+
 import com.kh.finalproject.entity.PayDto;
 
 public interface PayDao {
@@ -7,8 +9,8 @@ public interface PayDao {
 	void ready(PayDto payDto);
 	boolean approve(PayDto payDto);
 	void approve(int payNo);
-	void plus(int payNo);
-//	List<PaymentDto> list(int paymentBuyer);
-//	PaymentDto get(int paymentNo);
+	boolean plus(PayDto payDto);
+	List<PayDto> list(int memberNo);
+	PayDto get(int payNo);
 //	void cancel(int paymentNo);
 }

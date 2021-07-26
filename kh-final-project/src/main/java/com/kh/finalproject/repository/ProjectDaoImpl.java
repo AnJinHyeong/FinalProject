@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
+import com.kh.finalproject.vo.ProjectInformationVo;
 import com.kh.finalproject.vo.ProjectProgressVo;
 
 @Repository
@@ -138,6 +140,27 @@ public class ProjectDaoImpl implements ProjectDao{
 		if(member2) result += 7;
 		
 		return result;
+	}
+
+	@Override
+	public ProjectDto getByProjectNo(int projectNo) {
+		return sqlSession.selectOne("project.getByProjectNo",projectNo);
+	}
+
+	@Override
+	public boolean projectDelete(ProjectDto projectDto) {
+		int count = sqlSession.delete("project.projectDelete",projectDto);
+		return count > 0;
+	}
+
+	@Override
+	public List<IndexProjectVo> indexProjectMain() {
+		return sqlSession.selectList("project.indexProjectMain");
+	}
+	
+	@Override
+	public void setPercent(ProjectDto projectDto) {
+		sqlSession.update("project.setPercent", projectDto);
 	}
 
 }

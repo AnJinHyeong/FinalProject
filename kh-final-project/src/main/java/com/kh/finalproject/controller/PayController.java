@@ -6,21 +6,24 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalproject.service.PayService;
 import com.kh.finalproject.vo.pay.PayApprovePrepareVO;
 import com.kh.finalproject.vo.pay.PayApproveVO;
 import com.kh.finalproject.vo.pay.PayReadyPrepareVO;
 import com.kh.finalproject.vo.pay.PayReadyVO;
+import com.kh.finalproject.vo.pay.PaySearchVO;
 
 @Controller
 @RequestMapping("/pay")
 public class PayController {
-	
+
 	@Autowired//2개가 등록되어있으므로 사용이 불가능
 //	@Qualifier("payService")//id=kakaoPayService인 bean을 주입
 	private PayService payService;
@@ -59,25 +62,32 @@ public class PayController {
 		prepareVO.setPartner_order_id((String)session.getAttribute("partner_order_id"));
 		prepareVO.setPartner_user_id((String)session.getAttribute("partner_user_id"));
 		prepareVO.setTid((String)session.getAttribute("tid"));
+		prepareVO.setTotal_amount((String)session.getAttribute("total_amount"));
 		
 		session.removeAttribute("partner_order_id");
 		session.removeAttribute("partner_user_id");
 		session.removeAttribute("tid");
-
+		session.removeAttribute("total_amount");
 
 		PayApproveVO approveVO = payService.approve(prepareVO);
 		
 		//결제 승인이 완료된 시점 : 승인 정보(PayApproveVO)를 DB에 저장하는 등의 작업을 수행
 		
 		//결제 정보 조회 페이지 또는 결제 성공 알림페이지로 리다이렉트 한다
-		return "redirect:result_success";
+		return "redirect:result_success?tid="+approveVO.getTid();
 	}
 	
 	@GetMapping("/result_success")
-	public String resultSuccess() {
+	public String resultSuccess(
+			@ RequestParam String tid,
+			Model model) throws URISyntaxException {
+		PaySearchVO searchVO = payService.search(tid);
+		model.addAttribute("searchVO", searchVO);
 		return "pay/resultSuccess";//"/WEB-INF/views/pay/resultSuccess.jsp"
 	}
-//	
+
+	
+	
 //	@GetMapping("/cancel")
 //	@GetMapping("/fail")
 //	
