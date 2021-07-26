@@ -53,8 +53,7 @@
 		
 		var maxHeight = 0;
 		
-		$(window).on("scroll", function(){
-			console.log(maxHeight);
+		$(window).on("scroll", function(e){
 			var currentScroll = $(this).scrollTop();
 			console.log(currentScroll);
 			if(maxHeight < currentScroll){
@@ -65,6 +64,9 @@
 					endNum = projectCount;
 				}
 				getSomeProject(strNum, endNum);
+				if(endNum == projectCount){
+					$(window).off("scroll");
+				}
 			}
 		});
 	});
