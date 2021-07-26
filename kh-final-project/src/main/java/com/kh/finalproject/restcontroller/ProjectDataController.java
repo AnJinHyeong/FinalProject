@@ -126,6 +126,10 @@ public class ProjectDataController {
 		return projectDao.indexProjectMain();
 	}
 	
+	@GetMapping("/index/indexProjectMain2")
+	public List<IndexProjectVo> indexProjectMain2(){
+		return projectDao.indexProjectMain2();
+	}
 	@PostMapping("/sponsorListByProjectNo/{index}")
 	public List<SponsorListVo> sponsorListByProjectNo(HttpSession session, @RequestParam int projectNo, @PathVariable int index){
 		int memberNo = (int)session.getAttribute("memberNo");

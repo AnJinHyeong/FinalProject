@@ -156,7 +156,6 @@ $(document).ready(function(){
 							</li>
 
 						</ul>
-
 						
 					</c:when>
 					<c:otherwise>

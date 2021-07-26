@@ -402,7 +402,6 @@
 			
 		});
 		
-		console.log($(".projcet-insert-input").val().length);
 	});
 	
 	
@@ -466,7 +465,7 @@
 				<div class="projcet-insert-div2">
 					<div>
 						<p class="project-insert-p">제목</p>
-						<input type="text" name="projectTitle" class="projcet-insert-input" max="30" autocomplete="none" value="${projectDto.projectTitle}">
+						<input type="text" name="projectTitle" class="projcet-insert-input" autocomplete="off" max="30" autocomplete="none" value="${projectDto.projectTitle}">
 						<p id="textMaxTitle" class="f12 pb10 pt10 left fRed font-12">최대 30자 이하로 입력해주세요</p>
 						<p id="textSizeTitle" class="f12 pb10 pt10 right font-12">(<span id="textSizeSpanTitle" class="font-12">0</span><span class="font-12">/30</span>)</p>
 					</div>
@@ -487,7 +486,7 @@
 				<div class="projcet-insert-div2">
 					<div>
 						<p class="project-insert-p">요약 내용</p>
-						<textarea class="project-insert-text" rows="1" id="projectSummary-text" name="projectSummary" required>${projectDto.projectSummary}</textarea>
+						<textarea class="project-insert-text" rows="1" id="projectSummary-text" name="projectSummary" required autocomplete="off">${projectDto.projectSummary}</textarea>
 						<div>
 							<p id="textMin" class="f12 pb10 pt10 left fRed font-12">최소 10자 이상 입력해주세요</p>
 							<p id="textMax" class="f12 pb10 pt10 left fRed font-12">최대 50자 이하로 입력해주세요</p>
