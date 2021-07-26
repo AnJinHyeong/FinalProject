@@ -21,60 +21,8 @@
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 
-<style>
-
-	.menu_1{
-
-		text-align: right;
-
-	}
-
-	.sub_1{
-
-		position:absolute;
-
-		width:100px;
-
-	}
-
-</style>
-
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
-$(document).ready(function(){
-
-	
-
-	$('#top_menu .sub_1').hide();
-
- 
-
-	$('.menu_1').click(function(){
-
-		if($('#top_menu .sub_1').is(':visible')==false){
-
-			
-
-			$('.sub_1').slideDown();
-
-			
-
-		}else if($('#top_menu .sub_1').is(':visible')==true){
-
-			
-
-			$('.sub_1').hide();
-
-		}
-
- 
-
-	});
-
-	
-
-});
-
 	$(function(){
 		$.ajax({
 			url :"${pageContext.request.contextPath}/header/getMemberHavePoint",
@@ -101,6 +49,28 @@ $(document).ready(function(){
 			}
 		});
 		
+		$(".loginLogoutBtn").on("click", function(){
+			$(".headerLoginLogout").toggle();
+		});
+		
+		$(".projectBtn").on("click", function(){
+			$(".headerProject").toggle();
+		});
+		
+	});
+	
+	$("html").on("click", function(e){
+		if($(".headerLoginLogout").css("display") == "block"){
+			if(!$(e.target).hasClass("UlOn")){
+				$(".headerLoginLogout").toggle();
+			}
+		}
+		
+		if($(".headerProject").css("display") == "block"){
+			if(!$(e.target).hasClass("UlOn2")){
+				$(".headerProject").toggle();
+			}
+		}
 	});
 </script>
 
@@ -109,64 +79,91 @@ $(document).ready(function(){
 
 	<header class="main-row"> 
 		<div class="header-row">
-			<div class="header-left">
-				<a class="header-a" href="#">프로젝트 둘러보기</a>
-				<a class="header-a" href="${root}/project/projectInsert">프로젝트 올리기</a>
+			<div class="header-left w120 h60">
+				<div class="w120 taCenter h100p dpBlock p5">
+					<button class="UlOn2 projectBtn bosNone cursorPointer w50 bacInherit h30 mt5">
+						<div class="UlOn2 bacWhite w30 h30 mautoX">
+							<div class="dpFlex UlOn2">
+								<i class="UlOn2 fab fa-grav" style="padding: 1px; color: #707070;"></i>
+
+								<i class="UlOn2 fs12 fas fa-cloud" style="padding: 1px; color: #B5EAEA;"></i>
+							</div>
+							<div class="dpFlex UlOn2">
+								<i class="UlOn2 fas fa-tablet-alt" style="padding: 1px; color: #FFCB77;"></i>
+
+								<i class="UlOn2 fas fa-music" style="padding: 1px; color: #F38BA0;"></i>
+							</div>
+						</div>
+						<span class="UlOn2 dpBlock fs12 h20 mt5 fBold">PROJECT</span>
+					</button>
+				</div>
+				
+				<div class="UlOn2 headerProject dpNone poAbsolute w160 zi2 mt60 ml60">
+					<ul class="UlOn2 lsNone bacWhite p10 bora5 boc240 bosSolid bow1">
+						<li><a href="${root}/project/projectInsert">프로젝트 올리기</a></li>
+						<li><a href="#">프로젝트 요청 게시판</a></li>
+					</ul>
+				</div>
 			</div>
+			
+			
 			<div class="header-center">
-				<a class="header-center-link" href="${root}/">FüN‿ding</a>
+				<a class="header-center-link" href="${root}/" style="color: #FF3535">FüN‿ding</a>
 			</div>
 			<div class="header-right">
 			
-				<div class="float-container">
-					<form action="${root}/project/projectSearch" class="right" method="post" id="headerSearchForm">
-						<div class="inputToggleContainer off">
-							<input class="inputToggleText fs18 pl10" type="text" name="keyword" placeholder="검색어를 입력해주세요." autocomplete="off">
-							<button class="inputToggleBtn off bacInherit zi1 cursorPointer"><i class="fas fa-search bacWhite"></i></button>
-							<button class="inputToggleBtnX off bacInherit cursorPointer"><i class="fas fa-times"></i></button>
-						</div>
-					</form>
-				</div>
 				
-				<c:choose>
-					<c:when test="${isLogin}">
-						<a class="header-link" href="${root}/pay/confirm" style="margin: 0 10px;"><span id="memberHavePoint" style="font-size: 16px;"></span><span style="color: #ffd700; font-size: 16px; padding-left: 5px;"><i class="fas fa-coins"></i></span></a>
-						<ul id="top_menu" style="list-style:none;"> 
-
-							<li>
-
-								<a><img src="${root}/image/user-in.svg"  class="menu_1" width="118" height="25"  style="padding-right:100px;"></a>
-
-									<ul class="sub_1" style="list-style:none; padding-left:0px;">
-
-										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="${root}/member/myMsg">메세지</a></li>
-
-										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="#">후원현황</a></li>
-
-										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="#">내 프로젝트</a></li>
-
-										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="${root}/member/myLikeProject">좋아한 프로젝트</a></li>
-
-										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="${root}/member/mySettings">내 정보 수정</a></li>
-
-										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="${root}/member/logout">로그아웃</a></li>
-
-									</ul>
-
-							</li>
-
-						</ul>
-						
-					</c:when>
-					<c:otherwise>
-						<a class="header-link" href="${root}/member/login" style="width: 120px; margin: 0 35px;">로그인/회원가입</a>
-						<a href="#"><img src="${root}/image/user-out.svg" width="25" height="25" ></a>
-					</c:otherwise>
-				</c:choose>
+				<form action="${root}/project/projectSearch" method="post" id="headerSearchForm">
+					<div class="inputToggleContainer off">
+						<input class="inputToggleText fs18 pl10" type="text" name="keyword" placeholder="검색어를 입력해주세요." autocomplete="off">
+						<button class="inputToggleBtn off bacInherit zi1 cursorPointer"><i class="fas fa-search bacWhite"></i></button>
+						<button class="inputToggleBtnX off bacInherit cursorPointer"><i class="fas fa-times"></i></button>
+					</div>
+				</form>
+				
+				
+				<div class="w120 ml20 h100p">
+					<c:choose>
+						<c:when test="${isLogin}">
+							<div class="w120 taCenter h100p dpBlock p5">
+								<button class="UlOn loginLogoutBtn bosNone cursorPointer w50 bacInherit h30 mt5"><i class="h100p fs30 UlOn fas fa-user"></i></button>
+								
+								<a class="header-link dpBlock fs12 h20 mt5" href="${root}/pay/confirm">
+								<span style="color: #ffd700;"><i class="fas fa-coins"></i></span>
+								<span class="fBold" id="memberHavePoint"></span></a>
+							</div>
+							
+							
+								
+							<div class="headerLoginLogout dpNone poAbsolute w160 zi2" style="margin-left: -100px;">
+								<ul class="UlOn lsNone bacWhite p10 bora5 boc240 bosSolid bow1">
+									<li><a href="${root}/member/myMsg">메세지</a></li>
+									<li><a href="${root}/sponsor/sponsorList">후원현황</a></li>
+									<li><a href="${root}/member/myProject">내 프로젝트</a></li>
+									<li><a href="${root}/member/myLikeProject">좋아한 프로젝트</a></li>
+									<li><a href="${root}/member/mySettings">내 정보 수정</a></li>
+									<li><a href="${root}/member/logout">로그아웃</a></li>
+								</ul>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="w120 taCenter h100p dpBlock p5">
+								<button class="UlOn loginLogoutBtn bosNone cursorPointer w50 bacInherit h30 mt5">
+									<i class="h100p fs30 UlOn far fa-user"></i>
+									<span class="UlOn dpBlock fs12 h20 mt5 fBold">LOGIN</span>
+								</button>
+							</div>
+							
+							<div class="headerLoginLogout dpNone poAbsolute w160 zi2" style="margin-left: -100px;">
+								<ul class="UlOn lsNone bacWhite p10 bora5 boc240 bosSolid bow1">
+									<li><a href="${root}/member/login">로그인</a></li>
+									<li><a href="#">회원가입</a></li>
+								</ul>
+							</div>
+						</c:otherwise>
+					</c:choose>
+				</div>
 			</div>
 		</div>
 		
-		<div>
-		
-		</div>
 	</header>
