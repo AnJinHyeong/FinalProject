@@ -41,6 +41,7 @@ public class MemberDaoImpl implements MemberDao{
 		return sqlSession.selectOne("member.selectHavePoint", memberNo);
 	}
 	
+	@Override
 	public int getMemberHavePoint(int memberNo) {
 		return sqlSession.selectOne("member.getMemberHavePoint", memberNo);
 	}
@@ -51,9 +52,13 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
+	public void addPointBySponsorCancel(SponsorDto sponsorDto) {
+		sqlSession.update("member.addPointBySponsorCancel", sponsorDto);
+	}
+	
+	@Override
 	public List<PayDto> list(int memberNo) {
 		return sqlSession.selectList("pay.list",memberNo);
 	}
-
 
 }

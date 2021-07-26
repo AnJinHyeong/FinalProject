@@ -354,4 +354,15 @@ public class ProjectController {
 		return "redirect:projectMainCommunity";
 	}
 	
+	@PostMapping("/projectSearch")
+	public String projectSearch(Model model, @RequestParam String keyword) {
+		if(keyword == null || keyword.equals("")) {
+			return "redirect:/";
+		}
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("projectSearchCount", projectDao.projectSearchCount(keyword));
+		model.addAttribute("projectCategorySearchCount", projectDao.projectCategorySearchCount(keyword));
+		return "project/projectSearch";
+	}
+	
 }

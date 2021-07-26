@@ -80,4 +80,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update member set member_have_point = member_have_point - #{sponsorAmount} where member_no = #{memberNo} 
 	</update>
 	
+	<!-- 후원 취소시 포인트 증가 -->
+	<update id="addPointBySponsorCancel" parameterType="SponsorDto">
+		update member set member_have_point = member_have_point + #{sponsorAmount} where member_no = #{memberNo} 
+	</update>
+	
 </mapper>

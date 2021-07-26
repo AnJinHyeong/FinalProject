@@ -12,6 +12,12 @@
 	 margin: 20px 0;
 }
 
+.section-project-search-row-div{
+	 width: 100%; 
+	 min-height: 30px; 
+	 margin: 20px 0;
+}
+
 .section-project-minaP{
 	font-size: 25px; 
 	font-weight: bold; 
@@ -27,9 +33,17 @@
 	flex-wrap: wrap; 
 }
 
+.section-project-main-search{
+	display: inline-flex;  
+	width: 100%; 
+	max-height: 600px; 
+	background-color: #fff; 
+	flex-wrap: wrap; 
+}
+
 .section-project-mainDiv{
 	width: 300px;
-	height: 250px; 
+	height: 300px; 
 	padding: 10px; 
 	text-align: center;
 }

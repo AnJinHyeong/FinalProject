@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- 프로젝트 후원모금 합 -->
     <select id="currentAmount" parameterType="int" resultType="int">
-    	select sum(sponsor_amount) from sponsor where project_no = #{projectNo}
+    	select sum(sponsor_amount) from sponsor where project_no = #{projectNo} and sponsor_cancel is null
     </select>
     
     <!-- 프로젝트 후원자 수 -->
@@ -23,19 +23,69 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     		(select member_no from sponsor where project_no = #{projectNo} group by member_no)
     </select>
 	
-	<!-- 내가 후원한 후원 프로젝트 목록/후원금액 -->
-	<select id="sponsorProjectListByMemberNo" resultType="SponsorVo" parameterType="int">
-		select project_no, project_title, sum(sponsor_amount) sum_sponsor_amount from(
-			select P.project_no, P.project_title, S.sponsor_amount
+	<!-- 내가 후원한 후원 프로젝트 목록/후원금액(진행중) -->
+	<select id="sponsorStartedProjectListByMemberNo" resultType="SponsorVo" parameterType="int">
+		<![CDATA[
+			select project_no, project_title, sum(sponsor_amount) sum_sponsor_amount from(
+				select P.project_start_date, P.project_end_date, P.project_no, P.project_title, S.sponsor_amount
+				    from sponsor S
+				left outer join project P on P.project_no = S.project_no
+				    where S.member_no = #{memberNo} and sysdate > P.project_start_date and P.project_end_date > sysdate and S.sponsor_cancel is null
+				) group by project_title, project_no
+		]]>
+	</select>
+	
+	<!-- 내가 후원한 후원 프로젝트 목록/후원금액(종료) -->
+	<select id="sponsorFinishedProjectListByMemberNo" resultType="SponsorVo" parameterType="int">
+		<![CDATA[
+			select project_no, project_title, sum(sponsor_amount) sum_sponsor_amount from(
+				select P.project_start_date, P.project_end_date, P.project_no, P.project_title, S.sponsor_amount
+				    from sponsor S
+				left outer join project P on P.project_no = S.project_no
+				    where S.member_no = #{memberNo} and P.project_end_date < sysdate and S.sponsor_cancel is null
+				) group by project_title, project_no
+		]]>
+	</select>
+	
+	<!-- 내가 후원한 후원 프로젝트 목록/후원금액(취소) -->
+	<select id="sponsorCanceledProjectListByMemberNo" resultType="SponsorVo" parameterType="int">
+		select project_no, project_title from(
+			select P.project_start_date, P.project_no, P.project_title, S.sponsor_amount
 			    from sponsor S
 			left outer join project P on P.project_no = S.project_no
-			    where S.member_no = #{memberNo}
+			    where S.member_no = #{memberNo} and sponsor_cancel = 'Y'
 			) group by project_title, project_no
 	</select>
 	
 	<!-- 내가 후원한 특정 프로젝트 후원금액 -->
 	<select id="sponsorAmountByProjectNoAndMemberNo" resultType="int" parameterType="SponsorVo">
-		select sum(sponsor_amount) sponsor_amount from sponsor where member_no = #{memberNo} and project_no = #{projectNo} group by project_no, member_no
+		select sum(sponsor_amount) sponsor_amount from sponsor 
+			where member_no = #{memberNo} and project_no = #{projectNo} and sponsor_cancel is null
+			group by project_no, member_no
+	</select>
+	
+	<!-- 내가 후원한 프로젝트 후원목록 -->
+	<select id="sponsorListByProjectNo" parameterType="SponsorDto" resultType="SponsorListVo">
+		select S.sponsor_no, S.member_no, G.gift_no, G.gift_summary, S.project_no, S.sponsor_amount, to_char(S.sponsor_date) sponsor_date from sponsor S
+		left outer join gift G on S.gift_no = G.gift_no
+		where S.project_no = #{projectNo} and S.sponsor_cancel is null and S.member_no = #{memberNo} order by S.sponsor_amount desc
+	</select>
+	
+	<!-- 내가 취소한 프로젝트 후원목록 -->
+	<select id="sponsorCanceledListByProjectNo" parameterType="SponsorDto" resultType="SponsorListVo">
+		select S.sponsor_no, S.member_no, G.gift_no, G.gift_summary, S.project_no, S.sponsor_amount, to_char(S.sponsor_date) sponsor_date from sponsor S
+		left outer join gift G on S.gift_no = G.gift_no
+		where S.project_no = #{projectNo} and S.sponsor_cancel = 'Y' and S.member_no = #{memberNo} order by S.sponsor_amount desc
+	</select>
+	
+	<!-- 후원 취소 -->
+	<update id="sponsorCancel" parameterType="SponsorDto">
+		update sponsor set sponsor_cancel = 'Y' where sponsor_no = #{sponsorNo} and member_no = #{memberNo}
+	</update>
+	
+	<!-- 후원객체로 후원정보 가져오기 -->
+	<select id="getSponsor" parameterType="SponsorDto" resultType="SponsorDto">
+		select * from sponsor where sponsor_no = #{sponsorNo} and member_no = #{memberNo}
 	</select>
 	
 </mapper>
