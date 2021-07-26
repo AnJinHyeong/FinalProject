@@ -1,5 +1,80 @@
 package com.kh.finalproject.service;
 
-public class PointServiceImpl {
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.kh.finalproject.entity.MemberDto;
+import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.entity.SponsorDto;
+import com.kh.finalproject.error.PercentCalcFailException;
+import com.kh.finalproject.error.SponFailException;
+import com.kh.finalproject.repository.MemberDao;
+import com.kh.finalproject.repository.ProjectDao;
+import com.kh.finalproject.repository.SponsorDao;
+
+@Service
+public class PointServiceImpl implements PointService{
+	
+	@Autowired
+	private MemberDao memberDao;
+	
+	@Autowired
+	private SponsorDao sponsorDao;
+	
+	@Autowired
+	private ProjectDao projectDao;
+	
+	@Override
+	@Transactional
+	public void usePoint(int projectNo, HttpSession session, SponsorDto sponsorDto) {
+		int memberNo = (int)session.getAttribute("memberNo");
+		sponsorDto.setMemberNo(memberNo);
+		sponsorDto.setProjectNo(projectNo);
+		
+		MemberDto target = memberDao.getByMemberNo(memberNo);
+		if(target.getMemberHavePoint() < sponsorDto.getSponsorAmount()) {
+			throw new SponFailException("후원 프로젝트 번호:" + projectNo + ", 보유 포인트가 부족합니다.");
+		}
+		sponsorDao.insert(sponsorDto);
+		memberDao.usePoint(sponsorDto);
+		
+		int currentAmount = sponsorDao.currentAmount(projectNo);
+		int targetAmount = projectDao.getByProjectNo(projectNo).getProjectTargetAmount();
+		if(targetAmount == 0) {
+			throw new PercentCalcFailException("후원 프로젝트 번호:" + projectNo + ", 목표금액이 정해지지 않았습니다.");
+		}
+		int percent = currentAmount * 100 / targetAmount;
+		
+		projectDao.setPercent(ProjectDto.builder()
+				.projectNo(projectNo)
+				.projectPercent(percent)
+				.build());
+	}
+
+	@Override
+	@Transactional
+	public void cancelSponsor(HttpSession session, int sponsorNo) {
+		int memberNo = (int)session.getAttribute("memberNo");
+		SponsorDto target = SponsorDto.builder()
+				.sponsorNo(sponsorNo)
+				.memberNo(memberNo)
+				.build();
+		sponsorDao.sponsorCancel(target);
+		memberDao.addPointBySponsorCancel(sponsorDao.getSponsor(target));
+		
+		int projectNo = sponsorDao.getSponsor(target).getProjectNo();
+		
+		int currentAmount = sponsorDao.currentAmount(projectNo);
+		int targetAmount = projectDao.getByProjectNo(projectNo).getProjectTargetAmount();
+		int percent = currentAmount * 100 / targetAmount;
+		
+		projectDao.setPercent(ProjectDto.builder()
+				.projectNo(projectNo)
+				.projectPercent(percent)
+				.build());
+	}
 
 }
