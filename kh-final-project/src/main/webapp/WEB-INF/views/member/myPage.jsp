@@ -76,7 +76,7 @@
 			<div class="subTitle"><a href="${pageContext.request.contextPath}/member/myPage">메세지</a></div>
 			<div class="subTitle"><a href = "${root}/sponsor/sponsorList">후원현황</a></div>
 			<div class = "subTitle"><a href = "${root}/pay/confirm" >결제 관련 기능</a></div>
-			<div class="subTitle">좋아한프로젝트</div>
+			<div class="subTitle"><a href="${root}/member/myLikeProject">좋아하는 프로젝트</a></div>
 			<div class="subTitle"><a href="${pageContext.request.contextPath}/member/myProject">내가만든프로젝트</a></div>
 			<div class="subTitle">내 정보 수정</div>
 		

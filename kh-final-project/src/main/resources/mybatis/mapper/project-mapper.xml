@@ -116,10 +116,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete project where project_no = #{projectNo} and member_no = #{memberNo}
 	</delete>
 	
-	<!-- main 화면 project join구문 -->
+	<!-- main 화면 현재 펀딩 진행중인 프로젝트 조회 구문 -->
 	<select id="indexProjectMain" resultType="IndexProjectVo">
-		select * from(
-			select rownum rn, TMP.* from(
+		<![CDATA[
+			select * from(
+				select rownum rn, TMP.* from(
 					select
 					    P.project_no,P.PROJECT_TITLE, P.PROJECT_PERCENT, P.MEMBER_INFO_NICK, P.PROJECT_STATE,
 					    I.image_no,
@@ -127,15 +128,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					from Project P
 					    inner join image_file I on P.project_no = I.project_no 
 						INNER JOIN category C ON P.category_no = C.category_no    
-					WHERE I.project_state = 'Y' AND P.PROJECT_STATE = 3 ORDER BY P.project_percent DESC
+					WHERE I.project_state = 'Y' AND P.PROJECT_STATE = '3' AND project_start_date <= sysdate AND sysdate < project_end_date ORDER BY project_percent desc
 				)TMP
 			) where rn between 1 and 8
+		]]>
 	</select>
+	
+	<!-- main 화면 펀딩 진행예정인 프로젝트 조회 구문 -->
+	<select id="indexProjectMain2" resultType="IndexProjectVo">
+		<![CDATA[
+			select * from(
+				select rownum rn, TMP.* from(
+					select
+					    P.project_no,P.PROJECT_TITLE, P.PROJECT_PERCENT, P.MEMBER_INFO_NICK, P.PROJECT_STATE,
+					    I.image_no,
+					    C.CATEGORY_NO ,C.CATEGORY_THEME 
+					from Project P
+					    inner join image_file I on P.project_no = I.project_no 
+						INNER JOIN category C ON P.category_no = C.category_no    
+					WHERE I.project_state = 'Y' AND P.PROJECT_STATE = '3' AND project_start_date > sysdate  ORDER BY project_percent desc
+				)TMP
+			) where rn between 1 and 8
+		]]>
+	</select>
+	
+	
 	
 	<!-- 프로젝트 달성도 변경 -->
 	<update id="setPercent" parameterType="ProjectDto">
 		update project set project_percent = #{projectPercent} where project_no = #{projectNo}
 	</update>
+	
+	
+	
 	
 </mapper>
 

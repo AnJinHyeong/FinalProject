@@ -163,4 +163,9 @@ public class ProjectDaoImpl implements ProjectDao{
 		sqlSession.update("project.setPercent", projectDto);
 	}
 
+	@Override
+	public List<IndexProjectVo> indexProjectMain2() {
+		return sqlSession.selectList("project.indexProjectMain2");
+	}
+
 }

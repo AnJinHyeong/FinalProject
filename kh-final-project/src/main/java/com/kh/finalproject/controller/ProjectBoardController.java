@@ -19,6 +19,7 @@ import com.kh.finalproject.entity.CategoryDto;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.ProjectCommunityDto;
 import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.entity.ProjectReportDto;
 import com.kh.finalproject.entity.SponsorDto;
 import com.kh.finalproject.error.SponFailException;
 import com.kh.finalproject.repository.CategoryDao;
@@ -26,6 +27,7 @@ import com.kh.finalproject.repository.GiftDao;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.ProjectCommunityDao;
 import com.kh.finalproject.repository.ProjectDao;
+import com.kh.finalproject.repository.ProjectReportDao;
 import com.kh.finalproject.repository.SponsorDao;
 
 import lombok.extern.slf4j.Slf4j;
@@ -91,6 +93,10 @@ public class ProjectBoardController {
 		model.addAttribute("plus7", plus7);
 		model.addAttribute("giftList", giftDao.listByProjectNo(projectNo));
 		model.addAttribute("giftCount", giftDao.count(projectNo));
+		model.addAttribute("giftItemVoList", giftDao.list());
+		model.addAttribute("currentAmount", sponsorDao.currentAmount(projectNo));
+		model.addAttribute("projectPercent", projectDao.getByProjectNo(projectNo).getProjectPercent());
+		model.addAttribute("currentSponsorMemberCount", sponsorDao.currentSponsorMemberCount(projectNo));
 		
 		List<ProjectCommunityDto> communityList = projectCommunityDao.listByProjectNo2(projectNo);
 		model.addAttribute("communityList", communityList);
@@ -159,6 +165,27 @@ public class ProjectBoardController {
 				.build());
 		
 		return "redirect:/projectBoard/" + projectNo;
+	}
+	
+	@Autowired
+	private ProjectReportDao projectReportDao;
+	
+	@PostMapping("/projectReport")
+	public String projectReport(
+			HttpSession session,
+			@RequestParam int projectNo,
+			@RequestParam String reportContent) {
+		int memberNo = (int)session.getAttribute("memberNo");
+		
+		ProjectReportDto projectReportDto = ProjectReportDto.builder()
+				.reportContent(reportContent)
+				.reportMemberNo(memberNo)
+				.reportProjectNo(projectNo)
+				.build();
+		
+		projectReportDao.insert(projectReportDto);
+		
+		return "redirect:/projectBoard/"+projectNo;
 	}
 	
 }

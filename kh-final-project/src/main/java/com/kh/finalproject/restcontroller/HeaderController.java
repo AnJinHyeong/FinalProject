@@ -18,8 +18,11 @@ public class HeaderController {
 	
 	@PostMapping("/getMemberHavePoint")
 	public int getMemberHavePoint(HttpSession session){
-		int memberNo = (int)session.getAttribute("memberNo");
-		return memberDao.getMemberHavePoint(memberNo); 
+		Integer memberNo = (Integer)session.getAttribute("memberNo");
+		if(memberNo == null) {
+			return 0;
+		}
+		return memberDao.getMemberHavePoint(memberNo);
 	}
 	
 }

@@ -13,8 +13,6 @@
 			success : function(resp) {
 				console.log(resp);
 				$("#sectionProjectMain1").empty();
-				var option = $("#option").html();
-				$("#sectionProjectMain1").append(option);
 				for(var i=0; i < resp.length; i++){
 					var template = $("#projectMaindiv").html();
 					template = template.replace("{{categoryTheme}}", resp[i].categoryTheme);
@@ -27,6 +25,36 @@
 					template = template.replace("{{projectImage}}", url);
 					
 					$("#sectionProjectMain1").append(template);
+					
+				}
+				
+				$(".section-project-image").on("click",function(){
+					var projectNo = $(this).attr("id");
+					location.href="${pageContext.request.contextPath}/projectBoard/"+projectNo+"";
+				});
+			}
+			
+		});
+		
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath}/project/data/index/indexProjectMain2",
+			type : 'get',
+			success : function(resp) {
+				console.log(resp);
+				$("#sectionProjectMain2").empty();
+				for(var i=0; i < resp.length; i++){
+					var template = $("#projectMaindiv").html();
+					template = template.replace("{{categoryTheme}}", resp[i].categoryTheme);
+					template = template.replace("{{memberInfoNick}}", resp[i].memberInfoNick);
+					template = template.replace("{{projectTitle}}", resp[i].projectTitle);
+					template = template.replace("{{projectPercent}}", resp[i].projectPercent);
+					template = template.replace("{{projectNo}}", resp[i].projectNo);
+					
+					var url = "${pageContext.request.contextPath}/image/project/projectMainDownload/"+resp[i].imageNo;
+					template = template.replace("{{projectImage}}", url);
+					
+					$("#sectionProjectMain2").append(template);
 					
 				}
 				
@@ -81,29 +109,9 @@
 			<p class="section-project-minaP">공개 예정 프로젝트</p>
 			
 			<div class="section-project-main">
-				<div class="section-project-mainDiv">
-					dd
-				</div>
-				<div class="section-project-mainDiv">
-					dd
-				</div>
-				<div class="section-project-mainDiv">
-					dd
-				</div>
-				<div class="section-project-mainDiv">
-					dd
-				</div>
-				<div class="section-project-mainDiv">
-					dd
-				</div>
-				<div class="section-project-mainDiv">
-					dd
-				</div>
-				<div class="section-project-mainDiv">
-					dd
-				</div>
-				<div class="section-project-mainDiv">
-					dd
+			
+				<div class="section-project-main2" id="sectionProjectMain2">
+			
 				</div>
 			</div>
 		</div>

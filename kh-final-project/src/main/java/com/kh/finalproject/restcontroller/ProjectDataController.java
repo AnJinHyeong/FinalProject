@@ -123,4 +123,9 @@ public class ProjectDataController {
 		return projectDao.indexProjectMain();
 	}
 	
+	@GetMapping("/index/indexProjectMain2")
+	public List<IndexProjectVo> indexProjectMain2(){
+		return projectDao.indexProjectMain2();
+	}
+	
 }

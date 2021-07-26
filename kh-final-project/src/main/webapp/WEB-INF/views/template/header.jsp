@@ -27,13 +27,17 @@
 
 <script>
 	$(function(){
-		$.ajax({
-			url :"${pageContext.request.contextPath}/header/getMemberHavePoint",
-			type: "post",
-			success : function(resp){
-				$("#memberHavePoint").text(resp);
-			}
-		});
+		
+		if(${not empty memberNo}){
+			$.ajax({
+				url :"${pageContext.request.contextPath}/header/getMemberHavePoint",
+				type: "post",
+				success : function(resp){
+					$("#memberHavePoint").text(resp);
+				}
+			});
+		}
+		
 	});
 </script>
 
@@ -54,7 +58,7 @@
 				<c:choose>
 					<c:when test="${isLogin}">
 						<a class="header-link" href="${root}/member/logout" style="width: 95px; text-align: center;">로그아웃</a>
-						<a class="header-link" href="${root}/pay/confirm" style="margin: 0 10px;"><span id="memberHavePoint"></span>p</a>
+						<a class="header-link" href="${root}/pay/confirm" style="margin: 0 10px;"><span id="memberHavePoint" style="font-size: 16px;"></span><span style="color: #ffd700; font-size: 16px; padding-left: 5px;"><i class="fas fa-coins"></i></span></a>
 						<a href="${root}/member/myPage"><img src="${root}/image/user-in.svg" width="25" height="25"></a>
 					</c:when>
 					<c:otherwise>
