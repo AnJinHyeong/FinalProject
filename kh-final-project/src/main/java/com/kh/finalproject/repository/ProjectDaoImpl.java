@@ -198,4 +198,14 @@ public class ProjectDaoImpl implements ProjectDao{
 		return sqlSession.selectOne("project.projectCategorySearchCount", keyword);
 	}
 
+	@Override
+	public List<IndexProjectVo> projectSearchAll(String keyword) {
+		return sqlSession.selectList("project.projectSearchAll", keyword);
+	}
+
+	@Override
+	public List<IndexProjectVo> projectCategorySearchAll(String keyword) {
+		return sqlSession.selectList("project.projectCategorySearchAll", keyword);
+	}
+
 }

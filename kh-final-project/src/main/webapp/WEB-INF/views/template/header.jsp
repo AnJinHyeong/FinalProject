@@ -81,7 +81,7 @@
 		<div class="header-row">
 			<div class="header-left w120 h60">
 				<div class="w120 taCenter h100p dpBlock p5">
-					<button class="UlOn2 projectBtn bosNone cursorPointer w50 bacInherit h30 mt5">
+					<button class="UlOn2 projectBtn bosNone cursorPointer w50 bacInherit h30 mt5 header-icon-ani">
 						<div class="UlOn2 bacWhite w30 h30 mautoX">
 							<div class="dpFlex UlOn2">
 								<i class="UlOn2 fab fa-grav" style="padding: 1px; color: #707070;"></i>
@@ -99,8 +99,9 @@
 				</div>
 				
 				<div class="UlOn2 headerProject dpNone poAbsolute w160 zi2 mt60 ml60">
-					<ul class="UlOn2 lsNone bacWhite p10 bora5 boc240 bosSolid bow1">
-						<li><a href="${root}/project/projectInsert">프로젝트 올리기</a></li>
+					<ul class="UlOn2 lsNone bacWhite p10 bora5 boc240 bosSolid bow1" style="width: 170px;">
+						<li><a href="${root}/project/projectInsert" style="text-align: left; padding-left: 5px;">프로젝트 올리기</a></li>
+						<li><a href="${root}/projectRequestBoard/projectRequestBoard" style="text-align: left; padding-left: 5px;">프로젝트 요청 게시판</a></li>
 					</ul>
 				</div>
 			</div>
@@ -125,28 +126,26 @@
 					<c:choose>
 						<c:when test="${isLogin}">
 							<div class="w120 taCenter h100p dpBlock p5">
-								<button class="UlOn loginLogoutBtn bosNone cursorPointer w50 bacInherit h30 mt5"><i class="h100p fs30 UlOn fas fa-user"></i></button>
+								<button class="UlOn loginLogoutBtn bosNone cursorPointer w50 bacInherit h30 mt5 header-icon-ani"><i class="h100p fs30 UlOn fas fa-user"></i></button>
 								
-								<a class="header-link dpBlock fs12 h20 mt5" href="${root}/pay/confirm">
+								<a class="header-link dpBlock fs12 h20 mt5 header-icon-ani" href="${root}/pay/confirm">
 								<span style="color: #ffd700;"><i class="fas fa-coins"></i></span>
 								<span class="fBold" id="memberHavePoint"></span></a>
 							</div>
-							
-							
 								
 							<div class="headerLoginLogout dpNone poAbsolute w160 zi2" style="margin-left: -100px;">
 								<ul class="UlOn lsNone bacWhite p10 bora5 boc240 bosSolid bow1">
 									<li><a href="${root}/member/myMsg">메세지</a></li>
 									<li><a href="${root}/sponsor/sponsorList">후원현황</a></li>
-									<li><a href="#">내 프로젝트</a></li>
-									<li><a href="#">좋아한 프로젝트</a></li>
+									<li><a href="${root}/member/myProject">내 프로젝트</a></li>
+									<li><a href="${root}/member/myLikeProject">좋아한 프로젝트</a></li>
 									<li><a href="${root}/member/mySettings">내 정보 수정</a></li>
 									<li><a href="${root}/member/logout">로그아웃</a></li>
 								</ul>
 							</div>
 						</c:when>
 						<c:otherwise>
-							<div class="w120 taCenter h100p dpBlock p5">
+							<div class="w120 taCenter h100p dpBlock p5 header-icon-ani">
 								<button class="UlOn loginLogoutBtn bosNone cursorPointer w50 bacInherit h30 mt5">
 									<i class="h100p fs30 UlOn far fa-user"></i>
 									<span class="UlOn dpBlock fs12 h20 mt5 fBold">LOGIN</span>

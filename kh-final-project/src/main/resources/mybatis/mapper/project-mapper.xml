@@ -208,6 +208,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
+	<!-- 키워드 모두 검색 -->
+	<select id="projectSearchAll" parameterType="String" resultType="IndexProjectVo">
+		<![CDATA[
+	        select
+	            P.project_no,P.PROJECT_TITLE, P.PROJECT_PERCENT, P.MEMBER_INFO_NICK, 
+	            P.PROJECT_STATE, I.image_no, C.CATEGORY_NO, C.CATEGORY_THEME, P.project_summary, P.project_content
+	        from Project P
+	            left outer join image_file I on P.project_no = I.project_no
+				left outer join category C ON P.category_no = C.category_no
+	        WHERE I.project_state = 'Y' AND P.PROJECT_STATE = '3' and (
+	            instr(project_title, #{keyword}) > 0 
+	                or
+	            instr(project_content, #{keyword}) > 0
+	                or
+	            instr(project_summary, #{keyword}) > 0
+	                or
+	            instr(member_info_nick, #{keyword}) > 0)
+	        ORDER BY P.project_percent DESC   
+		]]>
+	</select>
+	
 	<!-- 키워드 검색 카테고리 -->
 	<select id="projectCategorySearch" parameterType="String" resultType="IndexProjectVo">
 		<![CDATA[
@@ -234,6 +255,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE I.project_state = 'Y' AND P.PROJECT_STATE = '3' and instr(C.category_theme, #{keyword}) > 0
 		]]>
 	</select>
+	
+	<!-- 키워드 모두 검색 카테고리 -->
+	<select id="projectCategorySearchAll" parameterType="String" resultType="IndexProjectVo">
+		<![CDATA[
+	        select
+	            P.project_no,P.PROJECT_TITLE, P.PROJECT_PERCENT, P.MEMBER_INFO_NICK, 
+	            P.PROJECT_STATE, I.image_no, C.CATEGORY_NO, C.CATEGORY_THEME, P.project_summary, P.project_content
+	        from Project P
+	            left outer join image_file I on P.project_no = I.project_no
+	            left outer JOIN category C ON P.category_no = C.category_no
+	        WHERE I.project_state = 'Y' AND P.PROJECT_STATE = '3' and instr(C.category_theme, #{keyword}) > 0 ORDER BY P.project_percent DESC   
+		]]>
+	</select>
+	
+	
+	
 	
 </mapper>
 

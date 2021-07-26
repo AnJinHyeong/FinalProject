@@ -59,5 +59,9 @@ public interface ProjectDao {
 	List<IndexProjectVo> projectCategorySearch(String keyword);
 	// 키워드 카테고리 검색 갯수
 	int projectCategorySearchCount(String keyword);
+	// 키워드 검색 더보기
+	List<IndexProjectVo> projectSearchAll(String keyword);
+	// 키워드 카테고리 검색 더보기
+	List<IndexProjectVo> projectCategorySearchAll(String keyword);
 	
 }

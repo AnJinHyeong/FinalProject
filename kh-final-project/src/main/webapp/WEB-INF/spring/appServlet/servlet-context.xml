@@ -60,6 +60,8 @@
 			<exclude-mapping path="/project/projectHeader"/>
 			<exclude-mapping path="/project/data/**"/>
 			<exclude-mapping path="/project/projectSearch"/>
+			<exclude-mapping path="/project/projectSearchAll/**"/>
+			<exclude-mapping path="/project/projectCategorySearchAll/**"/>
 			<beans:bean class="com.kh.finalproject.interceptor.MemberLoginInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>
