@@ -69,21 +69,15 @@
 		<div class="text-left titleDiv">
 			<h1>비밀번호 찾기</h1>	
 		</div>
-		<form action="pwSearch" method="post">
+		<form action="getPw" method="post">
 			<div>이메일 주소</div>
 			<br>
 			<input type="text" name="memberEmail" required class="form-input form-underline radius-b" placeholder="가입하신 이메일 입력해주세요.">
 			<br>
-			<div class="titleP">FUN_Ding 가입 시 사용하신 이메일을 입력하시면 새 비밀번호를 재설정할 수 있는 링크를 보내드립니다.</div>
+			<div class="titleP">FUN_Ding 가입 시 사용하신 이메일을 입력하시면 임시 비밀번호를 발급해드립니다.</div>
 			<br>
 			<button type="submit" class="pwBtn">비밀번호 설정 링크 받기</button>
-			<div>
-					<c:if test="${param.error != null}">
-					<div class="row">
-						<h5 class="error">정보가 일치하지 않습니다</h5>
-					</div>
-					</c:if>
-			</div>
+			
 		</form>
 	</div>
 </div>

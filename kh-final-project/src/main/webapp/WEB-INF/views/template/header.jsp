@@ -18,11 +18,61 @@
 	<link rel="stylesheet" type="text/css" href="${root}/css/yongbo.css">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+
 <style>
 
-</style>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	.menu_1{
 
+		text-align: right;
+
+	}
+
+	.sub_1{
+
+		position:absolute;
+
+		width:100px;
+
+	}
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+$(document).ready(function(){
+
+	
+
+	$('#top_menu .sub_1').hide();
+
+ 
+
+	$('.menu_1').click(function(){
+
+		if($('#top_menu .sub_1').is(':visible')==false){
+
+			
+
+			$('.sub_1').slideDown();
+
+			
+
+		}else if($('#top_menu .sub_1').is(':visible')==true){
+
+			
+
+			$('.sub_1').hide();
+
+		}
+
+ 
+
+	});
+
+	
+
+});
+</script>
 </head>
 <body class="align-column">
 
@@ -41,11 +91,35 @@
 					<c:when test="${isLogin}">
 						<a class="header-link" href="${root}/member/logout" style="width: 95px; text-align: center;">로그아웃</a>
 						<a class="header-link" href="${root}/pay/confirm" style="margin: 0 10px;">5000p</a>
-						<a href="${root}/member/myPage"><img src="${root}/image/user-in.svg" width="25" height="25"></a>
+						<ul id="top_menu" style="list-style:none;"> 
+
+							<li>
+
+								<a><img src="${root}/image/user-in.svg"  class="menu_1" width="118" height="25"  style="padding-right:100px;"></a>
+
+									<ul class="sub_1" style="list-style:none; padding-left:0px;">
+
+										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="${root}/member/myMsg">메세지</a></li>
+
+										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="#">후원현황</a></li>
+
+										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="#">내 프로젝트</a></li>
+
+										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="#">좋아한 프로젝트</a></li>
+
+										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="${root}/member/mySettings">내 정보 수정</a></li>
+
+										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="${root}/member/logout">로그아웃</a></li>
+
+									</ul>
+
+							</li>
+
+						</ul>
 					</c:when>
 					<c:otherwise>
 						<a class="header-link" href="${root}/member/login" style="width: 120px; margin: 0 35px;">로그인/회원가입</a>
-						<a href="${root}/member/myPage"><img src="${root}/image/user-out.svg" width="25" height="25" ></a>
+						<a href="#"><img src="${root}/image/user-out.svg" width="25" height="25" ></a>
 					</c:otherwise>
 				</c:choose>
 			</div>
