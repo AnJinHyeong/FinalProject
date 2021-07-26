@@ -1,10 +1,13 @@
 package com.kh.finalproject.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.PayDto;
+import com.kh.finalproject.entity.PaymentDto;
 
 @Repository
 public class PayDaoImpl implements PayDao{
@@ -46,6 +49,11 @@ public class PayDaoImpl implements PayDao{
 	@Override
 	public PayDto get(int payNo) {
 		return sqlSession.selectOne("pay.get", payNo);
+	}
+
+	@Override
+	public List<PayDto> list(int memberNo) {
+		return sqlSession.selectList("pay.list",memberNo);
 	}
 
 //	

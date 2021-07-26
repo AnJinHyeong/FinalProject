@@ -943,3 +943,8 @@
 	border: 1px solid rgb(160, 160, 160);
 	transition: border 0.2s ease-in-out;
 }
+
+.inputToggleBtn,.inputToggleBtnX{font-size:24px;width:50px;}
+.inputToggleBtnX.on{left:calc(100% + 40px);}
+.inputToggleContainer.on{width:600px}
+.inputToggleContainer{margin-right:80px;height:50px}

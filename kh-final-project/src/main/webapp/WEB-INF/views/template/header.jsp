@@ -8,7 +8,7 @@
 
 <!DOCTYPE html>
 <html>
-<head>
+<head>	
 <meta charset="UTF-8">
 <title>FüN‿ding - 즐거움의 시작</title>
 	<link rel="stylesheet" type="text/css" href="${root}/css/template.css">
@@ -27,16 +27,30 @@
 
 <script>
 	$(function(){
+		$.ajax({
+			url :"${pageContext.request.contextPath}/header/getMemberHavePoint",
+			type: "post",
+			success : function(resp){
+				$("#memberHavePoint").text(resp);
+			}
+		});
+				
+		$(".inputToggleBtn").on("click", function(e){
+			if($(this).hasClass("off")){
+				$(".inputToggleContainer,.inputToggleBtn,.inputToggleBtnX").toggleClass('on');
+				$(".inputToggleContainer,.inputToggleBtn,.inputToggleBtnX").toggleClass('off');
+				e.preventDefault();
+			}
+		});
 		
-		if(${not empty memberNo}){
-			$.ajax({
-				url :"${pageContext.request.contextPath}/header/getMemberHavePoint",
-				type: "post",
-				success : function(resp){
-					$("#memberHavePoint").text(resp);
-				}
-			});
-		}
+		$(".inputToggleBtnX").on("click", function(e){
+			if($(this).hasClass("on")){
+				$(".inputToggleContainer,.inputToggleBtn,.inputToggleBtnX").toggleClass('on');
+				$(".inputToggleContainer,.inputToggleBtn,.inputToggleBtnX").toggleClass('off');
+				$("#headerSearchForm").find("input[name=keyword]").val("");
+				e.preventDefault();
+			}
+		});
 		
 	});
 </script>
@@ -54,7 +68,17 @@
 				<a class="header-center-link" href="${root}/">FüN‿ding</a>
 			</div>
 			<div class="header-right">
-				<img src="${root}/image/search.svg" width="20" height="20">
+			
+				<div class="float-container">
+					<form action="${root}/project/projectSearch" class="right" method="post" id="headerSearchForm">
+						<div class="inputToggleContainer off">
+							<input class="inputToggleText fs18 pl10" type="text" name="keyword" placeholder="검색어를 입력해주세요." autocomplete="off">
+							<button class="inputToggleBtn off bacInherit zi1 cursorPointer"><i class="fas fa-search bacWhite"></i></button>
+							<button class="inputToggleBtnX off bacInherit cursorPointer"><i class="fas fa-times"></i></button>
+						</div>
+					</form>
+				</div>
+				
 				<c:choose>
 					<c:when test="${isLogin}">
 						<a class="header-link" href="${root}/member/logout" style="width: 95px; text-align: center;">로그아웃</a>

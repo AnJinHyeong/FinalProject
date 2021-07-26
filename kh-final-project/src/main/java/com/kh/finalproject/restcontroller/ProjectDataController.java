@@ -16,13 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.finalproject.entity.GiftDto;
 import com.kh.finalproject.entity.ItemDto;
 import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.entity.SponsorDto;
 import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.repository.GiftDao;
 import com.kh.finalproject.repository.ItemDao;
 import com.kh.finalproject.repository.ProjectDao;
-import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.repository.SponsorDao;
+import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectInformationVo;
+import com.kh.finalproject.vo.ProjectVo;
+import com.kh.finalproject.vo.SponsorListVo;
 import com.kh.finalproject.vo.SponsorVo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -94,7 +97,7 @@ public class ProjectDataController {
 	
 	@PostMapping("/projectInformation")
 	public ProjectInformationVo projectInformation(HttpSession session, @RequestParam int projectNo) {
-		ProjectDto projectDto = projectDao.getByProjectNo(projectNo);
+		ProjectVo projectVo = projectDao.getProjectVoByProjectNo(projectNo);
 		int currentMemberNo = (int)session.getAttribute("memberNo");
 		int sumSponsorAmountByOne = sponsorDao.sponsorAmountByProjectNoAndMemberNo(SponsorVo.builder()
 											.memberNo(currentMemberNo)
@@ -104,15 +107,15 @@ public class ProjectDataController {
 		
 		return ProjectInformationVo.builder()
 				.projectNo(projectNo)
-				.projectTitle(projectDto.getProjectTitle())
-				.projectTargetAmount(projectDto.getProjectTargetAmount())
-				.projectPercent(projectDto.getProjectPercent())
-				.projectState(projectDto.getProjectState())
-				.projectStartDateString(String.valueOf(projectDto.getProjectStartDate()))
-				.projectEndDateString(String.valueOf(projectDto.getProjectEndDate()))
-				.memberNo(projectDto.getMemberNo())
-				.categoryNo(projectDto.getCategoryNo())
-				.memberInfoNick(projectDto.getMemberInfoNick())
+				.projectTitle(projectVo.getProjectTitle())
+				.projectTargetAmount(projectVo.getProjectTargetAmount())
+				.projectPercent(projectVo.getProjectPercent())
+				.projectState(projectVo.getProjectState())
+				.projectStartDate(projectVo.getProjectStartDate())
+				.projectEndDate(projectVo.getProjectEndDate())
+				.memberNo(projectVo.getMemberNo())
+				.categoryNo(projectVo.getCategoryNo())
+				.memberInfoNick(projectVo.getMemberInfoNick())
 				.sumSponsorAmountByOne(sumSponsorAmountByOne)
 				.sumCurrentAmountByAll(sumCurrentAmountByAll)
 				.build();
@@ -126,6 +129,33 @@ public class ProjectDataController {
 	@GetMapping("/index/indexProjectMain2")
 	public List<IndexProjectVo> indexProjectMain2(){
 		return projectDao.indexProjectMain2();
+	}
+	@PostMapping("/sponsorListByProjectNo/{index}")
+	public List<SponsorListVo> sponsorListByProjectNo(HttpSession session, @RequestParam int projectNo, @PathVariable int index){
+		int memberNo = (int)session.getAttribute("memberNo");
+		if(index == 2) {
+			return sponsorDao.sponsorCanceledListByProjectNo(SponsorDto.builder()
+					.projectNo(projectNo)
+					.memberNo(memberNo)
+					.build());
+		}
+		else {
+			return sponsorDao.sponsorListByProjectNo(SponsorDto.builder()
+					.projectNo(projectNo)
+					.memberNo(memberNo)
+					.build());
+		}
+		
+	}
+	
+	@PostMapping("/projectSearch")
+	public List<IndexProjectVo> projectSearch(@RequestParam String keyword){
+		return projectDao.projectSearch(keyword);
+	}
+	
+	@PostMapping("/projectCategorySearch")
+	public List<IndexProjectVo> projectCategorySearch(@RequestParam String keyword){
+		return projectDao.projectCategorySearch(keyword);
 	}
 	
 }

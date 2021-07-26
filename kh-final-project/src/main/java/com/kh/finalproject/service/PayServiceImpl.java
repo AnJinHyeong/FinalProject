@@ -17,6 +17,7 @@ import com.kh.finalproject.vo.pay.PayApprovePrepareVO;
 import com.kh.finalproject.vo.pay.PayApproveVO;
 import com.kh.finalproject.vo.pay.PayReadyPrepareVO;
 import com.kh.finalproject.vo.pay.PayReadyVO;
+import com.kh.finalproject.vo.pay.PaySearchVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -145,33 +146,33 @@ private PayDao payDao;
 //	}
 
 
-//	@Override
-//	public KakaoPaySearchVO search(String tid) throws URISyntaxException {
-//		//[1] 요청 도구 생성
-//		RestTemplate template = new RestTemplate();
-//		
-//		//[2] Http Header 생성(ex : 편지봉투)
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.add("Authorization", kakaoAk);
-//		headers.add("Content-type", contentType);
-//		
-//		//[3] Http Body 생성(ex : 편지내용)
-//		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-//		body.add("cid", cid);
-//		body.add("tid", tid);
-//		
-//		//[4] Http Header / Body 합성
-//		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
-//		
-//		//[5] 목적지 주소 작성
-//		URI uri = new URI("https://kapi.kakao.com/v1/payment/order");
-//		
-//		//[6] 전송
-//		KakaoPaySearchVO searchVO = template.postForObject(uri, entity, KakaoPaySearchVO.class);
-//		log.debug("searchVo = {}", searchVO);
-//		
-//		return searchVO;
-//	}
+	@Override
+	public PaySearchVO search(String tid) throws URISyntaxException {
+		//[1] 요청 도구 생성
+		RestTemplate template = new RestTemplate();
+		
+		//[2] Http Header 생성(ex : 편지봉투)
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", kakaoAk);
+		headers.add("Content-type", contentType);
+		
+		//[3] Http Body 생성(ex : 편지내용)
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+		body.add("cid", cid);
+		body.add("tid", tid);
+		
+		//[4] Http Header / Body 합성
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+		
+		//[5] 목적지 주소 작성
+		URI uri = new URI("https://kapi.kakao.com/v1/payment/order");
+		
+		//[6] 전송
+		PaySearchVO searchVO = template.postForObject(uri, entity, PaySearchVO.class);
+		log.debug("searchVo = {}", searchVO);
+		
+		return searchVO;
+	}
 //
 //	@Override
 //	public KakaoPayCancelVO cancel(KakaoPayCancelPrepareVO prepareVO) throws URISyntaxException {

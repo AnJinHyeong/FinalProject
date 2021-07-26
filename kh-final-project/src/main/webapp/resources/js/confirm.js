@@ -9,26 +9,16 @@ $(function(){
 //  10만원 이상 입력박스
 	$('#10upMoney').blur('input', function(){
 			var text = $(this).val();
-			var regexText = /^[0-9]{6}$/;
-			if(!regexText.test(text)){
+			if(100000<=text&&text<=1000000){
+				$('#error').text("");
+				return true;
+			}
+			else{
 				$('#error').val("");
 				$('#error').text("십 만원 ~ 백 만원 이하의 숫자만 입력해주세요");
 				$(this).val("");
 				return false;
 			}
-			else if(text<=100000){
-				$('#error').val("");
-				$('#error').text("십 만원 ~ 백 만원 이하의 숫자만 입력해주세요");
-				$(this).val("");
-				return false;
-			}
-			else if(text=0){
-				return false;
-			}
-				else{
-					$('#error').text("");
-			}
-			
 	});
 
 

@@ -1,10 +1,10 @@
 package com.kh.finalproject.restcontroller;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+//github.com/AnJinHyeong/FinalProject.git
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.finalproject.repository.MemberDao;
@@ -24,5 +24,4 @@ public class HeaderController {
 		}
 		return memberDao.getMemberHavePoint(memberNo);
 	}
-	
 }
