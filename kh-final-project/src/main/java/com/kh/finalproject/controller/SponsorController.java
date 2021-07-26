@@ -16,6 +16,7 @@ import com.kh.finalproject.entity.SponsorDto;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.repository.SponsorDao;
+import com.kh.finalproject.service.PointService;
 
 @Controller
 @RequestMapping("/sponsor")
@@ -37,29 +38,17 @@ public class SponsorController {
 		return "sponsor/sponsorList";
 	}
 	
+	@Autowired
+	private PointService pointService;
+	
 	@PostMapping("/sponsorCancel")
 	@Transactional
 	public String sponsorCancel(HttpSession session, @RequestParam int sponsorNo) {
-		int memberNo = (int)session.getAttribute("memberNo");
-		SponsorDto target = SponsorDto.builder()
-				.sponsorNo(sponsorNo)
-				.memberNo(memberNo)
-				.build();
-		sponsorDao.sponsorCancel(target);
-		memberDao.addPointBySponsorCancel(sponsorDao.getSponsor(target));
 		
-		int projectNo = sponsorDao.getSponsor(target).getProjectNo();
-		
-		int currentAmount = sponsorDao.currentAmount(projectNo);
-		int targetAmount = projectDao.getByProjectNo(projectNo).getProjectTargetAmount();
-		int percent = currentAmount * 100 / targetAmount;
-		
-		projectDao.setPercent(ProjectDto.builder()
-				.projectNo(projectNo)
-				.projectPercent(percent)
-				.build());
+		pointService.cancelSponsor(session, sponsorNo);
 		
 		return "redirect:sponsorList";
 	}
+	
 	
 }
