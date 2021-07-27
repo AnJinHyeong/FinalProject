@@ -30,6 +30,7 @@ import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.vo.GiftSelectedItemVo;
 import com.kh.finalproject.vo.ItemListVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
+import com.kh.finalproject.vo.SearchVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -352,6 +353,53 @@ public class ProjectController {
 		projectCommunityDao.deleteByProjectNo(projectCommunityDto);
 		
 		return "redirect:projectMainCommunity";
+	}
+	
+	@PostMapping("/projectSearch")
+	public String projectSearch(Model model, @ModelAttribute SearchVo searchVo) {
+		model.addAttribute("projectOrder", searchVo.getProjectOrder());
+		model.addAttribute("projectState", searchVo.getProjectState());
+		String keyword = searchVo.getKeyword();
+		if(keyword == null || keyword.equals("")) {
+			return "project/projectList";
+		}
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("projectSearchCount", projectDao.projectSearchCount(searchVo));
+		model.addAttribute("projectCategorySearchCount", projectDao.projectCategorySearchCount(searchVo));
+		return "project/projectSearch";
+	}
+	
+	@PostMapping("/projectSearchAll")
+	public String projectSearchAll(Model model, @ModelAttribute SearchVo searchVo) {
+		model.addAttribute("projectOrder", searchVo.getProjectOrder());
+		model.addAttribute("projectState", searchVo.getProjectState());
+		String keyword = searchVo.getKeyword();
+		if(keyword == null || keyword.equals("")) {
+			return "project/projectList";
+		}
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("projectSearchCount", projectDao.projectSearchCount(searchVo));
+		return "project/projectSearchAll";
+	}
+	
+	@PostMapping("/projectCategorySearchAll")
+	public String projectCategorySearchAll(Model model, @ModelAttribute SearchVo searchVo) {
+		model.addAttribute("projectOrder", searchVo.getProjectOrder());
+		model.addAttribute("projectState", searchVo.getProjectState());
+		String keyword = searchVo.getKeyword();
+		if(keyword == null || keyword.equals("")) {
+			return "project/projectList";
+		}
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("projectCategorySearchCount", projectDao.projectCategorySearchCount(searchVo));
+		return "project/projectCategorySearchAll";
+	}
+	
+	@GetMapping("/projectList")
+	public String projectList(Model model) {
+		model.addAttribute("projectOrder", 1);
+		model.addAttribute("projectState", 1);
+		return "project/projectList";
 	}
 	
 }

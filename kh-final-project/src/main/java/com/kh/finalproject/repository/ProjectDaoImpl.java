@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.service.SearchService;
 import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
-import com.kh.finalproject.vo.ProjectInformationVo;
 import com.kh.finalproject.vo.ProjectProgressVo;
+import com.kh.finalproject.vo.ProjectVo;
+import com.kh.finalproject.vo.SearchVo;
 
 @Repository
 public class ProjectDaoImpl implements ProjectDao{
@@ -32,6 +34,11 @@ public class ProjectDaoImpl implements ProjectDao{
 	@Override
 	public ProjectDto get(ProjectDto projectDto) {
 		return sqlSession.selectOne("project.get",projectDto);
+	}
+	
+	@Override
+	public ProjectVo getProjectVoByProjectNo(int projectNo) {
+		return sqlSession.selectOne("project.getProjectVoByProjectNo", projectNo);
 	}
 	
 	public void insertBySequence(ProjectCategoryVo projectCategoryVo) {
@@ -161,6 +168,76 @@ public class ProjectDaoImpl implements ProjectDao{
 	@Override
 	public void setPercent(ProjectDto projectDto) {
 		sqlSession.update("project.setPercent", projectDto);
+	}
+
+	@Override
+	public List<IndexProjectVo> indexProjectMain2() {
+		return sqlSession.selectList("project.indexProjectMain2");
+	}	
+	
+	@Autowired
+	private SearchService searchService;
+	
+	@Override
+	public List<IndexProjectVo> projectSearch(SearchVo searchVo) {
+		
+		searchService.getString(searchVo);
+		
+		return sqlSession.selectList("project.projectSearch", searchVo);
+	}
+
+	@Override
+	public int projectSearchCount(SearchVo searchVo) {
+		
+		searchService.getString(searchVo);
+		
+		if(sqlSession.selectOne("project.projectSearchCount", searchVo) == null) {
+			return 0;
+		}
+		return sqlSession.selectOne("project.projectSearchCount", searchVo);
+	}
+
+	@Override
+	public List<IndexProjectVo> projectCategorySearch(SearchVo searchVo) {
+		
+		searchService.getString(searchVo);
+		
+		return sqlSession.selectList("project.projectCategorySearch", searchVo);
+	}
+
+	@Override
+	public int projectCategorySearchCount(SearchVo searchVo) {
+		
+		searchService.getString(searchVo);
+		
+		if(sqlSession.selectOne("project.projectCategorySearchCount", searchVo) == null) {
+			return 0;
+		}
+		return sqlSession.selectOne("project.projectCategorySearchCount", searchVo);
+	}
+
+	@Override
+	public List<IndexProjectVo> projectSearchAll(SearchVo searchVo) {
+		
+		searchService.getString(searchVo);
+		
+		return sqlSession.selectList("project.projectSearchAll", searchVo);
+	}
+
+	@Override
+	public List<IndexProjectVo> projectCategorySearchAll(SearchVo searchVo) {
+		
+		searchService.getString(searchVo);
+		
+		return sqlSession.selectList("project.projectCategorySearchAll", searchVo);
+	}
+
+	@Override
+	public List<IndexProjectVo> projectList(SearchVo searchVo) {
+		
+		searchService.getString(searchVo);
+		
+		return sqlSession.selectList("project.projectList", searchVo);
 	}
 
 }

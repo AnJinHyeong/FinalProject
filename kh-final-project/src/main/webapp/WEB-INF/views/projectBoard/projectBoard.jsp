@@ -70,6 +70,146 @@
 			$(this).parent().find(".projectBoardSponsor").show('fast');
 		});
 		
+		//좋아요 기능
+		$("#projectLikeBtnOn").hide();
+		
+		if(${not empty memberNo}){
+			$.ajax({
+				url :"${pageContext.request.contextPath}/projectLike/${projectDto.projectNo}/projectLikeConfirm",
+				type: "post",
+				success : function(resp){
+					if(resp == 1){
+						$("#projectLikeBtnOn").show();
+						$("#projectLikeBtnOff").hide();
+					}
+					else{
+						$("#projectLikeBtnOn").hide();
+						$("#projectLikeBtnOff").show();
+					}
+				}
+			
+			});
+		}
+		
+		
+		$("#projectLikeBtn").on("click",function(){
+			
+			$.ajax({
+				url :"${pageContext.request.contextPath}/projectLike/${projectDto.projectNo}/projectLikeConfirm",
+				type: "post",
+				success : function(resp){
+					if(resp == 1){
+						$.ajax({
+							url :"${pageContext.request.contextPath}/projectLike/${projectDto.projectNo}/projectLikeDelete",
+							type: "get",
+							success : function(resp){
+								
+							}
+						
+						});
+						$("#projectLikeBtnOn").hide();
+						$("#projectLikeBtnOff").show();
+					}
+					else{
+						$.ajax({
+							url :"${pageContext.request.contextPath}/projectLike/${projectDto.projectNo}/projectLikeAdd",
+							type: "get",
+							success : function(resp){
+								
+							}
+						
+						});
+						$("#projectLikeBtnOn").show();
+						$("#projectLikeBtnOff").hide();
+					}
+				}
+			
+			});
+			
+			
+		});
+		
+		//신고하기 기능
+	    $("#report2").hide();
+	    
+		$('#report').hover(function() {
+		  $("#report1").hide();
+		  $("#report2").show();
+		  
+		}, function(){
+			$("#report1").show();
+			$("#report2").hide();
+		});
+		
+		
+		const modal = document.querySelector('.report-modal'); 
+		const btnOpenPopup = document.querySelector('#report'); 
+		btnOpenPopup.addEventListener('click', () => { modal.style.display = 'block'; });
+		
+		$("#modal-cancel").on("click",function(){
+			$(".report-modal").hide();
+		});
+		
+		
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
+		var yyyy = today.getFullYear();
+		if(dd<10){
+		  dd='0'+dd
+		} 
+		if(mm<10){
+		  mm='0'+mm
+		} 
+		today = yyyy+'-'+mm+'-'+dd;
+		
+		var startday = $(".projectStartDate").val();
+		var endday = $(".projectEndDate").val();
+		
+		var sdd = today;//오늘날짜
+		var startday = startday;//펀딩시작날짜
+		var endday = endday;//펀딩끝날짜
+	   	var ar1 = sdd.split('-');
+	   	var ar2 = startday.split('-');
+	   	var ar3 = endday.split('-');
+	   	var da1 = new Date(ar1[0], ar1[1], ar1[2]);
+   		var da2 = new Date(ar2[0], ar2[1], ar2[2]);
+   		var da3 = new Date(ar3[0], ar3[1], ar3[2]);
+   		
+	   	var dif = da1 >= da2;
+	   	var dif2 = da3 - da1;
+	   	
+		if(dif == false){
+			$("#day-open1").hide();
+			$("#day-open2").show();
+		}
+		else{
+			$("#day-open1").show();
+			$("#day-open2").hide();
+		}
+		
+		var dif2 = da3 - da2;
+	   	var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
+	   	var cMonth = cDay * 30;// 월 만듬
+	   	var cYear = cMonth * 12; // 년 만듬
+	 	if(startday && endday){
+		    $("#funding-date").text(parseInt(dif2/cDay)+" 일");
+	 	}
+		
+		// 후원하기 버튼 누르면 후원버튼으로 포커스
+		$("#sponsorFocusBtn").on("click", function(){
+
+			var scrollPosition = $("#giftList").offset().top;
+
+			$("html, body").animate({
+				scrollTop: scrollPosition - 200
+			}, 300);
+			
+			$("#giftListBasic").children("div").click();
+			
+			$("input[name=sponsorAmount]").focus();
+			
+		});
 		
 	});
 		
@@ -77,6 +217,8 @@
 </script>
 
 <section class="main-row topLine">
+	<input type="hidden" value="${projectDto.projectStartDate}" id="projectStartDate" class="projectStartDate">
+	<input type="hidden" value="${projectDto.projectEndDate}" id="projectEndDate" class="projectEndDate">
 
 	<div class="project-board-top bottomLine">
 		<div class="project-board-div">
@@ -118,11 +260,11 @@
 					<img id="projectMainImage" class="project-board-mainImage">
 				</div>
 				
-				<div class="projext-board-flex-div3">
+				<div class="projext-board-flex-div3" id="day-open1">
 					<div class="project-board-div3-div">
 						<div style="margin: 0px 0px 1.75rem; letter-spacing: 0.5px;padding-bottom: 15px; border-bottom: 1px solid #ff6666;">
 							<div style="font-size: 30px;">
-								<span>0</span>
+								<span id="funding-date">0</span>
 								<span style="font-size: 1rem;">일 남음</span>
 							</div>
 						</div>
@@ -150,9 +292,57 @@
 					</div>
 
 					<div class="project-board-flex-div4">
-						<button class="project-board-div4-like">좋아요</button>
-						<button class="project-board-div4-like">신고하기</button>
+						<button class="project-board-div4-like" id="projectLikeBtn">
+							<c:choose>
+								<c:when test="${not empty memberNo}">
+									<span class="font-20 red" id="projectLikeBtnOn"><i class='fas fa-heart'></i></span>
+									<span class="font-20 red" id="projectLikeBtnOff"><i class='far fa-heart'></i></span>
+								</c:when>
+								<c:otherwise>
+									<a href="${pageContext.request.contextPath}/member/login">
+										<span class="font-20 red" id="projectLikeBtnOff"><i class='far fa-heart'></i></span>
+									</a>
+								</c:otherwise>
+							</c:choose>
+						</button>
+						<button class="project-board-div4-like" id="report">
+							<c:choose>
+								<c:when test="${not empty memberNo}">
+									<span class="font-20 red" id="report1"><i class="far fa-tired"></i></span>
+									<span class="font-12 red" id="report2">신고하기</span>
+								</c:when>
+								<c:otherwise>
+									<a href="${pageContext.request.contextPath}/member/login"><span class="font-20 red" id="report1"><i class="far fa-tired"></i></span></a>
+									<a href="${pageContext.request.contextPath}/member/login"><span class="font-12 red" id="report2">신고하기</span></a>
+								</c:otherwise>
+							</c:choose>
+						</button>
 						<button class="project-board-div4-funding">프로젝트 후원</button>
+					</div>
+				</div>
+				
+				<!-- div33 -->
+				<!-- div33 -->
+				<div class="projext-board-flex-div3" id="day-open2">
+					<div class="project-board-div3-div">
+						<div style="margin: 0px 0px 1.75rem; letter-spacing: 0.5px;padding-bottom: 130px; border-bottom: 1px solid #ff6666;">
+							<div style="font-size: 30px;">
+								<span>${projectDto.projectStartDate}</span>
+								<span style="font-size: 1rem;">펀딩 시작 예정</span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="project-board-flex-div4" style="background-color: #f6f6f6; width: 100%; height: 150px; border-radius: 3%; text-align: left; border: 1px solid #ededed;">
+						<p style="padding: 5px 10px 0 10px; font-size: 15px; color: black; font: bold;"><span class="font-12 red"><i class="fas fa-file"></i></span> 프로젝트 간단 소개</p>
+						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">${projectDto.projectSummary}</p>
+						<p style="padding: 25px 10px 0 10px; font-size: 15px; color: black; font: bold;"><span class="font-12 red"><i class="fas fa-coins"></i></span> 프로젝트 결제 안내</p>
+						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">목표 금액인 ${projectDto.projectTargetAmount}원이 모여야만 결제됩니다.</p>
+						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">결제는 프로젝트 예정 종료일인 ${projectDto.projectEndDate} 이후 ${plus7.substring(0, 10)} 이내에 다 함께 진행됩니다.</p>
+					</div>
+
+					<div class="project-board-flex-div4">
+						<button class="project-board-div4-funding" style="width: 430px;">현재 프로젝트는 펀딩 진행 전 입니다.</button>
 					</div>
 				</div>
 				
@@ -234,7 +424,7 @@
 										<form action="" method="post">
 											<div class="dpFlex mt10">
 												<input name="sponsorAmount" type="number" class="inputNumberNone fs14 w90p h40 taRight inputFocusNone boc220 bosSolid bow1 borNone"
-												value="1000" min="${giftDto.giftPrice}">
+												value="1000" min="1000">
 												<span class="fs14 w10p h40 boc220 bosSolid bow1 bolNone dpFlex dpFlexCenter">원</span>
 											</div>
 											<button class="w100p h40 boc220 bosSolid bow1 bacWhite mt10 project-btn-normal-hover cursorPointer">후원하기</button>
@@ -294,7 +484,30 @@
 		</div>
 	</div>
 	
-
+	<div class="report-modal"> 
+		<div class="report-modal-body">
+			<div style="text-align: right;">
+				<button class="report-cancel-btn" id="modal-cancel"><span class="modal-body-cancel"><i class="fas fa-times"></i></span></button>
+			</div>
+			<div style="padding: 10px 0;">
+				<p class="report-main-p">신고하기</p>
+			</div>
+			<div style="text-align: left; height: 50px;">
+				<p class="report-sub-p"><span class="font-12 red"><i class="fas fa-exclamation-circle"></i></span> 해당 프로젝트의 신고 사유를 자세하게 적어주세요.</p> 
+			</div>
+			<form action="projectReport" method="post">
+				<input type="hidden" value="${projectDto.projectNo}" name="projectNo">
+				<div style="height: 130px;">
+					<textarea class="report-insert-text" name="reportContent" required autocomplete="off"></textarea>
+				</div>
+				<div style="height: 60px; margin: 20px 0; text-align: center; padding: 10px 0;">
+					<button class="project-report-btn">신고하기</button>
+				</div>
+			</form>
+		</div> 
+	</div>
+	
+	
 </section>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

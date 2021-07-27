@@ -25,6 +25,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from project where project_no = #{projectNo}
 	</select>
 	
+	<select id="getProjectVoByProjectNo" parameterType="int" resultType="ProjectVo">
+		select project_no, project_title, project_content, project_target_amount, project_percent, to_char(project_regist_date) project_regist_date, 
+		to_char(project_start_date) project_start_date, to_char(project_end_date) project_end_date, project_stop_causes, project_summary, 
+		member_no, category_no, member_info_nick, member_info_content, project_state, project_content_file 
+		from project where project_no = #{projectNo}
+	</select>
+	
 	<select id="insertBySequence" parameterType="ProjectCategoryVo">
 		insert into project
 			(project_no, project_regist_date, project_summary, member_no, category_no, project_state)
@@ -116,10 +123,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete project where project_no = #{projectNo} and member_no = #{memberNo}
 	</delete>
 	
-	<!-- main 화면 project join구문 -->
+	<!-- main 화면 현재 펀딩 진행중인 프로젝트 조회 구문 -->
 	<select id="indexProjectMain" resultType="IndexProjectVo">
-		select * from(
-			select rownum rn, TMP.* from(
+		<![CDATA[
+			select * from(
+				select rownum rn, TMP.* from(
 					select
 					    P.project_no,P.PROJECT_TITLE, P.PROJECT_PERCENT, P.MEMBER_INFO_NICK, P.PROJECT_STATE,
 					    I.image_no,
@@ -127,15 +135,160 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					from Project P
 					    inner join image_file I on P.project_no = I.project_no 
 						INNER JOIN category C ON P.category_no = C.category_no    
-					WHERE I.project_state = 'Y' AND P.PROJECT_STATE = 3 ORDER BY P.project_percent DESC
+					WHERE I.project_state = 'Y' AND P.PROJECT_STATE = '3' AND project_start_date <= sysdate AND sysdate < project_end_date ORDER BY project_percent desc
 				)TMP
 			) where rn between 1 and 8
+		]]>
 	</select>
+	
+	<!-- main 화면 펀딩 진행예정인 프로젝트 조회 구문 -->
+	<select id="indexProjectMain2" resultType="IndexProjectVo">
+		<![CDATA[
+			select * from(
+				select rownum rn, TMP.* from(
+					select
+					    P.project_no,P.PROJECT_TITLE, P.PROJECT_PERCENT, P.MEMBER_INFO_NICK, P.PROJECT_STATE,
+					    I.image_no,
+					    C.CATEGORY_NO ,C.CATEGORY_THEME 
+					from Project P
+					    inner join image_file I on P.project_no = I.project_no 
+						INNER JOIN category C ON P.category_no = C.category_no    
+					WHERE I.project_state = 'Y' AND P.PROJECT_STATE = '3' AND project_start_date > sysdate  ORDER BY project_percent desc
+				)TMP
+			) where rn between 1 and 8
+		]]>
+	</select>
+	
+	
 	
 	<!-- 프로젝트 달성도 변경 -->
 	<update id="setPercent" parameterType="ProjectDto">
 		update project set project_percent = #{projectPercent} where project_no = #{projectNo}
 	</update>
+	
+	
+	<!-- 키워드 검색 -->
+	<select id="projectSearch" parameterType="SearchVo" resultType="IndexProjectVo">
+		<![CDATA[
+			select * from(
+			    select rownum rn, TMP.* from(
+			        select
+			            P.project_no,P.PROJECT_TITLE, P.PROJECT_PERCENT, P.MEMBER_INFO_NICK, 
+			            P.PROJECT_STATE, I.image_no, C.CATEGORY_NO, C.CATEGORY_THEME, P.project_summary, P.project_content
+			        from Project P
+			            left outer join image_file I on P.project_no = I.project_no
+						left outer join category C ON P.category_no = C.category_no
+			        WHERE I.project_state = 'Y' AND P.PROJECT_STATE = '3' and (
+			            instr(project_title, #{keyword}) > 0 
+			                or
+			            instr(project_content, #{keyword}) > 0
+			                or
+			            instr(project_summary, #{keyword}) > 0
+			                or
+			            instr(member_info_nick, #{keyword}) > 0)
+			           ${projectStateString}
+			        ORDER BY ${projectOrderString} DESC   
+			    )TMP
+			) where rn between 1 and 8
+		]]>
+	</select>
+	
+	<!-- 키워드 검색 갯수 -->
+	<select id="projectSearchCount" parameterType="SearchVo" resultType="int">
+		<![CDATA[
+			select count(*) from Project P
+			    left outer join image_file I on P.project_no = I.project_no
+			        where I.project_state = 'Y' and P.project_state = '3' and (
+						instr(P.project_title, #{keyword}) > 0 
+						    or
+						instr(P.project_content, #{keyword}) > 0
+						    or
+						instr(P.project_summary, #{keyword}) > 0
+						    or
+						instr(P.member_info_nick, #{keyword}) > 0)
+						${projectStateString}
+		]]>
+	</select>
+	
+	<!-- 키워드 모두 검색 -->
+	<select id="projectSearchAll" parameterType="SearchVo" resultType="IndexProjectVo">
+		<![CDATA[
+	        select
+	            P.project_no,P.PROJECT_TITLE, P.PROJECT_PERCENT, P.MEMBER_INFO_NICK, 
+	            P.PROJECT_STATE, I.image_no, C.CATEGORY_NO, C.CATEGORY_THEME, P.project_summary, P.project_content
+	        from Project P
+	            left outer join image_file I on P.project_no = I.project_no
+				left outer join category C ON P.category_no = C.category_no
+	        WHERE I.project_state = 'Y' AND P.PROJECT_STATE = '3' and (
+	            instr(project_title, #{keyword}) > 0 
+	                or
+	            instr(project_content, #{keyword}) > 0
+	                or
+	            instr(project_summary, #{keyword}) > 0
+	                or
+	            instr(member_info_nick, #{keyword}) > 0)
+	        ${projectStateString}
+	        ORDER BY ${projectOrderString} DESC   
+		]]>
+	</select>
+	
+	<!-- 키워드 검색 카테고리 -->
+	<select id="projectCategorySearch" parameterType="searchVo" resultType="IndexProjectVo">
+		<![CDATA[
+			select * from(
+			    select rownum rn, TMP.* from(
+			        select
+			            P.project_no,P.PROJECT_TITLE, P.PROJECT_PERCENT, P.MEMBER_INFO_NICK, 
+			            P.PROJECT_STATE, I.image_no, C.CATEGORY_NO, C.CATEGORY_THEME, P.project_summary, P.project_content
+			        from Project P
+			            left outer join image_file I on P.project_no = I.project_no
+			            left outer JOIN category C ON P.category_no = C.category_no
+			        WHERE I.project_state = 'Y' AND P.PROJECT_STATE = '3' and instr(C.category_theme, #{keyword}) > 0 
+			        ${projectStateString}
+			        ORDER BY ${projectOrderString} DESC  
+			    )TMP
+			) where rn between 1 and 8
+		]]>
+	</select>
+	
+	<!-- 키워드 검색 카테고리 갯수 -->
+	<select id="projectCategorySearchCount" parameterType="SearchVo" resultType="int">
+		<![CDATA[
+			select count(*) from Project P
+			    left outer join image_file I on P.project_no = I.project_no
+			    left outer join category C ON P.category_no = C.category_no
+			WHERE I.project_state = 'Y' AND P.PROJECT_STATE = '3' and instr(C.category_theme, #{keyword}) > 0
+			${projectStateString}
+		]]>
+	</select>
+	
+	<!-- 키워드 모두 검색 카테고리 -->
+	<select id="projectCategorySearchAll" parameterType="SearchVo" resultType="IndexProjectVo">
+		<![CDATA[
+	        select
+	            P.project_no,P.PROJECT_TITLE, P.PROJECT_PERCENT, P.MEMBER_INFO_NICK, 
+	            P.PROJECT_STATE, I.image_no, C.CATEGORY_NO, C.CATEGORY_THEME, P.project_summary, P.project_content
+	        from Project P
+	            left outer join image_file I on P.project_no = I.project_no
+	            left outer JOIN category C ON P.category_no = C.category_no
+	        WHERE I.project_state = 'Y' AND P.PROJECT_STATE = '3' and instr(C.category_theme, #{keyword}) > 0 
+	        ${projectStateString}
+	        ORDER BY ${projectOrderString} DESC 
+		]]>
+	</select>
+	
+	<!-- 프로젝트 전체 검색 -->
+	<select id="projectList" resultType="IndexProjectVo" parameterType="searchVo">
+		select
+	            P.project_no,P.PROJECT_TITLE, P.PROJECT_PERCENT, P.MEMBER_INFO_NICK, 
+	            P.PROJECT_STATE, I.image_no, C.CATEGORY_NO, C.CATEGORY_THEME, P.project_summary, P.project_content
+	        from Project P
+	            left outer join image_file I on P.project_no = I.project_no
+	            left outer JOIN category C ON P.category_no = C.category_no
+	        WHERE I.project_state = 'Y' AND P.PROJECT_STATE = '3' 
+	        ${projectStateString}
+	        ORDER BY ${projectOrderString} DESC 
+	</select>
 	
 </mapper>
 

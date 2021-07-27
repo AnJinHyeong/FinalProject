@@ -19,14 +19,18 @@ import com.kh.finalproject.entity.CategoryDto;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.ProjectCommunityDto;
 import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.entity.ProjectReportDto;
 import com.kh.finalproject.entity.SponsorDto;
+import com.kh.finalproject.error.PercentCalcFailException;
 import com.kh.finalproject.error.SponFailException;
 import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.repository.GiftDao;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.ProjectCommunityDao;
 import com.kh.finalproject.repository.ProjectDao;
+import com.kh.finalproject.repository.ProjectReportDao;
 import com.kh.finalproject.repository.SponsorDao;
+import com.kh.finalproject.service.PointService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -91,6 +95,10 @@ public class ProjectBoardController {
 		model.addAttribute("plus7", plus7);
 		model.addAttribute("giftList", giftDao.listByProjectNo(projectNo));
 		model.addAttribute("giftCount", giftDao.count(projectNo));
+		model.addAttribute("giftItemVoList", giftDao.list());
+		model.addAttribute("currentAmount", sponsorDao.currentAmount(projectNo));
+		model.addAttribute("projectPercent", projectDao.getByProjectNo(projectNo).getProjectPercent());
+		model.addAttribute("currentSponsorMemberCount", sponsorDao.currentSponsorMemberCount(projectNo));
 		
 		List<ProjectCommunityDto> communityList = projectCommunityDao.listByProjectNo2(projectNo);
 		model.addAttribute("communityList", communityList);
@@ -133,32 +141,36 @@ public class ProjectBoardController {
 		return "redirect:projectBoardCommunity";
 	}
 	
+	@Autowired
+	private PointService pointService;
+	
 	@PostMapping("/{projectNo}")
-	@Transactional
 	public String projectBoard(@PathVariable int projectNo, HttpSession session, @ModelAttribute SponsorDto sponsorDto) {
-		int memberNo = (int)session.getAttribute("memberNo");
-		sponsorDto.setMemberNo(memberNo);
-		sponsorDto.setProjectNo(projectNo);
 		
-		MemberDto target = memberDao.getByMemberNo(memberNo);
-		if(target.getMemberHavePoint() < sponsorDto.getSponsorAmount()) {
-			System.out.println("sponfailException111111111111111");
-			throw new SponFailException("보유 포인트가 부족합니다.");
-		}
-		System.out.println("sponfailException333333333333333333333");
-		sponsorDao.insert(sponsorDto);
-		memberDao.usePoint(sponsorDto);
-		
-		int currentAmount = sponsorDao.currentAmount(projectNo);
-		int targetAmount = projectDao.getByProjectNo(projectNo).getProjectTargetAmount();
-		int percent = currentAmount / targetAmount * 100;
-		
-		projectDao.setPercent(ProjectDto.builder()
-				.projectNo(projectNo)
-				.projectPercent(percent)
-				.build());
+		pointService.usePoint(projectNo, session, sponsorDto);
 		
 		return "redirect:/projectBoard/" + projectNo;
+	}
+	
+	@Autowired
+	private ProjectReportDao projectReportDao;
+	
+	@PostMapping("/projectReport")
+	public String projectReport(
+			HttpSession session,
+			@RequestParam int projectNo,
+			@RequestParam String reportContent) {
+		int memberNo = (int)session.getAttribute("memberNo");
+		
+		ProjectReportDto projectReportDto = ProjectReportDto.builder()
+				.reportContent(reportContent)
+				.reportMemberNo(memberNo)
+				.reportProjectNo(projectNo)
+				.build();
+		
+		projectReportDao.insert(projectReportDto);
+		
+		return "redirect:/projectBoard/"+projectNo;
 	}
 	
 }

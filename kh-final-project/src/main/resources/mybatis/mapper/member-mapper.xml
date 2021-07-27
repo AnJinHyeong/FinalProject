@@ -22,16 +22,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(member_seq.nextval,#{memberId},#{memberPw},#{memberNick},#{memberEmail},#{memberIntroduce})
 	</insert>
 	
+	<insert id ="msgInsert" parameterType ="MessageDto">
+		INSERT INTO message(msg_no,sender_no,msg_title,msg_content,msg_date,receiver_no)
+		VALUES(msg_seq.nextval,#{senderNo},#{msgTitle},#{msgContent},sysdate,#{receiverNo})
+	</insert>
+	
 <!-- 		<select id="get" resultType="MemberDto" parameterType="int">
 		select * from member where member_no = #{memberNo}
 	</select> -->
+<!-- 	이메일로 아이디찾기 -->
+	<select id="getId" parameterType ="MemberDto" resultType="MemberDto">
+		select member_id from member where member_email = #{memberEmail}
+	</select>
 	
+	<select id="getMsg" parameterType="MessageDto" resultType="MessageDto">
+		select * from message where sender_no = #{senderNo} and msg_no = #{msgNo}
+	</select>
+<!-- 	발송메시지함 -->
+	<select id="msglist" parameterType="int" resultType="MessageDto">
+		select * from message where sender_no = #{memberNo}
+	</select>
+<!-- 	받은메시지함 -->
+	<select id="msglist2" parameterType="int" resultType="MessageDto">
+		select * from message where receiver_no = #{memberNo}
+	</select>
+<!-- 	전체 메시지함 -->
+	<select id="msglist3" parameterType="int" resultType="MessageDto">
+		select * from message where sender_no = #{memberNo}
+		union
+		select * from message where receiver_no = #{memberNo}
+	</select>
 <!-- 	로그인 구문 -->
 	<!-- 로그인 -->
 	<select id="login" parameterType="MemberDto" resultType="MemberDto">
 		select * from member 
 		where member_id = #{memberId} and member_pw = #{memberPw}
 	</select>
+	
+<!-- 	비밀번호 초기화 구문 -->
+	<update id="pwUp" parameterType="MemberDto">
+		update member set member_pw = #{memberPw} where member_email = #{memberEmail}
+	</update>
 	
 <!-- 이메일 인증키 저장 구문 -->
 	<insert id="insert2" parameterType="EmailAuthDto">
@@ -69,7 +100,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getByMemberNo" resultType="MemberDto" parameterType="int">
 		select * from member where member_no = #{memberNo}
 	</select>
+
+	<update id="upEmail" parameterType="MemberDto">
+		update member set member_email = #{memberEmail} where member_no =#{memberNo}
+	</update>
 	
+	<update id="upPw2" parameterType="MemberDto">
+		update member set member_pw = #{memberPw} where member_no=#{memberNo}
+	</update>
+	
+	<update id="upIntro" parameterType="MemberDto">
+		update member set member_introduce = #{memberIntroduce} where member_no=#{memberNo}
+	</update>
+
 	<!-- 보유 포인트 조회 -->
 	<select id = "getMemberHavePoint" resultType = "int" parameterType ="int">
 		SELECT member_have_point FROM member WHERE member_no = #{memberNo}
@@ -80,4 +123,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update member set member_have_point = member_have_point - #{sponsorAmount} where member_no = #{memberNo} 
 	</update>
 	
+	<!-- 후원 취소시 포인트 증가 -->
+	<update id="addPointBySponsorCancel" parameterType="SponsorDto">
+		update member set member_have_point = member_have_point + #{sponsorAmount} where member_no = #{memberNo} 
+	</update>
+	
+
 </mapper>

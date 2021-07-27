@@ -9,9 +9,9 @@ member_email varchar2(30) not null unique,
 member_introduce varchar2(1000),
 member_grade varchar2(30) default '사용자' check (member_grade in('관리자','사용자','블랙')) ,   
 member_address VARCHAR2(200)
+);
 
 CREATE SEQUENCE member_seq;
-);
 
 #project table
 CREATE TABLE project(
@@ -20,12 +20,12 @@ project_title varchar2(90),
 project_content clob default empty_clob(),
 project_content_file clob default empty_clob(),
 project_target_amount NUMBER(19),
-project_percent NUMBER(5),
+project_percent NUMBER(5) default 0 not null check(project_percent >= 0),
 project_state char(1) CHECK (project_state IN ('1','2','3','X')) NOT NULL,
 project_regist_date DATE DEFAULT sysdate NOT NULL,
 project_start_date DATE,
 project_end_date DATE,
-project_stop_caues varchar2(4000),
+project_stop_causes varchar2(4000),
 project_summary varchar2(150) not null,
 member_no references member(member_no) on delete SET NULL,
 category_no REFERENCES category(category_no) ON DELETE SET NULL
@@ -125,7 +125,41 @@ member_no references member(member_no) not null,
 gift_no references gift(gift_no),
 project_no references project(project_no) not null,
 sponsor_amount number(19) not null check(sponsor_amount >= 0),
-sponsor_date date default sysdate not null
+sponsor_date date default sysdate not null,
+sponsor_cancel char(1) check (sponsor_cancel ='Y')
 );
 
 create sequence sponsor_seq;
+
+
+#peoject_like
+CREATE TABLE project_like(
+like_project_no REFERENCES project(project_no) ON DELETE SET NULL,
+like_member_no references member(member_no) on delete SET NULL,
+like_date DATE DEFAULT sysdate,
+constraint project_like_pk primary key(like_project_no, like_member_no) 
+);
+
+
+#project_community
+CREATE TABLE project_community(
+project_community_no number(19) PRIMARY KEY,
+project_community_content varchar2(4000) NOT NULL,
+project_community_date DATE DEFAULT sysdate,
+member_no references member(member_no) ON DELETE CASCADE,
+project_no references project(project_no) ON DELETE CASCADE 
+);
+
+CREATE SEQUENCE project_community_seq;
+
+
+#project_report
+CREATE TABLE project_report(
+report_no NUMBER(19) PRIMARY KEY,
+report_project_no REFERENCES project(project_no) ON DELETE SET NULL,
+report_member_no references member(member_no) on delete SET NULL,
+report_content varchar2(4000) NOT NULL,
+report_date DATE DEFAULT sysdate
+);
+
+CREATE SEQUENCE project_report_seq;

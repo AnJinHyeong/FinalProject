@@ -40,8 +40,38 @@
 	            	$('.c').css('display','block');
 		        }
 		    });
-		});
 
+			
+
+			$('#top_menu .sub_1').hide();
+
+		 
+
+			$('.menu_1').click(function(){
+
+				if($('#top_menu .sub_1').is(':visible')==false){
+
+					
+
+					$('.sub_1').slideDown();
+
+					
+
+				}else if($('#top_menu .sub_1').is(':visible')==true){
+
+					
+
+					$('.sub_1').hide();
+
+				}
+
+		 
+
+			});
+
+			
+
+		});
 	
 	</script>
 	<style>
@@ -200,6 +230,23 @@
 	color:blue;
 	box-shadow: none;
 }
+
+
+	.menu_1{
+
+		text-align: right;
+
+	}
+
+	.sub_1{
+
+		position:absolute;
+
+		width:100px;
+
+	}
+
+
 </style>
 
 </head>
@@ -217,14 +264,33 @@
 				<img src="${root}/image/search.svg" width="20" height="20">
 				<c:choose>
 					<c:when test="${isLogin}">
-						<a class="header-link" href="${root}/member/logout" style="width: 95px; text-align: center;">로그아웃</a>
 						<a class="header-link" href="#" style="margin: 0 10px;">5000p</a>
-						<a href="${root}/member/myPage"><img src="${root}/image/user-in.svg" width="25" height="25"></a>
+						<ul id="top_menu" style="list-style:none;"> 
+
+							<li>
+
+								<a><img src="${root}/image/user-in.svg"  class="menu_1" width="118" height="25"  style="padding-right:100px;"></a>
+
+									<ul class="sub_1" style="list-style:none; padding-left:0px;">
+
+										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="${root}/member/myMsg">메세지</a></li>
+
+										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="#">후원현황</a></li>
+
+										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="#">내 프로젝트</a></li>
+
+										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="#">좋아한 프로젝트</a></li>
+
+										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="${root}/member/mySettings">내 정보 수정</a></li>
+
+										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="${root}/member/logout">로그아웃</a></li>
+
+									</ul>
+
+							</li>
+
+						</ul>
 					</c:when>
-					<c:otherwise>
-						<a class="header-link" href="${root}/member/login" style="width: 120px; margin: 0 35px;">로그인/회원가입</a>
-						<a href="${root}/member/myPage"><img src="${root}/image/user-out.svg" width="25" height="25" ></a>
-					</c:otherwise>
 				</c:choose>
 			</div>
 		</div>
@@ -268,9 +334,32 @@
 	     			 <input type="radio" id="tb2-2" name="show2" value="2"><label for="tb2-2" >발신 메시지</label>
 	     			 <input type="radio" id="tb2-3" name="show2" value="3"><label for="tb2-3">수신 메시지</label>
     			</div>
-    			<div class="a">a의영역</div>
-    			<div class="b" style="display:none">b의영역</div>
-    			<div class="c" style="display:none">c의영역</div>
+    			<div class="a" style="display:none">
+    				<c:forEach var="messageDto3" items="${messageDto3}">
+    				<div class="float-container"> 
+    					<div class="left">${messageDto3.msgTitle}</div>
+    					<div class="left">${messageDto3.msgContent}</div>
+    					<div class="left">${messageDto3.msgDate}</div>
+    				</div>
+    				</c:forEach>
+    			</div>
+    			<div class="b" style="display:none">
+ 					<c:forEach var="messageDto" items="${messageDto}"> 
+    				<div class="float-container">
+    					<div class="left">${messageDto.msgTitle}</div>
+    					<div class="left">${messageDto.msgContent}</div>
+    					<div class="left">${messageDto.msgDate}</div>
+    				</div>
+    				</c:forEach>
+    			</div>
+    			<div class="c" style="display:none">
+    				<c:forEach var="messageDto2" items="${messageDto2}">
+    				<div class="float-container">
+    					<div class="left">${messageDto2.msgContent}</div>
+    					<div class="left">${messageDto2.msgDate}</div>
+    				</div>
+    				</c:forEach>
+    			</div>
     			
     		</div>
     	</div>

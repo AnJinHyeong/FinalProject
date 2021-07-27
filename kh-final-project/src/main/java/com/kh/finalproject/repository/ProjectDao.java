@@ -5,7 +5,8 @@ import java.util.List;
 import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
-import com.kh.finalproject.vo.ProjectInformationVo;
+import com.kh.finalproject.vo.ProjectVo;
+import com.kh.finalproject.vo.SearchVo;
 
 public interface ProjectDao {
 	
@@ -41,10 +42,29 @@ public interface ProjectDao {
 	int calculateProjectProgress(int projectNo);
 	//프로젝트 No를 이용한 프로젝트 조회
 	ProjectDto getByProjectNo(int projectNo);
+	//프로젝트 No를 이용한 프로젝트Vo 조회(Date String타입으로 변환)
+	ProjectVo getProjectVoByProjectNo(int projectNo);
 	//프로젝트 삭제(memberNo, projectNo 를 이용)
 	boolean projectDelete(ProjectDto projectDto);
 	//index화면 프로젝트 리스트 
 	List<IndexProjectVo> indexProjectMain();
+	//index화면 프로젝트 리스트 
+	List<IndexProjectVo> indexProjectMain2();
 	// 프로젝트 달성도 업데이트
 	void setPercent(ProjectDto projectDto);
+	// 키워드 검색
+	List<IndexProjectVo> projectSearch(SearchVo searchVo);
+	// 키워드 검색 갯수
+	int projectSearchCount(SearchVo searchVo);
+	// 키워드 카테고리 검색
+	List<IndexProjectVo> projectCategorySearch(SearchVo searchVo);
+	// 키워드 카테고리 검색 갯수
+	int projectCategorySearchCount(SearchVo searchVo);
+	// 키워드 검색 더보기
+	List<IndexProjectVo> projectSearchAll(SearchVo searchVo);
+	// 키워드 카테고리 검색 더보기
+	List<IndexProjectVo> projectCategorySearchAll(SearchVo searchVo);
+	// 필터에 따른 프로젝트 리스트 조회
+	List<IndexProjectVo> projectList(SearchVo searchVo);
+	
 }

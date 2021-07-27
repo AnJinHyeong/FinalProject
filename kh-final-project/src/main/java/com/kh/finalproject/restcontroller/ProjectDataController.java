@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,13 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.finalproject.entity.GiftDto;
 import com.kh.finalproject.entity.ItemDto;
 import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.entity.SponsorDto;
 import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.repository.GiftDao;
 import com.kh.finalproject.repository.ItemDao;
 import com.kh.finalproject.repository.ProjectDao;
-import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.repository.SponsorDao;
+import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectInformationVo;
+import com.kh.finalproject.vo.ProjectVo;
+import com.kh.finalproject.vo.SearchVo;
+import com.kh.finalproject.vo.SponsorListVo;
 import com.kh.finalproject.vo.SponsorVo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -94,7 +99,7 @@ public class ProjectDataController {
 	
 	@PostMapping("/projectInformation")
 	public ProjectInformationVo projectInformation(HttpSession session, @RequestParam int projectNo) {
-		ProjectDto projectDto = projectDao.getByProjectNo(projectNo);
+		ProjectVo projectVo = projectDao.getProjectVoByProjectNo(projectNo);
 		int currentMemberNo = (int)session.getAttribute("memberNo");
 		int sumSponsorAmountByOne = sponsorDao.sponsorAmountByProjectNoAndMemberNo(SponsorVo.builder()
 											.memberNo(currentMemberNo)
@@ -104,15 +109,15 @@ public class ProjectDataController {
 		
 		return ProjectInformationVo.builder()
 				.projectNo(projectNo)
-				.projectTitle(projectDto.getProjectTitle())
-				.projectTargetAmount(projectDto.getProjectTargetAmount())
-				.projectPercent(projectDto.getProjectPercent())
-				.projectState(projectDto.getProjectState())
-				.projectStartDateString(String.valueOf(projectDto.getProjectStartDate()))
-				.projectEndDateString(String.valueOf(projectDto.getProjectEndDate()))
-				.memberNo(projectDto.getMemberNo())
-				.categoryNo(projectDto.getCategoryNo())
-				.memberInfoNick(projectDto.getMemberInfoNick())
+				.projectTitle(projectVo.getProjectTitle())
+				.projectTargetAmount(projectVo.getProjectTargetAmount())
+				.projectPercent(projectVo.getProjectPercent())
+				.projectState(projectVo.getProjectState())
+				.projectStartDate(projectVo.getProjectStartDate())
+				.projectEndDate(projectVo.getProjectEndDate())
+				.memberNo(projectVo.getMemberNo())
+				.categoryNo(projectVo.getCategoryNo())
+				.memberInfoNick(projectVo.getMemberInfoNick())
 				.sumSponsorAmountByOne(sumSponsorAmountByOne)
 				.sumCurrentAmountByAll(sumCurrentAmountByAll)
 				.build();
@@ -122,5 +127,53 @@ public class ProjectDataController {
 	public List<IndexProjectVo> indexProjectMain(){
 		return projectDao.indexProjectMain();
 	}
+	
+	@GetMapping("/index/indexProjectMain2")
+	public List<IndexProjectVo> indexProjectMain2(){
+		return projectDao.indexProjectMain2();
+	}
+	@PostMapping("/sponsorListByProjectNo/{index}")
+	public List<SponsorListVo> sponsorListByProjectNo(HttpSession session, @RequestParam int projectNo, @PathVariable int index){
+		int memberNo = (int)session.getAttribute("memberNo");
+		if(index == 2) {
+			return sponsorDao.sponsorCanceledListByProjectNo(SponsorDto.builder()
+					.projectNo(projectNo)
+					.memberNo(memberNo)
+					.build());
+		}
+		else {
+			return sponsorDao.sponsorListByProjectNo(SponsorDto.builder()
+					.projectNo(projectNo)
+					.memberNo(memberNo)
+					.build());
+		}
+		
+	}
+	
+	@PostMapping("/projectSearch")
+	public List<IndexProjectVo> projectSearch(@ModelAttribute SearchVo searchVo){
+		return projectDao.projectSearch(searchVo);
+	}
+	
+	@PostMapping("/projectCategorySearch")
+	public List<IndexProjectVo> projectCategorySearch(@ModelAttribute SearchVo searchVo){
+		return projectDao.projectCategorySearch(searchVo);
+	}
+	
+	@PostMapping("/projectSearchAll")
+	public List<IndexProjectVo> projectSearchAll(@ModelAttribute SearchVo searchVo){
+		return projectDao.projectSearchAll(searchVo);
+	}
+	
+	@PostMapping("/projectCategorySearchAll")
+	public List<IndexProjectVo> projectCategorySearchAll(@ModelAttribute SearchVo searchVo){
+		return projectDao.projectCategorySearchAll(searchVo);
+	}
+	
+	@PostMapping("/projectList")
+	public List<IndexProjectVo> projectList(@ModelAttribute SearchVo searchVo){
+		return projectDao.projectList(searchVo);
+	}
+	
 	
 }
