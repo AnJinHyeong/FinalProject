@@ -3,7 +3,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
@@ -64,11 +63,109 @@
 			}
 		});
 		
-		// 선물 영역 클릭시 가격과 등록버튼 활성화
-		$(".sponsorOn").on("click", function(){
-			$(".projectBoardSponsor").not($(this).parent().find(".projectBoardSponsor")).hide('fast');
-			$(this).parent().find(".projectBoardSponsor").show('fast');
-		});
+		
+		
+		//좋아요 기능
+// 		$.ajax({
+// 			url :"${pageContext.request.contextPath}/projectCommunityLike/likeCount",
+// 			type: "get",
+// 			data: {
+// 				projectCommunityNo : $(".project-board-community-like-btn").attr("id")
+// 			},
+// 			success : function(resp){
+// 				var likeCount = $(".likeCount").attr("id");
+// 				$("#likeCount").text(resp);
+// 			}
+		
+// 		});
+		
+		
+// 		$.ajax({
+// 			url :"${pageContext.request.contextPath}/projectCommunityLike/likeConfirm",
+// 			type: "get",
+// 			data: {
+// 				projectCommunityNo : $(".project-board-community-like-btn").attr("id")
+// 			},
+// 			success : function(resp){
+// 				if(resp == 1){
+// 					$(".likeOn").show();
+// 					$(".likeOff").hide();
+// 				}
+// 				else{
+// 					$(".likeOn").hide();
+// 					$(".likeOff").show();
+// 				}
+// 			}
+		
+// 		});
+		
+// 		$(".project-board-community-like-btn").on("click",function(){
+// 			var likeId = $(this).attr("id");
+// 			console.log(likeId);
+// 			$.ajax({
+// 				url :"${pageContext.request.contextPath}/projectCommunityLike/likeConfirm",
+// 				type: "get",
+// 				data: {
+// 					projectCommunityNo : likeId
+// 				},
+// 				success : function(resp){
+// 					if(resp == 1){
+// 						$.ajax({
+// 							url :"${pageContext.request.contextPath}/projectCommunityLike/likeDelete",
+// 							type: "get",
+// 							data: {
+// 								projectCommunityNo : likeId
+// 							},
+// 							success : function(resp){
+// 								$.ajax({
+// 									url :"${pageContext.request.contextPath}/projectCommunityLike/likeCount",
+// 									type: "get",
+// 									data: {
+// 										projectCommunityNo : likeId
+// 									},
+// 									success : function(resp){
+// 										console.log(resp);
+// 										$(".likeCount").text(resp);
+// 										$(".likeOn").hide();
+// 										$(".likeOff").show();
+// 									}
+								
+// 								});
+// 							}
+						
+// 						});
+// 					}
+// 					else{
+// 						$.ajax({
+// 							url :"${pageContext.request.contextPath}/projectCommunityLike/likeAdd",
+// 							type: "get",
+// 							data: {
+// 								projectCommunityNo : likeId
+// 							},
+// 							success: function(resp){
+// 								$.ajax({
+// 									url :"${pageContext.request.contextPath}/projectCommunityLike/likeCount",
+// 									type: "get",
+// 									data: {
+// 										projectCommunityNo : likeId
+// 									},
+// 									success : function(resp){
+// 										console.log(resp);
+// 										$(".likeCount").text(resp);
+// 										$(".likeOn").show();
+// 										$(".likeOff").hide();
+// 									}
+								
+// 								});
+// 							}
+						
+// 						});
+// 					}
+// 				}
+			
+// 			});
+			
+// 		});
 		
 		
 	});
@@ -76,7 +173,27 @@
 	
 </script>
 
+<script id="likeTemplate" type="text/template">
+<div class="project-board-community-row">
+	<div class="project-board-community-row100" style="padding: 10px;">
+		<div style="width: 100%; height: 30px;">
+			<span style="font-weight: bold; font-size: 18px;">{{memberNick}}</span>
+		</div>
+	</div>
+	<div class="project-board-community-row100" style="padding: 10px; height: 50px; font-size: 15px;">
+		{{projectCommunityContent}}
+	</div>
+	<div class="project-board-community-row100 topLine" style="padding: 0 10px; height: 30px; text-align: right; line-height: 2;"> 
+		
+	</div>
+</div>
+</script>
+
+
 <section class="main-row topLine">
+<!-- <em class="likeCount" id="{{projectCommunityNo}}likeCount">0</em> -->
+<!-- <button class="project-board-community-like-btn likeOn" id="{{projectCommunityNo}}"><i class="fas fa-heart"></i></button> -->
+<!-- <button class="project-board-community-like-btn likeOff" id="{{projectCommunityNo}}"><i class="far fa-heart"></i></button> -->
 
 	<div class="project-board-top bottomLine">
 		<div class="project-board-div">
@@ -128,14 +245,14 @@
 						</div>
 						<div style="margin: 0px 0px 1.75rem; letter-spacing: 0.5px;">
 							<div style="font-size: 30px;">
-								<span>${currentAmount}</span>
+								<span>0</span>
 								<span style="font-size: 1rem;">원 펀딩</span>
-								<span class="fBold fs20">${projectPercent}%</span>
+								<span style="font-size: 20px;"><span>0</span>%</span>
 							</div>
 						</div>
 						<div style="margin: 0px 0px 1.75rem; letter-spacing: 0.5px;">
 							<div style="font-size: 30px;">
-								<span>${currentSponsorMemberCount}</span>
+								<span>0</span>
 								<span style="font-size: 1rem;">명의 참여자</span>
 							</div>
 						</div>
@@ -163,18 +280,64 @@
 	<div class="bottomLine" style="height: 50px; box-shadow: rgb(0 0 0 / 10%) 0px 2px 3px;">
 		<div class="project-board-mid">
 			<div class="project-board-mid-div">
-				<a class="project-board-mid-a on" href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}">스토리</a>
-				<a class="project-board-mid-a" href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}/projectBoardCommunity">커뮤니티</a>
+				<a class="project-board-mid-a" href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}">스토리</a>
+				<a class="project-board-mid-a on" href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}/projectBoardCommunity">커뮤니티</a>
 			</div>
 		</div>
 	</div>
 	
 	<div class="project-board-content">
 		<div class="project-board-content-div">
-			<!-- 스토리 내용 div -->
+			<!-- 커뮤니티 내용 div -->
 			<div class="project-board-content-div1">
-				<div class="project-board-content-row1 scrollThin">
-					${projectDto.projectContent}
+				<div class="project-board-community-row1 scrollThin">
+					<div class="project-board-community-top" style="width: 100%; height: 40px; border: 1px solid #dcdcdc; border-radius: 3px; font-weight: bold; font-size: 18px; margin-bottom: 10px; background-color: #fff; padding: 7px 5px;">
+						<p><span style="color: #ff3a3a;"><i class="fas fa-comments"></i></span> 프로젝트를 향한 응원의 메세지를 남겨주세요.</p>
+					</div>
+				
+					<form action="projectBoardCommunity" method="post">
+						<div class="project-board-community-row-form">
+							<div class="project-board-community-row100">
+								<div style="width: 100%; height: 30px;">
+<!-- 									<img class="project-board-community-memberImage" id="myMemberImage"> -->
+									<span>${memberDto.memberNick}</span>
+								</div>
+							</div>
+							<div class="project-board-community-row100"> 
+								<textarea class="project-board-community-text" name="projectCommunityContent"></textarea>
+							</div>
+							<div class="project-board-community-row100" style="text-align: right;">
+								<button class="project-board-community-btn">등록</button>
+							</div>
+						</div>
+					</form>
+					
+					<!-- 커뮤니티 내용들 -->
+					<c:forEach var="communityList" items="${communityList}">
+						<div class="project-board-community-row">
+							<div class="project-board-community-row100" style="padding: 10px;">
+								<div style="width: 100%; height: 30px; display: flex;">
+									<c:choose>
+										<c:when test="${projectDto.memberNo == communityList.memberNo}">
+											<span style="font-weight: bold; font-size: 18px;  width: 15%;">${projectDto.memberInfoNick}</span>
+										</c:when>
+										<c:otherwise>
+											<span style="font-weight: bold; font-size: 18px;  width: 15%;">${communityList.memberNick}</span>
+										</c:otherwise>
+									</c:choose>
+									<c:if test="${memberDto.memberNo == communityList.memberNo}">
+										<div style="text-align: right; width: 85%">
+											<a href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}/projectBoardCommunityDelete?projectCommunityNo=${communityList.projectCommunityNo}"><span class="font-12 red"><i class="fas fa-times"></i></span></a>
+										</div>
+									</c:if>
+								</div>
+							</div>
+							
+							<div class="project-board-community-row100" style="padding: 10px; height: 50px; font-size: 15px;">
+								${communityList.projectCommunityContent}
+							</div>
+						</div>
+					</c:forEach>
 				</div>
 			</div>
 			
@@ -219,8 +382,8 @@
 					<c:otherwise>
 						<div id="giftList" class="project-giftList scrollThin">
 						
-							<div id="giftListBasic" class="project-insert-gift-list float-container p30 hMin140 project-board-item project-border-normal-hover mt10">
-								<div class=" sponsorOn cursorPointer">
+							<div id="giftListBasic" class="project-insert-gift-list float-container p30 h140 project-board-item" style="margin-top: 10px;">
+								<div>
 									<div class="mb10">
 										<span class="left w260 fBold fs22">1000원+</span>
 									</div>
@@ -228,61 +391,34 @@
 										<span class="left w260 fs14 fBold">선물을 선택하지 않고 밀어만 줍니다.</span>
 									</div>
 								</div>
-								
-								
-								<div class="projectBoardSponsor mt50 topLine dpNone">
-										<form action="" method="post">
-											<div class="dpFlex mt10">
-												<input name="sponsorAmount" type="number" class="inputNumberNone fs14 w90p h40 taRight inputFocusNone boc220 bosSolid bow1 borNone"
-												value="1000" min="${giftDto.giftPrice}">
-												<span class="fs14 w10p h40 boc220 bosSolid bow1 bolNone dpFlex dpFlexCenter">원</span>
-											</div>
-											<button class="w100p h40 boc220 bosSolid bow1 bacWhite mt10 project-btn-normal-hover cursorPointer">후원하기</button>
-										</form>
-									</div>
-								
-								
 							</div>
 						
 							<c:forEach var="giftDto" items="${giftList}">
-								<div class="project-insert-gift-list p30 project-board-item project-border-normal-hover">
-									<div class="cursorPointer sponsorOn">
-										<div class="mb10 w100p float-container">
-											<span id="giftPrice" class="left w260 fBold fs22">${giftDto.giftPrice}원+</span> 
-											<c:if test="${projectDto.projectState != '2'}">
-											</c:if>
-										</div>
-										<div>
-											<span id="giftSummary" class="w260 fs14 fBold">${giftDto.giftSummary}</span>
-										</div>
-										<div class="w100p fs12 p10">
-											<ul style="list-style: none;">
-				
-												<c:forEach var="giftItemVo" items="${giftItemVoList}">
-													<c:if test="${giftItemVo.giftNo == giftDto.giftNo}">
-														<li>
-															<div class="float-container w100p mb20">
-																<span class="left w70p">${giftItemVo.itemName}</span> <span class="right w20p">x ${giftItemVo.itemCount}</span>
-															</div>
-														</li>
-													</c:if>
-												</c:forEach>
-				
-											</ul>
-										</div>
+								<div class="project-insert-gift-list p30 project-board-item">
+									<div class="mb10 w100p float-container">
+										<span id="giftPrice" class="left w260 fBold fs22">${giftDto.giftPrice}원+</span> 
+										<c:if test="${projectDto.projectState != '2'}">
+										</c:if>
 									</div>
-										
-									<div class="projectBoardSponsor mt50 topLine dpNone">
-										<form action="" method="post">
-											<input type="hidden" name="giftNo" value="${giftDto.giftNo}">
-											<div class="dpFlex mt10">
-												<input name="sponsorAmount" type="number" class="inputNumberNone fs14 w90p h40 taRight inputFocusNone boc220 bosSolid bow1 borNone"
-												value="${giftDto.giftPrice}" min="${giftDto.giftPrice}">
-												<span class="fs14 w10p h40 boc220 bosSolid bow1 bolNone dpFlex dpFlexCenter">원</span>
-											</div>
-											<button class="w100p h40 boc220 bosSolid bow1 bacWhite mt10 project-btn-normal-hover cursorPointer">후원하기</button>
-										</form>
+									<div>
+										<span id="giftSummary" class="w260 fs14 fBold">${giftDto.giftSummary}</span>
 									</div>
+									<div class="w100p fs12 p10">
+										<ul style="list-style: none;">
+			
+											<c:forEach var="giftItemVo" items="${giftItemVoList}">
+												<c:if test="${giftItemVo.giftNo == giftDto.giftNo}">
+													<li>
+														<div class="float-container w100p mb20">
+															<span class="left w70p">${giftItemVo.itemName}</span> <span class="right w20p">x ${giftItemVo.itemCount}</span>
+														</div>
+													</li>
+												</c:if>
+											</c:forEach>
+			
+										</ul>
+									</div>
+									<span id="giftNo" class="yb hidden">${giftDto.giftNo}</span>
 								</div>
 							</c:forEach>
 						</div>

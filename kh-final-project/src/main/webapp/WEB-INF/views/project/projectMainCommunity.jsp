@@ -105,16 +105,16 @@
 					<c:when test="${projectDto.projectState == '3' || projectDto.projectState == 'X'}">
 						<ul class="project-main-ul">
 							<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMain" class="main-li-a">프로젝트 기획</a></li>
-							<li class="project-main-li main-li-on"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainApproval" class="main-li-a ">승인심사 요청</a></li>
-							<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainCommunity" class="main-li-a">커뮤니티</a></li>
+							<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainApproval" class="main-li-a ">승인심사 요청</a></li>
+							<li class="project-main-li main-li-on"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainCommunity" class="main-li-a">커뮤니티</a></li>
 							<li class="project-main-li"><a href="#" class="main-li-a">후원자 관리</a></li>
 						</ul>
 					</c:when>
 					<c:otherwise>
 						<ul class="project-main-ul">
 							<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMain" class="main-li-a">프로젝트 기획</a></li>
-							<li class="project-main-li main-li-on"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainApproval" class="main-li-a">승인심사 요청</a></li>
-							<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainCommunity" class="main-li-a project-disable">커뮤니티<i class="fas fa-lock" style="margin-left: 5px; font-size: 12px;"></i></a></li>
+							<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainApproval" class="main-li-a">승인심사 요청</a></li>
+							<li class="project-main-li main-li-on"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainCommunity" class="main-li-a project-disable">커뮤니티<i class="fas fa-lock" style="margin-left: 5px; font-size: 12px;"></i></a></li>
 							<li class="project-main-li"><a href="#" class="main-li-a project-disable">후원자 관리<i class="fas fa-lock" style="margin-left: 5px; font-size: 12px;"></i></a></li>
 						</ul>
 					</c:otherwise>
@@ -123,56 +123,67 @@
 			</div>
 	</div>
 	
-	<div class="topLine project-back-color" style="height: 650px;">
+	<div class="topLine project-back-color" style="height: 800px;">
 		
 		<div class="section-project-row">
-			
-			<div class="project-approval-div">
-				
-				<c:choose>
-					<c:when test="${projectDto.projectState == '1'}">
-						<form action="projectMainApproval" method="post">
-							<div class="project-approval-div-d" style="text-align: center;">
-								<button class="project-approval-btn"><span style="font-size: 13px;">승인심사 요청</span></button>	
-								<p class="font-12" style="margin-top: 10px; color: #F86453;"><i class="fas fa-exclamation-circle"></i> 승인 심사 요청 후 요청 취소가 가능합니다.</p>
-								<p class="font-12" style="margin-top: 10px; color: #F86453;">승인 심사 요청시 프로젝트 수정이 불가능 합니다.</p>
+		
+			<div class="" style=" height: 20px; width: 1200px; padding-top: 50px; text-align: left; font-weight: bold; font-size: 30px;">
+				프로젝트 커뮤니티 관리
+			</div>
+		
+			<div class="project-community-div">
+				<!-- 커뮤니티 내용들 -->
+				<div class="project-community-row1 scrollThin">
+					<c:forEach var="communityList" items="${communityList}">
+						<div class="project-board-community-row">
+							<div class="project-board-community-row100" style="padding: 10px;">
+								<div style="width: 100%; height: 30px; display: flex;">
+									<c:choose>
+										<c:when test="${projectDto.memberNo == communityList.memberNo}">
+											<span style="font-weight: bold; font-size: 18px;  width: 15%;">${projectDto.memberInfoNick}</span>
+										</c:when>
+										<c:otherwise>
+											<span style="font-weight: bold; font-size: 18px;  width: 15%;">${communityList.memberNick}</span>
+										</c:otherwise>
+									</c:choose>
+									<div style="text-align: right; width: 85%">
+										<a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectCommunityDelete?projectCommunityNo=${communityList.projectCommunityNo}"><span class="font-12 red"><i class="fas fa-times"></i></span></a>
+									</div>
+								</div>
 							</div>
-						</form>
-					</c:when>
-					<c:when test="${projectDto.projectState == '2'}">
-						<form action="projectMainApprovalCancel" method="post">
-							<div class="project-approval-div-d" style="text-align: center;">
-								<button class="project-approval-btn2"><span style="font-size: 13px;">승인심사 요청취소</span></button>	
-								<p class="font-12" style="margin-top: 10px; color: #F86453;"><i class="fas fa-exclamation-circle"></i> 현재 프로젝트는 심사 요청 상태 입니다.</p>
-								<p class="font-12" style="margin-top: 10px; color: #F86453;">승인 심사 요청시 프로젝트 등록,수정이 불가능 합니다.</p>
+							
+							<div class="project-board-community-row100" style="padding: 10px; height: 50px; font-size: 15px;">
+								${communityList.projectCommunityContent}
 							</div>
-						</form>
-					</c:when>
-					<c:when test="${projectDto.projectState == '3'}">
-						<div class="project-approval-div-d" style="text-align: center;">
-							<button class="project-approval-btn3"><span style="font-size: 13px;">심사완료</span></button>	
-							<p class="font-12" style="margin-top: 10px; color: #F86453;"><i class="fas fa-exclamation-circle"></i> 현재 프로젝트의 심사가 완료되었습니다.</p>
-							<p class="font-12" style="margin-top: 10px; color: #F86453;">설정하신 펀딩 시작일부터 펀딩이 시작됩니다.</p>
 						</div>
-					</c:when>
-					<c:otherwise>
-						
-					</c:otherwise>
-				</c:choose>
-				
-			
-				<div class="project-approval-div-d">
-					<p style="color: #ea5454; font-size: 15px;"><i class="fas fa-chart-pie"></i> 승인 심사 요청</p>
-					<p class="project-approval-top-p">프로젝트를 등록하기 위해서 관리자의 심사를 받아야합니다.</p>
-					<p class="project-approval-i"><i class="fas fa-check-circle"></i><span class="project-approval-font-span">프로젝트 기획을 완성해주세요.</span></p>
-					<p class="project-approval-i"><i class="fas fa-check-circle"></i><span class="project-approval-font-span">승인 심사는 최대 15일 이상 소요됩니다.</span></p>
-					<p class="project-approval-i"><i class="fas fa-check-circle"></i><span class="project-approval-font-span">심사 기준을 준수하면 보다 빠른 프로젝트 승인이 가능합니다.</span></p>
-					<p class="project-approval-i"><i class="fas fa-check-circle"></i><span class="project-approval-font-span">부적절한 프로젝트는 프로젝트 진행 중 중단될 수 있습니다.</span></p>
-					<p class="project-approval-i"><i class="fas fa-check-circle"></i><span class="project-approval-font-span">프로젝트 심사 통과 후 프로젝트 시작 예정일에 프로젝트가 공개 됩니다.</span></p>
+					</c:forEach>
 				</div>
 				
+				<!-- 등록 수정 -->
+				<div class="project-community-row2">
+					<div style="width: 100%; height: 50px; margin: 10px 0 0 10px; font-weight: bold; font-size: 20px;">
+						커뮤니티 글 등록
+					</div>
+					<div style="width: 100%; height: 200px;">
+						<form action="projectMainCommunity" method="post">
+							<div class="project-board-community-row-form">
+								<div class="project-board-community-row100">
+									<div style="width: 100%; height: 30px;">
+	<!-- 									<img class="project-board-community-memberImage" id="myMemberImage"> -->
+										<span>${projectDto.memberInfoNick}</span>
+									</div>
+								</div>
+								<div class="project-board-community-row100"> 
+									<textarea class="project-board-community-text" name="projectCommunityContent"></textarea>
+								</div>
+								<div class="project-board-community-row100" style="text-align: right;">
+									<button class="project-board-community-btn">등록</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
-			
 		</div>
 		
 		

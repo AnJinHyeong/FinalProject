@@ -18,12 +18,14 @@ import com.kh.finalproject.entity.CategoryDto;
 import com.kh.finalproject.entity.GiftDto;
 import com.kh.finalproject.entity.ItemDto;
 import com.kh.finalproject.entity.MemberDto;
+import com.kh.finalproject.entity.ProjectCommunityDto;
 import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.repository.GiftDao;
 import com.kh.finalproject.repository.ImageDao;
 import com.kh.finalproject.repository.ItemDao;
 import com.kh.finalproject.repository.MemberDao;
+import com.kh.finalproject.repository.ProjectCommunityDao;
 import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.vo.GiftSelectedItemVo;
 import com.kh.finalproject.vo.ItemListVo;
@@ -296,6 +298,60 @@ public class ProjectController {
 		return "redirect:member/myProject";
 	}
 	
+	@Autowired
+	private ProjectCommunityDao projectCommunityDao;
 	
+	@GetMapping("{projectNo}/projectMainCommunity")
+	public String projectMainCommunity(
+			@PathVariable int projectNo,
+			HttpSession session,
+			Model model) {
+		int memberNo = (int) session.getAttribute("memberNo");
+		ProjectDto projectDto = ProjectDto.builder().projectNo(projectNo).memberNo(memberNo).build();
+		ProjectDto find = projectDao.get(projectDto);
+		model.addAttribute("projectDto", find);
+
+		CategoryDto theme = categoryDao.getByNo(find.getCategoryNo());
+		CategoryDto theme2 = categoryDao.getByNo(theme.getCategorySuper());
+		
+		model.addAttribute("categoryDto", theme);
+		model.addAttribute("categoryDto2", theme2);
+		
+		List<ProjectCommunityDto> communityList = projectCommunityDao.listByProjectNo2(projectNo);
+		model.addAttribute("communityList", communityList);
+		
+		return "project/projectMainCommunity";
+	}
+	
+	@PostMapping("/{projectNo}/projectMainCommunity")
+	public String projectBoardCommunity(
+			@PathVariable int projectNo,
+			HttpSession session,
+			@RequestParam String projectCommunityContent) {
+		int memberNo = (int)session.getAttribute("memberNo");
+		ProjectCommunityDto find = ProjectCommunityDto.builder()
+				.projectCommunityContent(projectCommunityContent)
+				.projectNo(projectNo)
+				.memberNo(memberNo)
+				.build();
+		projectCommunityDao.insert(find);
+		
+		return "redirect:projectMainCommunity";
+	}
+	
+	
+	@GetMapping("/{projectNo}/projectCommunityDelete")
+	public String projectCommunityDelete(
+			@RequestParam int projectCommunityNo,
+			@PathVariable int projectNo) {
+		ProjectCommunityDto projectCommunityDto = ProjectCommunityDto.builder()
+				.projectNo(projectNo)
+				.projectCommunityNo(projectCommunityNo)
+				.build();
+		
+		projectCommunityDao.deleteByProjectNo(projectCommunityDto);
+		
+		return "redirect:projectMainCommunity";
+	}
 	
 }
