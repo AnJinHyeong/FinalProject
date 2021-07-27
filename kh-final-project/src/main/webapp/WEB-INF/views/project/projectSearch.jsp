@@ -109,12 +109,11 @@
 
 		<div class="section-project-rrr">
 
-			<div class="section-project-search-row-div">
+			<div class="section-project-search-row-div float-container">
 				<p class="mb20 project-search-p">
-				<span>${projectSearchCount}</span>
-					개의 프로젝트가 있습니다.
+				<span>${projectSearchCount}개의 프로젝트가 있습니다.</span>
 					<c:if test="${projectSearchCount > 0}">
-						<span class="font-12 red-hover-cursor p-search-margin" id="search-plus1">더 보기 <i class="fas fa-angle-double-right"></i></span>
+						<span class="font-12 red-hover-cursor" style="float: right;" id="search-plus1">더 보기 <i class="fas fa-angle-double-right"></i></span>
 					</c:if>
 				</p>
 				<c:if test="${projectSearchCount > 0}">
@@ -122,12 +121,12 @@
 				</c:if>
 			</div>
 
-			<div class="section-project-search-row-div">
+			<div class="section-project-search-row-div float-container">
 				<p class="project-search-p">
 					<span>${projectCategorySearchCount}</span>
 					개의 카테고리가 있습니다.
 					<c:if test="${projectCategorySearchCount > 0}">
-						<span class="font-12 red-hover-cursor p-search-margin" id="search-plus2">더 보기 <i class="fas fa-angle-double-right"></i></span>
+						<span class="font-12 red-hover-cursor" style="float: right;" id="search-plus2">더 보기 <i class="fas fa-angle-double-right"></i></span>
 					</c:if>
 				</p>
 				<c:if test="${projectCategorySearchCount > 0}">
@@ -135,8 +134,8 @@
 				</c:if>
 			</div>
 			
-			<div class="section-project-search-row-div">
-				<p class="project-search-p"><span></span>개의 커뮤니티 게시글이 있습니다.<span class="font-12 red-hover-cursor p-search-margin" id="search-plus3" style="margin-left: 930px;">더 보기 <i class="fas fa-angle-double-right"></i></span></p>
+			<div class="section-project-search-row-div float-container">
+				<p class="project-search-p"><span></span>개의 커뮤니티 게시글이 있습니다.<span class="font-12 red-hover-cursor" id="search-plus3" style="float: right;" >더 보기 <i class="fas fa-angle-double-right"></i></span></p>
 				<div class="section-project-main-search" id="sectionProjectMain2"></div>
 			</div>
 

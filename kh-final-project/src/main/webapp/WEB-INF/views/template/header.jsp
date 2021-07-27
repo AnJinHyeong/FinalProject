@@ -98,10 +98,10 @@
 					</button>
 				</div>
 				
-				<div class="UlOn2 headerProject dpNone poAbsolute w160 zi2 mt60 ml60">
-					<ul class="UlOn2 lsNone bacWhite p10 bora5 boc240 bosSolid bow1" style="width: 170px;">
-						<li><a href="${root}/project/projectInsert" style="text-align: left; padding-left: 5px;">프로젝트 올리기</a></li>
-						<li><a href="${root}/projectRequestBoard/projectRequestBoard" style="text-align: left; padding-left: 5px;">프로젝트 요청 게시판</a></li>
+				<div class="UlOn2 headerProject dpNone poAbsolute w160 zi2 mt70">
+					<ul class="UlOn2 lsNone bacWhite p10 bora5 boc240 bosSolid bow1 w200">
+						<li><a href="${root}/project/projectInsert"style="padding-left: 5px;">프로젝트 올리기</a></li>
+						<li><a href="${root}/projectRequestBoard/projectRequestBoard"style="padding-left: 5px;">프로젝트 요청 게시판</a></li>
 					</ul>
 				</div>
 			</div>
@@ -133,7 +133,7 @@
 								<span class="fBold" id="memberHavePoint"></span></a>
 							</div>
 								
-							<div class="headerLoginLogout dpNone poAbsolute w160 zi2" style="margin-left: -100px;">
+							<div class="headerLoginLogout dpNone poAbsolute w160 zi2 mt10" style="margin-left: -40px;">
 								<ul class="UlOn lsNone bacWhite p10 bora5 boc240 bosSolid bow1">
 									<li><a href="${root}/member/myMsg">메세지</a></li>
 									<li><a href="${root}/sponsor/sponsorList">후원현황</a></li>
@@ -152,7 +152,7 @@
 								</button>
 							</div>
 							
-							<div class="headerLoginLogout dpNone poAbsolute w160 zi2" style="margin-left: -100px;">
+							<div class="headerLoginLogout dpNone poAbsolute w160 zi2 mt10" style="margin-left: -40px;">
 								<ul class="UlOn lsNone bacWhite p10 bora5 boc240 bosSolid bow1">
 									<li><a href="${root}/member/login">로그인</a></li>
 									<li><a href="#">회원가입</a></li>

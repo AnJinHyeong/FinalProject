@@ -8,37 +8,67 @@
 <script>
 	$(function(){
 		
-		$.ajax({
-			url : "${pageContext.request.contextPath}/project/data/projectSearchAll",
-			type : 'post',
-			data : {
-				keyword : "${keyword}"
-			},
-			success : function(resp) {
-				for(var i = 0 ; i < resp.length ; i++){
-					var template = $("#projectSearchListTemplate").html();
-					template = template.replace("{{categoryTheme}}", resp[i].categoryTheme);
-					template = template.replace("{{memberInfoNick}}", resp[i].memberInfoNick);
-					template = template.replace("{{projectTitle}}", resp[i].projectTitle);
-					template = template.replace("{{projectPercent}}", resp[i].projectPercent);
-					template = template.replace("{{projectNo}}", resp[i].projectNo);
+		var projectCountInRow = 4;
+		var rowCount = 3;
+		var count = rowCount * projectCountInRow;
+		var strNum = 0;
+		var endNum = strNum + count;
+		var projectCount;
+		
+		function getSomeProject(strNum, endNum, functionIndex){
+			$.ajax({
+				url : "${pageContext.request.contextPath}/project/data/projectSearchAll",
+				type : 'post',
+				data : {
+					keyword : "${keyword}"
+				},
+				success : function(resp) {
+					if(functionIndex != null){
+						projectCount = resp.length;
+						console.log(projectCount);
+					}
+					for(var i = strNum ; i < endNum ; i++){
+						var template = $("#projectSearchListTemplate").html();
+						template = template.replace("{{categoryTheme}}", resp[i].categoryTheme);
+						template = template.replace("{{memberInfoNick}}", resp[i].memberInfoNick);
+						template = template.replace("{{projectTitle}}", resp[i].projectTitle);
+						template = template.replace("{{projectPercent}}", resp[i].projectPercent);
+						template = template.replace("{{projectNo}}", resp[i].projectNo);
+						
+						var url = "${pageContext.request.contextPath}/image/project/projectMainDownload/"+resp[i].imageNo;
+						template = template.replace("{{projectImage}}", url);
+						
+						$("#sectionProjectMain1").append(template);
+					}
 					
-					var url = "${pageContext.request.contextPath}/image/project/projectMainDownload/"+resp[i].imageNo;
-					template = template.replace("{{projectImage}}", url);
-					
-					$("#sectionProjectMain1").append(template);
+					$(".section-project-image").on("click",function(){
+						var projectNo = $(this).attr("id");
+						location.href="${pageContext.request.contextPath}/projectBoard/"+projectNo+"";
+					});
 				}
-				
-				$(".section-project-image").on("click",function(){
-					var projectNo = $(this).attr("id");
-					location.href="${pageContext.request.contextPath}/projectBoard/"+projectNo+"";
-				});
+			});
+		}
+		
+		getSomeProject(strNum, endNum, 1);
+		
+		var maxHeight = 0;
+		
+		$(window).on("scroll", function(e){
+			var currentScroll = $(this).scrollTop();
+			console.log(currentScroll);
+			if(maxHeight < currentScroll){
+				maxHeight = maxHeight + (300 * rowCount);
+				strNum = strNum + count;
+				endNum = endNum + count;
+				if(endNum > projectCount){
+					endNum = projectCount;
+				}
+				getSomeProject(strNum, endNum);
+				if(endNum == projectCount){
+					$(window).off("scroll");
+				}
 			}
 		});
-		
-		
-		
-		
 	});
 </script>
 
@@ -71,7 +101,7 @@
 
 	<div class="section-row">
 
-		<div class="section-project-rrr" style="height: 1000px;">
+		<div class="section-project-rrr">
 
 			<div class="section-project-search-row-div">
 				<p class="mb20 project-search-p"><span>${projectSearchCount}</span>개의 프로젝트가 있습니다.</p>
