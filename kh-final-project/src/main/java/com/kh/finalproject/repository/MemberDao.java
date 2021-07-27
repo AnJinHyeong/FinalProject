@@ -20,6 +20,4 @@ public interface MemberDao {
 	int getMemberHavePoint(int memberNo);
 	// 포인트 사용, 보유포인트 감소
 	void usePoint(SponsorDto sponsorDto);
-	
-
 }

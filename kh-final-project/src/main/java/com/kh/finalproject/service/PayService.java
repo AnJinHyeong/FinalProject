@@ -1,7 +1,9 @@
 package com.kh.finalproject.service;
 
 import java.net.URISyntaxException;
+import java.util.List;
 
+import com.kh.finalproject.vo.Criteria;
 import com.kh.finalproject.vo.pay.PayApprovePrepareVO;
 import com.kh.finalproject.vo.pay.PayApproveVO;
 import com.kh.finalproject.vo.pay.PayReadyPrepareVO;
@@ -22,4 +24,6 @@ public interface PayService {
 	PaySearchVO search(String tid) throws URISyntaxException;
 //	//결제 취소 기능 
 //	PayCancelVO cancel(PayCancelPrepareVO prepareVO) throws URISyntaxException;
+	
+
 }
