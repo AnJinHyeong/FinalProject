@@ -6,6 +6,7 @@ import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
 import com.kh.finalproject.vo.ProjectVo;
+import com.kh.finalproject.vo.SearchVo;
 
 public interface ProjectDao {
 	
@@ -52,16 +53,18 @@ public interface ProjectDao {
 	// 프로젝트 달성도 업데이트
 	void setPercent(ProjectDto projectDto);
 	// 키워드 검색
-	List<IndexProjectVo> projectSearch(String keyword);
+	List<IndexProjectVo> projectSearch(SearchVo searchVo);
 	// 키워드 검색 갯수
-	int projectSearchCount(String keyword);
+	int projectSearchCount(SearchVo searchVo);
 	// 키워드 카테고리 검색
-	List<IndexProjectVo> projectCategorySearch(String keyword);
+	List<IndexProjectVo> projectCategorySearch(SearchVo searchVo);
 	// 키워드 카테고리 검색 갯수
-	int projectCategorySearchCount(String keyword);
+	int projectCategorySearchCount(SearchVo searchVo);
 	// 키워드 검색 더보기
-	List<IndexProjectVo> projectSearchAll(String keyword);
+	List<IndexProjectVo> projectSearchAll(SearchVo searchVo);
 	// 키워드 카테고리 검색 더보기
-	List<IndexProjectVo> projectCategorySearchAll(String keyword);
+	List<IndexProjectVo> projectCategorySearchAll(SearchVo searchVo);
+	// 필터에 따른 프로젝트 리스트 조회
+	List<IndexProjectVo> projectList(SearchVo searchVo);
 	
 }
