@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ import com.kh.finalproject.repository.SponsorDao;
 import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectInformationVo;
 import com.kh.finalproject.vo.ProjectVo;
+import com.kh.finalproject.vo.SearchVo;
 import com.kh.finalproject.vo.SponsorListVo;
 import com.kh.finalproject.vo.SponsorVo;
 
@@ -149,23 +151,28 @@ public class ProjectDataController {
 	}
 	
 	@PostMapping("/projectSearch")
-	public List<IndexProjectVo> projectSearch(@RequestParam String keyword){
-		return projectDao.projectSearch(keyword);
+	public List<IndexProjectVo> projectSearch(@ModelAttribute SearchVo searchVo){
+		return projectDao.projectSearch(searchVo);
 	}
 	
 	@PostMapping("/projectCategorySearch")
-	public List<IndexProjectVo> projectCategorySearch(@RequestParam String keyword){
-		return projectDao.projectCategorySearch(keyword);
+	public List<IndexProjectVo> projectCategorySearch(@ModelAttribute SearchVo searchVo){
+		return projectDao.projectCategorySearch(searchVo);
 	}
 	
 	@PostMapping("/projectSearchAll")
-	public List<IndexProjectVo> projectSearchAll(@RequestParam String keyword){
-		return projectDao.projectSearchAll(keyword);
+	public List<IndexProjectVo> projectSearchAll(@ModelAttribute SearchVo searchVo){
+		return projectDao.projectSearchAll(searchVo);
 	}
 	
 	@PostMapping("/projectCategorySearchAll")
-	public List<IndexProjectVo> projectCategorySearchAll(@RequestParam String keyword){
-		return projectDao.projectCategorySearchAll(keyword);
+	public List<IndexProjectVo> projectCategorySearchAll(@ModelAttribute SearchVo searchVo){
+		return projectDao.projectCategorySearchAll(searchVo);
+	}
+	
+	@PostMapping("/projectList")
+	public List<IndexProjectVo> projectList(@ModelAttribute SearchVo searchVo){
+		return projectDao.projectList(searchVo);
 	}
 	
 	
