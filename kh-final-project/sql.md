@@ -176,3 +176,38 @@ banner_color char(7) default '#000000' not null
 );
 
 create sequence banner_seq;
+
+
+#request
+CREATE TABLE request(
+request_no number(19) PRIMARY KEY,
+request_title VARCHAR2(300) NOT NULL,
+request_content VARCHAR2(4000) NOT NULL,
+request_date DATE DEFAULT sysdate,
+request_view NUMBER(19) DEFAULT 0,
+request_like_count number(19) DEFAULT 0,
+request_reply_count number(19) DEFAULT 0,
+request_category_no REFERENCES category(category_no) ON DELETE CASCADE,
+request_member_no REFERENCES member(member_no) ON DELETE SET NULL
+);
+
+CREATE SEQUENCE request_seq;
+
+#request_like
+CREATE TABLE request_like(
+request_like_no references request(request_no) ON DELETE CASCADE,
+request_like_member_no references member(member_no) ON DELETE CASCADE,
+request_like_date DATE DEFAULT sysdate,
+constraint request_like_pk primary key(request_like_no, request_like_member_no) 
+);
+
+#request_reply
+CREATE TABLE request_reply(
+request_reply_pk_no number(19) PRIMARY KEY,
+request_reply_no references request(request_no) ON DELETE CASCADE,
+request_reply_member_no references member(member_no) ON DELETE CASCADE,
+request_reply_content varchar2(300) NOT NULL,
+request_reply_date DATE DEFAULT sysdate
+);
+
+CREATE SEQUENCE request_reply_seq;
