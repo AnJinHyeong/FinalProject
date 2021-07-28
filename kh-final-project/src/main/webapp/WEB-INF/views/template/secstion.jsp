@@ -3,6 +3,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
+
 <script>
 	
 	$(function(){
@@ -62,7 +64,6 @@
 			url : "${pageContext.request.contextPath}/project/data/index/indexProjectMain2",
 			type : 'get',
 			success : function(resp) {
-				console.log(resp);
 				$("#sectionProjectMain2").empty();
 				for(var i=0; i < resp.length; i++){
 					var template = $("#projectMaindiv").html();
@@ -74,8 +75,6 @@
 					
 					var url = "${pageContext.request.contextPath}/image/project/projectMainDownload/"+resp[i].imageNo;
 					template = template.replace("{{projectImage}}", url);
-					
-					console.log(resp[i].projectPercent);
 					
 					if(resp[i].projectPercent < 25){
 						template = template.replace("{{icon}}", "fa-battery-empty");
@@ -144,8 +143,13 @@
 	<div class="section-project-rrr">
 		
 		<div class="section-project-row-div">
-			<a href="#" class="section-project-minaP">주목할 만한 프로젝트<i class="fc150 ml10 fas fa-angle-right"></i></a>
-			
+			<form action="${root}/project/projectSearch" method="post">
+				<input type="hidden" name="projectState" value="2">
+				<input type="hidden" name="projectOrder" value="1">
+				<button class="right bosNone bacInherit cursorPointer">			
+					<span class="section-project-minaP">주목할 만한 프로젝트<i class="fc150 ml10 fas fa-angle-right"></i></span>
+				</button>
+			</form>
 			
 			<div class="section-project-main" id="sectionProjectMain1">
 			
@@ -153,8 +157,13 @@
 		</div>
 		
 		<div class="section-project-row-div">
-			<a href="#" class="section-project-minaP">공개 예정 프로젝트<i class="fc150 ml10 fas fa-angle-right"></i></a>
-			
+			<form action="${root}/project/projectSearch" method="post">
+				<input type="hidden" name="projectState" value="3">
+				<input type="hidden" name="projectOrder" value="1">
+				<button class="right bosNone bacInherit cursorPointer">			
+					<span class="section-project-minaP">공개 예정 프로젝트<i class="fc150 ml10 fas fa-angle-right"></i></span>
+				</button>
+			</form>
 			
 			<div class="section-project-main" id="sectionProjectMain2">
 			
