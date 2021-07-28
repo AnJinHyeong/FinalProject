@@ -62,13 +62,13 @@
 	
 	$("html").on("click", function(e){
 		if($(".headerLoginLogout").css("display") == "block"){
-			if(!$(e.target).hasClass("UlOn")){
+			if(!$(e.target).hasClass("On")){
 				$(".headerLoginLogout").toggle();
 			}
 		}
 		
 		if($(".headerProject").css("display") == "block"){
-			if(!$(e.target).hasClass("UlOn2")){
+			if(!$(e.target).hasClass("On2")){
 				$(".headerProject").toggle();
 			}
 		}
@@ -82,27 +82,28 @@
 		<div class="header-row">
 			<div class="header-left w120 h60">
 				<div class="w120 taCenter h100p dpBlock p5">
-					<button class="UlOn2 projectBtn bosNone cursorPointer w50 bacInherit h30 mt5 header-icon-ani">
-						<div class="UlOn2 bacWhite w30 h30 mautoX">
-							<div class="dpFlex UlOn2">
-								<i class="UlOn2 fab fa-grav" style="padding: 1px; color: #707070;"></i>
+					<button class="On2 projectBtn bosNone cursorPointer w50 bacInherit h30 mt5 header-icon-ani">
+						<div class="On2 bacWhite w30 h30 mautoX">
+							<div class="dpFlex On2">
+								<i class="On2 fab fa-grav" style="padding: 1px; color: #707070;"></i>
 
-								<i class="UlOn2 fs12 fas fa-cloud" style="padding: 1px; color: #B5EAEA;"></i>
+								<i class="On2 fs12 fas fa-cloud" style="padding: 1px; color: #B5EAEA;"></i>
 							</div>
-							<div class="dpFlex UlOn2">
-								<i class="UlOn2 fas fa-tablet-alt" style="padding: 1px; color: #FFCB77;"></i>
+							<div class="dpFlex On2">
+								<i class="On2 fas fa-tablet-alt" style="padding: 1px; color: #FFCB77;"></i>
 
-								<i class="UlOn2 fas fa-music" style="padding: 1px; color: #F38BA0;"></i>
+								<i class="On2 fas fa-music" style="padding: 1px; color: #F38BA0;"></i>
 							</div>
 						</div>
-						<span class="UlOn2 dpBlock fs12 h20 mt5 fBold">PROJECT</span>
+						<span class="On2 dpBlock fs12 h20 mt5 fBold">PROJECT</span>
 					</button>
 				</div>
 				
-				<div class="UlOn2 headerProject dpNone poAbsolute w160 zi2 mt60 ml60">
-					<ul class="UlOn2 lsNone bacWhite p10 bora5 boc240 bosSolid bow1" style="width: 170px;">
-						<li><a href="${root}/project/projectInsert" style="text-align: left; padding-left: 5px;">프로젝트 올리기</a></li>
-						<li><a href="${root}/requestBoard/requestBoard" style="text-align: left; padding-left: 5px;">자유 게시판</a></li>
+				<div class="On2 headerProject dpNone poAbsolute w160 zi2 mt70">
+					<ul class="On2 lsNone bacWhite p10 bora5 boc240 bosSolid bow1 w200">
+						<li><a href="${root}/project/projectList"style="padding-left: 5px;">전체 프로젝트 보기</a></li>
+						<li><a href="${root}/project/projectInsert"style="padding-left: 5px;">프로젝트 올리기</a></li>
+						<li><a href="${root}/requestBoard/requestBoard" style="padding-left: 5px;">자유 게시판</a></li>
 					</ul>
 				</div>
 			</div>
@@ -116,6 +117,8 @@
 				
 				<form action="${root}/project/projectSearch" method="post" id="headerSearchForm">
 					<div class="inputToggleContainer off">
+						<input type="hidden" name="projectState" value="1">
+						<input type="hidden" name="projectOrder" value="1">
 						<input class="inputToggleText fs18 pl10" type="text" name="keyword" placeholder="검색어를 입력해주세요." autocomplete="off">
 						<button class="inputToggleBtn off bacInherit zi1 cursorPointer"><i class="fas fa-search bacWhite"></i></button>
 						<button class="inputToggleBtnX off bacInherit cursorPointer"><i class="fas fa-times"></i></button>
@@ -127,15 +130,15 @@
 					<c:choose>
 						<c:when test="${isLogin}">
 							<div class="w120 taCenter h100p dpBlock p5">
-								<button class="UlOn loginLogoutBtn bosNone cursorPointer w50 bacInherit h30 mt5 header-icon-ani"><i class="h100p fs30 UlOn fas fa-user"></i></button>
+								<button class="On loginLogoutBtn bosNone cursorPointer w50 bacInherit h30 mt5 header-icon-ani"><i class="h100p fs30 On fas fa-user"></i></button>
 								
 								<a class="header-link dpBlock fs12 h20 mt5 header-icon-ani" href="${root}/pay/confirm">
 								<span style="color: #ffd700;"><i class="fas fa-coins"></i></span>
 								<span class="fBold" id="memberHavePoint"></span></a>
 							</div>
 								
-							<div class="headerLoginLogout dpNone poAbsolute w160 zi2" style="margin-left: -100px;">
-								<ul class="UlOn lsNone bacWhite p10 bora5 boc240 bosSolid bow1">
+							<div class="headerLoginLogout dpNone poAbsolute w160 zi2 mt10" style="margin-left: -40px;">
+								<ul class="On lsNone bacWhite p10 bora5 boc240 bosSolid bow1">
 									<li><a href="${root}/member/myMsg">메세지</a></li>
 									<li><a href="${root}/sponsor/sponsorList">후원현황</a></li>
 									<li><a href="${root}/member/myProject">내 프로젝트</a></li>
@@ -147,14 +150,14 @@
 						</c:when>
 						<c:otherwise>
 							<div class="w120 taCenter h100p dpBlock p5 header-icon-ani">
-								<button class="UlOn loginLogoutBtn bosNone cursorPointer w50 bacInherit h30 mt5">
-									<i class="h100p fs30 UlOn far fa-user"></i>
-									<span class="UlOn dpBlock fs12 h20 mt5 fBold">LOGIN</span>
+								<button class="On loginLogoutBtn bosNone cursorPointer w50 bacInherit h30 mt5">
+									<i class="h100p fs30 On far fa-user"></i>
+									<span class="On dpBlock fs12 h20 mt5 fBold">LOGIN</span>
 								</button>
 							</div>
 							
-							<div class="headerLoginLogout dpNone poAbsolute w160 zi2" style="margin-left: -100px;">
-								<ul class="UlOn lsNone bacWhite p10 bora5 boc240 bosSolid bow1">
+							<div class="headerLoginLogout dpNone poAbsolute w160 zi2 mt10" style="margin-left: -40px;">
+								<ul class="On lsNone bacWhite p10 bora5 boc240 bosSolid bow1">
 									<li><a href="${root}/member/login">로그인</a></li>
 									<li><a href="#">회원가입</a></li>
 								</ul>

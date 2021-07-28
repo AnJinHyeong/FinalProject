@@ -144,7 +144,8 @@
 	<div class="section-project-rrr">
 		
 		<div class="section-project-row-div">
-			<p class="section-project-minaP">주목할 만한 프로젝트</p>
+			<a href="#" class="section-project-minaP">주목할 만한 프로젝트<i class="fc150 ml10 fas fa-angle-right"></i></a>
+			
 			
 			<div class="section-project-main" id="sectionProjectMain1">
 			
@@ -152,18 +153,16 @@
 		</div>
 		
 		<div class="section-project-row-div">
-			<p class="section-project-minaP">공개 예정 프로젝트</p>
+			<a href="#" class="section-project-minaP">공개 예정 프로젝트<i class="fc150 ml10 fas fa-angle-right"></i></a>
 			
-			<div class="section-project-main">
 			
-				<div class="section-project-main2" id="sectionProjectMain2">
+			<div class="section-project-main" id="sectionProjectMain2">
 			
-				</div>
 			</div>
 		</div>
 		
 		<div class="section-project-row-div">
-			<p class="section-project-minaP">인기 추천 프로젝트</p>
+			<a href="#" class="section-project-minaP">인기 추천 프로젝트<i class="fc150 ml10 fas fa-angle-right"></i></a>
 			
 			<div class="section-project-main">
 				<div class="section-project-mainDiv">

@@ -19,19 +19,19 @@
 		
 		function getSomeProject(strNum, endNum, functionIndex){
 			$.ajax({
-				url : "${pageContext.request.contextPath}/project/data/projectSearchAll",
+				url : "${pageContext.request.contextPath}/project/data/projectList",
 				type : 'post',
 				data : {
-					keyword : "${keyword}",
 					projectState : "${projectState}",
 					projectOrder : "${projectOrder}"
 				},
 				success : function(resp) {
 					if(functionIndex != null){
 						projectCount = resp.length;
+						$("#projectListCount").text(projectCount);
 					}
 					for(var i = strNum ; i < endNum ; i++){
-						var template = $("#projectSearchListTemplate").html();
+						var template = $("#projectListTemplate").html();
 						template = template.replace("{{categoryTheme}}", resp[i].categoryTheme);
 						template = template.replace("{{memberInfoNick}}", resp[i].memberInfoNick);
 						template = template.replace("{{projectTitle}}", resp[i].projectTitle);
@@ -41,7 +41,7 @@
 						var url = "${pageContext.request.contextPath}/image/project/projectMainDownload/"+resp[i].imageNo;
 						template = template.replace("{{projectImage}}", url);
 						
-						$("#sectionProjectMain1").append(template);
+						$("#projectListMain").append(template);
 					}
 					
 					$(".section-project-image").on("click",function(){
@@ -79,7 +79,7 @@
 	});
 </script>
 
-<script id="projectSearchListTemplate" type="text/template">
+<script id="projectListTemplate" type="text/template">
 	<div class="section-project-mainDiv">
 		<div class="section-project-image-div">
 			<img src="{{projectImage}}" class="section-project-image" id="{{projectNo}}">
@@ -117,15 +117,11 @@
 		<div class="section-project-rrr">
 
 			<div class="section-project-search-row-div">
-				<p class="mb20 project-search-p"><span>${projectSearchCount}</span>개의 프로젝트가 있습니다.</p>
-				<c:if test="${projectSearchCount > 0}">
-					<div class="section-project-main-search" id="sectionProjectMain1"></div>
-				</c:if>
+				<p class="mb20 project-search-p"><span id="projectListCount"></span>개의 프로젝트가 있습니다.</p>
+				<div class="section-project-main-search" id="projectListMain"></div>
 			</div>
 
 		</div>
-		
-		
 		
 	</div>
 

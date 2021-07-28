@@ -30,6 +30,7 @@ import com.kh.finalproject.repository.ProjectCommunityDao;
 import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.repository.ProjectReportDao;
 import com.kh.finalproject.repository.SponsorDao;
+import com.kh.finalproject.service.PointService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -140,31 +141,13 @@ public class ProjectBoardController {
 		return "redirect:projectBoardCommunity";
 	}
 	
+	@Autowired
+	private PointService pointService;
+	
 	@PostMapping("/{projectNo}")
-	@Transactional
 	public String projectBoard(@PathVariable int projectNo, HttpSession session, @ModelAttribute SponsorDto sponsorDto) {
-		int memberNo = (int)session.getAttribute("memberNo");
-		sponsorDto.setMemberNo(memberNo);
-		sponsorDto.setProjectNo(projectNo);
 		
-		MemberDto target = memberDao.getByMemberNo(memberNo);
-		if(target.getMemberHavePoint() < sponsorDto.getSponsorAmount()) {
-			throw new SponFailException("후원 프로젝트 번호:" + projectNo + ", 보유 포인트가 부족합니다.");
-		}
-		sponsorDao.insert(sponsorDto);
-		memberDao.usePoint(sponsorDto);
-		
-		int currentAmount = sponsorDao.currentAmount(projectNo);
-		int targetAmount = projectDao.getByProjectNo(projectNo).getProjectTargetAmount();
-		if(targetAmount == 0) {
-			throw new PercentCalcFailException("후원 프로젝트 번호:" + projectNo + ", 목표금액이 정해지지 않았습니다.");
-		}
-		int percent = currentAmount * 100 / targetAmount;
-		
-		projectDao.setPercent(ProjectDto.builder()
-				.projectNo(projectNo)
-				.projectPercent(percent)
-				.build());
+		pointService.usePoint(projectNo, session, sponsorDto);
 		
 		return "redirect:/projectBoard/" + projectNo;
 	}
