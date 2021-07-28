@@ -141,6 +141,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
+	
 	<!-- main 화면 펀딩 진행예정인 프로젝트 조회 구문 -->
 	<select id="indexProjectMain2" resultType="IndexProjectVo">
 		<![CDATA[
