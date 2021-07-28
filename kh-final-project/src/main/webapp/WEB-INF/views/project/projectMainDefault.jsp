@@ -48,7 +48,7 @@
 			
 		});
 		
-		
+		//카테고리 
 		if(${category.categorySuper != 0}){
 			$.ajax({
 				url:"${pageContext.request.contextPath}/category/data/childCategory",
@@ -108,7 +108,7 @@
 		
 		
 		
-		//
+		
 		$("#parentsCategory").on("input",function(){
 			
 			$.ajax({

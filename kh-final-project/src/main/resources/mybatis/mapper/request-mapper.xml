@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="request">
+	
+	<insert id="insert" parameterType="RequestDto">
+		insert into request values(request_seq.nextval, #{requestTitle}, #{requestContent}, sysdate, 0, #{requestCategoryNo}, #{requestMemberNo})
+	</insert>
+	
+	<select id="selectAll" resultType="RequestVo">
+		select
+		    R.*,
+		    C.CATEGORY_THEME 
+		from request R
+		    INNER join category C on R.request_category_no = C.category_no ORDER BY REQUEST_NO desc
+	</select>
+	
+	<select id="getByRequestNo" parameterType="int" resultType="RequestVo">
+		select
+		    R.*,
+		    C.CATEGORY_THEME 
+		from request R
+		    INNER join category C on R.request_category_no = C.category_no 
+		    where R.request_no = #{requestNo}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

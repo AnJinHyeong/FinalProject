@@ -18,6 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="${root}/css/yongbo.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/projectBoard.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/templateSection.css">
+	<link rel="stylesheet" type="text/css" href="${root}/css/requestBoard.css">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 
@@ -101,14 +102,14 @@
 				<div class="UlOn2 headerProject dpNone poAbsolute w160 zi2 mt60 ml60">
 					<ul class="UlOn2 lsNone bacWhite p10 bora5 boc240 bosSolid bow1" style="width: 170px;">
 						<li><a href="${root}/project/projectInsert" style="text-align: left; padding-left: 5px;">프로젝트 올리기</a></li>
-						<li><a href="${root}/projectRequestBoard/projectRequestBoard" style="text-align: left; padding-left: 5px;">프로젝트 요청 게시판</a></li>
+						<li><a href="${root}/requestBoard/requestBoard" style="text-align: left; padding-left: 5px;">자유 게시판</a></li>
 					</ul>
 				</div>
 			</div>
 			
 			
 			<div class="header-center">
-				<a class="header-center-link" href="${root}/" style="color: #FF3535">FüN‿ding</a>
+				<a class="header-center-link" href="${root}/">FüN‿ding</a>
 			</div>
 			<div class="header-right">
 			
