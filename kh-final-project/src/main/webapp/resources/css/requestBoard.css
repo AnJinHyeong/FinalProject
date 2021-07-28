@@ -92,3 +92,7 @@
 	border: none;
 }
 	
+.overflow_nowrap{
+   white-space: pre-wrap;
+   overflow-wrap: anywhere;
+}

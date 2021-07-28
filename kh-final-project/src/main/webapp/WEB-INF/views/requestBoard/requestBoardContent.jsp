@@ -32,17 +32,18 @@
 	
 	<div class="container-1200" style="margin: 0 auto; height: 700px; display: flex; flex-wrap: wrap;" id="projectRequestDiv1">
 		
-		<div class="container-1000 hMax500 mt30 mb30" style="border: 1px solid #dcdcdc; border-radius: 8px; padding: 20px;">
+		<div class="container-1000 hMin300 mt30 mb10" style="border: 1px solid #dcdcdc; border-radius: 8px; padding: 20px;">
 			
 			<div style="height: 10px;  padding-left: 10px;">
-				<p class="font-20">${request.requestTitle} <span class="font-12 red"><i class='far fa-heart'></i></span></p>
+				<p class="font-20">${request.requestTitle} <span class="font-20 red"><i class='far fa-heart'></i></span></p>
 			</div>
-			<div style="margin: 20px 0; border-bottom: 1px solid red; padding-left: 10px; color: #ededed;">
-				 <p class="font-12">${request.categoryTheme}</p>
+			<div class="float-container" style="margin: 10px 0; border-bottom: 1px solid red; padding: 10px 0 10px 10px; color: #7c7c7c;">
+				 <span class="font-12 left">${request.categoryTheme}</span>
+				 <span class="font-12 right" style="color: black">${request.requestDate}</span>
 			</div>
 			
-			<div>
-				${request.requestContent}
+			<div >
+				<pre class="overflow_nowrap">${request.requestContent}</pre>
 			</div>
 			
 			<div>
@@ -51,10 +52,22 @@
 			
 		</div>
 		
+		<div class="container-1000 hMax100 mt10 mb10" style="border: 1px solid #dcdcdc; border-radius: 8px; padding: 20px;">
+			<div>
+				아이디
+			</div>
+			<div>
+				내용
+			</div>
+			<div>
+				등록
+			</div>
+		</div>
+		
 	</div>
 	
 </section>
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-	
+</body>
+</html>
 	

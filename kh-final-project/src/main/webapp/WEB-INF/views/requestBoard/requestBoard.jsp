@@ -100,7 +100,7 @@
 			</div>
 		</div>
 		
-		<div class="container-1200" style="margin: 0 auto; height: 800px;" id="projectRequestDiv2">
+		<div class="container-1200" style="margin: 0 auto; height: 700px;" id="projectRequestDiv2">
 			<c:choose>
 				<c:when test="${not empty memberNo}">
 					<div class="container-1200 h700 mt30 mb30" style="border: 1px solid #dcdcdc; border-radius: 8px;">
@@ -177,5 +177,6 @@
 	</div>
 </section>
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+</body>
+</html>
 	
