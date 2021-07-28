@@ -25,7 +25,7 @@ public class ProjectTest10 {
 	public void test() {
 		String keyword = "게임";
 		
-		log.info(String.valueOf(projectDao.projectCategorySearchCount(keyword)));
+//		log.info(String.valueOf(projectDao.projectCategorySearchCount(keyword)));
 	}
 	
 }

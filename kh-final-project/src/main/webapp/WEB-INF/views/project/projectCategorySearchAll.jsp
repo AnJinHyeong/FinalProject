@@ -27,11 +27,10 @@
 					projectOrder : "${projectOrder}"
 				},
 				success : function(resp) {
-					console.log(resp);
 					if(functionIndex != null){
 						projectCount = resp.length;
 					}
-					for(var i = strNum ; i < endNum ; i++){
+					for(var i = strNum ; i < Math.min(endNum, projectCount) ; i++){
 						var template = $("#projectSearchListTemplate").html();
 						template = template.replace("{{categoryTheme}}", resp[i].categoryTheme);
 						template = template.replace("{{memberInfoNick}}", resp[i].memberInfoNick);

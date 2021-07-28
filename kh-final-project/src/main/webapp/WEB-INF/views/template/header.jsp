@@ -99,7 +99,7 @@
 				</div>
 				
 				<div class="On2 headerProject dpNone poAbsolute w160 zi2 mt70">
-					<ul class="On2 lsNone bacWhite p10 bora5 boc240 bosSolid bow1 w200">
+					<ul class="On2 lsNone bacWhite p10 bora5 boc240 bosSolid bow1 w200 taLeft">
 						<li><a href="${root}/project/projectList"style="padding-left: 5px;">전체 프로젝트 보기</a></li>
 						<li><a href="${root}/project/projectInsert"style="padding-left: 5px;">프로젝트 올리기</a></li>
 						<li><a href="${root}/projectRequestBoard/projectRequestBoard"style="padding-left: 5px;">프로젝트 요청 게시판</a></li>
@@ -137,7 +137,7 @@
 							</div>
 								
 							<div class="headerLoginLogout dpNone poAbsolute w160 zi2 mt10" style="margin-left: -40px;">
-								<ul class="On lsNone bacWhite p10 bora5 boc240 bosSolid bow1">
+								<ul class="On lsNone bacWhite p10 bora5 boc240 bosSolid bow1 taRight">
 									<li><a href="${root}/member/myMsg">메세지</a></li>
 									<li><a href="${root}/sponsor/sponsorList">후원현황</a></li>
 									<li><a href="${root}/member/myProject">내 프로젝트</a></li>
