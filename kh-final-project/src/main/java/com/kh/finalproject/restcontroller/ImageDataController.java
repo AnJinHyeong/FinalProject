@@ -190,4 +190,20 @@ public class ImageDataController {
 		imageDao.deleteProjectStoryAllImage(projectNo);
 	}
 	
+	@GetMapping("/downloadImageMainBanner/{imageNo}")
+	public ResponseEntity<ByteArrayResource> downloadImageMainBanner(@PathVariable int imageNo) throws IOException {
+		
+		ImageDto imageDto = imageDao.getImageMainBanner(imageNo); 
+		ByteArrayResource resource = imageDao.getFile(imageDto.getImageSaveName());
+		String fileName = URLEncoder.encode(imageDto.getImageUploadName(), "UTF-8");
+
+		return ResponseEntity.ok()
+								.contentType(MediaType.APPLICATION_OCTET_STREAM)
+								.contentLength(imageDto.getImageSize())
+								.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
+								.header(HttpHeaders.CONTENT_DISPOSITION, 
+										"attachment; filename=\""+fileName+"\"")
+								.body(resource);
+	}
+	
 }

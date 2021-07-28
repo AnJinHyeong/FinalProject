@@ -38,13 +38,13 @@
 .bocBlack{border-color:black}.bocWhite{border-color:white}.bolcBlack{border-color:black}.bolcWhite{border-color:white}.borcBlack{border-color:black}.borcWhite{border-color:white}.botcBlack{border-color:black}.botcWhite{border-color:white}.bobcBlack{border-color:black}.bobcWhite{border-color:white}
 .bow1{border-width:1px}
 .bosSolid{border-style:solid}.bosNone{border-style:none}
-.bora5{border-radius:5px}.bora10{border-radius:10px}
+.bora5{border-radius:5px}.bora10{border-radius:10px}.bora20{border-radius:20px}.bora30{border-radius:30px}
 .borNone{border-right: none !important}.bolNone{border-left: none !important}.botNone{border-top: none !important}.bobNone{border-bottom: none !important}
 
 
 /* background-color */
 .bac5{background-color:#050505}.bac10{background-color:#0a0a0a}.bac15{background-color:#0f0f0f}.bac20{background-color:#141414}.bac25{background-color:#191919}.bac30{background-color:#1e1e1e}.bac35{background-color:#232323}.bac40{background-color:#282828}.bac45{background-color:#2d2d2d}.bac50{background-color:#323232}.bac55{background-color:#373737}.bac60{background-color:#3c3c3c}.bac65{background-color:#414141}.bac70{background-color:#464646}.bac75{background-color:#4b4b4b}.bac80{background-color:#505050}.bac85{background-color:#555}.bac90{background-color:#5a5a5a}.bac95{background-color:#5f5f5f}.bac100{background-color:#646464}.bac105{background-color:#696969}.bac110{background-color:#6e6e6e}.bac115{background-color:#737373}.bac120{background-color:#787878}.bac125{background-color:#7d7d7d}.bac130{background-color:#828282}.bac135{background-color:#878787}.bac140{background-color:#8c8c8c}.bac145{background-color:#919191}.bac150{background-color:#969696}.bac155{background-color:#9b9b9b}.bac160{background-color:#a0a0a0}.bac165{background-color:#a5a5a5}.bac170{background-color:#aaa}.bac175{background-color:#afafaf}.bac180{background-color:#b4b4b4}.bac185{background-color:#b9b9b9}.bac190{background-color:#bebebe}.bac195{background-color:#c3c3c3}.bac200{background-color:#c8c8c8}.bac205{background-color:#cdcdcd}.bac210{background-color:#d2d2d2}.bac215{background-color:#d7d7d7}.bac220{background-color:#dcdcdc}.bac225{background-color:#e1e1e1}.bac230{background-color:#e6e6e6}.bac235{background-color:#ebebeb}.bac240{background-color:#f0f0f0}.bac245{background-color:#f5f5f5}.bac250{background-color:#fafafa}
-.bacBlack{background-color:black}.bacWhite{background-color:white}.bacInherit{background-color:inherit}
+.bacBlack{background-color:black}.bacWhite{background-color:white}.bacInherit{background-color:inherit}.bacInitial{background-color:initial}
 
 /* text-align */
 .taLeft{text-align:left}.taRight{text-align:right}.taCenter{text-align:center}

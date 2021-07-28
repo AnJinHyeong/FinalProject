@@ -6,7 +6,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="imageFile">
 	
-	
 	<select id="sequence" resultType="int">
 		select image_file_seq.nextval from dual		
 	</select>
@@ -103,6 +102,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="confirmProjectMainStoryByImageSaveName" resultType="int" parameterType="map">
 		SELECT count(*) FROM image_file WHERE project_no = #{projectNo} and project_state is null and member_No is null and image_save_name = #{imageSaveName}
 	</select>
+	
+	<!-- 메인 배너 이미지 가져오기(구문 수정 예정) -->
+	<select id="getListMainBanner" resultType="ImageDto">
+		select * from image_file where main_banner is not null order by image_no desc
+	</select>
+	
+	<!-- 메인 배너 이미지 갯수 -->
+	<select id="getCountMainBanner" resultType="int">
+		select count(*) from image_file where main_banner is not null
+	</select>
+	
+	<!-- 이미지 번호로 배너이미지 가져오기 -->
+	<select id="getImageMainBanner" resultType="ImageDto" parameterType="int">
+		select * from image_file where image_no = #{imageNo} and main_banner is not null
+	</select>
+	
+	<!-- 배너 이미지 등록 -->
+	<insert id="insertImageMainBanner" parameterType="ImageDto">
+		insert into image_file(image_no, image_upload_name, image_save_name, image_content_type, image_size, main_banner) 
+		values(#{imageNo}, #{imageUploadName}, #{imageSaveName}, #{imageContentType}, #{imageSize}, #{mainBanner})
+	</insert>
 	
 </mapper>
 
