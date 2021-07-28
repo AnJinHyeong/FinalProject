@@ -112,6 +112,57 @@
 		});
 		
 		
+		$.ajax({
+			url :"${pageContext.request.contextPath}/request/requestLikeList",
+			type: "post",
+			success : function(resp){
+				$("#requestLikeList").empty();
+
+				var listTop = $("#requestLikeListST").html();
+				$("#requestLikeList").append(listTop);
+				
+				var template = $("#requestList1").html();
+				template = template.replace("{{requestTitle}}", resp[0].requestTitle);
+				template = template.replace("{{requestNo}}", resp[0].requestNo);
+				$("#requestLikeList").append(template);
+				
+				for(var i=1; i < resp.length; i++){
+					var template = $("#requestList").html();
+					template = template.replace("{{requestTitle}}", resp[i].requestTitle);
+					template = template.replace("{{requestNo}}", resp[i].requestNo);
+					template = template.replace("{{i}}", i+1);
+					$("#requestLikeList").append(template);
+				}
+			}
+		
+		});
+		
+		$.ajax({
+			url :"${pageContext.request.contextPath}/request/requestViewList",
+			type: "post",
+			success : function(resp){
+				$("#requestViewList").empty();
+
+				var listTop = $("#requestViewListST").html();
+				$("#requestViewList").append(listTop);
+				
+				var template = $("#requestList1").html();
+				template = template.replace("{{requestTitle}}", resp[0].requestTitle);
+				template = template.replace("{{requestNo}}", resp[0].requestNo);
+				$("#requestViewList").append(template);
+				
+				for(var i=1; i < resp.length; i++){
+					var template = $("#requestList").html();
+					template = template.replace("{{requestTitle}}", resp[i].requestTitle);
+					template = template.replace("{{requestNo}}", resp[i].requestNo);
+					template = template.replace("{{i}}", i+1);
+					$("#requestViewList").append(template);
+				}
+			}
+		
+		});
+		
+		
 		
 		
 	});
@@ -131,6 +182,22 @@
 			
 		</div>
 	</div>
+</script>
+
+<script id="requestLikeListST" type="text/template">
+	<strong class="font-20"><span class="font-20 red"><i class="fas fa-heart"></i></span> 인기 TOP5 게시글</strong>
+</script>
+
+<script id="requestViewListST" type="text/template">
+	<strong class="font-20"><span class="font-20 red"><i class="fas fa-comment-alt"></i></span> 사람들이 많이 찾은 게시글</strong>
+</script>
+
+<script id="requestList1" type="text/template">
+	<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;"><i class="fas fa-crown"></i>.</span><a href="${pageContext.request.contextPath}/requestBoard/requestBoardContent/{{requestNo}}"> {{requestTitle}}</a></p>
+</script>
+
+<script id="requestList" type="text/template">
+	<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;">{{i}}.</span><a href="${pageContext.request.contextPath}/requestBoard/requestBoardContent/{{requestNo}}"> {{requestTitle}}</a></p>
 </script>
 
 
@@ -193,27 +260,13 @@
 		</div>
 		
 		<div class="section-projectRequest-row-div" style="height: 400px;">
-			<p class="section-project-minaP" >프로젝트 소통 게시판</p>
+			<a href="${pageContext.request.contextPath}/requestBoard/requestBoard"><p class="section-project-minaP" >프로젝트 소통 게시판 <i class="fc150 ml10 fas fa-angle-right"></i></p></a>
 			
 			<div style="display: flex; justify-content: center; 1200px; height: 300px;">
-				<div style="width: 45%; height: 300px; border: 1px solid #dcdcdc; border-radius: 8px; margin: 20px 0; padding: 20px;">
-					<strong class="font-20"><span class="font-20 red"><i class="fas fa-heart"></i></span> 인기 TOP5 게시글</strong>
-					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;"><i class="fas fa-crown"></i>.</span> 저는 이거 추천해요!!</p>
-					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;">2.</span> 이런건 어떤가요</p>
-					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;">3.</span> 으엑</p>
-					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;">4.</span> 꼭 한번 읽어주세요</p>
-					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;">5.</span> 펀딩 화이팅ㅇ!!</p>
-					<p style="text-align: right;"><span class="font-12 red-hover-cursor">더 보기 <i class="fas fa-angle-double-right"></i></span></p>
+				<div style="width: 45%; height: 300px; border: 1px solid #dcdcdc; border-radius: 8px; margin: 10px 0; padding: 20px; margin-right: 20px;" id="requestLikeList">
 				</div>
 			
-				<div style="width: 45%; height: 300px; border: 1px solid #dcdcdc; border-radius: 8px; margin: 20px 0; padding: 20px;">
-					<strong class="font-20"><span class="font-20 red"><i class="fas fa-comment-alt"></i></span> 사람들이 많이 찾은 게시글</strong>
-					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;"><i class="fas fa-crown"></i>.</span> 저는 이거 추천해요!!</p>
-					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;">2.</span> 이런건 어떤가요</p>
-					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;">3.</span> 으엑</p>
-					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;">4.</span> 꼭 한번 읽어주세요</p>
-					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;">5.</span> 펀딩 화이팅ㅇ!!</p>
-					<p style="text-align: right;"><span class="font-12 red-hover-cursor">더 보기 <i class="fas fa-angle-double-right"></i></span></p>
+				<div style="width: 45%; height: 300px; border: 1px solid #dcdcdc; border-radius: 8px; margin: 10px 0; padding: 20px;" id="requestViewList">
 				</div>
 				
 			</div>
