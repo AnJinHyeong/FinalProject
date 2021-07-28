@@ -50,7 +50,7 @@
 .taLeft{text-align:left}.taRight{text-align:right}.taCenter{text-align:center}
 
 /* display */
-.dpNone{display:none}.dpFlex{display:flex}.dpBlock{display:block}.dpInline{display:inline}.dpInlineBlock{display:inline-block}
+.dpNone{display:none}.dpFlex{display:flex}.dpBlock{display:block}.dpInline{display:inline}.dpInlineBlock{display:inline-block}.dpInlineFlex{display:inline-flex}
 
 /* position */
 .poAbsolute{position:absolute}.poFixed{position:fixed}.poRelative{position:relative}
@@ -59,7 +59,7 @@
 .poAbsoluteRightCenter{left:100%;top:50%;transform:translate(-100%, -50%);}
 
 /* etc */
-.dpFlex.dpFlexCenter{align-items:center}
+.dpFlex.dpFlexCenter{align-items:center}.dpFlexXCenter{justify-content: center}
 
 .inputFocusNone:focus{outline:none}
 
@@ -95,3 +95,5 @@ pre.preWrap{white-space:pre-wrap}
 /* .inputToggleContainer{margin-right:80px;height:40px} */
 
 .zi0{z-index:0}.zi1{z-index:1}.zi2{z-index:2}
+
+.rollingImage{object-fit:cover}
