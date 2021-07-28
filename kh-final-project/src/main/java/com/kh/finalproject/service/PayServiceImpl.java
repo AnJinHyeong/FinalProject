@@ -121,7 +121,6 @@ private PayDao payDao;
 		
 		//[7] DB의 결제정보를 승인으로 변경
 
-
 		payDao.approve(Integer.parseInt(payApprovePrepareVO.getPartner_order_id()));
 		
 		PayDto payDto = payDao.get(Integer.parseInt(payApprovePrepareVO.getPartner_order_id()));
@@ -131,9 +130,6 @@ private PayDao payDao;
 				.build();
 		
 		payDao.plus(find);
-		
-
-		payDao.approve(Integer.parseInt(payApprovePrepareVO.getPartner_user_id()));
 
 		
 		return approveVO;
@@ -173,42 +169,4 @@ private PayDao payDao;
 		
 		return searchVO;
 	}
-//
-//	@Override
-//	public KakaoPayCancelVO cancel(KakaoPayCancelPrepareVO prepareVO) throws URISyntaxException {
-//		
-//		PaymentDto paymentDto = paymentDao.get(prepareVO.getPaymentNo());
-//		prepareVO.setTid(paymentDto.getPaymentTid());
-//		
-//		//[1] 요청 도구 생성
-//		RestTemplate template = new RestTemplate();
-//		
-//		//[2] Http Header 생성(ex : 편지봉투)
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.add("Authorization", kakaoAk);
-//		headers.add("Content-type", contentType);
-//		
-//		//[3] Http Body 생성(ex : 편지내용)
-//		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-//		body.add("cid", cid);
-//		body.add("tid", prepareVO.getTid());
-//		body.add("cancel_amount", String.valueOf(prepareVO.getCancel_amount()));
-//		body.add("cancel_tax_free_amount", String.valueOf(prepareVO.getCancel_tax_free_amount()));
-//		
-//		//[4] Http Header / Body 합성
-//		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
-//		
-//		//[5] 목적지 주소 작성
-//		URI uri = new URI("https://kapi.kakao.com/v1/payment/cancel");
-//		
-//		//[6] 전송
-//		KakaoPayCancelVO cancelVO = 
-//				template.postForObject(uri, entity, KakaoPayCancelVO.class);
-//		log.debug("cancelVO = {}", cancelVO);
-//		
-//		//데이터베이스 상태를 취소로 변경하는 코드
-//		paymentDao.cancel(prepareVO.getPaymentNo());
-//		
-//		return cancelVO;
-//	}
 }

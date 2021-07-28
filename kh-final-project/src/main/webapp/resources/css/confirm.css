@@ -11,22 +11,17 @@
 	text-align: left;
 }
 
-#payBorder{		
-
+#payBorder{	
+	margin-top: 30px;
     padding: 32px;
     border-radius: 5px;
     border: 1px solid rgb(228, 228, 228);
-    	left:0px;
+
 }
 
 #payContent{
 text-align:left;
 }
-
-#payTitle{
-    padding: 0px 0px 0px;
-}
-
 
 
 #payForm{
@@ -38,6 +33,7 @@ text-align:left;
 	
 }
 #form{
+	position: static; 
     width: 100%;
     cursor: pointer;
     display: inline-flex;
@@ -65,13 +61,22 @@ text-align:left;
 
 #10upName{
     color: rgb(61, 61, 61);
-    margin: 0px 0px 10px;
 }
 #10underMoney{
 	left: 300px;
 }
-#10upMoney{
-	left: 300px;
+
+input[id = "10upMoney"]{
+	margin-left: 30px;
+width: 100px;
+padding: .4em .4em;
+border: 1px solid #999;
+font-family: inherit;
+background: url('arrow.jpg') no-repeat 95% 50%;
+border-radius: 0px;
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
 }
 
 #error{
@@ -88,15 +93,16 @@ text-align:left;
 }
 
 .nomalBorder{		
-    padding: 32px;
+	margin-top: 30px;
+    padding: 25px;
     border-radius: 5px;
     border: 1px solid rgb(228, 228, 228);
     height: 100px;
+
 }
 
-.nomalButton{
-	float:left
-	    width: 100%;
+#nomalButton{
+	    width: 25%;
     cursor: pointer;
     display: inline-flex;
     -webkit-box-align: center;
@@ -106,13 +112,44 @@ text-align:left;
     height: 52px;
     white-space: nowrap;
     border-radius: 4px;
-    margin: 0px;
+    margin-left: 180px;
     border: 0px;
     outline: none;
     font-weight: bold;
     box-sizing: border-box;
-    padding: 0px 24px;
     background-color: rgb(255, 87, 87);
     color: rgb(255, 255, 255);
 }
+#nomalAll{
+	width: 450px;
+    padding: 30px 0px 72px;
+    margin: 0px auto 12px;
+	text-align: left;	
+}
+#nomalTitle{
+	font-size: 24px;
+	font-weight: 700;
 	
+}
+.radioBorder{
+width: 300px;
+padding: .5em .5em;
+}
+
+﻿select {
+	margin-left: 80px;
+width: 100px;
+padding: .4em .4em;
+     border:1px solid #999;
+     font-family:'Nanumgothic';
+     background:url('https://i.ibb.co/98Vbb8L/gnb-bg.gif') no-repeat 95% 50%;
+     border-radius:3px;
+     -webkit-appearance: none;
+     -moz-appearance: none;
+     appearance : none;
+}
+
+
+
+
+
