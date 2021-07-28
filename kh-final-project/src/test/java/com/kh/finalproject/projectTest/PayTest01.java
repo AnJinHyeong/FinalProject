@@ -1,5 +1,8 @@
 package com.kh.finalproject.projectTest;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,25 +10,30 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.kh.finalproject.repository.ProjectDao;
+import com.kh.finalproject.repository.PayDao;
+import com.kh.finalproject.vo.Criteria;
 
 import lombok.extern.slf4j.Slf4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml",
-		"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" })
+		"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"
+})
 @WebAppConfiguration
 @Slf4j
-public class ProjectTest10 {
-
+public class PayTest01 {
+	
 	@Autowired
-	private ProjectDao projectDao;
+	private PayDao payDao;
 	
 	@Test
 	public void test() {
-		String keyword = "게임";
+		int memberNo = 92;
 		
-//	log.info(String.valueOf(projectDao.projectCategorySearchCount(keyword)));
+		Criteria cri = new Criteria();
+		
+		log.info(payDao.payList(memberNo, cri).toString());
+		
+		
 	}
-	
 }

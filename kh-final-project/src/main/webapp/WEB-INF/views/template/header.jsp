@@ -18,6 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="${root}/css/yongbo.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/projectBoard.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/templateSection.css">
+	<link rel="stylesheet" type="text/css" href="${root}/css/requestBoard.css">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 
@@ -102,7 +103,7 @@
 					<ul class="On2 lsNone bacWhite p10 bora5 boc240 bosSolid bow1 w200 taLeft">
 						<li><a href="${root}/project/projectList"style="padding-left: 5px;">전체 프로젝트 보기</a></li>
 						<li><a href="${root}/project/projectInsert"style="padding-left: 5px;">프로젝트 올리기</a></li>
-						<li><a href="${root}/projectRequestBoard/projectRequestBoard"style="padding-left: 5px;">프로젝트 요청 게시판</a></li>
+						<li><a href="${root}/requestBoard/requestBoard" style="padding-left: 5px;">자유 게시판</a></li>
 					</ul>
 				</div>
 			</div>

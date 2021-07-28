@@ -201,10 +201,31 @@
 			</div>
 		</div>
 		
-		<div class="section-projectRequest-row-div">
-			<p class="section-project-minaP">프로젝트 요청 게시판</p>
-			인기 게시글
-			목록
+		<div class="section-projectRequest-row-div" style="height: 400px;">
+			<p class="section-project-minaP" >프로젝트 소통 게시판</p>
+			
+			<div style="display: flex; justify-content: center; 1200px; height: 300px;">
+				<div style="width: 45%; height: 300px; border: 1px solid #dcdcdc; border-radius: 8px; margin: 20px 0; padding: 20px;">
+					<strong class="font-20"><span class="font-20 red"><i class="fas fa-heart"></i></span> 인기 TOP5 게시글</strong>
+					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;"><i class="fas fa-crown"></i>.</span> 저는 이거 추천해요!!</p>
+					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;">2.</span> 이런건 어떤가요</p>
+					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;">3.</span> 으엑</p>
+					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;">4.</span> 꼭 한번 읽어주세요</p>
+					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;">5.</span> 펀딩 화이팅ㅇ!!</p>
+					<p style="text-align: right;"><span class="font-12 red-hover-cursor">더 보기 <i class="fas fa-angle-double-right"></i></span></p>
+				</div>
+			
+				<div style="width: 45%; height: 300px; border: 1px solid #dcdcdc; border-radius: 8px; margin: 20px 0; padding: 20px;">
+					<strong class="font-20"><span class="font-20 red"><i class="fas fa-comment-alt"></i></span> 사람들이 많이 찾은 게시글</strong>
+					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;"><i class="fas fa-crown"></i>.</span> 저는 이거 추천해요!!</p>
+					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;">2.</span> 이런건 어떤가요</p>
+					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;">3.</span> 으엑</p>
+					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;">4.</span> 꼭 한번 읽어주세요</p>
+					<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;">5.</span> 펀딩 화이팅ㅇ!!</p>
+					<p style="text-align: right;"><span class="font-12 red-hover-cursor">더 보기 <i class="fas fa-angle-double-right"></i></span></p>
+				</div>
+				
+			</div>
 		</div>
 		
 	</div>
