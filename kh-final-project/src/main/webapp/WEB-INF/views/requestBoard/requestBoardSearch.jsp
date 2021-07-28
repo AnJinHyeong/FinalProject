@@ -122,14 +122,14 @@
 		<div class="container-1200" style="margin: 0 auto; height: 700px; display: flex; flex-wrap: wrap;" id="projectRequestDiv1">
 		
 			<div class="container-700 hMax650 mt30 mb30 scrollThin" id="requestDiv">
-				<c:forEach var="request" items="${request}">
-					<a href="${pageContext.request.contextPath}/requestBoard/requestBoardContent/${request.requestNo}">
+				<c:forEach var="requestSearch" items="${requestSearch}">
+					<a href="${pageContext.request.contextPath}/requestBoard/requestBoardContent/${requestSearch.requestNo}">
 						<div class="topLine bottomLine request-div">
-							<span class="font-12" style="text-align: center; width: 5%;">${request.requestNo}</span>
-							<span class="font-12 " style="text-align: center; width: 10%;">${request.categoryTheme}</span>
-							<span class="font-12 overflow" style="text-align: left; width: 75%;">${request.requestTitle}</span>
-							<span class="font-12 red" style="text-align: right; width: 5%;"><i class='far fa-heart'></i> ${request.requestLikeCount}</span>
-							<span class="font-12" style="text-align: right; width: 5%;" class="font-12"><i class="far fa-comment"></i> ${request.requestReplyCount}</span>
+							<span class="font-12" style="text-align: center; width: 5%;">${requestSearch.requestNo}</span>
+							<span class="font-12 " style="text-align: center; width: 10%;">${requestSearch.categoryTheme}</span>
+							<span class="font-12 overflow" style="text-align: left; width: 75%;">${requestSearch.requestTitle}</span>
+							<span class="font-12 red" style="text-align: right; width: 5%;"><i class='far fa-heart'></i> ${requestSearch.requestLikeCount}</span>
+							<span class="font-12" style="text-align: right; width: 5%;" class="font-12"><i class="far fa-comment"></i> ${requestSearch.requestReplyCount}</span>
 						</div>
 					</a>
 				</c:forEach>
@@ -137,10 +137,10 @@
 			
 			<div class="container-400 hMax600 mt30 mb30">
 			
-				<div style="width: 100%; height: 300px; border: 1px solid #dcdcdc; border-radius: 8px; margin: 10px 0; padding: 20px;" id="requestLikeList">
+				<div style="width: 100%; height: 300px; border: 1px solid #dcdcdc; border-radius: 8px; margin: 20px 0; padding: 20px;" id="requestLikeList">
 				</div>
 			
-				<div style="width: 100%; height: 300px; border: 1px solid #dcdcdc; border-radius: 8px; margin: 10px 0; padding: 20px;" id="requestViewList">
+				<div style="width: 100%; height: 300px; border: 1px solid #dcdcdc; border-radius: 8px; margin: 20px 0; padding: 20px;" id="requestViewList">
 				</div>
 				
 			</div>
@@ -223,8 +223,8 @@
 		<form action="requestSearch" method="post">
 			<div style="width: 1100px; height: 60px; margin: 0 auto;" id="requsetSearch">
 				<div class="container-1100 h50" style="border: 1px solid #dcdcdc; border-radius: 8px; display: flex; justify-content: flex-start; padding: 5px; 0;">
-						<input type="text" style="padding: 0 20px; width: 90%; height: 40px; border: none;" placeholder="검색 기능을 이용해 보세요." autocomplete="off" name="keyword">
-						<button class="" style="width: 10%; height: 40px;; font-size: 20px; margin: 0; background-color: #fff; border: none; cursor: pointer;"><i class="fas fa-search bacWhite"></i></button>
+					<input type="text" style="padding: 0 20px; width: 90%; height: 40px; border: none;" placeholder="검색 기능을 이용해 보세요." name="keyword" autocomplete="off" value="${keyword}">
+					<button class="" style="width: 10%; height: 40px;; font-size: 20px; margin: 0; background-color: #fff; border: none; cursor: pointer;"><i class="fas fa-search bacWhite"></i></button>
 				</div>
 			</div>
 		</form>

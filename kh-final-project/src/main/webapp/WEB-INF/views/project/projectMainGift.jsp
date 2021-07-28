@@ -240,7 +240,8 @@
 											<c:if test="${giftItemVo.giftNo == giftDto.giftNo}">
 												<li>
 													<div class="float-container w100p mb20">
-														<span class="left w70p">${giftItemVo.itemName}</span> <span class="right w20p">x ${giftItemVo.itemCount}</span>
+														<span class="left w70p">${giftItemVo.itemName}</span> 
+														<span class="right w20p">x ${giftItemVo.itemCount}</span>
 													</div>
 												</li>
 											</c:if>

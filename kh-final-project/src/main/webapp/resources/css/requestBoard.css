@@ -96,3 +96,14 @@
    white-space: pre-wrap;
    overflow-wrap: anywhere;
 }
+
+
+.request-Like-Btn{
+	cursor: pointer;
+}
+
+.overflow{
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+}
