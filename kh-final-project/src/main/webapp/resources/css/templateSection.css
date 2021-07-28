@@ -24,7 +24,7 @@
 	padding-left: 10px;
 }
 
-a.section-project-minaP:hover{
+.section-project-row-div span.section-project-minaP:hover{
 	margin-left: 10px;
 	color: rgb(150, 150, 150);
 	transition: all 0.3s ease-in-out;

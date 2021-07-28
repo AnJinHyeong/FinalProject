@@ -30,7 +30,7 @@
 						projectCount = resp.length;
 						$("#projectListCount").text(projectCount);
 					}
-					for(var i = strNum ; i < endNum ; i++){
+					for(var i = strNum ; i < Math.min(endNum, projectCount) ; i++){
 						var template = $("#projectListTemplate").html();
 						template = template.replace("{{categoryTheme}}", resp[i].categoryTheme);
 						template = template.replace("{{memberInfoNick}}", resp[i].memberInfoNick);

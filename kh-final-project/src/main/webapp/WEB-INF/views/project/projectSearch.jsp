@@ -117,39 +117,22 @@
 			}
 		});
 		
-		$("#search-plus1").on("click",function(){
-			var newForm = $('<form></form>');
-			newForm.attr("name","newForm");
-			newForm.attr("method","post");
-			newForm.attr("action","${pageContext.request.contextPath}/project/projectSearchAll");
+// 		$("#search-plus2").on("click",function(){
+// 			var newForm = $('<form></form>');
+// 			newForm.attr("name","newForm");
+// 			newForm.attr("method","post");
+// 			newForm.attr("action","${pageContext.request.contextPath}/project/projectCategorySearchAll");
 // 			newForm.attr("target","_blank");
 			
-			newForm.append($('<input/>', {type: 'hidden', name: 'keyword', value:'${keyword}' }));
-			newForm.append($('<input/>', {type: 'hidden', name: 'projectOrder', value:'${projectOrder}' }));
-			newForm.append($('<input/>', {type: 'hidden', name: 'projectState', value:'${projectState}' }));
+// 			newForm.append($('<input/>', {type: 'hidden', name: 'keyword', value:'${keyword}' }));
+// 			newForm.append($('<input/>', {type: 'hidden', name: 'projectOrder', value:'${projectOrder}' }));
+// 			newForm.append($('<input/>', {type: 'hidden', name: 'projectState', value:'${projectState}' }));
 			
-			newForm.appendTo('body');
-			newForm.submit();
-
-// 			location.href="${pageContext.request.contextPath}/project/projectSearchAll/${keyword}";
-		});
-		
-		$("#search-plus2").on("click",function(){
-			var newForm = $('<form></form>');
-			newForm.attr("name","newForm");
-			newForm.attr("method","post");
-			newForm.attr("action","${pageContext.request.contextPath}/project/projectCategorySearchAll");
-// 			newForm.attr("target","_blank");
-			
-			newForm.append($('<input/>', {type: 'hidden', name: 'keyword', value:'${keyword}' }));
-			newForm.append($('<input/>', {type: 'hidden', name: 'projectOrder', value:'${projectOrder}' }));
-			newForm.append($('<input/>', {type: 'hidden', name: 'projectState', value:'${projectState}' }));
-			
-			newForm.appendTo('body');
-			newForm.submit();
+// 			newForm.appendTo('body');
+// 			newForm.submit();
 			
 // 			location.href="${pageContext.request.contextPath}/project/projectCategorySearchAll/${keyword}";
-		});
+// 		});
 		
 		var projectOrderTextValue = ${projectOrder};
 		var projectStateTextValue = ${projectState};
@@ -195,26 +178,39 @@
 
 		<div class="section-project-rrr">
 
-			<div class="section-project-search-row-div float-container">
-				<p class="mb20 project-search-p">
-				<span>${projectSearchCount}개의 프로젝트가 있습니다.</span>
-					<c:if test="${projectSearchCount > 0}">
-						<span class="font-12 red-hover-cursor" style="float: right;" id="search-plus1">더 보기 <i class="fas fa-angle-double-right"></i></span>
-					</c:if>
-				</p>
+			<div class="section-project-search-row-div">
+				<form action="projectSearchAll" method="post">
+					<input type="hidden" name="keyword" value="${keyword}">
+					<input type="hidden" name="projectState" value="${projectState}">
+					<input type="hidden" name="projectOrder" value="${projectOrder}">
+					<p class="mb20 project-search-p float-container">
+					<span>${projectSearchCount}개의 프로젝트가 있습니다.</span>
+						<c:if test="${projectSearchCount > 0}">
+								<button class="right bosNone bacInherit">
+									<span class="font-12 red-hover-cursor">더 보기 <i class="fas fa-angle-double-right"></i></span>
+								</button>
+						</c:if>
+					</p>
+				</form>
 				<c:if test="${projectSearchCount > 0}">
 					<div class="section-project-main-search" id="sectionProjectMain1"></div>
 				</c:if>
 			</div>
 
 			<div class="section-project-search-row-div float-container">
-				<p class="project-search-p">
-					<span>${projectCategorySearchCount}</span>
-					개의 카테고리가 있습니다.
-					<c:if test="${projectCategorySearchCount > 0}">
-						<span class="font-12 red-hover-cursor" style="float: right;" id="search-plus2">더 보기 <i class="fas fa-angle-double-right"></i></span>
-					</c:if>
-				</p>
+				<form action="projectCategorySearchAll" method="post">
+					<input type="hidden" name="keyword" value="${keyword}">
+					<input type="hidden" name="projectState" value="${projectState}">
+					<input type="hidden" name="projectOrder" value="${projectOrder}">
+					<p class="mb20 project-search-p float-container">
+					<span>${projectCategorySearchCount}개의 카테고리가 있습니다.</span>
+						<c:if test="${projectCategorySearchCount > 0}">
+								<button class="right bosNone bacInherit">
+									<span class="font-12 red-hover-cursor">더 보기 <i class="fas fa-angle-double-right"></i></span>
+								</button>
+						</c:if>
+					</p>
+				</form>
 				<c:if test="${projectCategorySearchCount > 0}">
 					<div class="section-project-main-search" id="sectionProjectMain2"></div>
 				</c:if>
