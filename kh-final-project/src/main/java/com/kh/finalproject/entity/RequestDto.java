@@ -15,9 +15,10 @@ public class RequestDto {
 	private String requestContent;
 	private Date requestDate;
 	private int requestView;
+	private int requestLikeCount;
+	private int requestReplyCount;
 	
 	private int requestCategoryNo;
 	private int requestMemberNo;
-	
 	
 }

@@ -17,6 +17,8 @@ public class RequestVo {
 	private int requestView;
 	private int requestCategoryNo;
 	private int requestMemberNo;
+	private int requestLikeCount;
+	private int requestReplyCount;
 	
 	private String categoryTheme;
 	
