@@ -4,4 +4,5 @@ public interface FileService {
 
 	void deleteLocalFileNotInDB();
 	
+	void autoClearDeleteLocalFileNotInDB();
 }
