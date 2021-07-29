@@ -11,6 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from member where member_id = #{memberId}
 	</select>
 
+<!--  email 중복체크-->
+	<select id = "checkEmail" parameterType = "String" resultType = "MemberDto">
+	select * from member where member_email = #{memberEmail}
+	</select>
+
 <!-- 	 번호 생성 구문
 	<select id="sequence" resultType="int">
 		select member_seq.nextval from dual
@@ -18,8 +23,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!--  가입 구문-->
 	<insert id = "insert" parameterType = "MemberDto">
-		INSERT INTO member(member_no,member_id,member_pw,member_nick,member_email,member_introduce)
-		VALUES(member_seq.nextval,#{memberId},#{memberPw},#{memberNick},#{memberEmail},#{memberIntroduce})
+		INSERT INTO member(member_no,member_id,member_pw,member_nick,member_email)
+		VALUES(member_seq.nextval,#{memberId},#{memberPw},#{memberNick},#{memberEmail})
 	</insert>
 	
 	<insert id ="msgInsert" parameterType ="MessageDto">
@@ -90,6 +95,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteByEmail" parameterType="string">
 		delete email_auth where email = #{email}
 	</delete>
+	
+	<!-- 인증번호 삽입 -->
+<!-- 	<insert id = authKeyMake parameterType = "int">
+	INSERT INTO()
+	
+	
+	</insert> -->
+	
+	<!-- 인증번호 자동삭제 -->
 	
 	<delete id="deleteByTime">
 		<![CDATA[ 

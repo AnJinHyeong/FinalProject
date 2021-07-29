@@ -222,20 +222,19 @@
 		var playRolling;
 		
 		var startPlayRolling = setTimeout(function() {
-			$("#imageNextBtn").click();
+			imageRollingNext($("#imageNextBtn"));
 		}, 3000);
 		
 		$("#imageNextBtn, #imagePreBtn").one("click", function() {
 			clearTimeout(startPlayRolling);
 		});
 		
-		$("#imageNextBtn").on("click", function(){
-			$(this).prop("disabled", true);
-			var that = $(this);
+		function imageRollingNext(btn){
+			btn.prop("disabled", true);
 			
 			clearInterval(playRolling);
 			playRolling = setInterval(function() {
-				$("#imageNextBtn").click();
+				imageRollingNext($("#imageNextBtn"));
 			}, 3000);
 			
 			$(".mainBannerImage").each(function(index, item){
@@ -244,10 +243,11 @@
 				}
 				else{
 					$(this).animate({"left": (Number($(this).css("left").split("px")[0]) - width) + "px"}, 300, "swing", function(){
-						that.prop("disabled", false);
+						btn.prop("disabled", false);
 					});
 				}
 			});
+			
 			currentNo = currentNo + 1;
 			if (currentNo > mainBannerImageCount){
 				currentNo = 1;
@@ -267,16 +267,19 @@
 															"color": resp.bannerColor}, 300);
 				}
 			});
-			
+		}
+		
+		$("#imageNextBtn").on("click", function(){
+			imageRollingNext($(this));
 		});
 		
-		$("#imagePreBtn").on("click", function(){
-			$(this).prop("disabled", true);
-			var that = $(this);
+		
+		function imageRollingPre(btn){
+			btn.prop("disabled", true);
 			
 			clearInterval(playRolling);
 			playRolling = setInterval(function() {
-				$("#imageNextBtn").click();
+				imageRollingNext($("#imageNextBtn"));
 			}, 3000);
 			
 			$(".mainBannerImage").each(function(index, item){
@@ -285,10 +288,11 @@
 				}
 				else{
 					$(this).animate({"left": (Number($(this).css("left").split("px")[0]) + width) + "px"}, 300, "swing", function(){
-						that.prop("disabled", false);
+						btn.prop("disabled", false);
 					});
 				}
 			});
+			
 			currentNo = currentNo - 1;
 			if(currentNo < 1){
 				currentNo = mainBannerImageCount;
@@ -308,7 +312,10 @@
 															"color": resp.bannerColor}, 300);
 				}
 			});
-			
+		}
+		
+		$("#imagePreBtn").on("click", function(){
+			imageRollingPre($(this));
 		});
 		
 		$(".mainBannerImage").each(function(index, item){

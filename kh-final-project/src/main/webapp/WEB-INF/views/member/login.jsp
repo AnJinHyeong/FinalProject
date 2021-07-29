@@ -114,7 +114,7 @@
 			<div class="row">
 			
 				<div class="text-center subDiv">
-					<span>아직 Fun_ding 계정이 없으신가요? <br>	<a href="${pageContext.request.contextPath}/member/emailCheck">가입하기</a></span>
+					<span>아직 Fun_ding 계정이 없으신가요? <br>	<a href="${pageContext.request.contextPath}/member/join">가입하기</a></span>
 					
 				</div>
 				<hr>

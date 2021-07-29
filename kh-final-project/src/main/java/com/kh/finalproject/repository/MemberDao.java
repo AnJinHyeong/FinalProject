@@ -8,6 +8,7 @@ import com.kh.finalproject.entity.SponsorDto;
 
 public interface MemberDao {
 	boolean checkId(String memberId);
+	boolean checkEmail(String memberEmail);
 	void memberInsert(MemberDto memberDto);
 	MemberDto login(MemberDto memberDto);
 	// 회원 번호를 이용해 회원 정보 조회
