@@ -1,6 +1,9 @@
 package com.kh.finalproject.repository;
 
+import java.util.List;
+
 import com.kh.finalproject.entity.BannerDto;
+import com.kh.finalproject.vo.BannerVo;
 
 public interface BannerDao {
 
@@ -14,4 +17,8 @@ public interface BannerDao {
 	void insertBanner(BannerDto bannerDto);
 	// 시퀀스로 배너 등록
 	void insertBannerBySequence(BannerDto bannerDto);
+	// 배너 목록 가져오기
+	List<BannerVo> getBannerList();
+	// 배너 지우기
+	void deleteBannerByBannerNo(int bannerNo);
 }

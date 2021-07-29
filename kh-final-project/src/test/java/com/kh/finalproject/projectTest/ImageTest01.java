@@ -1,7 +1,6 @@
 package com.kh.finalproject.projectTest;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import org.junit.Test;

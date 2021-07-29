@@ -63,4 +63,9 @@ public interface ImageDao {
 	void insertImageMainBanner(ImageDto imageDto);
 	// 시퀀스 받기
 	int getSequence();
+	// 이미지 번호로 이미지 삭제
+	void deleteImageByImageNo(int imageNo);
+	
+	// 이미지 저장이름목록 안겹치게 가져오기
+	List<String> getImageSaveNameList();
 }

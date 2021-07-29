@@ -187,5 +187,16 @@ public class ImageDaoImpl implements ImageDao{
 	public int getSequence() {
 		return sqlSession.selectOne("imageFile.sequence");
 	}
+
+	@Override
+	public void deleteImageByImageNo(int imageNo) {
+		sqlSession.delete("imageFile.deleteImageByImageNo", imageNo);
+		
+	}
+
+	@Override
+	public List<String> getImageSaveNameList() {
+		return sqlSession.selectList("imageFile.getImageSaveNameList");
+	}
 	
 }

@@ -23,6 +23,7 @@ import com.kh.finalproject.entity.ImageDto;
 import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.repository.ImageDao;
 import com.kh.finalproject.repository.ProjectDao;
+import com.kh.finalproject.service.FileService;
 
 @RequestMapping("/image")
 @RestController
@@ -190,16 +191,17 @@ public class ImageDataController {
 		imageDao.deleteProjectStoryAllImage(projectNo);
 	}
 	
-	@GetMapping("/downloadImageMainBanner/{imageNo}")
+	@GetMapping(value="/downloadImageMainBanner/{imageNo}")
 	public ResponseEntity<ByteArrayResource> downloadImageMainBanner(@PathVariable int imageNo) throws IOException {
-		
+//		System.out.println("imageNo = " + imageNo);
 		ImageDto imageDto = imageDao.getImageMainBanner(imageNo); 
 		ByteArrayResource resource = imageDao.getFile(imageDto.getImageSaveName());
 		String fileName = URLEncoder.encode(imageDto.getImageUploadName(), "UTF-8");
 
 		return ResponseEntity.ok()
 								.contentType(MediaType.APPLICATION_OCTET_STREAM)
-								.contentLength(imageDto.getImageSize())
+//								.contentLength(imageDto.getImageSize())
+								.contentLength(resource.contentLength())
 								.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
 								.header(HttpHeaders.CONTENT_DISPOSITION, 
 										"attachment; filename=\""+fileName+"\"")
