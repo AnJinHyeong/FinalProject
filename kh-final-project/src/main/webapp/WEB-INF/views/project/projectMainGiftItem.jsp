@@ -94,7 +94,7 @@
 							<div class="project-insert-item-list float-container">
 								<span id="itemName" class="left w280 fBold">${itemDto.itemName}</span> 
 								<span id="itemNo" class="yb hidden">${itemDto.itemNo}</span> 
-								<c:if test="${projectDto.projectState != '2'}">
+								<c:if test="${projectDto.projectState == '1'}">
 									<span class="yb modalX right"> <i class="fas fa-times"></i></span>
 								</c:if>
 							</div>
@@ -129,7 +129,7 @@
 								</p>
 							</div>
 							
-							<c:if test="${projectDto.projectState != '2'}">
+							<c:if test="${projectDto.projectState == '1'}">
 								<div class="project-insert-div3">
 									<input class="project-btn btn3 project-btn-hover" style="margin-right: 0px" type="submit" value="등록">
 								</div>

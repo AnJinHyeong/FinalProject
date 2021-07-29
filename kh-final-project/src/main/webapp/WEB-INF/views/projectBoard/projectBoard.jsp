@@ -71,7 +71,13 @@
 		});
 		
 		//좋아요 기능
-		$("#projectLikeBtnOn").hide();
+		if(!${not empty memberNo}){
+			$("#projectLikeBtnI").addClass('far');
+			
+			$("#projectLikeBtn").on("click",function(){
+				window.alert("로그인 후 이용이 가능합니다.");
+			});
+		}
 		
 		if(${not empty memberNo}){
 			$.ajax({
@@ -79,12 +85,10 @@
 				type: "post",
 				success : function(resp){
 					if(resp == 1){
-						$("#projectLikeBtnOn").show();
-						$("#projectLikeBtnOff").hide();
+						$("#projectLikeBtnI").addClass('fas');
 					}
 					else{
-						$("#projectLikeBtnOn").hide();
-						$("#projectLikeBtnOff").show();
+						$("#projectLikeBtnI").addClass('far');
 					}
 				}
 			
@@ -107,8 +111,8 @@
 							}
 						
 						});
-						$("#projectLikeBtnOn").hide();
-						$("#projectLikeBtnOff").show();
+						$("#projectLikeBtnI").addClass('far');
+						$("#projectLikeBtnI").removeClass('fas');
 					}
 					else{
 						$.ajax({
@@ -119,8 +123,8 @@
 							}
 						
 						});
-						$("#projectLikeBtnOn").show();
-						$("#projectLikeBtnOff").hide();
+						$("#projectLikeBtnI").addClass('fas');
+						$("#projectLikeBtnI").removeClass('far');
 					}
 				}
 			
@@ -129,7 +133,16 @@
 			
 		});
 		
+		
+		
+ 		
 		//신고하기 기능
+		if(!${not empty memberNo}){
+			$("#report").on("click",function(){
+				window.alert("로그인 후 이용이 가능합니다.");
+			});
+		}
+		
 	    $("#report2").hide();
 	    
 		$('#report').hover(function() {
@@ -142,6 +155,7 @@
 		});
 		
 		
+		//펀딩 기간 계산
 		const modal = document.querySelector('.report-modal'); 
 		const btnOpenPopup = document.querySelector('#report'); 
 		btnOpenPopup.addEventListener('click', () => { modal.style.display = 'block'; });
@@ -176,16 +190,31 @@
    		var da2 = new Date(ar2[0], ar2[1], ar2[2]);
    		var da3 = new Date(ar3[0], ar3[1], ar3[2]);
    		
-	   	var dif = da1 >= da2;
-	   	var dif2 = da3 - da1;
+	   	var dif = da1 >= da2;//펀딩 시작전
+	   	var dif2 = da3 - da1;//펀딩 종료일까지 일수 계산
+	   	var dif3 = da3 <= da1;//펀딩 종료 시점
 	   	
+	   	console.log(dif3);
 		if(dif == false){
 			$("#day-open1").hide();
 			$("#day-open2").show();
+			$("#day-open3").hide();
+			$("#project-board-content").hide();
+			$("#project-board-mid").hide();
+		}
+		else if(dif3 == true){
+			$("#day-open1").hide();
+			$("#day-open2").hide();
+			$("#day-open3").show();
+			$("#project-board-content").hide();
+			$("#project-board-mid").hide();
 		}
 		else{
 			$("#day-open1").show();
 			$("#day-open2").hide();
+			$("#day-open3").hide();
+			$("#project-board-content").show();
+			$("#project-board-mid").show();
 		}
 		
 		var dif2 = da3 - da2;
@@ -260,6 +289,8 @@
 					<img id="projectMainImage" class="project-board-mainImage">
 				</div>
 				
+				
+				
 				<div class="projext-board-flex-div3" id="day-open1">
 					<div class="project-board-div3-div">
 						<div style="margin: 0px 0px 1.75rem; letter-spacing: 0.5px;padding-bottom: 15px; border-bottom: 1px solid #ff6666;">
@@ -293,29 +324,11 @@
 
 					<div class="project-board-flex-div4">
 						<button class="project-board-div4-like" id="projectLikeBtn">
-							<c:choose>
-								<c:when test="${not empty memberNo}">
-									<span class="font-20 red" id="projectLikeBtnOn"><i class='fas fa-heart'></i></span>
-									<span class="font-20 red" id="projectLikeBtnOff"><i class='far fa-heart'></i></span>
-								</c:when>
-								<c:otherwise>
-									<a href="${pageContext.request.contextPath}/member/login">
-										<span class="font-20 red" id="projectLikeBtnOff"><i class='far fa-heart'></i></span>
-									</a>
-								</c:otherwise>
-							</c:choose>
+							<span class="font-20 red"><i id="projectLikeBtnI" class=' fa-heart'></i></span>
 						</button>
 						<button class="project-board-div4-like" id="report">
-							<c:choose>
-								<c:when test="${not empty memberNo}">
-									<span class="font-20 red" id="report1"><i class="far fa-tired"></i></span>
-									<span class="font-12 red" id="report2">신고하기</span>
-								</c:when>
-								<c:otherwise>
-									<a href="${pageContext.request.contextPath}/member/login"><span class="font-20 red" id="report1"><i class="far fa-tired"></i></span></a>
-									<a href="${pageContext.request.contextPath}/member/login"><span class="font-12 red" id="report2">신고하기</span></a>
-								</c:otherwise>
-							</c:choose>
+							<span class="font-20 red" id="report1"><i class="far fa-tired"></i></span>
+							<span class="font-12 red" id="report2">신고하기</span>
 						</button>
 						<button class="project-board-div4-funding">프로젝트 후원</button>
 					</div>
@@ -346,12 +359,53 @@
 					</div>
 				</div>
 				
+				
+				<!-- div33 -->
+				<!-- div33 -->
+				<div class="projext-board-flex-div3" id="day-open3">
+					<div class="project-board-div3-div">
+						<div style="margin: 0px 0px 1.75rem; letter-spacing: 0.5px;padding-bottom: 15px; border-bottom: 1px solid #ff6666;">
+							<div style="font-size: 30px;">
+								<span id="funding-date">펀딩 종료</span>
+							</div>
+						</div>
+						<div style="margin: 0px 0px 1.75rem; letter-spacing: 0.5px;">
+							<div style="font-size: 30px;">
+								<span>${currentAmount}</span>
+								<span style="font-size: 1rem;">원 펀딩</span>
+								<span class="fBold fs20">${projectPercent}%</span>
+							</div>
+						</div>
+						<div style="margin: 0px 0px 1.75rem; letter-spacing: 0.5px;">
+							<div style="font-size: 30px;">
+								<span>${currentSponsorMemberCount}</span>
+								<span style="font-size: 1rem;">명의 참여자</span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="project-board-flex-div4" style="background-color: #f6f6f6; width: 100%; height: 150px; border-radius: 3%; text-align: left; border: 1px solid #ededed;">
+						<p style="padding: 5px 10px 0 10px; font-size: 15px; color: black; font: bold;"><span class="font-12 red"><i class="fas fa-file"></i></span> 프로젝트 간단 소개</p>
+						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">${projectDto.projectSummary}</p>
+						<p style="padding: 25px 10px 0 10px; font-size: 15px; color: black; font: bold;"><span class="font-12 red"><i class="fas fa-coins"></i></span> 프로젝트 결제 안내</p>
+						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">목표 금액인 ${projectDto.projectTargetAmount}원이 모여야만 결제됩니다.</p>
+						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">결제는 프로젝트 예정 종료일인 ${projectDto.projectEndDate} 이후 ${plus7.substring(0, 10)} 이내에 다 함께 진행됩니다.</p>
+					</div>
+
+					<div class="project-board-flex-div4">
+						<button class="project-board-div4-funding" style="width: 430px;">현재 프로젝트는 펀이 종료된 상태 입니다.</button>
+					</div>
+				</div>
+				
 			</div>
 		</div>
+		
 	</div>
 	
-	<div class="bottomLine" style="height: 50px; box-shadow: rgb(0 0 0 / 10%) 0px 2px 3px;">
-		<div class="project-board-mid">
+	
+	
+	<div class="bottomLine" style="height: 50px; box-shadow: rgb(0 0 0 / 10%) 0px 2px 3px;" id="project-board-mid">
+		<div class="project-board-mid" >
 			<div class="project-board-mid-div">
 				<a class="project-board-mid-a on" href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}">스토리</a>
 				<a class="project-board-mid-a" href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}/projectBoardCommunity">커뮤니티</a>
@@ -359,7 +413,7 @@
 		</div>
 	</div>
 	
-	<div class="project-board-content">
+	<div class="project-board-content" id="project-board-content">
 		<div class="project-board-content-div">
 			<!-- 스토리 내용 div -->
 			<div class="project-board-content-div1">

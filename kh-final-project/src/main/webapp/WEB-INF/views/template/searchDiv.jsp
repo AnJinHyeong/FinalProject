@@ -27,7 +27,7 @@
 		<ul class="lsNone bacWhite p10 bora5 boc240 bosSolid bow1 On4 ml200 w180 taCenter">
 			<li value="1">달성도순</li>
 			<li value="2">최신순</li>
-<!-- 						<li>좋아요순</li> -->
+			<li value="3">좋아요순</li>
 		</ul>
 	</div>	
 	

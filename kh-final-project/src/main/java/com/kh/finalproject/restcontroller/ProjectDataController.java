@@ -25,6 +25,7 @@ import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.repository.SponsorDao;
 import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectInformationVo;
+import com.kh.finalproject.vo.ProjectSponsorVo;
 import com.kh.finalproject.vo.ProjectVo;
 import com.kh.finalproject.vo.SearchVo;
 import com.kh.finalproject.vo.SponsorListVo;
@@ -132,6 +133,13 @@ public class ProjectDataController {
 	public List<IndexProjectVo> indexProjectMain2(){
 		return projectDao.indexProjectMain2();
 	}
+	
+	@GetMapping("/index/indexProjectMain3")
+	public List<IndexProjectVo> indexProjectMain3(){
+		return projectDao.indexProjectMain3();
+	}
+
+	
 	@PostMapping("/sponsorListByProjectNo/{index}")
 	public List<SponsorListVo> sponsorListByProjectNo(HttpSession session, @RequestParam int projectNo, @PathVariable int index){
 		int memberNo = (int)session.getAttribute("memberNo");
@@ -173,6 +181,11 @@ public class ProjectDataController {
 	@PostMapping("/projectList")
 	public List<IndexProjectVo> projectList(@ModelAttribute SearchVo searchVo){
 		return projectDao.projectList(searchVo);
+	}
+
+	@PostMapping("/getSponsorSelect")
+	public ProjectSponsorVo getSponsorSelect(@RequestParam int sponsorNo){
+		return projectDao.getSponsorSelect(sponsorNo);
 	}
 	
 	

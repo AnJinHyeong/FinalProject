@@ -229,7 +229,7 @@
 						<textarea name="projectContent" class="w100p h200 dpNone"></textarea>
 						<textarea name="projectContentFile" class="w100p h200 dpNone"></textarea>
 						
-						<c:if test="${projectDto.projectState != '2'}">
+						<c:if test="${projectDto.projectState == '1'}">
 							<div class="project-insert-div3">
 								<input id="inputStory" class="project-btn btn3 project-btn-hover mr0" type="submit" value="저장">
 							</div>
