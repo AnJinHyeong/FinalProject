@@ -72,6 +72,7 @@ div.historyPage ul li a.now {
 	background-color:#f40;
 	border:1px solid #f40;
 }
+
 div.historyPage ul li a:hover, ul li a:focus {
 	rgb(255, 87, 87);
 	color:white;

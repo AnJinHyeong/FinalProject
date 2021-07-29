@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="requestLike">
+	
+	<insert id="add" parameterType="RequestLikeDto">
+		insert into request_like values(#{requestLikeNo}, #{requestLikeMemberNo}, sysdate)
+	</insert>
+	
+	<delete id="delete" parameterType="RequestLikeDto">
+		delete request_like where request_like_no = #{requestLikeNo} and request_like_member_no = #{requestLikeMemberNo}
+	</delete>
+	
+	<select id="confirm" parameterType="RequestLikeDto" resultType="int">
+		SELECT count(*) FROM request_like WHERE request_like_no = #{requestLikeNo} AND request_like_member_no = #{requestLikeMemberNo}
+	</select>
+	
+<!-- 	<select id="myLikeProject" parameterType="int" resultType="ProjectLikeDto"> -->
+<!-- 		select * from project_like where like_member_no = #{likeMemberNo} -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="myLikeProjectList" resultType="ProjectLikeVo" parameterType="int"> -->
+<!-- 		select -->
+<!-- 		    P.*, -->
+<!-- 		    PL.* -->
+<!-- 		from Project P -->
+<!-- 		    inner join project_like PL on P.project_no = PL.like_project_no -->
+<!-- 		WHERE PL.like_member_no = #{likeMemberNo} -->
+<!-- 	</select> -->
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

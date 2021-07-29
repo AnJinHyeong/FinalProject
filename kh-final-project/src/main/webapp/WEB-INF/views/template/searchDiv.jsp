@@ -9,7 +9,7 @@
 	</div>
 	
 	<div id="projectStateSelectBox" class="projectListState dpNone poAbsolute w180 zi2 mt40 On3">
-		<ul class="lsNone bacWhite p10 bora5 boc240 bosSolid bow1 On3">
+		<ul class="lsNone bacWhite p10 bora5 boc240 bosSolid bow1 On3 taCenter">
 			<li value="1">전체 프로젝트</li>
 			<li value="2">진행중인 프로젝트</li>
 			<li value="3">공개 예정 프로젝트</li>
@@ -24,10 +24,10 @@
 	</div>
 	
 	<div id="projectOrderSelectBox" class="projectListState dpNone poAbsolute w180 zi2 mt40 On4">
-		<ul class="lsNone bacWhite p10 bora5 boc240 bosSolid bow1 On4 ml200 w180">
+		<ul class="lsNone bacWhite p10 bora5 boc240 bosSolid bow1 On4 ml200 w180 taCenter">
 			<li value="1">달성도순</li>
 			<li value="2">최신순</li>
-<!-- 						<li>좋아요순</li> -->
+			<li value="3">좋아요순</li>
 		</ul>
 	</div>	
 	

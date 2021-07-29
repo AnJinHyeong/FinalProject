@@ -1,6 +1,3 @@
-//join.jsp(회원가입js)
-
-// 아이디입력
 $(function () {
 	$("#projectStateBtn").on("click", function(){
 		$("#projectStateSelectBox").toggle();

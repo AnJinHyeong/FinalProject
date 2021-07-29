@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="banner">
+	
+	<!-- 시퀀스 얻기 -->
+	<select id="getSequence" resultType="int">
+		select banner_seq.nextval from dual
+	</select>
+	
+	<!-- 배너정보 가져오기 -->
+	<select id="getBanner" parameterType="int" resultType="BannerDto">
+		select * from banner where banner_no = #{bannerNo};
+    </select>
+    
+    <!-- index로 배너정보 가져오기 -->
+	<select id="getBannerByIndexNo" parameterType="int" resultType="BannerDto">
+		select * from banner where banner_no = 
+			(select main_banner from(
+			    select rownum rn, TMP.* from( 
+			        select main_banner from image_file order by image_no desc) TMP)
+			    where rn = #{indexNo})
+    </select>
+    
+    <!-- 배너 등록 -->
+    <insert id="insertBanner" parameterType="BannerDto">
+    	insert into banner values(banner_seq.nextval, #{bannerTitle}, #{bannerContent}, #{bannerBackgroundColor}, #{bannerColor})
+    </insert>
+    
+    <!-- 시퀀스로 배너 등록 -->
+    <insert id="insertBannerBySequence" parameterType="BannerDto">
+    	insert into banner values(#{bannerNo}, #{bannerTitle}, #{bannerContent}, #{bannerBackgroundColor}, #{bannerColor})
+    </insert>
+    
+    <!-- 배너 목록 가져오기 -->
+    <select id="getBannerList" resultType="BannerVo">
+    	select B.*, I.image_no banner_image_no from banner B
+		    left outer join image_file I on B.banner_no = I.main_banner
+		    order by image_no desc
+    </select>
+    
+    <!-- 배너 지우기 -->
+    <delete id="deleteBannerByBannerNo" parameterType="int">
+    	delete banner where banner_no = #{bannerNo}
+    </delete>
+	
+</mapper>
+

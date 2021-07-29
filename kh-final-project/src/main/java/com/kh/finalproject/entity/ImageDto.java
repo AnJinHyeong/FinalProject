@@ -18,4 +18,6 @@ public class ImageDto {
 	private String projectState;
 	private int memberNo;
 	
+	private int mainBanner;
+	
 }

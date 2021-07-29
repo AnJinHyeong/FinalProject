@@ -20,6 +20,7 @@ import com.kh.finalproject.entity.ItemDto;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.ProjectCommunityDto;
 import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.entity.SponsorDto;
 import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.repository.GiftDao;
 import com.kh.finalproject.repository.ImageDao;
@@ -401,5 +402,26 @@ public class ProjectController {
 		model.addAttribute("projectState", 1);
 		return "project/projectList";
 	}
+	
+	@GetMapping("/{projectNo}/projectMainSponsor")
+	public String projectMainSponsor(@ModelAttribute ProjectDto projectDto, @PathVariable int projectNo, HttpSession session, Model model) {
+		int memberNo = (int) session.getAttribute("memberNo");
+		projectDto = ProjectDto.builder().projectNo(projectNo).memberNo(memberNo).build();
+		ProjectDto find = projectDao.get(projectDto);
+		model.addAttribute("projectDto", find);
+
+		CategoryDto theme = categoryDao.getByNo(find.getCategoryNo());
+		CategoryDto theme2 = categoryDao.getByNo(theme.getCategorySuper());
+		
+		model.addAttribute("categoryDto", theme);
+		model.addAttribute("categoryDto2", theme2);
+		
+		List<SponsorDto> sponsorList = projectDao.projectSponsorByProjectNo(projectNo);
+		model.addAttribute("sponsorList", sponsorList);
+		
+		
+		return "project/projectMainSponsor";
+	}
+	
 	
 }

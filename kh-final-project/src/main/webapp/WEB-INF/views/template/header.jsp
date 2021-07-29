@@ -18,10 +18,12 @@
 	<link rel="stylesheet" type="text/css" href="${root}/css/yongbo.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/projectBoard.css">
 	<link rel="stylesheet" type="text/css" href="${root}/css/templateSection.css">
+	<link rel="stylesheet" type="text/css" href="${root}/css/requestBoard.css">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <script>
 	$(function(){
 		$.ajax({
@@ -55,6 +57,17 @@
 		
 		$(".projectBtn").on("click", function(){
 			$(".headerProject").toggle();
+		});
+		
+		$.ajax({
+			url :"${pageContext.request.contextPath}/member/getMember",
+			type: "post",
+			success : function(resp){
+				if(resp.memberGrade == "관리자"){
+					$("#isNotAdmin").hide();
+					$("#isAdmin").show();
+				}
+			}
 		});
 		
 	});
@@ -99,10 +112,10 @@
 				</div>
 				
 				<div class="On2 headerProject dpNone poAbsolute w160 zi2 mt70">
-					<ul class="On2 lsNone bacWhite p10 bora5 boc240 bosSolid bow1 w200">
+					<ul class="On2 lsNone bacWhite p10 bora5 boc240 bosSolid bow1 w200 taLeft">
 						<li><a href="${root}/project/projectList"style="padding-left: 5px;">전체 프로젝트 보기</a></li>
 						<li><a href="${root}/project/projectInsert"style="padding-left: 5px;">프로젝트 올리기</a></li>
-						<li><a href="${root}/projectRequestBoard/projectRequestBoard"style="padding-left: 5px;">프로젝트 요청 게시판</a></li>
+						<li><a href="${root}/requestBoard/requestBoard" style="padding-left: 5px;">자유 게시판</a></li>
 					</ul>
 				</div>
 			</div>
@@ -131,13 +144,21 @@
 							<div class="w120 taCenter h100p dpBlock p5">
 								<button class="On loginLogoutBtn bosNone cursorPointer w50 bacInherit h30 mt5 header-icon-ani"><i class="h100p fs30 On fas fa-user"></i></button>
 								
-								<a class="header-link dpBlock fs12 h20 mt5 header-icon-ani" href="${root}/pay/confirm">
-								<span style="color: #ffd700;"><i class="fas fa-coins"></i></span>
-								<span class="fBold" id="memberHavePoint"></span></a>
+								<div class="p0 m0" id="isNotAdmin">
+									<a class="header-link dpBlock fs12 h20 mt5 header-icon-ani" href="${root}/pay/confirm">
+									<span style="color: #ffd700;"><i class="fas fa-coins"></i></span>
+									<span class="fBold" id="memberHavePoint"></span></a>
+								</div>
+								
+								<div class="p0 m0 dpNone" id="isAdmin">
+									<a class="header-link dpBlock fs12 h20 mt5 header-icon-ani" href="${root}/admin">
+									<span class="fBold">ADMIN</span></a>
+								</div>
+								
 							</div>
 								
 							<div class="headerLoginLogout dpNone poAbsolute w160 zi2 mt10" style="margin-left: -40px;">
-								<ul class="On lsNone bacWhite p10 bora5 boc240 bosSolid bow1">
+								<ul class="On lsNone bacWhite p10 bora5 boc240 bosSolid bow1 taRight">
 									<li><a href="${root}/member/myMsg">메세지</a></li>
 									<li><a href="${root}/sponsor/sponsorList">후원현황</a></li>
 									<li><a href="${root}/member/myProject">내 프로젝트</a></li>

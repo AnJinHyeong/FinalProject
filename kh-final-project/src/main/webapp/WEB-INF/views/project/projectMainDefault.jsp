@@ -48,7 +48,7 @@
 			
 		});
 		
-		
+		//카테고리 
 		if(${category.categorySuper != 0}){
 			$.ajax({
 				url:"${pageContext.request.contextPath}/category/data/childCategory",
@@ -108,7 +108,7 @@
 		
 		
 		
-		//
+		
 		$("#parentsCategory").on("input",function(){
 			
 			$.ajax({
@@ -519,7 +519,7 @@
 			</div>
 			
 			
-			<c:if test="${projectDto.projectState != '2'}">
+			<c:if test="${projectDto.projectState == '1'}">
 				<div class="project-insert-div3">
 					<input class="project-btn btn3 project-btn-hover" type="submit" value="저장">
 				</div>
