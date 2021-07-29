@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, body {
+	min-width: 1200px;
+}
+
+body{
+	display: flex;
+	align-items: flex-start;
+}
+
+aside{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: fixed;
+	background-color: rgb(230, 230, 230);
+	min-width: 220px;
+	z-index: 3;
+	height: 100vh;
+}
+
+.adminAside>.title, .adminAside>.title2{
+	font-weight: bold;
+}
+
+.adminAside>.title{
+	font-size: 30px;
+	padding-top: 30px;
+}
+
+.adminAside>.title2{
+	font-size: 12px;
+	padding-left: 100px;
+}
+
+.adminAsideList{
+	margin-top: 50px;
+}
+
+.adminAside>.adminAsideList>ul{
+	list-style: none;
+	display: block;
+}
+
+.adminAside>.adminAsideList>ul>li>span{
+	font-weight: bold;
+}

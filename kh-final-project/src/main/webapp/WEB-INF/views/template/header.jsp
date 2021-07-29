@@ -59,6 +59,17 @@
 			$(".headerProject").toggle();
 		});
 		
+		$.ajax({
+			url :"${pageContext.request.contextPath}/member/getMember",
+			type: "post",
+			success : function(resp){
+				if(resp.memberGrade == "관리자"){
+					$("#isNotAdmin").hide();
+					$("#isAdmin").show();
+				}
+			}
+		});
+		
 	});
 	
 	$("html").on("click", function(e){
@@ -133,9 +144,17 @@
 							<div class="w120 taCenter h100p dpBlock p5">
 								<button class="On loginLogoutBtn bosNone cursorPointer w50 bacInherit h30 mt5 header-icon-ani"><i class="h100p fs30 On fas fa-user"></i></button>
 								
-								<a class="header-link dpBlock fs12 h20 mt5 header-icon-ani" href="${root}/pay/confirm">
-								<span style="color: #ffd700;"><i class="fas fa-coins"></i></span>
-								<span class="fBold" id="memberHavePoint"></span></a>
+								<div class="p0 m0" id="isNotAdmin">
+									<a class="header-link dpBlock fs12 h20 mt5 header-icon-ani" href="${root}/pay/confirm">
+									<span style="color: #ffd700;"><i class="fas fa-coins"></i></span>
+									<span class="fBold" id="memberHavePoint"></span></a>
+								</div>
+								
+								<div class="p0 m0 dpNone" id="isAdmin">
+									<a class="header-link dpBlock fs12 h20 mt5 header-icon-ani" href="${root}/admin">
+									<span class="fBold">ADMIN</span></a>
+								</div>
+								
 							</div>
 								
 							<div class="headerLoginLogout dpNone poAbsolute w160 zi2 mt10" style="margin-left: -40px;">

@@ -27,5 +27,10 @@ public class MemberDataController {
 		return memberDto;
 	}
 	
+	@PostMapping("/getMember")
+	public MemberDto getMemberGrade(HttpSession session) {
+		int memberNo = (int)session.getAttribute("memberNo");
+		return memberDao.getByMemberNo(memberNo);
+	}
 	
 }
