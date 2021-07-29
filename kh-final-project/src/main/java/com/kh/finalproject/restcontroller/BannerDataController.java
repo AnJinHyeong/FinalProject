@@ -11,7 +11,7 @@ import com.kh.finalproject.repository.BannerDao;
 
 @RestController
 @RequestMapping("/banner/data")
-public class BannerController {
+public class BannerDataController {
 
 	@Autowired
 	private BannerDao bannerDao;

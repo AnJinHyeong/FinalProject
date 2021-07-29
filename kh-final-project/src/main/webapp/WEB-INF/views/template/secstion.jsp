@@ -165,11 +165,27 @@
 		var left = -width;
 		var maxLeft = (mainBannerImageCount - 2) * width;
     
-    var currentNo = 1;
+		var currentNo = 1;
+		
+		var playRolling;
+		
+		var startPlayRolling = setTimeout(function() {
+			$("#imageNextBtn").click();
+		}, 3000);
+		
+		$("#imageNextBtn, #imagePreBtn").one("click", function() {
+			clearTimeout(startPlayRolling);
+		});
 		
 		$("#imageNextBtn").on("click", function(){
 			$(this).prop("disabled", true);
 			var that = $(this);
+			
+			clearInterval(playRolling);
+			playRolling = setInterval(function() {
+				$("#imageNextBtn").click();
+			}, 3000);
+			
 			$(".mainBannerImage").each(function(index, item){
 				if($(this).css("left") == "-" + width + "px"){
 					$(this).css("left", maxLeft + "px");
@@ -205,14 +221,15 @@
 		$("#imagePreBtn").on("click", function(){
 			$(this).prop("disabled", true);
 			var that = $(this);
+			
+			clearInterval(playRolling);
+			playRolling = setInterval(function() {
+				$("#imageNextBtn").click();
+			}, 3000);
+			
 			$(".mainBannerImage").each(function(index, item){
 				if($(this).css("left") == maxLeft + "px"){
 					$(this).css("left", "-" + width + "px");
-				}
-				else if($(this).css("left") == "0px"){
-					$(this).animate({"left": (Number($(this).css("left").split("px")[0]) + width) + "px"}, 300, "swing", function(){
-						that.prop("disabled", false);
-					});
 				}
 				else{
 					$(this).animate({"left": (Number($(this).css("left").split("px")[0]) + width) + "px"}, 300, "swing", function(){
@@ -289,8 +306,10 @@
 <div class="section-row">
 
 	<a href="${root}/banner/bannerInsert">배너 등록</a>
-
-	<div class="dpFlex dpFlexXCenter mt20 mb20">
+	<a href="${root}/banner/bannerList">배너 목록</a>
+	<a href="${root}/deleteLocalFileNotInDB">로컬 파일 정리</a>
+	
+	<div class="dpFlex dpFlexXCenter mt20 mb20 boc220 bow1 bosSolid ml50 mr50">
 		<div id="mainBannerContainer" class="dpInlineBlock w700 h400 scrollNone poRelative">
 			<c:forEach var="imageDto" items="${mainBannerImageList}" varStatus="status">
 				<div class="mainBannerImage w100p h100p poAbsolute" style="left: ${(status.index - 1) * 700}px;">

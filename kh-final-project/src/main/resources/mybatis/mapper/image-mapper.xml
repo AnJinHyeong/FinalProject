@@ -124,6 +124,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{imageNo}, #{imageUploadName}, #{imageSaveName}, #{imageContentType}, #{imageSize}, #{mainBanner})
 	</insert>
 	
+	<!-- 이미지 번호로 이미지 삭제 -->
+	<delete id="deleteImageByImageNo" parameterType="int">
+		delete image_file where image_no = #{imageNo}
+	</delete>
+	
+	<!-- 이미지 저장이름 목록 안겹치게 가져오기 -->
+	<select id="getImageSaveNameList" resultType="String">
+		select image_save_name from image_file group by image_save_name order by image_save_name desc
+	</select>
+	
 </mapper>
 
 
