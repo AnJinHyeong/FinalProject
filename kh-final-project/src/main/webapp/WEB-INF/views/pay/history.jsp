@@ -46,14 +46,14 @@ table.type09 td {
 }
 
 
-			ul {
+		div.historyPage ul {
 	text-align:center;
 }
-ul li {
+div.historyPage ul li {
 	display:inline;
 	vertical-align:middle;
 }
-ul li a {
+div.historyPage ul li a {
 	display:-moz-inline-stack;	/*FF2*/
 	vertical-align:top;
 	padding:4px;
@@ -67,17 +67,25 @@ ul li a {
 	width /**/:26px;	/*IE 5.5*/
 
 }
-ul li a.now {
+div.historyPage ul li a.now {
 	color:#fff;
 	background-color:#f40;
 	border:1px solid #f40;
 }
-ul li a:hover, ul li a:focus {
+div.historyPage ul li a:hover, ul li a:focus {
 	rgb(255, 87, 87);
 	color:white;
 	border:1px solid #f40;
 	background-color:#f40;
+	
+	div.historyPage ul li {
+	color: green;
+	}
+	
 }
+
+
+
 </style>
 
 
@@ -123,14 +131,14 @@ ul li a:hover, ul li a:focus {
 </section>
 
 <br>
-<div>
+<div class = historyPage>
   <ul>
     <c:if test="${pageMaker.prev}">
     	<li><a href="history${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
     </c:if> 
 
     <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-    	<li><a href="history${pageMaker.makeQuery(idx)}">${idx}</a></li>
+    	<li><a id = "current" href="history${pageMaker.makeQuery(idx)}">${idx}</a></li>
     </c:forEach>
 
     <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
