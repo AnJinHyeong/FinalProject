@@ -28,7 +28,10 @@
 		<input type="text" name="bannerTitle" placeholder="타이틀">
 		<input type="text" name="bannerContent" placeholder="내용">
 		<input type="color" name="bannerBackgroundColor" value="#ffffff">
-		<input type="color" name="bannerColor" value="#000000">
+		<select name="bannerColor">
+			<option value="#000000">검정
+			<option value="#ffffff">흰색
+		</select>
 		<input type="file" name="bannerImage">
 		<input type="submit" value="등록">
 	</form>
