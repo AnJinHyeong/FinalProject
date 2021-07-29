@@ -111,6 +111,58 @@
 		});
 		
 		$.ajax({
+			url : "${pageContext.request.contextPath}/project/data/index/indexProjectMain3",
+			type : 'get',
+			success : function(resp) {
+				$("#sectionProjectMain3").empty();
+				for(var i=0; i < resp.length; i++){
+					var template = $("#projectMaindiv").html();
+					template = template.replace("{{categoryTheme}}", resp[i].categoryTheme);
+					template = template.replace("{{memberInfoNick}}", resp[i].memberInfoNick);
+					template = template.replace("{{projectTitle}}", resp[i].projectTitle);
+					template = template.replace("{{projectPercent}}", resp[i].projectPercent);
+					template = template.replace("{{projectNo}}", resp[i].projectNo);
+					
+					var url = "${pageContext.request.contextPath}/image/project/projectMainDownload/"+resp[i].imageNo;
+					template = template.replace("{{projectImage}}", url);
+					
+					if(resp[i].projectPercent < 25){
+						template = template.replace("{{icon}}", "fa-battery-empty");
+						template = template.replace("{{iconColor}}", "#ffadad");
+					}
+					else if(resp[i].projectPercent < 50 && resp[i].projectPercent >= 25){
+						template = template.replace("{{icon}}", "fa-battery-quarter");
+						template = template.replace("{{iconColor}}", "#ffdb72");
+					}
+					else if(resp[i].projectPercent < 75 && resp[i].projectPercent >= 50){
+						template = template.replace("{{icon}}", "fa-battery-half");
+						template = template.replace("{{iconColor}}", "#aaffb8");
+					}
+					else if(resp[i].projectPercent < 100 && resp[i].projectPercent >= 75){
+						template = template.replace("{{icon}}", "fa-battery-three-quarters");
+						template = template.replace("{{iconColor}}", "#84ff84");
+					}
+					else if(resp[i].projectPercent >= 100){
+						template = template.replace("{{icon}}", "fa-battery-full");
+						template = template.replace("{{iconColor}}", "#00ff2e");
+					}
+					
+					
+					$("#sectionProjectMain3").append(template);
+					
+				}
+				
+				$(".section-project-image").on("click",function(){
+					var projectNo = $(this).attr("id");
+					location.href="${pageContext.request.contextPath}/projectBoard/"+projectNo+"";
+				});
+			}
+			
+		});
+		
+		
+		
+		$.ajax({
 			url :"${pageContext.request.contextPath}/request/requestLikeList",
 			type: "post",
 			success : function(resp){
@@ -368,33 +420,16 @@
 		</div>
 		
 		<div class="section-project-row-div">
-			<a href="#" class="section-project-minaP">인기 추천 프로젝트<i class="fc150 ml10 fas fa-angle-right"></i></a>
+			<form action="${root}/project/projectSearch" method="post">
+				<input type="hidden" name="projectState" value="2">
+				<input type="hidden" name="projectOrder" value="3">
+				<button class="right bosNone bacInherit cursorPointer">			
+					<span class="section-project-minaP">인기 추천 프로젝트<i class="fc150 ml10 fas fa-angle-right"></i></span>
+				</button>
+			</form>
 			
-			<div class="section-project-main">
-				<div class="section-project-mainDiv">
-					dd
-				</div>
-				<div class="section-project-mainDiv">
-					dd
-				</div>
-				<div class="section-project-mainDiv">
-					dd
-				</div>
-				<div class="section-project-mainDiv">
-					dd
-				</div>
-				<div class="section-project-mainDiv">
-					dd
-				</div>
-				<div class="section-project-mainDiv">
-					dd
-				</div>
-				<div class="section-project-mainDiv">
-					dd
-				</div>
-				<div class="section-project-mainDiv">
-					dd
-				</div>
+			<div class="section-project-main" id="sectionProjectMain3">
+
 			</div>
 		</div>
 		

@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.entity.SponsorDto;
 import com.kh.finalproject.service.SearchService;
 import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
 import com.kh.finalproject.vo.ProjectProgressVo;
+import com.kh.finalproject.vo.ProjectSponsorVo;
 import com.kh.finalproject.vo.ProjectVo;
 import com.kh.finalproject.vo.SearchVo;
 
@@ -175,6 +177,11 @@ public class ProjectDaoImpl implements ProjectDao{
 		return sqlSession.selectList("project.indexProjectMain2");
 	}	
 	
+	@Override
+	public List<IndexProjectVo> indexProjectMain3() {
+		return sqlSession.selectList("project.indexProjectMain3");
+	}
+	
 	@Autowired
 	private SearchService searchService;
 	
@@ -239,5 +246,32 @@ public class ProjectDaoImpl implements ProjectDao{
 		
 		return sqlSession.selectList("project.projectList", searchVo);
 	}
+
+	@Override
+	public boolean projectLikeUp(int projectNo) {
+		int count = sqlSession.update("project.projectLikeUp", projectNo);
+		return count > 0;
+	}
+
+	@Override
+	public boolean projectLikeDown(int projectNo) {
+		int count = sqlSession.update("project.projectLikeDown", projectNo);
+		return count > 0;
+	}
+	
+	@Override
+	public List<SponsorDto> projectSponsorByProjectNo(int projectNo) {
+		return sqlSession.selectList("project.projectSponsorByProjectNo", projectNo);
+	}
+	
+
+	@Override
+	public ProjectSponsorVo getSponsorSelect(int sponsorNo) {
+		return sqlSession.selectOne("project.getSponsorSelect", sponsorNo);
+	}
+
+	
+
+	
 
 }

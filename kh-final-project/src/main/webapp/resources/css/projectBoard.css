@@ -386,6 +386,7 @@
 	height: 2400px; 
 	display: none; 
 	background-color: rgba(0, 0, 0, 0.4); 
+	z-index: 100;
 } 
 
 .report-modal-body{
@@ -423,4 +424,31 @@
 	height: 100%; 
 	border: 1px solid rgb(240, 240, 240); 
 	resize: none;
+}
+
+.sponsor-div-top{
+	border: 1px solid #cdcdcd;
+	height: 40px;
+    margin: 10px 0;
+    width: 100%;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+    background-color: #fff;
+}
+
+.sponsor-div{
+	height: 40px;
+    margin: 10px 0;
+    width: 100%;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.sponsor-div:hover{
+	cursor: pointer;
+	background-color: #fff;
 }

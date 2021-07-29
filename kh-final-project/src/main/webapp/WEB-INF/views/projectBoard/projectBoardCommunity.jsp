@@ -64,27 +64,29 @@
 		});
 		
 		//좋아요 기능
-		$("#projectLikeBtnOn").hide();
+		if(!${not empty memberNo}){
+			$("#projectLikeBtnI").addClass('far');
+			
+			$("#projectLikeBtn").on("click",function(){
+				window.alert("로그인 후 이용이 가능합니다.");
+			});
+		}
 		
-		$("#projectLikeBtnOn").hide();
 		if(${not empty memberNo}){
 			$.ajax({
 				url :"${pageContext.request.contextPath}/projectLike/${projectDto.projectNo}/projectLikeConfirm",
 				type: "post",
 				success : function(resp){
 					if(resp == 1){
-						$("#projectLikeBtnOn").show();
-						$("#projectLikeBtnOff").hide();
+						$("#projectLikeBtnI").addClass('fas');
 					}
 					else{
-						$("#projectLikeBtnOn").hide();
-						$("#projectLikeBtnOff").show();
+						$("#projectLikeBtnI").addClass('far');
 					}
 				}
 			
 			});
 		}
-		
 		
 		
 		$("#projectLikeBtn").on("click",function(){
@@ -102,8 +104,8 @@
 							}
 						
 						});
-						$("#projectLikeBtnOn").hide();
-						$("#projectLikeBtnOff").show();
+						$("#projectLikeBtnI").addClass('far');
+						$("#projectLikeBtnI").removeClass('fas');
 					}
 					else{
 						$.ajax({
@@ -114,8 +116,8 @@
 							}
 						
 						});
-						$("#projectLikeBtnOn").show();
-						$("#projectLikeBtnOff").hide();
+						$("#projectLikeBtnI").addClass('fas');
+						$("#projectLikeBtnI").removeClass('far');
 					}
 				}
 			
@@ -126,6 +128,12 @@
 		
 		
 		//신고하기
+		if(!${not empty memberNo}){
+			$("#report").on("click",function(){
+				window.alert("로그인 후 이용이 가능합니다.");
+			});
+		}
+		
 		$("#report2").hide();
 	    
 		$('#report').hover(function() {
@@ -137,7 +145,7 @@
 			$("#report2").hide();
 		});
 		
-		
+		//펀딩 기간 계산
 		const modal = document.querySelector('.report-modal'); 
 		const btnOpenPopup = document.querySelector('#report'); 
 		btnOpenPopup.addEventListener('click', () => { modal.style.display = 'block'; });
@@ -291,29 +299,11 @@
 
 					<div class="project-board-flex-div4">
 						<button class="project-board-div4-like" id="projectLikeBtn">
-							<c:choose>
-								<c:when test="${not empty memberNo}">
-									<span class="font-20 red" id="projectLikeBtnOn"><i class='fas fa-heart'></i></span>
-									<span class="font-20 red" id="projectLikeBtnOff"><i class='far fa-heart'></i></span>
-								</c:when>
-								<c:otherwise>
-									<a href="${pageContext.request.contextPath}/member/login">
-										<span class="font-20 red" id="projectLikeBtnOff"><i class='far fa-heart'></i></span>
-									</a>
-								</c:otherwise>
-							</c:choose>
+							<span class="font-20 red"><i id="projectLikeBtnI" class=' fa-heart'></i></span>
 						</button>
 						<button class="project-board-div4-like" id="report">
-							<c:choose>
-								<c:when test="${not empty memberNo}">
-									<span class="font-20 red" id="report1"><i class="far fa-tired"></i></span>
-									<span class="font-12 red" id="report2">신고하기</span>
-								</c:when>
-								<c:otherwise>
-									<a href="${pageContext.request.contextPath}/member/login"><span class="font-20 red" id="report1"><i class="far fa-tired"></i></span></a>
-									<a href="${pageContext.request.contextPath}/member/login"><span class="font-12 red" id="report2">신고하기</span></a>
-								</c:otherwise>
-							</c:choose>
+							<span class="font-20 red" id="report1"><i class="far fa-tired"></i></span>
+							<span class="font-12 red" id="report2">신고하기</span>
 						</button>
 						<button class="project-board-div4-funding">프로젝트 후원</button>
 					</div>

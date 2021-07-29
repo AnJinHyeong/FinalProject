@@ -226,7 +226,7 @@
 							<div class="project-insert-gift-list p30">
 								<div class="mb10 w100p float-container">
 									<span id="giftPrice" class="left w260 fBold fs22">${giftDto.giftPrice}원+</span> 
-									<c:if test="${projectDto.projectState != '2'}">
+									<c:if test="${projectDto.projectState == '1'}">
 										<span class="yb modalX right"> <i class="fas fa-times"></i></span>
 									</c:if>
 								</div>
@@ -344,7 +344,7 @@
 											</div>
 										</div>
 										
-										<c:if test="${projectDto.projectState != '2'}">
+										<c:if test="${projectDto.projectState == '1'}">
 											<c:if test="${itemCount != 0}">
 												<div class="project-insert-div3 mt50">
 													<input class="project-btn btn3 project-btn-hover" style="margin-right: 0px" type="submit" value="등록">

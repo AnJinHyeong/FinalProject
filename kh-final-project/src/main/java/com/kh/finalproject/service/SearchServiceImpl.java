@@ -15,6 +15,9 @@ public class SearchServiceImpl implements SearchService {
 		else if(searchVo.getProjectOrder() == 2) {
 			searchVo.setProjectOrderString("project_regist_date");
 		}
+		else if(searchVo.getProjectOrder() == 3) {
+			searchVo.setProjectOrderString("project_like_count");
+		}
 		
 		if(searchVo.getProjectState() == 1) {
 			searchVo.setProjectStateString("");

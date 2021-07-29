@@ -292,7 +292,7 @@
 					</div>
 				</div>
 				
-				<c:if test="${projectDto.projectState != '2'}">
+				<c:if test="${projectDto.projectState == '1'}">
 					<div class="project-insert-div3">
 						<input class="project-btn btn3 project-btn-hover" type="submit" value="저장">
 					</div>

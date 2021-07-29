@@ -309,6 +309,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	        ORDER BY ${projectOrderString} DESC 
 	</select>
 	
+	<update id="projectLikeUp">
+		update project set project_like_count = project_like_count + 1 where project_no = #{projectNo}
+	</update>
+	
+	<update id="projectLikeDown">
+		update project set project_like_count = project_like_count - 1 where project_no = #{projectNo}
+	</update>
+	
+	<select id="projectSponsorByProjectNo" parameterType="int" resultType="SponsorDto">
+		SELECT * FROM SPONSOR  WHERE project_no = #{projectNo}
+	</select>
+	
+	<select id="getSponsorSelect" parameterType="int" resultType="ProjectSponsorVo">
+		SELECT 
+			S.*,
+			M.MEMBER_NICK, M.MEMBER_EMAIL , M.MEMBER_ADDRESS ,
+			G.GIFT_PRICE , G.GIFT_SUMMARY
+		FROM sponsor S 
+			INNER JOIN MEMBER M ON S.member_no = M.member_no
+			LEFT OUTER JOIN GIFT G ON S.gift_no = G.GIFT_NO 
+		WHERE S.SPONSOR_NO = #{sponsorNo}
+	</select>
+	
+	<update id="projectApprovalUpdate4">
+		<![CDATA[
+	        UPDATE project SET PROJECT_STATE = '4' WHERE project_state = '3' AND project_end_date <= sysdate
+		]]>
+	</update>
 </mapper>
 
 
