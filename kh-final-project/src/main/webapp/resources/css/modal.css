@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+/* font */
+.modal{ 
+ font-family: 'NanumSquare', sans-serif;
+position:fixed; 
+width:100%; 
+height:100%; 
+background: rgba(0,0,0,0.8); 
+top:0; left:0; 
+}
+
+.modalContent{
+	text-align:center;
+	background:white;
+	width : 500px;
+	height: 400px;
+position:fixed;
+  top:50%; 
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+
+.modalTitle{
+	font-size: 25px;
+	color: white;
+	font-weight: bold;
+	background: #FF9F43;
+	padding : 10px;
+}
+
+.form{
+	border: none;
+	font-size: 20px;
+	color: white;
+	font-weight: bold;
+	background: #FF9F43;
+	padding : 10px;
+	border
+}
+.bold{
+	font-weight: bold;
+}

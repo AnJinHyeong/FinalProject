@@ -158,18 +158,27 @@ public class MemberController {
 		return "member/redirectMember";
 	}
 
+	/* 이메일 인증번호 비동기로 비활성화 */
+//	@PostMapping(value = "/memberInsert")
+//	public String memberInsert(@ModelAttribute EmailAuthDto emailAuthDto, RedirectAttributes attr,@ModelAttribute MemberDto memberDto) {
+//	boolean result = emailService.checkCertification(emailAuthDto);
+//	if(result) {
+//		memberDao.memberInsert(memberDto);
+//		return "member/joinSuccess";
+//
+//		  }else { attr.addAttribute("error", ""); attr.addAttribute("email",
+//		  emailAuthDto.getEmail()); return "redirect:join"; }
+//
+//	}
+	
+
 	@PostMapping(value = "/memberInsert")
-	public String memberInsert(@ModelAttribute EmailAuthDto emailAuthDto, RedirectAttributes attr,@ModelAttribute MemberDto memberDto) {
-	boolean result = emailService.checkCertification(emailAuthDto);
-	if(result) {
+	public String memberInsert(@ModelAttribute MemberDto memberDto) {
 		memberDao.memberInsert(memberDto);
-		return "member/joinSuccess";
-	}else {
-		attr.addAttribute("error", "");
-		attr.addAttribute("email", emailAuthDto.getEmail());
-		return "redirect:join";
-	}	
+		return "index";
 	}
+	
+	
 	 
 	@GetMapping("/login")
 	public String memberInsert() {
@@ -235,13 +244,14 @@ public class MemberController {
 		return "member/emailCheck";
 	}
 	
-	@PostMapping("/emailCheck")
-	public String emailCheck(@RequestParam String email, RedirectAttributes attr) throws MessagingException {
-		emailService.sendEmail(email);
-		
-		attr.addAttribute("email", email);
-		return "redirect:join";
-	}
+	/* 이메일 인증번호 비동기로 비활성화2 */
+//	@PostMapping("/emailCheck")
+//	public String emailCheck(@RequestParam String email, RedirectAttributes attr) throws MessagingException {
+//		emailService.sendEmail(email);
+//		
+//		attr.addAttribute("email", email);
+//		return "redirect:join";
+//	}
 	
 	@Autowired
 	private ProjectLikeDao projectLikeDao;
