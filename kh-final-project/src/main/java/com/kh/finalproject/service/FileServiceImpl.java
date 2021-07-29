@@ -48,7 +48,7 @@ public class FileServiceImpl implements FileService {
 		log.debug("로컬 파일 정리가 완료되었습니다. test");
 	}
 	
-	@Scheduled(cron = "0 * * * * *")
+	@Scheduled(cron = "0 0 0 * * *")
 	@Override
 	public void autoClearDeleteLocalFileNotInDB() {
 		test();
