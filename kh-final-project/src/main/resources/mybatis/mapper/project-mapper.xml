@@ -332,6 +332,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE S.SPONSOR_NO = #{sponsorNo}
 	</select>
 	
+	<update id="projectApprovalUpdate4">
+		<![CDATA[
+	        UPDATE project SET PROJECT_STATE = '4' WHERE project_state = '3' AND project_end_date <= sysdate
+		]]>
+	</update>
 </mapper>
 
 
