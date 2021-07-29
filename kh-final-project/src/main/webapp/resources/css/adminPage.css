@@ -46,13 +46,25 @@ aside *{
 }
 .admin-aside-top_menu{
 	 padding: 1rem 0;
+	 list-style:none;
 }
 .admin-aside-top_menu li{
 	margin-top: 10px;
+	list-style:none;
+	font-size: 17px;
+}
+.admin-aside-top_menu li > a{
+	color:#c1c1c1;
+	cursor: pointer;
 }
 .admin-aside-top_menu li:hover > a{
-	color:#ff9f43;
+	color:#fff;
 	cursor: pointer;
+	font-weight: bold;
+}
+.admin-aside-main-span{
+	font-size: 13px;
+	font-weight: bold;
 }
 
 

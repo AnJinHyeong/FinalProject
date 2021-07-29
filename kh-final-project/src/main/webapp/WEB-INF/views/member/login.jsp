@@ -81,7 +81,7 @@
 
 </style>
 <hr class="hrClass">
-<div class="container-800 mainDiv">
+<div class="container-800 mainDiv" style="height: 770px;" >
 	<div class="loginForm">
 		<div class="text-left titleDiv">
 			<h1>로그인</h1>

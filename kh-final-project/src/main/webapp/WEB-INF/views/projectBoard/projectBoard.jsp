@@ -154,17 +154,17 @@
 			$("#report2").hide();
 		});
 		
-		
-		//펀딩 기간 계산
-		const modal = document.querySelector('.report-modal'); 
-		const btnOpenPopup = document.querySelector('#report'); 
-		btnOpenPopup.addEventListener('click', () => { modal.style.display = 'block'; });
+		if(${not empty memberNo}){
+			const modal = document.querySelector('.report-modal'); 
+			const btnOpenPopup = document.querySelector('#report'); 
+			btnOpenPopup.addEventListener('click', () => { modal.style.display = 'block'; });
+		}
 		
 		$("#modal-cancel").on("click",function(){
 			$(".report-modal").hide();
 		});
 		
-		
+		//펀딩 기간 계산
 		var today = new Date();
 		var dd = today.getDate();
 		var mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!

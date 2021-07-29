@@ -12,4 +12,15 @@ public class AdminController {
 	public String adminHome() {
 		return "admin/adminHome";
 	}
+	
+	@GetMapping("/adminProjectSelect")
+	public String adminProjectSelect() {
+		
+		return "admin/adminProjectSelect";
+	}
+
+
+
+
+	
 }
