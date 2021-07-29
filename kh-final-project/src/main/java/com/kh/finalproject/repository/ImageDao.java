@@ -52,4 +52,15 @@ public interface ImageDao {
 	void deleteImageByImageSaveName(int projectNo, String imageSaveName);
 	// 프로젝트 번호와 이미지 저장 이름으로 이미지 확인 (>1: 이미지 o / =0: 이미지 x)
 	int confirmProjectMainStoryByImageSaveName(int projectNo, String imageSaveName);
+	
+	// 배너 이미지 목록 가져오기
+	List<ImageDto> getListMainBanner();
+	// 배너 이미지 갯수
+	int getCountMainBanner();
+	// 배너 이미지 가져오기
+	ImageDto getImageMainBanner(int imageNo);
+	// 배너 이미지 등록
+	void insertImageMainBanner(ImageDto imageDto);
+	// 시퀀스 받기
+	int getSequence();
 }
