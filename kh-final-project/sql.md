@@ -112,7 +112,8 @@ image_content_type varchar2(30),
 image_size number(19) DEFAULT 0 NOT NULL,
 project_no REFERENCES project(project_no) ON DELETE CASCADE,
 project_state char(1) CHECK (project_state IN ('Y')) ,
-member_no REFERENCES member(member_no) ON DELETE CASCADE
+member_no REFERENCES member(member_no) ON DELETE CASCADE,
+main_banner references banner(banner_no) on delete cascade
 );
 
 CREATE SEQUENCE image_file_seq;
@@ -163,6 +164,19 @@ report_date DATE DEFAULT sysdate
 );
 
 CREATE SEQUENCE project_report_seq;
+
+
+#banner
+create table banner(
+banner_no number(19) primary key,
+banner_title varchar2(60) not null,
+banner_content varchar2(150) not null, 
+banner_background_color char(7) default '#ffffff' not null,
+banner_color char(7) default '#000000' not null
+);
+
+create sequence banner_seq;
+
 
 #request
 CREATE TABLE request(

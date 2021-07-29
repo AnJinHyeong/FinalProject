@@ -2,7 +2,6 @@ package com.kh.finalproject.restcontroller;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +14,6 @@ import com.kh.finalproject.repository.CategoryDao;
 @RequestMapping("/category/data")
 @RestController
 public class CategoryDataController {
-	
-	@Autowired
-	private SqlSession sqlSession;
 	
 	@Autowired
 	private CategoryDao categoryDao;

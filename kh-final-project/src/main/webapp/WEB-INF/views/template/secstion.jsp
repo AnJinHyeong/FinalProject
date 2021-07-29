@@ -110,7 +110,6 @@
 			
 		});
 		
-		
 		$.ajax({
 			url : "${pageContext.request.contextPath}/project/data/index/indexProjectMain3",
 			type : 'get',
@@ -213,8 +212,96 @@
 		
 		});
 		
+		var mainBannerImageCount = ${mainBannerImageCount};
+		var width = 700;
+		var left = -width;
+		var maxLeft = (mainBannerImageCount - 2) * width;
+    
+    var currentNo = 1;
 		
+		$("#imageNextBtn").on("click", function(){
+			$(this).prop("disabled", true);
+			var that = $(this);
+			$(".mainBannerImage").each(function(index, item){
+				if($(this).css("left") == "-" + width + "px"){
+					$(this).css("left", maxLeft + "px");
+				}
+				else{
+					$(this).animate({"left": (Number($(this).css("left").split("px")[0]) - width) + "px"}, 300, "swing", function(){
+						that.prop("disabled", false);
+					});
+				}
+			});
+			currentNo = currentNo + 1;
+			if (currentNo > mainBannerImageCount){
+				currentNo = 1;
+			}
+			$("#mainBannerImageCurrentNo").text(currentNo);
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/banner/data/getBannerByIndexNo",
+				type : 'post',
+				data : {
+					indexNo :  currentNo
+				},
+				success : function(resp) {
+					$("#mainBannerTitle").text(resp.bannerTitle);
+					$("#mainBannerContent").text(resp.bannerContent);
+					$("#mainBannerTextContainer").animate({"background-color": resp.bannerBackgroundColor, 
+															"color": resp.bannerColor}, 300);
+				}
+			});
+			
+		});
 		
+		$("#imagePreBtn").on("click", function(){
+			$(this).prop("disabled", true);
+			var that = $(this);
+			$(".mainBannerImage").each(function(index, item){
+				if($(this).css("left") == maxLeft + "px"){
+					$(this).css("left", "-" + width + "px");
+				}
+				else if($(this).css("left") == "0px"){
+					$(this).animate({"left": (Number($(this).css("left").split("px")[0]) + width) + "px"}, 300, "swing", function(){
+						that.prop("disabled", false);
+					});
+				}
+				else{
+					$(this).animate({"left": (Number($(this).css("left").split("px")[0]) + width) + "px"}, 300, "swing", function(){
+						that.prop("disabled", false);
+					});
+				}
+			});
+			currentNo = currentNo - 1;
+			if(currentNo < 1){
+				currentNo = mainBannerImageCount;
+			}
+			$("#mainBannerImageCurrentNo").text(currentNo);
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/banner/data/getBannerByIndexNo",
+				type : 'post',
+				data : {
+					indexNo :  currentNo
+				},
+				success : function(resp) {
+					$("#mainBannerTitle").text(resp.bannerTitle);
+					$("#mainBannerContent").text(resp.bannerContent);
+					$("#mainBannerTextContainer").animate({"background-color": resp.bannerBackgroundColor, 
+															"color": resp.bannerColor}, 300);
+				}
+			});
+			
+		});
+		
+		$(".mainBannerImage").each(function(index, item){
+			if($(this).css("left") == maxLeft + "px"){
+				$(this).css("left", "-" + width + "px");
+			}
+			else{
+				$(this).css("left", (Number($(this).css("left").split("px")[0]) + width) + "px");
+			}
+		});
 		
 	});
 	
@@ -251,12 +338,36 @@
 	<p class="request-p font-14"><span class="request-top5-i" style="color: #ff9e9e;">{{i}}.</span><a href="${pageContext.request.contextPath}/requestBoard/requestBoardContent/{{requestNo}}"> {{requestTitle}}</a></p>
 </script>
 
-
 <div class="section-row">
-	<div class="section-event" style="background-color: #dcdcdc;">
+
+	<a href="${root}/banner/bannerInsert">배너 등록</a>
+
+	<div class="dpFlex dpFlexXCenter mt20 mb20">
+		<div id="mainBannerContainer" class="dpInlineBlock w700 h400 scrollNone poRelative">
+			<c:forEach var="imageDto" items="${mainBannerImageList}" varStatus="status">
+				<div class="mainBannerImage w100p h100p poAbsolute" style="left: ${(status.index - 1) * 700}px;">
+					<img class="w700 h100p rollingImage" src="${pageContext.request.contextPath}/image/downloadImageMainBanner/${imageDto.imageNo}">
+				</div>
+			</c:forEach>
+		</div>
+		<div id="mainBannerTextContainer" class="dpInlineBlock w400 h400 scrollNone pl30 pr30 pt100" style="background-color: ${startBannerDto.bannerBackgroundColor}; color: ${startBannerDto.bannerColor}">
 		
-		이벤트 구현 위치
-		
+			<div class="mb20 h80">
+				<span id="mainBannerTitle" class="fs30 fBold">${startBannerDto.bannerTitle}</span>
+			</div>
+			<div class="mb50 h80">
+				<span id="mainBannerContent" class="fs12">${startBannerDto.bannerContent}</span>
+			</div>
+			
+			<div class="taCenter fcWhite bora30 dpFlex dpFlexCenter dpFlexXCenter p5" style="background-color: rgba(0, 0, 0, 0.3); margin: 0 120px;">
+				<button id="imagePreBtn" class="bacInitial w20 h20 fBold bosNone"><i class="fWhite fs18 fas fa-chevron-left"></i></button>
+				<div class="taCenter dpFlex h30 w40 dpFlexCenter dpFlexXCenter">
+					<span class="fs14 fBold fWhite"><span id="mainBannerImageCurrentNo">1</span>/${mainBannerImageCount}</span>
+				</div>
+				<button id="imageNextBtn" class="bacInitial w20 h20 fBold bosNone"><i class="fWhite fs18 fas fa-chevron-right"></i></button>
+			</div>
+			
+		</div>
 	</div>
 	
 	<div class="section-project-rrr">
