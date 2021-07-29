@@ -152,6 +152,28 @@
 			}
 		});
 		
+		var projectNo = ${projectDto.projectNo};
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath}/project/data/projectInformation",
+			type : 'post',
+			data : {
+				"projectNo" : projectNo
+			},
+			success : function(resp) {
+				if (resp.projectPercent < 100) {
+					
+					$("#projectGaugeBackground").css("background-color", "rgba(255, 0, 0, 0.05)");
+					$("#projectGaugeBackground").css("width", resp.projectPercent + "%");
+					
+				} else {
+					$("#projectGaugeBackground").css("background-color", "rgba(0, 255, 0, 0.05)");
+					$("#projectGaugeBackground").css("width", "100%");
+				}
+				$("#projectGaugePercent").text("(" + resp.projectPercent + "%)");
+				$("#projectGaugeAmount").text(resp.sumCurrentAmountByAll + " / " + resp.projectTargetAmount);
+			}
+		});
 		
 	});
 </script>
@@ -160,6 +182,11 @@
 	<div class="section-project-row">
 
 		<div class="project-main-div1">
+			<div class="boc240 bosSolid bow1 w200 h40 poRelative mr20">
+				<div id="projectGaugeBackground" class="poAbsolute h100p dpFlex"></div>
+				<pre id="projectGaugeAmount" class="poAbsolute fs12 fBold poAbsoluteLeftCenter" style="padding-left:5px;"></pre>
+				<pre id="projectGaugePercent" class="poAbsolute fs12 fBold poAbsoluteRightCenter" style="padding-right:5px;"></pre>
+			</div>
 			<c:choose>
 				<c:when test="${projectDto.projectState == '1' || projectDto.projectState == '2'}">
 					<a href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}"><button class="project-btn btn1 project-btn-hover" id="projectBoard">미리보기</button></a>
