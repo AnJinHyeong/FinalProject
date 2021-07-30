@@ -25,45 +25,15 @@
 </style>
 
 
-
- 
-
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
 <section class="main-row topLine">
-
- 
 
 	<div class="container-1200 mt30 poRelative">
 
 		<p class="fs34 pl20">
-
 			<strong>내가 만든 프로젝트</strong>
-
 		</p>
 
 	</div> 
-
- 
 
 	<div class="mt30 bottomLine poRelative">
 
@@ -81,15 +51,9 @@
 
 	</div> 
 
- 
-
-	<div class="container-1400 dpFlex pl100 pr100 abc">
-
- 
+	<div class="container-1400 dpFlex pl100 pr100 abc" style="min-height: 658px;">
 
 		<div class="container-800 hMax600 mt30 mb30 scrollThin">
-
- 
 
 		<c:choose>
 
@@ -110,8 +74,6 @@
 				<c:forEach var="projectDto" items="${projectDto}">
 
 					<div class="float-container" style="border-bottom:solid 1px #3d3d3d; padding:20px;">
-
-					
 
 						<div class="left" class="project-main-img w80 h100p">이미지</div>
 
@@ -139,32 +101,7 @@
 
 		</div>
 
-		 
-
 	</div>
 
- 
-
- 
-
-		
-
-		
-
-		
-
-	
-
-		
-
- 
-
-	
-
- 
-
 </section>
-
- 
-
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

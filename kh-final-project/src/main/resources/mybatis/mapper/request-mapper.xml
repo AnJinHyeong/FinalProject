@@ -93,6 +93,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM request WHERE instr(request_title, #{keyword}) > 0 ORDER BY request_no asc
 	</select>
 	
+	<delete id="deleteRequest" parameterType="RequestDto">
+		delete request where request_no = #{requestNo} and request_member_no = #{requestMemberNo}
+	</delete>
+	
+	<update id="requestEdit" parameterType="RequestDto">
+		update request 
+		set request_title = #{requestTitle}, request_category_no = #{requestCategoryNo}, request_content = #{requestContent} 
+		where request_no = #{requestNo} and request_member_no = #{requestMemberNo}
+	</update>
+	
+	<select id="requestEditgetByRequestNo" parameterType="int" resultType="RequestDto">
+		select * from request where request_no = #{requestNo}
+	</select>
+	
 </mapper>
 
 
