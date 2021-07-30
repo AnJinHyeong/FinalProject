@@ -108,8 +108,8 @@ public class MemberDaoImpl implements MemberDao{
 
 
 	@Override
-	public void addPointBySponsorCancel(SponsorDto sponsorDto) {
-		sqlSession.update("member.addPointBySponsorCancel", sponsorDto);
+	public void addPoint(SponsorDto sponsorDto) {
+		sqlSession.update("member.addPoint", sponsorDto);
 	}
 	
 	@Override

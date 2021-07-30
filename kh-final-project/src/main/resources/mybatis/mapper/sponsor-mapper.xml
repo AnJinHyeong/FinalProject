@@ -88,5 +88,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from sponsor where sponsor_no = #{sponsorNo} and member_no = #{memberNo}
 	</select>
 	
+	<!-- 프로젝트 번호로 후원금액 목록 가져오기 -->
+	<select id="getSponsorAmountListByProjectNo" resultType="ProjectAmountGiveVo" parameterType="int">
+		select member_no sponsor_member_no, sum(sponsor_amount) sponsor_amount from sponsor where project_no = #{projectNo} group by member_no
+	</select>
+	
 </mapper>
 
