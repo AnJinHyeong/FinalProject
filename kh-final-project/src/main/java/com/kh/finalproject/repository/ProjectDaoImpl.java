@@ -10,6 +10,8 @@ import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.entity.SponsorDto;
 import com.kh.finalproject.service.SearchService;
 import com.kh.finalproject.vo.IndexProjectVo;
+import com.kh.finalproject.vo.ProjectAdminSearchKeywordVo;
+import com.kh.finalproject.vo.ProjectAdminSearchVo;
 import com.kh.finalproject.vo.ProjectAmountGiveVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
 import com.kh.finalproject.vo.ProjectProgressVo;
@@ -283,6 +285,11 @@ public class ProjectDaoImpl implements ProjectDao{
 		return projectDto;
 	}
 
+	@Override
+	public List<ProjectAdminSearchVo> projectAdminSelectList(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo) {
+		return sqlSession.selectList("project.projectAdminSelect", projectAdminSearchKeywordVo);
+	}
+	
 	@Override
 	public List<ProjectAmountGiveVo> getProjectAmountGiveVoList() {
 		return sqlSession.selectList("project.getProjectAmountGiveVoList");
