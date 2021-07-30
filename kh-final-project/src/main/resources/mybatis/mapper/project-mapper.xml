@@ -348,6 +348,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</update>
 	
+	<select id="projectAdminSelect" parameterType="ProjectAdminSearchKeywordVo" resultType="ProjectAdminSearchVo">
+		SELECT
+		    P.*,
+			C.CATEGORY_THEME
+		from Project P
+			left outer join category C ON P.category_no = C.category_no
+		WHERE  P.PROJECT_STATE = #{projectState} and (instr(P.#{searchType}, #{keyword}) > 0)
+	</select>
+
 	<select id="getProjectAmountGiveVoList" resultType="ProjectAmountGiveVo">
 		<![CDATA[
 			select project_no, member_no, project_percent, to_char(project_end_date) project_end_date, project_state, project_amount_give from project
