@@ -268,10 +268,18 @@ public class ProjectDaoImpl implements ProjectDao{
 	@Override
 	public ProjectSponsorVo getSponsorSelect(int sponsorNo) {
 		return sqlSession.selectOne("project.getSponsorSelect", sponsorNo);
+  }
+	
+  @Override
+	public List<ProjectDto> proList(int memberNo) {
+		List<ProjectDto> projectDto = sqlSession.selectList("project.proList", memberNo);
+		return projectDto;
 	}
 
-	
-
-	
-
+	@Override
+	public List<ProjectDto> proList2(int memberNo) {
+		List<ProjectDto> projectDto = sqlSession.selectList("project.proList2", memberNo);
+		return projectDto;
+	}
+  
 }

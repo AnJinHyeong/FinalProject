@@ -10,7 +10,7 @@
 
 <meta charset="UTF-8">
 
-<title>문의하기</title>
+<title>배송지 주소 입력</title>
 
 <style>
 
@@ -42,13 +42,15 @@
 
 	}
 
+
+	
 }
 
 </style>
 
 <script>
 
-	
+
 
 </script>
 
@@ -60,27 +62,20 @@
 
 		<div><h1>배송지 추가</h1></div>
 
-		<form>
+		<form action="upAddress" method ="post">
+
 
 			<div>
 
-				받는 사람<br>
+				주소 :
 
-				<input type="text"  placeholder="받는사람 이름" style='width:70%; margin-bottom:10px; margin-left:30px;' value="">
-
-			</div>
-
-			<div>
-
-				주소<br>
-
-				<input type="text"  placeholder="주소" style='width:70%; margin-bottom:10px; margin-left:30px;' value="">
+				<input type="text"  placeholder="주소" style='width:70%; margin-bottom:10px; margin-left:30px;' name="memberAddress">
 
 			</div>
 
 			
 
-			<input type="submit" class="textBtn" disabled="disabled" style="width:100%;" value="등록 완료">
+			<input type="submit" class="textBtn" style="width:70%;" value="등록 완료">
 
 		</form>
 
