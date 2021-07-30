@@ -9,12 +9,6 @@
 
 
 <style>
-.wall {
-	content: "";
-	display: block;
-	clear: both;
-}
-
 .section-setting {
 	width: 85%;
 	/* 	min-height: 1000px; */
@@ -44,11 +38,6 @@
 	margin-top: 20px;
 	font-size: 15px;
 	padding: 15px;
-}
-
-.introCont {
-	font-size: 12px;
-	color: gray;
 }
 
 .titleCont {
@@ -143,106 +132,87 @@
 <script>
 	$(function() {
 
-		$('#changeBtn1').click(function() {
-
+		$('#changeProBtn').click(function() {
+			$(".targetDiv").hide('fast');
+			$(".targetBtn").html('변경');
+			$(".targetBtn").not($(this)).hide('fast');
 			if ($('.changePro').css("display") == "none") {
-
-				$('.changePro').show();
-
-				$("#changeBtn1").html('취소');
-
+				$('.changePro').show('fast');
+				$("#changeProBtn").html('취소');
 			} else if ($('.changePro').css("display") != "none") {
-
-				$('.changePro').hide();
-
-				$("#changeBtn1").html('변경');
-
+				$('.changePro').hide('fast');
+				$("#changeProBtn").html('변경');
+				$(".targetBtn").not($(this)).show('fast');
 			}
-
 		});
 
-		$('#changeBtn2').click(function() {
-
+		$('#changeNickBtn').click(function() {
+			$(".targetDiv").hide('fast');
+			$(".targetBtn").html('변경');
+			$(".targetBtn").not($(this)).hide('fast');
 			if ($('.changeNick').css("display") == "none") {
-
-				$('.changeNick').show();
-
+				$('.changeNick').show('fast');
 				$('.changeNick2').hide();
-
-				$("#changeBtn2").html('취소');
-
+				$("#changeNickBtn").html('취소');
 			} else if ($('.changeNick').css("display") != "none") {
-
-				$('.changeNick').hide();
-
+				$('.changeNick').hide('fast');
 				$('.changeNick2').show();
-
-				$("#changeBtn2").html('변경');
-
+				$("#changeNickBtn").html('변경');
+				$(".targetBtn").not($(this)).show('fast');
 			}
-
 		});
 
-		$('#changeBtn3').click(function() {
-
+		$('#changeIntroBtn').click(function() {
+			$(".targetDiv").hide('fast');
+			$(".targetBtn").html('변경');
+			$(".targetBtn").not($(this)).hide('fast');
 			if ($('.changeIntro').css("display") == "none") {
-
-				$('.changeIntro').show();
+				$('.changeIntro').show('fast');
 				$('.divIntro').hide();
-				$("#changeBtn3").html('취소');
-
+				$("#changeIntroBtn").html('취소');
 			} else if ($('.changeIntro').css("display") != "none") {
-
-				$('.changeIntro').hide();
+				$('.changeIntro').hide('fast');
 				$('.divIntro').show();
-				$("#changeBtn3").html('변경');
-
+				$("#changeIntroBtn").html('변경');
+				$(".targetBtn").not($(this)).show('fast');
 			}
-
 		});
 
-		$('#changeBtn4').click(function() {
-
+		$('#changePwBtn').click(function() {
+			$(".targetDiv").hide('fast');
+			$(".targetBtn").html('변경');
+			$(".targetBtn").not($(this)).hide('fast');
 			if ($('.changePw2').css("display") == "none") {
-
-				$('.changePw2').show();
-
-				$('.changePw1').hide();
-
-				$("#changeBtn4").html('취소');
-
+				$('.changePw2').show('fast');
+				$("#changePwBtn").html('취소');
 			} else if ($('.changePw2').css("display") != "none") {
-
-				$('.changePw2').hide();
-
-				$('.changePw1').show();
-
-				$("#changeBtn4").html('변경');
-
+				$('.changePw2').hide('fast');
+				$("#changePwBtn").html('변경');
+				$(".targetBtn").not($(this)).show('fast');
 			}
-
 		});
 		
-		$('#changeBtn5').click(function() {
-
-			$(".changeAddress").toggle();
-			
-			$("#submittedAddress").toggle();
-			
+		$('#changeAddressBtn').click(function() {
+			$(".targetDiv").hide('fast');
+			$(".targetBtn").html('변경');
+			$(".targetBtn").not($(this)).hide('fast');
 			if ($('.changeAddress').css("display") == "none") {
-
-				$("#changeBtn5").html('변경');
-
-			} else if ($('.changeAddress').css("display") != "none") {
-
-				$("#changeBtn5").html('취소');
-
+				$(".changeAddress").show('fast');
+				$("#changeAddressBtn").html('취소');
+			} else {
+				$(".changeAddress").hide('fast');
+				$("#changeAddressBtn").html('변경');
+				$(".targetBtn").not($(this)).show('fast');
 			}
 
 		});
 
-		$("#memberAddressInsert").on("click", function(){
-			$("input[name=memberAddress]").val("(" + $("input[name=postNumber]").val() + ") " + $("input[name=basicAddress]").val() + " " + $("input[name=detailAddress]").val());
+		$("#memberAddressInsert").on("click", function(e){
+			$("input[name=memberAddress]").val($("input[name=postNumber]").val() + ")" + $("input[name=basicAddress]").val() + " " + $("input[name=detailAddress]").val());
+			if($("input[name=postNumber]").val() == ""){
+				alert("주소를 입력하세요.")
+				e.preventDefault();
+			}
 		});
 
 	});
@@ -299,350 +269,151 @@
     }
 </script>
 
-<section class="topLine main-row">
 
-	<div class="mt30" style="margin-left: 85px;">
-		<strong class="setTitle pl20" style="font-size: 34px; color: black;">내 정보 수정</strong>
+<section class="main-row topLine">
+
+	<div class="container-1200 mt30 poRelative">
+		<p class="fs34 pl20">
+			<strong>내 정보 수정</strong>
+		</p>
 	</div>
 
-	<div class="mt20 bottomLine w100p"></div>
+	<div class="mt30 bottomLine poRelative"></div>
 
-	<div class="section-setting float-container bottomLine">
+	<div class="container-1200 dpFlex hMin700">
 
-		<div class="left left-container">
+		<div class="container-800 mt30 mb30 scrollThin">
 
-			<div>
 
-				<div class="float-container">
-
-					<div class="left" style="margin-top: 10px; margin-bottom: 10px;">
-						<strong>프로필 사진</strong>
+			<div class="mb20">
+				<div class="float-container bottomLine pb20">
+					<div class="left pl10">
+						<span class="fs18 fBold">프로필 사진</span>
 					</div>
-
-					<button type="button" class="right changeTitle" id="changeBtn1">변경</button>
-
-					<div class="wall"></div>
-
+					<button type="button" class="right bosNone bora5 fBold project-btn-normal-hover w70 h30 targetBtn" id="changeProBtn">변경</button>
 				</div>
 
-				<div class="changePro" style="display: none; margin-top: 10px; margin-bottom: 10px;">
-
+				<div class="targetDiv changePro dpNone" style="display: none; margin-top: 10px; margin-bottom: 10px;">
 					<div>프로필사진업로드</div>
-
 					<button type="button" class="imgBtn">저장</button>
-
 				</div>
-
-				<hr>
-
 			</div>
 
-
-
-			<div>
-
-				<div class="float-container">
-
-					<div class="left title2">
-						<strong>닉네임</strong>
+			<div class="mb20">
+				<div class="float-container bottomLine pb20">
+					<div class="left pl10">
+						<span class="fs18 fBold dpInlineBlock w120">닉네임</span> <span>${memberDto.memberNick}</span>
 					</div>
-
-
-					<button type="button" class="right changeTitle" id="changeBtn2">변경</button>
-
-					<div class="wall"></div>
-
+					<button type="button" class="right bosNone bora5 fBold project-btn-normal-hover w70 h30 targetBtn" id="changeNickBtn">변경</button>
 				</div>
 
-				<div class="changeNick2">${memberDto.memberNick}</div>
-
-				<div class="changeNick" style="display: none;">
-
-					<form action="upNick" method="post">
-
-						<input type="text" placeholder="바뀔이름" style="width: 100%; height: 40px;" name="memberNick">
-
-						<button type="submit" class="nickBtn">저장</button>
-
-					</form>
-
-
-				</div>
-
-				<hr>
-
-			</div>
-
-
-
-			<div>
-
-				<div class="float-container">
-
-					<div class="left" style="margin-top: 10px; margin-bottom: 10px;">
-						<strong>소개</strong>
-					</div>
-
-
-					<button type="button" class="right changeTitle" id="changeBtn3">변경</button>
-
-					<div class="wall"></div>
-
-				</div>
-
-				<div style="color: #9E9E9E; margin-top: 10px; margin-bottom: 10px;">
-					<div class="divIntro">
-						<c:choose>
-							<c:when test="${isIntro}">
-								<div>현재 소개글이 없습니다.</div>
-							</c:when>
-							<c:otherwise>
-								<div>${memberDto.memberIntroduce}</div>
-							</c:otherwise>
-						</c:choose>
-					</div>
-				</div>
-
-				<div class="changeIntro" style="display: none;">
-					<form action="upIntro" method="post">
-						<textarea rows="10" cols="100" style="padding: 5px;" name="memberIntroduce"></textarea>
-
-
-
-						<button type="submit" class="introBtn">저장</button>
-					</form>
-
-				</div>
-
-				<hr>
-
-			</div>
-
-		</div>
-
-		<div class="right right-container">
-
-			<div class="introduceCont">
-
-				<div>어떤 정보가 공개되나요?</div>
-
-
-
-				<div class="introCont" style="margin-top: 5px;">프로필 사진과, 이름, 사용자 이름, 소개글, 웹사이트 및 회원님과 관련된 프로젝트 등이 프로필 페이지에 공개 됩니다.</div>
-
-
-
-			</div>
-
-
-
-		</div>
-
-
-
-		<div class="wall"></div>
-	</div>
-
-	<div class="section-setting float-container bottomLine">
-
-		<div class="left left-container">
-
-			<div>
-
-				<div class="float-container">
-
-					<div class="left" style="margin-top: 10px; margin-bottom: 10px;">
-						<strong>이메일</strong>
-					</div>
-
-					<!-- 					<button type="button" class="right changeTitle" id="emailBtn1">변경</button> -->
-
-					<div class="wall"></div>
-
-				</div>
-
-					<div class="changeEmail2" style="color: #3d3d3d;">${memberDto.memberEmail}</div>
-
-				<!-- 				<div class="changeEmail" style="display: none; margin-top: 10px; margin-bottom: 10px;"> -->
-				<!-- 					<form action="upEmail" method="post"> -->
-
-				<!-- 						<input type="text" name="memberEmail" placeholder="바뀔이메일" style="width: 100%; height: 40px;"> -->
-
-				<!-- 						<button type="submit" class="emailBtn2">저장</button> -->
-
-				<!-- 					</form> -->
-
-				<!-- 				</div> -->
-
-				<hr>
-
-			</div>
-
-
-
-			<div>
-
-				<div class="float-container">
-
-					<div class="left title2">
-						<strong>비밀번호</strong>
-					</div>
-
-					<button type="button" class="right changeTitle" id="changeBtn4">변경</button>
-
-					<div class="wall"></div>
-
-				</div>
-
-
-
-				<div class="changePw" style="margin-top: 20px; margin-bottom: 10px;"></div>
-
-				<div class="changePw2" style="display: none; margin-top: 10px; margin-bottom: 10px;">
-					<form action="upPw2" method="post">
-						<label for="curPw">현재 비밀번호</label><br> <input type="password" name="memberPw" placeholder="현재비밀번호"
-							style="width: 60%; height: 40px; margin-top: 10px; margin-bottom: 25px; border-radius: 4px; border: solid 1px gray;"
-						autocomplete="off"><br>
-
-						<div>변경할 비밀번호</div>
-
-						<input type="password" name="newPw" placeholder="변경할 비밀번호"
-							style="width: 60%; height: 40px; margin-top: 5px; margin-bottom: 5px; border-radius: 4px; border: solid 1px gray;"
-						autocomplete="off"><br> <input type="password" name="newPwCheck" placeholder="변경할 비밀번호 확인"
-							style="width: 60%; height: 40px; margin-top: 5px; margin-bottom: 10px; border-radius: 4px; border: solid 1px gray;"
-						autocomplete="off"><br>
-
-						<button type="submit" class="emailBtn2">저장</button>
+				<div class="targetDiv changeNick dpNone bottomLine pb20" style="margin-top: 20px; margin-bottom: 50px;">
+					<form action="upNick" method="post" class="float-container">
+						<input class="left h30 w700 p10 project-border-normal" type="text" placeholder="${memberDto.memberNick}" name="memberNick" required>
+						<button type="submit" class="right bosNone bora5 fBold project-btn-normal-hover w70 h30">저장</button>
 					</form>
 				</div>
-
-				<hr>
-
-			</div>
-		</div>
-
-		<div class="right right-container">
-
-			<div class="introduceCont">
-
-				<div>이메일은 어디에 쓰이나요?</div>
-
-
-
-				<div class="introCont" style="margin-top: 5px;">이메일로 회원의 비밀번호와 프로젝트 알림을 드립니다.</div>
-
-
-
 			</div>
 
-
-
-		</div>
-
-	</div>
-
-	<div class="section-setting float-container bottomLine">
-
-		<div class="left left-container">
-
-				<div>
-
-					<div class="float-container">
-
-						<div class="left" style="margin-top: 10px; margin-bottom: 10px;">
-							<strong>등록된 배송지</strong>
-						</div>
-
-						<button type="button" class="right changeTitle" id="changeBtn5">변경</button>
-
+			<div class="mb20">
+				<div class="float-container bottomLine pb20">
+					<div class="left pl10">
+						<span class="fs18 fBold dpInlineBlock w120">소개</span> <span class="changeNick2">${isIntro}</span>
 					</div>
-					
-					
-					
-					<div id="submittedAddress" style="margin-top:10px; margin-bottom:10px;">
-
-						<c:choose>
-							<c:when test="${isAddress}">
-							<div class="addressBox">현재 배송지 정보가 없습니다.</div>
-							</c:when>
-							<c:otherwise>
-							<div class="addressBox">${memberDto.memberAddress}</div>
-							</c:otherwise>
-						</c:choose> 
-						
-	
-					</div>
-					
-					
-
-<!-- 					<div class="changePro" style="margin-top: 10px; margin-bottom: 10px;"> -->
-
-<%-- 						<c:choose> --%>
-<%-- 							<c:when test="${isAddress}"> --%>
-<!-- 								<div class="addressBox" style="text-align: center; padding-top: 100px;">현재 배송지 정보가 없습니다.</div> -->
-<%-- 							</c:when> --%>
-<%-- 							<c:otherwise> --%>
-<%-- 								<div class="addressBox" style="text-align: center; padding-top: 100px;">${memberDto.memberAddress}</div> --%>
-<%-- 							</c:otherwise> --%>
-<%-- 						</c:choose> --%>
-
-
-<!-- 					</div> -->
-
-					<div class="changeAddress dpNone">
-						<div class="row">
-							<input type="text" name="postNumber" placeholder="우편번호" class="form-input form-input-inline"> <input type="button"
-								onclick="findAddress()" value="우편번호 찾기" class="form-btn form-btn-inline form-btn-positive"
-							>
-						</div>
-						<div class="row">
-							<input type="text" name="basicAddress" placeholder="주소" class="form-input">
-						</div>
-						<div class="row">
-							<input type="text" name="detailAddress" placeholder="상세주소" class="form-input">
-						</div>
-						
-						<form action="upAddress" method ="post">
-							
-							<input type="hidden" name="memberAddress">
-					
-							<input id="memberAddressInsert" type="submit" class="textBtn" value="등록 완료">
-							
-						</form>
-						
-					</div>
-					
-					<hr>
-
+					<button type="button" class="right bosNone bora5 fBold project-btn-normal-hover w70 h30 targetBtn" id="changeIntroBtn">변경</button>
 				</div>
 
+				<div class="targetDiv changeIntro dpNone bottomLine pb20" style="margin-top: 20px; margin-bottom: 50px;">
+					<form action="upIntro" method="post" class="float-container">
+						<input class="left h30 w700 p10 project-border-normal" type="text" placeholder="${isIntro}" name="memberIntroduce">
+						<button type="submit" class="right bosNone bora5 fBold project-btn-normal-hover w70 h30">저장</button>
+					</form>
+				</div>
+			</div>
+
+			<div class="mb20">
+				<div class="float-container bottomLine pb20">
+					<div class="left pl10">
+						<span class="fs18 fBold dpInlineBlock w120 h30">이메일</span> <span>${memberDto.memberEmail}</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="mb20">
+				<div class="float-container bottomLine pb20">
+					<div class="left pl10">
+						<span class="fs18 fBold dpInlineBlock w120">비밀번호</span>
+					</div>
+					<button type="button" class="right bosNone bora5 fBold project-btn-normal-hover w70 h30 targetBtn" id="changePwBtn">변경</button>
+				</div>
+
+				<div class="targetDiv changePw2 dpNone bottomLine pb20" style="margin-top: 20px; margin-bottom: 50px;">
+					<form action="upPw2" method="post" class="float-container">
+
+						<div class="left w700">
+							<input class="left h30 w700 p10 project-border-normal mb30" type="password" name="memberPw" placeholder="현재 비밀번호" autocomplete="off" required>
+
+							<input class="left h30 w700 p10 project-border-normal mb10" type="password" name="newPw" placeholder="변경할 비밀번호" autocomplete="off" required>
+							<input class="left h30 w700 p10 project-border-normal" type="password" name="newPwCheck" placeholder="변경할 비밀번호 확인" autocomplete="off" required>
+						</div>
+
+						<button type="submit" class="right bosNone bora5 fBold project-btn-normal-hover w70 h30 mt100">저장</button>
+
+					</form>
+				</div>
+			</div>
+
+			<div class="mb20">
+				<div class="float-container bottomLine pb20">
+					<div class="left pl10">
+						<span class="fs18 fBold dpInlineBlock w120">주소</span> <span>${memberDto.memberAddress}</span>
+					</div>
+					<button type="button" class="right bosNone bora5 fBold project-btn-normal-hover w70 h30 targetBtn" id="changeAddressBtn">변경</button>
+				</div>
+
+				<div class="targetDiv changeAddress float-container dpNone bottomLine pb20" style="margin-top: 20px; margin-bottom: 50px;">
+
+					<div class="left w700">
+						<input class="left h30 w300 p10 project-border-normal mb10" type="text" name="postNumber" placeholder="우편번호">
+						<input class="right bosNone bora5 fBold project-btn-normal-hover w120 h30 changeBtn" type="button" onclick="findAddress()" value="우편번호 찾기">
+						
+						<input class="left h30 w700 p10 project-border-normal mb10" type="text" name="basicAddress" placeholder="주소">
+						<input class="left h30 w700 p10 project-border-normal" type="text" name="detailAddress" placeholder="상세주소">
+					</div>
+					
+					<form action="upAddress" method="post" class="right">
+						<input type="hidden" name="memberAddress">
+						<button id="memberAddressInsert" type="submit" class="right bosNone bora5 fBold project-btn-normal-hover w70 h30 mt80">저장</button>
+					</form>
+
+				</div>
+			</div>
 
 		</div>
 
-		<div class="right right-container">
-
-			<div class="introduceCont">
-
-				<div>배송지를 삭제하면 예약된 후원의 배송지 정보도 삭제되나요?</div>
 
 
 
-				<div class="introCont" style="margin-top: 5px;">현재 후원하신 프로젝트에 등록된 배송지가 삭제되거나 변경되진 않습니다. 이를 변경하시려면 후원현황에서 변경해주세요.</div>
 
 
 
-			</div>
 
 
+		<div class="container-300 h400 mt30 mb30 boc200 bosSolid bow1 bora5 p30">
+
+			<div>어떤 정보가 공개되나요?</div>
+			<div class="fs12 fc150 mt10 mb40">프로필 사진과, 이름, 사용자 이름, 소개글, 웹사이트 및 회원님과 관련된 프로젝트 등이 프로필 페이지에 공개 됩니다.</div>
+
+			<div>이메일은 어디에 쓰이나요?</div>
+			<div class="fs12 fc150 mt10 mb40">이메일로 회원의 비밀번호와 프로젝트 알림을 드립니다.</div>
+
+			<div>배송지를 삭제하면 예약된 후원의 배송지 정보도 삭제되나요?</div>
+			<div class="fs12 fc150 mt10">현재 후원하신 프로젝트에 등록된 배송지가 삭제되거나 변경되진 않습니다. 이를 변경하시려면 후원현황에서 변경해주세요.</div>
 
 		</div>
 
 	</div>
 
 </section>
-
-
-
-
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
