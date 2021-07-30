@@ -212,9 +212,9 @@
     }
 </script>
 
-<section class="section-setting float-container">
+<section class="section-setting float-container topLine">
 
-<hr>
+<!-- <hr> -->
 
 		<div class="setTitle">
 
