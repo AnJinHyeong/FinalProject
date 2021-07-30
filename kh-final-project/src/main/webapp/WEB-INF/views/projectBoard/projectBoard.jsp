@@ -353,11 +353,12 @@
 						</div>
 					</div>
 					
-					<div class="project-board-flex-div4" style="background-color: #f6f6f6; width: 100%; height: 150px; border-radius: 3%; text-align: left; border: 1px solid #ededed;">
+					<div class="project-board-flex-div4" style="background-color: #f6f6f6; width: 100%; height: 170px; border-radius: 3%; text-align: left; border: 1px solid #ededed;">
 						<p style="padding: 5px 10px 0 10px; font-size: 15px; color: black; font: bold;"><span class="font-12 red"><i class="fas fa-file"></i></span> 프로젝트 간단 소개</p>
 						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">${projectDto.projectSummary}</p>
 						<p style="padding: 25px 10px 0 10px; font-size: 15px; color: black; font: bold;"><span class="font-12 red"><i class="fas fa-coins"></i></span> 프로젝트 결제 안내</p>
 						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">목표 금액인 ${projectDto.projectTargetAmount}원이 모여야만 결제됩니다.</p>
+						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">후원은 ${projectDto.projectEndDate} 00:00:00 에 종료 됩니다.</p>
 						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">결제는 프로젝트 예정 종료일인 ${projectDto.projectEndDate} 이후 ${plus7.substring(0, 10)} 이내에 다 함께 진행됩니다.</p>
 					</div>
 
@@ -391,16 +392,17 @@
 						</div>
 					</div>
 					
-					<div class="project-board-flex-div4" style="background-color: #f6f6f6; width: 100%; height: 150px; border-radius: 3%; text-align: left; border: 1px solid #ededed;">
+					<div class="project-board-flex-div4" style="background-color: #f6f6f6; width: 100%; height: 170px; border-radius: 3%; text-align: left; border: 1px solid #ededed;">
 						<p style="padding: 5px 10px 0 10px; font-size: 15px; color: black; font: bold;"><span class="font-12 red"><i class="fas fa-file"></i></span> 프로젝트 간단 소개</p>
 						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">${projectDto.projectSummary}</p>
 						<p style="padding: 25px 10px 0 10px; font-size: 15px; color: black; font: bold;"><span class="font-12 red"><i class="fas fa-coins"></i></span> 프로젝트 결제 안내</p>
 						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">목표 금액인 ${projectDto.projectTargetAmount}원이 모여야만 결제됩니다.</p>
+						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">후원은 ${projectDto.projectEndDate} 00:00:00 에 종료 됩니다.</p>
 						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">결제는 프로젝트 예정 종료일인 ${projectDto.projectEndDate} 이후 ${plus7.substring(0, 10)} 이내에 다 함께 진행됩니다.</p>
 					</div>
 
 					<div class="project-board-flex-div4">
-						<button class="project-board-div4-funding" style="width: 430px;">현재 프로젝트는 펀이 종료된 상태 입니다.</button>
+						<button class="project-board-div4-funding" style="width: 430px;">현재 프로젝트는 펀딩이 종료된 상태 입니다.</button>
 					</div>
 				</div>
 				

@@ -5,6 +5,8 @@ import java.util.List;
 import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.entity.SponsorDto;
 import com.kh.finalproject.vo.IndexProjectVo;
+import com.kh.finalproject.vo.ProjectAdminSearchKeywordVo;
+import com.kh.finalproject.vo.ProjectAdminSearchVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
 import com.kh.finalproject.vo.ProjectSponsorVo;
 import com.kh.finalproject.vo.ProjectVo;
@@ -80,5 +82,7 @@ public interface ProjectDao {
 	List<SponsorDto> projectSponsorByProjectNo(int projectNo);
 	//프로젝트 후원자 리스트 조회
 	ProjectSponsorVo getSponsorSelect(int projectNo);
+	//admin 프로젝트 검색
+	List<ProjectAdminSearchVo> projectAdminSelectList(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo);
 	
 }

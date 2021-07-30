@@ -116,7 +116,7 @@
 			<div class="w1200 h35" style="margin: 0 auto;">
 				<ul class="project-main-ul">
 					<li class="project-main-li" id="main-li-1"><a class="main-li-a cursorPointer">소통 공간</a></li>
-					<li class="project-main-li main-li-on" id="main-li-2"><a class="main-li-a cursorPointer">${requestEdit.requestNo}글 수정</a></li>
+					<li class="project-main-li main-li-on" id="main-li-2"><a class="main-li-a cursorPointer">${requestEdit.requestNo}번 게시글 수정</a></li>
 				</ul>
 			</div>
 		</div>
