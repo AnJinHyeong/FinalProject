@@ -213,7 +213,7 @@
 		});
 		
 		var mainBannerImageCount = ${mainBannerImageCount};
-		var width = 700;
+		var width = 800;
 		var left = -width;
 		var maxLeft = (mainBannerImageCount - 2) * width;
     
@@ -364,20 +364,20 @@
 
 <div class="section-row">
 
-	<a href="${root}/banner/bannerInsert">배너 등록</a>
-	<a href="${root}/banner/bannerList">배너 목록</a>
-	<a href="${root}/deleteLocalFileNotInDB">로컬 파일 정리</a>
-	<a href="${root}/givePointByFinishedProject">종료프로젝트 포인트 지급</a>
+<%-- 	<a href="${root}/banner/bannerInsert">배너 등록</a> --%>
+<%-- 	<a href="${root}/banner/bannerList">배너 목록</a> --%>
+<%-- 	<a href="${root}/deleteLocalFileNotInDB">로컬 파일 정리</a> --%>
+<%-- 	<a href="${root}/givePointByFinishedProject">종료프로젝트 포인트 지급</a> --%>
 	
-	<div class="dpFlex dpFlexXCenter mt20 mb20 boc220 bow1 bosSolid ml50 mr50">
-		<div id="mainBannerContainer" class="dpInlineBlock w700 h400 scrollNone poRelative">
+	<div class="dpFlex dpFlexXCenter mt20 mb20 boc220 bow1 bosSolid">
+		<div id="mainBannerContainer" class="dpInlineBlock w800 h450 scrollNone poRelative">
 			<c:forEach var="imageDto" items="${mainBannerImageList}" varStatus="status">
-				<div class="mainBannerImage w100p h100p poAbsolute" style="left: ${(status.index - 1) * 700}px;">
-					<img class="w700 h100p rollingImage" src="${pageContext.request.contextPath}/image/downloadImageMainBanner/${imageDto.imageNo}">
+				<div class="mainBannerImage w100p h100p poAbsolute" style="left: ${(status.index - 1) * 800}px;">
+					<img class="w800 h100p rollingImage" src="${pageContext.request.contextPath}/image/downloadImageMainBanner/${imageDto.imageNo}">
 				</div>
 			</c:forEach>
 		</div>
-		<div id="mainBannerTextContainer" class="dpInlineBlock w400 h400 scrollNone pl30 pr30 pt100" style="background-color: ${startBannerDto.bannerBackgroundColor}; color: ${startBannerDto.bannerColor}">
+		<div id="mainBannerTextContainer" class="dpInlineBlock w400 h450 scrollNone pl30 pr30 pt100" style="background-color: ${startBannerDto.bannerBackgroundColor}; color: ${startBannerDto.bannerColor}">
 		
 			<div class="mb20 h80">
 				<span id="mainBannerTitle" class="fs30 fBold">${startBannerDto.bannerTitle}</span>
