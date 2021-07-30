@@ -7,10 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.entity.SponsorDto;
+import com.kh.finalproject.service.SearchService;
 import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
 import com.kh.finalproject.vo.ProjectProgressVo;
+import com.kh.finalproject.vo.ProjectSponsorVo;
 import com.kh.finalproject.vo.ProjectVo;
+import com.kh.finalproject.vo.SearchVo;
 
 @Repository
 public class ProjectDaoImpl implements ProjectDao{
@@ -169,32 +173,104 @@ public class ProjectDaoImpl implements ProjectDao{
 	}
 
 	@Override
-	public List<IndexProjectVo> projectSearch(String keyword) {
-		return sqlSession.selectList("project.projectSearch", keyword);
+	public List<IndexProjectVo> indexProjectMain2() {
+		return sqlSession.selectList("project.indexProjectMain2");
+	}	
+	
+	@Override
+	public List<IndexProjectVo> indexProjectMain3() {
+		return sqlSession.selectList("project.indexProjectMain3");
+	}
+	
+	@Autowired
+	private SearchService searchService;
+	
+	@Override
+	public List<IndexProjectVo> projectSearch(SearchVo searchVo) {
+		
+		searchService.getString(searchVo);
+		
+		return sqlSession.selectList("project.projectSearch", searchVo);
 	}
 
 	@Override
-	public int projectSearchCount(String keyword) {
-		if(sqlSession.selectOne("project.projectSearchCount", keyword) == null) {
+	public int projectSearchCount(SearchVo searchVo) {
+		
+		searchService.getString(searchVo);
+		
+		if(sqlSession.selectOne("project.projectSearchCount", searchVo) == null) {
 			return 0;
 		}
-		return sqlSession.selectOne("project.projectSearchCount", keyword);
+		return sqlSession.selectOne("project.projectSearchCount", searchVo);
 	}
 
 	@Override
-	public List<IndexProjectVo> projectCategorySearch(String keyword) {
-		return sqlSession.selectList("project.projectCategorySearch", keyword);
+	public List<IndexProjectVo> projectCategorySearch(SearchVo searchVo) {
+		
+		searchService.getString(searchVo);
+		
+		return sqlSession.selectList("project.projectCategorySearch", searchVo);
 	}
 
 	@Override
-	public int projectCategorySearchCount(String keyword) {
-		if(sqlSession.selectOne("project.projectCategorySearchCount", keyword) == null) {
+	public int projectCategorySearchCount(SearchVo searchVo) {
+		
+		searchService.getString(searchVo);
+		
+		if(sqlSession.selectOne("project.projectCategorySearchCount", searchVo) == null) {
 			return 0;
 		}
-		return sqlSession.selectOne("project.projectCategorySearchCount", keyword);
+		return sqlSession.selectOne("project.projectCategorySearchCount", searchVo);
 	}
 
 	@Override
+	public List<IndexProjectVo> projectSearchAll(SearchVo searchVo) {
+		
+		searchService.getString(searchVo);
+		
+		return sqlSession.selectList("project.projectSearchAll", searchVo);
+	}
+
+	@Override
+	public List<IndexProjectVo> projectCategorySearchAll(SearchVo searchVo) {
+		
+		searchService.getString(searchVo);
+		
+		return sqlSession.selectList("project.projectCategorySearchAll", searchVo);
+	}
+
+	@Override
+	public List<IndexProjectVo> projectList(SearchVo searchVo) {
+		
+		searchService.getString(searchVo);
+		
+		return sqlSession.selectList("project.projectList", searchVo);
+	}
+
+	@Override
+	public boolean projectLikeUp(int projectNo) {
+		int count = sqlSession.update("project.projectLikeUp", projectNo);
+		return count > 0;
+	}
+
+	@Override
+	public boolean projectLikeDown(int projectNo) {
+		int count = sqlSession.update("project.projectLikeDown", projectNo);
+		return count > 0;
+	}
+	
+	@Override
+	public List<SponsorDto> projectSponsorByProjectNo(int projectNo) {
+		return sqlSession.selectList("project.projectSponsorByProjectNo", projectNo);
+	}
+	
+
+	@Override
+	public ProjectSponsorVo getSponsorSelect(int sponsorNo) {
+		return sqlSession.selectOne("project.getSponsorSelect", sponsorNo);
+  }
+	
+  @Override
 	public List<ProjectDto> proList(int memberNo) {
 		List<ProjectDto> projectDto = sqlSession.selectList("project.proList", memberNo);
 		return projectDto;
@@ -205,4 +281,5 @@ public class ProjectDaoImpl implements ProjectDao{
 		List<ProjectDto> projectDto = sqlSession.selectList("project.proList2", memberNo);
 		return projectDto;
 	}
+  
 }

@@ -8,6 +8,7 @@ import com.kh.finalproject.entity.SponsorDto;
 
 public interface MemberDao {
 	boolean checkId(String memberId);
+	boolean checkEmail(String memberEmail);
 	void memberInsert(MemberDto memberDto);
 	MemberDto login(MemberDto memberDto);
 	// 회원 번호를 이용해 회원 정보 조회
@@ -18,8 +19,11 @@ public interface MemberDao {
 	boolean updateEmail(MemberDto memberDto);
 	void changePassword(MemberDto memberDto);
 	boolean updateIntro(MemberDto memberDto);
+
 	boolean updateNick(MemberDto memberDto);
 	boolean updateAddress(MemberDto memberDto);
+
+	
 	int selectHavePoint(int memberNo);
 	List<PayDto>list(int memberNo);
 

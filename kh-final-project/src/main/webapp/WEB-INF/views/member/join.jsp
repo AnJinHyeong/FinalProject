@@ -3,38 +3,40 @@
 <!DOCTYPE html>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
 <html>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" type="text/css" href="${root}/css/join.css">
 	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/join.js"></script>
 <br><br>
-<script>
-	var email = $("#memberEmail").val();  
-</script>
 <style>
+.fas fa-envelope{
+ color : black;
+}
 	.mainDiv{
 		width:50%;
-		margin-top: 50px;
 		min-height: 720px;
 		padding:50px;
 	}
+	
 .joinForm{
-		width: 80%;
+padding: 32px;
+    border-radius: 5px;
+    border: 2px solid rgb(228, 228, 228);
+		width: 70%;
 		margin-top : 20px;
 		margin:0 auto;
-		border:1px groove #E4E4E4;
-		padding:40px;
-		border-radius:10px;
 		border-color:#E4E4E4;
-	
 	}
 .radius-b{
-		height:60px;
-		border-radius:5px;
+    border: 1px solid rgb(230, 230, 230);
+		height:50px;
+		border-radius:4px;
 	}
 	.joinBtn{
 		border-radius:5px;
@@ -83,7 +85,7 @@
 		</div>
 		
 		
-		<form action = "memberInsert" id = "form" method = "post" class="join-form">
+		<form action = "memberInsert" id = "form" method = "post" class="join-form" >
 			<div class = "row text-left">
 				<label for = "memberId">아이디</label>
 				<input type = "text" name="memberId" id = "memberId" required class = "form-input form-underline radius-b" placeholder = "8~20자 이내의 영문 소대문자, 숫자 조합가능">
@@ -113,32 +115,35 @@
 
 			
 			<div class = "row text-left">
-				<input type="hidden" name="email" value="${param.email}">
-				<label for = "memberEmail">이메일</label>
-				<input type = "text" name="memberEmail" id = "memeberEmail" required class = "form-input form-underline radius-b"
-							value = "${param.email}" readonly>
+			<div>	<label for = "memberEmail">이메일</label></div>
+				<input type = "email" name="memberEmail" id = "memberEmail" required class = "form-input form-underline radius-b"
+							value = "${param.email}" placeholder = "인증번호를 받기 위한 메일 입력">
+							<button id = "emailSend" disabled ><i class="fas fa-envelope"></i></button>
+											<input type="hidden" name="email" value="${param.email}">
+											
+															<div id = "checkEmail"></div>
+
 			</div>
-			
 			<div class = "row text-left">
-				<label for = "authKey">이메일</label>
-				<input type = "text" name="no" id = "no" required class = "form-input form-underline radius-b"
-							placeholder = "인증번호입력">
-			</div>
+				<label for = "authKey">인증번호</label>
+				<input type = "text" name="no" id = "no" required disabled class = "form-input form-underline radius-b"
+							placeholder = "이메일을 먼저 입력해주세요">
+							<span id = emailCheckResult></span>
+			</div> 
 			
-			
-			 
-			<div class = "row text-left">
+<!-- 			<div class = "row text-left">
 				<label for = "memberIntroduce">자기소개</label>
 				<input type="text" name = "memberIntroduce" class= "form-input form-underline radius-b"  placeholder = "(선택) 간단한 자기소개를 입력해주세요">
 				
-			</div>
+			</div> -->
 			<div class = "row text-center">
 			<input type = "submit" id= "submit" style= 'cursor:pointer' value = "가입" class = "joinBtn">
 			</div>
 
 		</form>
 		</div>
-	</div>
+		</div>
+
 </body>
 <br><br>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

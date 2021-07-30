@@ -21,6 +21,7 @@ public class ImageDaoImpl implements ImageDao{
 	@Autowired
 	private SqlSession sqlSession;
 	
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	private final File baseDir = new File("/Users/anjinhyeong/sts-workspace/upload/project_image");//저장 경로 //안진형
 //	private final File baseDir = new File("D:/upload/finalproject");//저장 경로
 	
@@ -160,6 +161,42 @@ public class ImageDaoImpl implements ImageDao{
 		map.put("projectNo", projectNo);
 		map.put("imageSaveName", imageSaveName);
 		return sqlSession.selectOne("imageFile.confirmProjectMainStoryByImageSaveName", map);
+	}
+
+	@Override
+	public List<ImageDto> getListMainBanner() {
+		return sqlSession.selectList("imageFile.getListMainBanner");
+	}
+
+	@Override
+	public int getCountMainBanner() {
+		return sqlSession.selectOne("imageFile.getCountMainBanner");
+	}
+	
+	@Override
+	public ImageDto getImageMainBanner(int imageNo) {
+		return sqlSession.selectOne("imageFile.getImageMainBanner", imageNo);
+	}
+
+	@Override
+	public void insertImageMainBanner(ImageDto imageDto) {
+		sqlSession.insert("imageFile.insertImageMainBanner", imageDto);	
+	}
+
+	@Override
+	public int getSequence() {
+		return sqlSession.selectOne("imageFile.sequence");
+	}
+
+	@Override
+	public void deleteImageByImageNo(int imageNo) {
+		sqlSession.delete("imageFile.deleteImageByImageNo", imageNo);
+		
+	}
+
+	@Override
+	public List<String> getImageSaveNameList() {
+		return sqlSession.selectList("imageFile.getImageSaveNameList");
 	}
 	
 }

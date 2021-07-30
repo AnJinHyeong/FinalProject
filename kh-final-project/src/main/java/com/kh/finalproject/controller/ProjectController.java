@@ -20,6 +20,7 @@ import com.kh.finalproject.entity.ItemDto;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.ProjectCommunityDto;
 import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.entity.SponsorDto;
 import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.repository.GiftDao;
 import com.kh.finalproject.repository.ImageDao;
@@ -30,6 +31,7 @@ import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.vo.GiftSelectedItemVo;
 import com.kh.finalproject.vo.ItemListVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
+import com.kh.finalproject.vo.SearchVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -355,14 +357,71 @@ public class ProjectController {
 	}
 	
 	@PostMapping("/projectSearch")
-	public String projectSearch(Model model, @RequestParam String keyword) {
+	public String projectSearch(Model model, @ModelAttribute SearchVo searchVo) {
+		model.addAttribute("projectOrder", searchVo.getProjectOrder());
+		model.addAttribute("projectState", searchVo.getProjectState());
+		String keyword = searchVo.getKeyword();
 		if(keyword == null || keyword.equals("")) {
-			return "redirect:/";
+			return "project/projectList";
 		}
 		model.addAttribute("keyword", keyword);
-		model.addAttribute("projectSearchCount", projectDao.projectSearchCount(keyword));
-		model.addAttribute("projectCategorySearchCount", projectDao.projectCategorySearchCount(keyword));
+		model.addAttribute("projectSearchCount", projectDao.projectSearchCount(searchVo));
+		model.addAttribute("projectCategorySearchCount", projectDao.projectCategorySearchCount(searchVo));
 		return "project/projectSearch";
 	}
+	
+	@PostMapping("/projectSearchAll")
+	public String projectSearchAll(Model model, @ModelAttribute SearchVo searchVo) {
+		model.addAttribute("projectOrder", searchVo.getProjectOrder());
+		model.addAttribute("projectState", searchVo.getProjectState());
+		String keyword = searchVo.getKeyword();
+		if(keyword == null || keyword.equals("")) {
+			return "project/projectList";
+		}
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("projectSearchCount", projectDao.projectSearchCount(searchVo));
+		return "project/projectSearchAll";
+	}
+	
+	@PostMapping("/projectCategorySearchAll")
+	public String projectCategorySearchAll(Model model, @ModelAttribute SearchVo searchVo) {
+		model.addAttribute("projectOrder", searchVo.getProjectOrder());
+		model.addAttribute("projectState", searchVo.getProjectState());
+		String keyword = searchVo.getKeyword();
+		if(keyword == null || keyword.equals("")) {
+			return "project/projectList";
+		}
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("projectCategorySearchCount", projectDao.projectCategorySearchCount(searchVo));
+		return "project/projectCategorySearchAll";
+	}
+	
+	@GetMapping("/projectList")
+	public String projectList(Model model) {
+		model.addAttribute("projectOrder", 1);
+		model.addAttribute("projectState", 1);
+		return "project/projectList";
+	}
+	
+	@GetMapping("/{projectNo}/projectMainSponsor")
+	public String projectMainSponsor(@ModelAttribute ProjectDto projectDto, @PathVariable int projectNo, HttpSession session, Model model) {
+		int memberNo = (int) session.getAttribute("memberNo");
+		projectDto = ProjectDto.builder().projectNo(projectNo).memberNo(memberNo).build();
+		ProjectDto find = projectDao.get(projectDto);
+		model.addAttribute("projectDto", find);
+
+		CategoryDto theme = categoryDao.getByNo(find.getCategoryNo());
+		CategoryDto theme2 = categoryDao.getByNo(theme.getCategorySuper());
+		
+		model.addAttribute("categoryDto", theme);
+		model.addAttribute("categoryDto2", theme2);
+		
+		List<SponsorDto> sponsorList = projectDao.projectSponsorByProjectNo(projectNo);
+		model.addAttribute("sponsorList", sponsorList);
+		
+		
+		return "project/projectMainSponsor";
+	}
+	
 	
 }

@@ -152,6 +152,28 @@
 			}
 		});
 		
+		var projectNo = ${projectDto.projectNo};
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath}/project/data/projectInformation",
+			type : 'post',
+			data : {
+				"projectNo" : projectNo
+			},
+			success : function(resp) {
+				if (resp.projectPercent < 100) {
+					
+					$("#projectGaugeBackground").css("background-color", "rgba(255, 0, 0, 0.05)");
+					$("#projectGaugeBackground").css("width", resp.projectPercent + "%");
+					
+				} else {
+					$("#projectGaugeBackground").css("background-color", "rgba(0, 255, 0, 0.05)");
+					$("#projectGaugeBackground").css("width", "100%");
+				}
+				$("#projectGaugePercent").text("(" + resp.projectPercent + "%)");
+				$("#projectGaugeAmount").text(resp.sumCurrentAmountByAll + " / " + resp.projectTargetAmount);
+			}
+		});
 		
 	});
 </script>
@@ -160,6 +182,11 @@
 	<div class="section-project-row">
 
 		<div class="project-main-div1">
+			<div class="boc240 bosSolid bow1 w200 h40 poRelative mr20">
+				<div id="projectGaugeBackground" class="poAbsolute h100p dpFlex"></div>
+				<pre id="projectGaugeAmount" class="poAbsolute fs12 fBold poAbsoluteLeftCenter" style="padding-left:5px;"></pre>
+				<pre id="projectGaugePercent" class="poAbsolute fs12 fBold poAbsoluteRightCenter" style="padding-right:5px;"></pre>
+			</div>
 			<c:choose>
 				<c:when test="${projectDto.projectState == '1' || projectDto.projectState == '2'}">
 					<a href="${pageContext.request.contextPath}/projectBoard/${projectDto.projectNo}"><button class="project-btn btn1 project-btn-hover" id="projectBoard">미리보기</button></a>
@@ -179,8 +206,11 @@
 					<c:when test="${projectDto.projectState == '3'}">
 						<button class="project-btn btn2">프로젝트 펀딩</button>
 					</c:when>
+					<c:when test="${projectDto.projectState == '4'}">
+						<button class="project-btn btn2">프로젝트 펀딩종료</button>
+					</c:when>
 					<c:otherwise>
-						<button class="project-btn btn2">기획중·<span id="progress"></span>% 완료</button>
+						<button class="project-btn btn2">프로젝트 중단</button>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -214,12 +244,12 @@
 
 		<div style="overflow-x: hidden; padding: 0px;">
 			<c:choose>
-				<c:when test="${projectDto.projectState == '3' || projectDto.projectState == 'X'}">
+				<c:when test="${projectDto.projectState == '3' || projectDto.projectState == 'X' || projectDto.projectState == '4'}">
 					<ul class="project-main-ul">
 						<li class="project-main-li main-li-on"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMain" class="main-li-a">프로젝트 기획</a></li>
 						<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainApproval" class="main-li-a ">승인심사 요청</a></li>
 						<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainCommunity" class="main-li-a">커뮤니티</a></li>
-						<li class="project-main-li"><a href="#" class="main-li-a">후원자 관리</a></li>
+						<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainSponsor" class="main-li-a">후원자 관리</a></li>
 					</ul>
 				</c:when>
 				<c:otherwise>
@@ -227,7 +257,7 @@
 						<li class="project-main-li main-li-on"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMain" class="main-li-a">프로젝트 기획</a></li>
 						<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainApproval" class="main-li-a">승인심사 요청</a></li>
 						<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainCommunity" class="main-li-a project-disable">커뮤니티<i class="fas fa-lock" style="margin-left: 5px; font-size: 12px;"></i></a></li>
-						<li class="project-main-li"><a href="#" class="main-li-a project-disable">후원자 관리<i class="fas fa-lock" style="margin-left: 5px; font-size: 12px;"></i></a></li>
+						<li class="project-main-li"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMainSponsor" class="main-li-a project-disable">후원자 관리<i class="fas fa-lock" style="margin-left: 5px; font-size: 12px;"></i></a></li>
 					</ul>
 				</c:otherwise>
 			</c:choose>

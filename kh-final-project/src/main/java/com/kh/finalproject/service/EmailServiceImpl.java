@@ -21,12 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class EmailServiceImpl implements EmailService{
 	
-		
-		
-	
 	@Autowired
 	private JavaMailSender sender;
-	
 	
 	@Autowired
 	private EmailAuthDao emailAuthDao;
@@ -34,29 +30,28 @@ public class EmailServiceImpl implements EmailService{
 	@Autowired
 	private MemberDao memberDao;
 
-	
 	@Autowired
 	private RandomService randomService;
 
-	@Override
-	@Transactional
-	public void sendEmail(String email) throws MessagingException {
-		
-		String no = randomService.randomAuth(3);
-		
-		MimeMessage message = sender.createMimeMessage();
-		MimeMessageHelper helper = new MimeMessageHelper(message,false,"UTF-8");
-		
-		helper.setFrom("final9595start@gmail.com");
-		helper.setTo(email);
-		helper.setSubject("[Fun_ding] 회원가입 인증번호 메일입니다.");
-		helper.setText("안녕하세요 [Fun_ding] 회원가입 해주셔서 감사합니다.");
-		helper.setText("인증번호: "+no);
-		
-		emailAuthDao.insert(EmailAuthDto.builder().email(email).no(no).build());
-		sender.send(message);
-		
-	}
+//	@Override
+//	@Transactional
+//	public void sendEmail(String email) throws MessagingException {
+//		
+//		String no = randomService.randomAuth(3);
+//		
+//		MimeMessage message = sender.createMimeMessage();
+//		MimeMessageHelper helper = new MimeMessageHelper(message,false,"UTF-8");
+//		
+//		helper.setFrom("final9595start@gmail.com");
+//		helper.setTo(email);
+//		helper.setSubject("[Fun_ding] 회원가입 인증번호 메일입니다.");
+//		helper.setText("안녕하세요 [Fun_ding] 회원가입 해주셔서 감사합니다.");
+//		helper.setText("인증번호: "+no);
+//		
+//		emailAuthDao.insert(EmailAuthDto.builder().email(email).no(no).build());
+//		sender.send(message);
+//		
+//	}
 	@Override
 	public void sendPwEmail(String memberEmail) throws MessagingException {
 		String memberPw = randomService.randomAuth(3);
@@ -91,6 +86,5 @@ public class EmailServiceImpl implements EmailService{
 		log.debug("인증정보 테이블 청소가 완료되었습니다");
 		
 	}
-
 
 }	

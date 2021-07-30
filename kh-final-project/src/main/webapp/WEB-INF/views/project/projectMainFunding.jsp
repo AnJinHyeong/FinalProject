@@ -218,7 +218,7 @@
 							<p class="project-insert-p">목표 금액</p>
 							<div class="project-funding-money-div">
 								<span class="project-funding-money-span">
-									<input type="text" class="projcet-insert-input project-input-money" name="projectTargetAmount" min="500000" value="${projectDto.projectTargetAmount}"><p style="padding-left: 3px;">원</p>
+									<input autocomplete="off" type="text" class="projcet-insert-input project-input-money" name="projectTargetAmount" min="500000" value="${projectDto.projectTargetAmount}"><p style="padding-left: 3px;">원</p>
 								</span>
 							</div>
 							<p class="project-insert-font font-on" style="font-size: 12px; margin-top: 5px;"></p>
@@ -292,7 +292,7 @@
 					</div>
 				</div>
 				
-				<c:if test="${projectDto.projectState != '2'}">
+				<c:if test="${projectDto.projectState == '1'}">
 					<div class="project-insert-div3">
 						<input class="project-btn btn3 project-btn-hover" type="submit" value="저장">
 					</div>

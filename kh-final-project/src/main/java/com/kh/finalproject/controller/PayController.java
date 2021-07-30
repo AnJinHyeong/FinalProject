@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.finalproject.repository.PayDao;
 import com.kh.finalproject.service.PayService;
+import com.kh.finalproject.vo.Criteria;
+import com.kh.finalproject.vo.PageMaker;
 import com.kh.finalproject.vo.pay.PayApprovePrepareVO;
 import com.kh.finalproject.vo.pay.PayApproveVO;
 import com.kh.finalproject.vo.pay.PayReadyPrepareVO;
@@ -24,8 +27,8 @@ import com.kh.finalproject.vo.pay.PaySearchVO;
 @RequestMapping("/pay")
 public class PayController {
 
-	@Autowired//2개가 등록되어있으므로 사용이 불가능
-//	@Qualifier("payService")//id=kakaoPayService인 bean을 주입
+	@Autowired 
+//	@Qualifier("payDao")
 	private PayService payService;
 	
 	@GetMapping("/confirm")
@@ -78,14 +81,32 @@ public class PayController {
 	}
 	
 	@GetMapping("/result_success")
-	public String resultSuccess(
-			@ RequestParam String tid,
-			Model model) throws URISyntaxException {
+	public String resultSuccess(@ RequestParam String tid,Model model) throws URISyntaxException {
 		PaySearchVO searchVO = payService.search(tid);
 		model.addAttribute("searchVO", searchVO);
 		return "pay/resultSuccess";//"/WEB-INF/views/pay/resultSuccess.jsp"
 	}
 
+
+	@Autowired
+	private PayDao payDao;
+	
+	@GetMapping("/history")
+	public String history(HttpSession session, Model model, Criteria cri) {
+
+		int memberNo = (int)session.getAttribute("memberNo");
+		
+		model.addAttribute("list", payDao.payList(memberNo,cri));
+			
+		PageMaker pageMaker = new PageMaker();
+		
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(payDao.listCount(memberNo));
+		
+		model.addAttribute("pageMaker", pageMaker);
+		
+		return "pay/history";
+	}
 	
 	
 //	@GetMapping("/cancel")

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="request">
+	
+	<insert id="insert" parameterType="RequestDto">
+		insert into request values(request_seq.nextval, #{requestTitle}, #{requestContent}, sysdate, 0, 0, 0, #{requestCategoryNo}, #{requestMemberNo})
+	</insert>
+	
+	<select id="selectAll" resultType="RequestVo">
+		select
+		    R.*,
+		    C.CATEGORY_THEME 
+		from request R
+		    INNER join category C on R.request_category_no = C.category_no ORDER BY REQUEST_NO desc
+	</select>
+	
+	<select id="getByRequestNo" parameterType="int" resultType="RequestVo">
+		select
+		    R.*,
+		    C.CATEGORY_THEME 
+		from request R
+		    INNER join category C on R.request_category_no = C.category_no 
+		    where R.request_no = #{requestNo}
+	</select>
+	
+	<!-- 게시판 댓글 -->
+	<insert id="insertReply" parameterType="RequestReplyDto">
+		insert into request_reply values(request_reply_seq.nextval, #{requestReplyNo}, #{requestReplyMemberNo}, #{requestReplyContent}, sysdate)
+	</insert>
+	
+	<select id="replyList" parameterType="int" resultType="RequestReplyVo">
+		select
+		    RR.*,
+		    M.member_nick 
+		from request_reply RR
+		    INNER join member M on RR.request_reply_member_no = M.member_no 
+		WHERE RR.request_reply_no = #{requestReplyNo} ORDER BY RR.request_reply_pk_no DESC
+	</select>
+	
+	<select id="replyCount" parameterType="int" resultType="int">
+		select
+		    count(*) 
+		from request_reply RR
+		    INNER join member M on RR.request_reply_member_no = M.member_no 
+		WHERE RR.request_reply_no = #{requestReplyNo} ORDER BY RR.request_reply_pk_no DESC 
+	</select>
+	
+	<delete id="deleteReply" parameterType="int">
+		delete request_reply where request_reply_pk_no = #{requestReplyPkNo}
+	</delete>
+	
+	<update id="likeCountUp" parameterType="int">
+		update request set request_like_count = request_like_count + 1 where request_no = #{requestNo}
+	</update>
+	
+	<update id="likeCountDown" parameterType="int">
+		update request set request_like_count = request_like_count - 1 where request_no = #{requestNo}
+	</update>
+	
+	<update id="replyCountUp" parameterType="int">
+		update request set request_reply_count = request_reply_count + 1 where request_no = #{requestNo}
+	</update>
+	
+	<update id="replyCountDown" parameterType="int">
+		update request set request_reply_count = request_reply_count - 1 where request_no = #{requestNo}
+	</update>
+	
+	<update id="viewCountUp" parameterType="int">
+		update request set request_view = request_view + 1 where request_no = #{requestNo}
+	</update>
+	
+	<select id="selectLikeTop5" resultType="RequestDto">
+		select * from(
+			select rownum rn, TMP.* from(
+				SELECT * FROM request 
+			)TMP
+		) where rn between 1 and 5 ORDER BY request_like_count DESC
+	</select>
+	
+	<select id="selectViewTop5" resultType="RequestDto">
+		select * from(
+			select rownum rn, TMP.* from(
+				SELECT * FROM request 
+			)TMP
+		) where rn between 1 and 5 ORDER BY request_view DESC
+	</select>
+	
+	<select id="requestSearch" parameterType="String" resultType="RequestVo">
+		SELECT * FROM request WHERE instr(request_title, #{keyword}) > 0 ORDER BY request_no asc
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

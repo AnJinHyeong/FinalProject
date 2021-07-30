@@ -22,6 +22,6 @@ public class HeaderController {
 		if(memberNo == null) {
 			return 0;
 		}
-		return memberDao.getMemberHavePoint(memberNo); 
+		return memberDao.getMemberHavePoint(memberNo);
 	}
 }

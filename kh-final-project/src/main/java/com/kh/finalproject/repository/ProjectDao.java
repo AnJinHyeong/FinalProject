@@ -3,9 +3,12 @@ package com.kh.finalproject.repository;
 import java.util.List;
 
 import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.entity.SponsorDto;
 import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
+import com.kh.finalproject.vo.ProjectSponsorVo;
 import com.kh.finalproject.vo.ProjectVo;
+import com.kh.finalproject.vo.SearchVo;
 
 public interface ProjectDao {
 	
@@ -49,15 +52,33 @@ public interface ProjectDao {
 	boolean projectDelete(ProjectDto projectDto);
 	//index화면 프로젝트 리스트 
 	List<IndexProjectVo> indexProjectMain();
+	//index화면 프로젝트 리스트 
+	List<IndexProjectVo> indexProjectMain2();
+	//index화면 프로젝트 리스트 
+	List<IndexProjectVo> indexProjectMain3();
 	// 프로젝트 달성도 업데이트
 	void setPercent(ProjectDto projectDto);
 	// 키워드 검색
-	List<IndexProjectVo> projectSearch(String keyword);
+	List<IndexProjectVo> projectSearch(SearchVo searchVo);
 	// 키워드 검색 갯수
-	int projectSearchCount(String keyword);
+	int projectSearchCount(SearchVo searchVo);
 	// 키워드 카테고리 검색
-	List<IndexProjectVo> projectCategorySearch(String keyword);
+	List<IndexProjectVo> projectCategorySearch(SearchVo searchVo);
 	// 키워드 카테고리 검색 갯수
-	int projectCategorySearchCount(String keyword);
+	int projectCategorySearchCount(SearchVo searchVo);
+	// 키워드 검색 더보기
+	List<IndexProjectVo> projectSearchAll(SearchVo searchVo);
+	// 키워드 카테고리 검색 더보기
+	List<IndexProjectVo> projectCategorySearchAll(SearchVo searchVo);
+	// 필터에 따른 프로젝트 리스트 조회
+	List<IndexProjectVo> projectList(SearchVo searchVo);
+	//프로젝트 좋아요시 카운트 +1
+	boolean projectLikeUp(int projectNo);
+	//프로젝트 좋아요시 카운트 -1
+	boolean projectLikeDown(int projectNo);
+	//프로젝트번호로 후원자 기록 조회
+	List<SponsorDto> projectSponsorByProjectNo(int projectNo);
+	//프로젝트 후원자 리스트 조회
+	ProjectSponsorVo getSponsorSelect(int projectNo);
 	
 }

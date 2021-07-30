@@ -33,10 +33,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 승인 데이터 등록 -->
 	<update id="approve" parameterType="int">
-		update pay
-		set pay_status='결제
-		완료'
-		where pay_no = #{payNo}
+		UPDATE pay
+		SET pay_status='결제 완료', pay_date=systimestamp
+		WHERE pay_no = #{payNo}
 	</update>
 
 	
@@ -47,26 +46,44 @@ SET member_have_point =
 member_have_point + #{payPrice}
 WHERE member_no = #{memberNo}
 	</update>
-
-	<!-- <update id = "plusResult"> UPDATE member SET member_have_point =( SELECT 
-		pay_all_price FROM pay WHERE pay.pay_no = pay.pay_no ) </update> -->
-
-	<!-- 취소 데이터 등록 -->
-	<update id="cancel" parameterType="int">
-		update pay
-		set pay_status='취소'
-		where pay_no = #{paymentNo}
-	</update>
 	
-	<select id = "list" resultType = "PayDto" parameterType ="int">
+	<!-- 회원 결제 내역 조회 -->
+<!-- 	<select id = "list" resultType = "PayDto" parameterType ="int">
 	SELECT * FROM pay 
 	WHERE member_no = #{memberNo}
 	ORDER BY pay_no DESC
+	</select> -->
+	
+		<!-- 회원 결제 내역 조회 -->
+		<select id = "payList" resultType = "PayDto" parameterType="map">
+		SELECT  pay_no, 
+		        pay_tid, 
+		        pay_price,
+		        pay_status, 
+		        pay_date,
+                member_no
+		 FROM ( 
+		        SELECT pay_no, 
+		        pay_tid, 
+		        pay_price,
+		        pay_status, 
+		        pay_date,
+                member_no,
+                ROW_NUMBER() OVER(PARTITION BY member_no ORDER BY member_no DESC) AS RNUM
+                FROM pay
+                ) pay
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd} AND member_no = #{memberNo}
 	</select>
 	
-	<!-- 조회 1. 회원 1명의 전체 결제내역 조회 2. 결제내역 1개에 대한 단일조회 -->
-	<!-- <select id="list" resultType="PaymentDto" parameterType="int"> select 
-		* from payment where payment_buyer = #{paymentBuyer} order by payment_no 
-		desc <<<<<<< HEAD </select> ======= </select> -->
-
+	
+		<!-- 게시물 수 조회 -->
+	<select id="listCount" resultType="int">
+	<![CDATA[
+	SELECT COUNT(*)
+	FROM pay 
+	WHERE member_no = #{memberNo}
+	]]>
+	</select>
+	
+	
 </mapper>

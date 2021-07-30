@@ -119,12 +119,14 @@ public class MemberDaoImpl implements MemberDao{
 
 
 
-
-
-
 	@Override
 	public void usePoint(SponsorDto sponsorDto) {
 		sqlSession.update("member.usePoint", sponsorDto);
+	}
+
+	@Override
+	public boolean checkEmail(String memberEmail) {
+		return sqlSession.selectOne("member.checkEmail", memberEmail) != null;
 	}
 
 

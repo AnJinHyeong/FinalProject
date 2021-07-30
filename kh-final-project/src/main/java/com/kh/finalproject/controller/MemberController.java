@@ -25,7 +25,9 @@ import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.MessageDao;
 import com.kh.finalproject.repository.ProjectDao;
+import com.kh.finalproject.repository.ProjectLikeDao;
 import com.kh.finalproject.service.EmailService;
+import com.kh.finalproject.vo.ProjectLikeVo;
 
 
 @Controller
@@ -239,18 +241,27 @@ public class MemberController {
 		return "member/redirectMember";
 	}
 
+	/* 이메일 인증번호 비동기로 비활성화 */
+//	@PostMapping(value = "/memberInsert")
+//	public String memberInsert(@ModelAttribute EmailAuthDto emailAuthDto, RedirectAttributes attr,@ModelAttribute MemberDto memberDto) {
+//	boolean result = emailService.checkCertification(emailAuthDto);
+//	if(result) {
+//		memberDao.memberInsert(memberDto);
+//		return "member/joinSuccess";
+//
+//		  }else { attr.addAttribute("error", ""); attr.addAttribute("email",
+//		  emailAuthDto.getEmail()); return "redirect:join"; }
+//
+//	}
+	
+
 	@PostMapping(value = "/memberInsert")
-	public String memberInsert(@ModelAttribute EmailAuthDto emailAuthDto, RedirectAttributes attr,@ModelAttribute MemberDto memberDto) {
-	boolean result = emailService.checkCertification(emailAuthDto);
-	if(result) {
+	public String memberInsert(@ModelAttribute MemberDto memberDto) {
 		memberDao.memberInsert(memberDto);
-		return "member/joinSuccess";
-	}else {
-		attr.addAttribute("error", "");
-		attr.addAttribute("email", emailAuthDto.getEmail());
-		return "redirect:join";
-	}	
+		return "index";
 	}
+	
+	
 	 
 	@GetMapping("/login")
 	public String memberInsert() {
@@ -358,13 +369,30 @@ public class MemberController {
 		return "member/emailCheck";
 	}
 	
-	@PostMapping("/emailCheck")
-	public String emailCheck(@RequestParam String email, RedirectAttributes attr) throws MessagingException {
-		emailService.sendEmail(email);
+	/* 이메일 인증번호 비동기로 비활성화2 */
+//	@PostMapping("/emailCheck")
+//	public String emailCheck(@RequestParam String email, RedirectAttributes attr) throws MessagingException {
+//		emailService.sendEmail(email);
+//		
+//		attr.addAttribute("email", email);
+//		return "redirect:join";
+//	}
+	
+	@Autowired
+	private ProjectLikeDao projectLikeDao;
+	
+	@GetMapping("/myLikeProject")
+	public String myLikeProject(
+			HttpSession session,
+			Model model) {
+		int memberNo = (int)session.getAttribute("memberNo");
 		
-		attr.addAttribute("email", email);
-		return "redirect:join";
+		List<ProjectLikeVo> likeList = projectLikeDao.myLikeProjectList(memberNo);
+		model.addAttribute("likeList", likeList);
+		
+		return "member/myLikeProject";
 	}
+
 	
 
 	@PostMapping("/getId")

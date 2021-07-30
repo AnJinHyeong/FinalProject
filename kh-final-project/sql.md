@@ -9,9 +9,9 @@ member_email varchar2(30) not null unique,
 member_introduce varchar2(1000),
 member_grade varchar2(30) default '사용자' check (member_grade in('관리자','사용자','블랙')) ,   
 member_address VARCHAR2(200)
+);
 
 CREATE SEQUENCE member_seq;
-);
 
 #project table
 CREATE TABLE project(
@@ -20,8 +20,8 @@ project_title varchar2(90),
 project_content clob default empty_clob(),
 project_content_file clob default empty_clob(),
 project_target_amount NUMBER(19),
-project_percent NUMBER(5),
-project_state char(1) CHECK (project_state IN ('1','2','3','X')) NOT NULL,
+project_percent NUMBER(5) default 0 not null check(project_percent >= 0),
+project_state char(1) default '1' CHECK (project_state IN ('1','2','3','4','X')) not null,
 project_regist_date DATE DEFAULT sysdate NOT NULL,
 project_start_date DATE,
 project_end_date DATE,
@@ -112,7 +112,8 @@ image_content_type varchar2(30),
 image_size number(19) DEFAULT 0 NOT NULL,
 project_no REFERENCES project(project_no) ON DELETE CASCADE,
 project_state char(1) CHECK (project_state IN ('Y')) ,
-member_no REFERENCES member(member_no) ON DELETE CASCADE
+member_no REFERENCES member(member_no) ON DELETE CASCADE,
+main_banner references banner(banner_no) on delete cascade
 );
 
 CREATE SEQUENCE image_file_seq;
@@ -130,3 +131,83 @@ sponsor_cancel char(1) check (sponsor_cancel ='Y')
 );
 
 create sequence sponsor_seq;
+
+
+#peoject_like
+CREATE TABLE project_like(
+like_project_no REFERENCES project(project_no) ON DELETE SET NULL,
+like_member_no references member(member_no) on delete SET NULL,
+like_date DATE DEFAULT sysdate,
+constraint project_like_pk primary key(like_project_no, like_member_no) 
+);
+
+
+#project_community
+CREATE TABLE project_community(
+project_community_no number(19) PRIMARY KEY,
+project_community_content varchar2(4000) NOT NULL,
+project_community_date DATE DEFAULT sysdate,
+member_no references member(member_no) ON DELETE CASCADE,
+project_no references project(project_no) ON DELETE CASCADE 
+);
+
+CREATE SEQUENCE project_community_seq;
+
+
+#project_report
+CREATE TABLE project_report(
+report_no NUMBER(19) PRIMARY KEY,
+report_project_no REFERENCES project(project_no) ON DELETE SET NULL,
+report_member_no references member(member_no) on delete SET NULL,
+report_content varchar2(4000) NOT NULL,
+report_date DATE DEFAULT sysdate
+);
+
+CREATE SEQUENCE project_report_seq;
+
+
+#banner
+create table banner(
+banner_no number(19) primary key,
+banner_title varchar2(60) not null,
+banner_content varchar2(150) not null, 
+banner_background_color char(7) default '#ffffff' not null,
+banner_color char(7) default '#000000' not null
+);
+
+create sequence banner_seq;
+
+
+#request
+CREATE TABLE request(
+request_no number(19) PRIMARY KEY,
+request_title VARCHAR2(300) NOT NULL,
+request_content VARCHAR2(4000) NOT NULL,
+request_date DATE DEFAULT sysdate,
+request_view NUMBER(19) DEFAULT 0,
+request_like_count number(19) DEFAULT 0,
+request_reply_count number(19) DEFAULT 0,
+request_category_no REFERENCES category(category_no) ON DELETE CASCADE,
+request_member_no REFERENCES member(member_no) ON DELETE SET NULL
+);
+
+CREATE SEQUENCE request_seq;
+
+#request_like
+CREATE TABLE request_like(
+request_like_no references request(request_no) ON DELETE CASCADE,
+request_like_member_no references member(member_no) ON DELETE CASCADE,
+request_like_date DATE DEFAULT sysdate,
+constraint request_like_pk primary key(request_like_no, request_like_member_no) 
+);
+
+#request_reply
+CREATE TABLE request_reply(
+request_reply_pk_no number(19) PRIMARY KEY,
+request_reply_no references request(request_no) ON DELETE CASCADE,
+request_reply_member_no references member(member_no) ON DELETE CASCADE,
+request_reply_content varchar2(300) NOT NULL,
+request_reply_date DATE DEFAULT sysdate
+);
+
+CREATE SEQUENCE request_reply_seq;

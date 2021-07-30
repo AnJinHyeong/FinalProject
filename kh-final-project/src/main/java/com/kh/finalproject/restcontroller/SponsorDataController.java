@@ -15,7 +15,7 @@ import com.kh.finalproject.vo.SponsorVo;
 
 @RequestMapping("/sponsor/data")
 @RestController
-public class SponsorDateController {
+public class SponsorDataController {
 
 	@Autowired
 	private SponsorDao sponsorDao;
