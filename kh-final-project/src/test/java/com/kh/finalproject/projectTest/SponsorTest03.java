@@ -35,7 +35,7 @@ public class SponsorTest03 {
 				.build();
 //		log.info(target.toString());
 //		log.info(sponsorDao.getSponsor(target).toString());
-		memberDao.addPointBySponsorCancel(sponsorDao.getSponsor(target));
+		memberDao.addPoint(sponsorDao.getSponsor(target));
 	}
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.entity.SponsorDto;
 import com.kh.finalproject.vo.IndexProjectVo;
+import com.kh.finalproject.vo.ProjectAmountGiveVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
 import com.kh.finalproject.vo.ProjectSponsorVo;
 import com.kh.finalproject.vo.ProjectVo;
@@ -80,5 +81,9 @@ public interface ProjectDao {
 	List<SponsorDto> projectSponsorByProjectNo(int projectNo);
 	//프로젝트 후원자 리스트 조회
 	ProjectSponsorVo getSponsorSelect(int projectNo);
+	// ProjectAmountVo 가져오기
+	List<ProjectAmountGiveVo> getProjectAmountGiveVoList();
+	// 완료된 프로젝트 포인트 지급 컬럼 업데이트
+	void setProjectAmountGiveY(int projectNo);
 	
 }

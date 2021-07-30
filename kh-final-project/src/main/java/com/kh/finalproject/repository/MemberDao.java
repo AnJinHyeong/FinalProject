@@ -32,6 +32,6 @@ public interface MemberDao {
 	// 포인트 사용, 보유포인트 감소
 	void usePoint(SponsorDto sponsorDto);
 	// 후원 취소, 보유포인트 환급
-	void addPointBySponsorCancel(SponsorDto sponsorDto);
+	void addPoint(SponsorDto sponsorDto);
 
 }

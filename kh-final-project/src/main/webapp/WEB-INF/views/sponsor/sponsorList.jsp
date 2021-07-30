@@ -122,9 +122,11 @@
 							success : function(resp) {
 
 								replaceProjectSummarizeTemplate(resp);
-								var action = $("#moveToProjectDetailForm").attr("action");
-								action = action + projectNo;
-								$("#moveToProjectDetailForm").attr("action", action);
+								
+								$("#moveToProjectDetailBtn").on("click", function(){
+									url = "${pageContext.request.contextPath}/projectBoard/" + projectNo
+									$(location).attr('href',url);
+								});
 								
 								$.ajax({
 									url : "${pageContext.request.contextPath}/project/data/sponsorListByProjectNo/" + that.index(),
@@ -159,9 +161,10 @@
 				success : function(resp) {
 					
 					replaceProjectSummarizeTemplate(resp);
-					var action = $("#moveToProjectDetailForm").attr("action");
-					action = action + projectNo;
-					$("#moveToProjectDetailForm").attr("action", action);
+					$("#moveToProjectDetailBtn").on("click", function(){
+						url = "${pageContext.request.contextPath}/projectBoard/" + projectNo
+						$(location).attr('href',url);
+					});
 					
 					$.ajax({
 						url : "${pageContext.request.contextPath}/project/data/sponsorListByProjectNo/" + that.index(),
@@ -213,9 +216,7 @@
 	</div>
 	
 	<div class="h100">
-		<form id="moveToProjectDetailForm" action="${root}/projectBoard/${projectNo}" method="get">
-			<button class="w100p project-btn btn3 project-btn-hover">상세 페이지로 이동</button>
-		</form>
+		<button id="moveToProjectDetailBtn" class="w100p project-btn btn3 project-btn-hover">상세 페이지로 이동</button>
 	</div>
 
 </script>

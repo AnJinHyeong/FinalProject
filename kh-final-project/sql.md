@@ -30,7 +30,8 @@ project_summary varchar2(150) not null,
 member_no references member(member_no) on delete SET NULL,
 category_no REFERENCES category(category_no) ON DELETE SET NULL
 member_info_nick varchar2(30),
-member_info_content varchar2(1000)
+member_info_content varchar2(1000),
+project_amount_give char(1) check(project_amount_give in ('Y'))
 );
 
 CREATE SEQUENCE project_seq;

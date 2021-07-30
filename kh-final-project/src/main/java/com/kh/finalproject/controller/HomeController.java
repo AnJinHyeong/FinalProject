@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.kh.finalproject.repository.BannerDao;
 import com.kh.finalproject.repository.ImageDao;
 import com.kh.finalproject.service.FileService;
+import com.kh.finalproject.service.PointService;
 
 @Controller
 public class HomeController {
@@ -38,6 +39,15 @@ public class HomeController {
 	@GetMapping("/deleteLocalFileNotInDB")
 	public String deleteLocalFileNotInDB() {
 		fileService.deleteLocalFileNotInDB();
+		return "redirect:/";
+	}
+	
+	@Autowired
+	private PointService pointService;
+	
+	@GetMapping("/givePointByFinishedProject")
+	public String givePointByFinishedProject() {
+		pointService.finishedProjectGiveAmount();
 		return "redirect:/";
 	}
 	
