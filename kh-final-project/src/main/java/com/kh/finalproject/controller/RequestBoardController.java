@@ -124,6 +124,54 @@ public class RequestBoardController {
 		return "requestBoard/requestBoardSearch";
 	}
 	
+	@GetMapping("/requestDelete/{requestNo}")
+	public String requestDelete(HttpSession session, @PathVariable int requestNo) {
+		int memberNo = (int)session.getAttribute("memberNo");
+		RequestDto requestDto = RequestDto.builder()
+				.requestMemberNo(memberNo)
+				.requestNo(requestNo)
+				.build();
+		
+		requestDao.deleteRequest(requestDto);
+		
+		return "redirect:/requestBoard/requestBoard";
+	}
+	
+	@GetMapping("/requestBoardEdit/{requestNo}")
+	public String requestBoardEdit(
+			HttpSession session, 
+			@PathVariable int requestNo,
+			Model model) {
+		
+		List<CategoryDto> categoryDto = categoryDao.approveList();
+		model.addAttribute("category", categoryDto);
+		
+		List<RequestVo> requestVo = requestDao.selectAll();
+		model.addAttribute("request", requestVo);
+		
+		RequestDto requestEdit = requestDao.requestEditgetByRequestNo(requestNo);
+		model.addAttribute("requestEdit", requestEdit);
+		
+		return "requestBoard/requestBoardEdit";
+	}
+	
+	
+	@PostMapping("/requestBoardEdit/requestEdit")
+	public String requestEdit(@ModelAttribute RequestDto requestDto, HttpSession session) {
+		int memberNo = (int)session.getAttribute("memberNo");
+		
+		RequestDto find = RequestDto.builder()
+				.requestMemberNo(memberNo)
+				.requestNo(requestDto.getRequestNo())
+				.requestTitle(requestDto.getRequestTitle())
+				.requestCategoryNo(requestDto.getRequestCategoryNo())
+				.requestContent(requestDto.getRequestContent())
+				.build();
+		
+		requestDao.requestEdit(find);
+		
+		return "redirect:/requestBoard/requestBoardContent/" + requestDto.getRequestNo();
+	}
 	
 	
 	

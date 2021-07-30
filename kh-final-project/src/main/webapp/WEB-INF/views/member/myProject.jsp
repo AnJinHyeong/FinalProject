@@ -32,7 +32,7 @@
 						<div class="left">${projectDto.projectNo}</div>
 						<div class="left"><strong>${projectDto.projectTitle}</strong></div>
 						<div class="left"><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMain">수정</a></div>
-						<div class="left"><a href="#">삭제</a></div>
+						<div class="left"><a href="${pageContext.request.contextPath}/project/projectDelete/${projectDto.projectNo}">삭제</a></div>
 						<div></div>
 					</div>
 				</c:forEach>

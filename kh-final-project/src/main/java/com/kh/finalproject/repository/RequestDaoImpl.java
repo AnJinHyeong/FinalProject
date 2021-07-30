@@ -97,6 +97,22 @@ public class RequestDaoImpl implements RequestDao{
 	public List<RequestVo> requestSearch(String keyword) {
 		return sqlSession.selectList("request.requestSearch", keyword);
 	}
+
+	@Override
+	public boolean deleteRequest(RequestDto requestDto) {
+		int count = sqlSession.delete("request.deleteRequest", requestDto);
+		return count > 0;
+	}
 	
+	@Override
+	public boolean requestEdit(RequestDto requestDto) {
+		int count = sqlSession.delete("request.requestEdit", requestDto);
+		return count > 0;
+	}
+
+	@Override
+	public RequestDto requestEditgetByRequestNo(int requestNo) {
+		return sqlSession.selectOne("request.requestEditgetByRequestNo", requestNo);
+	}
 	
 }

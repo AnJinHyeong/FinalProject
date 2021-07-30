@@ -423,5 +423,18 @@ public class ProjectController {
 		return "project/projectMainSponsor";
 	}
 	
+	@GetMapping("/projectDelete/{projectNo}")
+	public String projectDelete(@PathVariable int projectNo, HttpSession session) {
+		int memberNo = (int)session.getAttribute("memberNo");
+		
+		ProjectDto projectDto = ProjectDto.builder()
+				.memberNo(memberNo)
+				.projectNo(projectNo)
+				.build();
+		projectDao.projectDelete(projectDto);
+		
+		return "redirect:/member/myProject";
+	}
+	
 	
 }
