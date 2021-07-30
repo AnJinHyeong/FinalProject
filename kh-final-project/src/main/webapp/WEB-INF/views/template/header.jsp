@@ -179,7 +179,7 @@
 							<div class="headerLoginLogout dpNone poAbsolute w160 zi2 mt10" style="margin-left: -40px;">
 								<ul class="On lsNone bacWhite p10 bora5 boc240 bosSolid bow1">
 									<li><a href="${root}/member/login">로그인</a></li>
-									<li><a href="#">회원가입</a></li>
+									<li><a href="${pageContext.request.contextPath}/member/join">회원가입</a></li>
 								</ul>
 							</div>
 						</c:otherwise>

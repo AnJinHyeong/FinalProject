@@ -5,12 +5,9 @@
 
 	<section>
 		<div class="admin-home_content_area">
-			<div class="admin-home_content">
+			<div class="admin-home_content100">
+				<p class="admin-home-top-p">프로젝트 조회/심사</p>
 			</div>
-			
-			<div class="admin-home_content">
-			</div>
-			
 		</div>
 		<div class="admin-home_chart_area">
 			
