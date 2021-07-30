@@ -9,7 +9,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
 .right:hover{
-	background-color:#6d6d6d;
+	background-color: #e8e8e8; 
 }
 </style>
 <script>
@@ -33,7 +33,7 @@
 		</div>
 	</div>  
 
-	<div class="container-1400 dpFlex pl100 pr100 abc" style="min-height: 658px;">
+	<div class="container-1200 dpFlex pl100 pr100 abc" style="min-height: 673px;">
 
 		<div class="container-800 hMax600 mt30 mb30 scrollThin">
 
@@ -47,14 +47,12 @@
 			<div style="projectInsert3 w100p pb30;">
 				<c:forEach var="projectDto" items="${projectDto}">
 					<div class="float-container" style="border-bottom:solid 1px #3d3d3d; padding:20px;">
-					
 						<div class="left" class="project-main-img w80 h100p">이미지</div>
 						<div class="left projectNo" style="margin-left:10px;">${projectDto.memberNo}</div>
 						<div class="left projectNo" style="margin-left:10px;">${projectDto.projectNo}</div>
 						<div class="left btn-text projectTitle" style="margin-left:10px;"><strong>${projectDto.projectTitle}</strong></div>
-						<div class="right" style="border:solid 1px gray; padding : 10px; margin-left:10px;"><a href="#"><strong>삭제</strong></a></div>
+						<div class="right" style="border:solid 1px gray; padding : 10px; margin-left:10px;"><a href="${pageContext.request.contextPath}/project/projectDelete/${projectDto.projectNo}"><strong id="deleteSt">삭제</strong></a></div>
 						<div class="right" style="border:solid 1px gray; padding : 10px; "><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMain"><strong>수정</strong></a></div>
-						<div></div>   
 					</div> 
 				</c:forEach>
 			</div>	
