@@ -144,13 +144,16 @@ public class MemberController {
 		boolean upAddress=memberDao.updateAddress(memberDto);
 		if(upAddress){
 			model.addAttribute("msg","주소 변경이 완료되었습니다.");
-			model.addAttribute("url","/member/myAccount");
+//			model.addAttribute("url","/member/myAccount");
+			model.addAttribute("url","/member/myInformationSettings");
 			
 		}else	{
 			model.addAttribute("msg","주소 변경이 실패했습니다.");
-			model.addAttribute("url","/member/myAccount");
+//			model.addAttribute("url","/member/myAccount");
+			model.addAttribute("url","/member/myInformationSettings");
 		}
 		return "member/redirectMember";
+//		return "member/myInformationSettings";
 	}
 	@PostMapping("/upPw2")
 	public String upPw2(HttpSession session,Model model,@ModelAttribute MemberDto memberDto){
@@ -412,6 +415,15 @@ public class MemberController {
 		return "member/redirectMember";
 		
 	}
-
+	
+	@GetMapping("/myInformationSettings")
+	public String myInformationSettings(HttpSession session,Model model) {
+		
+		int memberNo = (int) session.getAttribute("memberNo");
+		MemberDto find = memberDao.getByMemberNo(memberNo);
+		
+		model.addAttribute("memberDto",find);
+		return "member/myInformationSettings";
+	}
 
 }
