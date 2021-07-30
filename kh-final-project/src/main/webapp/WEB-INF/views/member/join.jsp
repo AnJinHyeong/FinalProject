@@ -40,7 +40,7 @@ padding: 32px;
 	}
 	.joinBtn{
 		border-radius:5px;
-		background:red;
+		background: black;
 		color:#fff;
 		border:none;
 		position:relative;
@@ -118,10 +118,10 @@ padding: 32px;
 			<div>	<label for = "memberEmail">이메일</label></div>
 				<input type = "email" name="memberEmail" id = "memberEmail" required class = "form-input form-underline radius-b"
 							value = "${param.email}" placeholder = "인증번호를 받기 위한 메일 입력">
-							<button id = "emailSend" disabled ><i class="fas fa-envelope"></i></button>
-											<input type="hidden" name="email" value="${param.email}">
+							<button id = "emailSend" disabled style="cursor: pointer;"><i class="fas fa-envelope"></i></button>
+								<input type="hidden" name="email" value="${param.email}">
 											
-															<div id = "checkEmail"></div>
+								<div id = "checkEmail"></div>
 
 			</div>
 			<div class = "row text-left">
