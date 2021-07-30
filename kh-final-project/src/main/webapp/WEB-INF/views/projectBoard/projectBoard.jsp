@@ -240,8 +240,14 @@
 			
 		});
 		
+		
 	});
 		
+		function showMsg() {
+
+			window.open("${root}/member/${projectNo}/msgWrite","a","width=600, height=430, left=400, top=100 ,status=no,toolbar=no");
+
+		}
 	
 </script>
 
@@ -448,7 +454,7 @@
 						</c:otherwise>
 					</c:choose>
 					<div class="topLine" style="padding: 10px 0;">
-						<button class="project-board-sns-btn"><span class="fonr-12"><i class="far fa-envelope"></i></span> 문의하기</button>
+						<button class="project-board-sns-btn" onclick="showMsg()"><span class="fonr-12"><i class="far fa-envelope"></i></span> 문의하기</button>
 					</div>
 				</div>
 				
