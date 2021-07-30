@@ -39,6 +39,11 @@ public interface RequestDao {
 	List<RequestDto> selectViewTop5();
 	//게시글 제목 검색
 	List<RequestVo> requestSearch(String keyword);
-	
+	//게시글 삭제
+	boolean deleteRequest(RequestDto requestDto);
+	//게시글 수정
+	boolean requestEdit(RequestDto requestDto);
+	//게시글 수정시 정보 불러오기
+	RequestDto requestEditgetByRequestNo(int requestNo);
 	
 }

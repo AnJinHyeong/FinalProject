@@ -16,17 +16,39 @@
 </head>
 <body>
 	<aside>
-		<div class="admin-logo"><a href="#">FüN‿ding</a></div>
+		<div class="admin-logo" style="padding-bottom: 5px;"><a href="${root}/admin">FüN‿ding</a></div>
+		<div class="admin-logo" style="padding: 0 0 30px 0;">ADMIN</div>
 		<ul>
-			<li class="admin-aside-top_menu"><span class="">회원</span>
+			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">회원</span>
 				<ul class="admin-aside-side_menus">
-					<li><a href="#">회원</a></li>
-					<li><a href="#">회원</a></li>
+					<li><a href="#">회원 관리</a></li>
+					<li><a href="#">회원 결제 관리</a></li>
 				</ul>
 			</li>
-			<li class="admin-aside-top_menu"><span class=""></span>
+			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">프로젝트</span>
 				<ul class="admin-aside-side_menus">
-					<li><a href="#">메인 페이지</a></li>
+					<li><a href="#">카테고리 심사</a></li>
+					<li><a href="${root}/admin/adminProjectSelect">프로젝트 조회/심사</a></li>
+				</ul>
+			</li>
+			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">문의함</span>
+				<ul class="admin-aside-side_menus">
+					<li><a href="#">관리자 문의</a></li>
+				</ul>
+			</li>
+			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">배너</span>
+				<ul class="admin-aside-side_menus">
+					<li><a href="#">배너 관리 </a></li>
+				</ul>
+			</li>
+			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">자유 게시판</span>
+				<ul class="admin-aside-side_menus">
+					<li><a href="#">게시글 조회/관리</a></li>
+				</ul>
+			</li>
+			<li class="admin-aside-top_menu" style="margin-top: 100px;"><span class=""></span>
+				<ul class="admin-aside-side_menus">
+					<li><a href="${root}/" style="color: #fff;">메인 페이지</a></li>
 				</ul>
 			</li>
 		</ul>

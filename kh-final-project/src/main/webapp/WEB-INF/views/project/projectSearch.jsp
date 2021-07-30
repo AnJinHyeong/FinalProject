@@ -216,11 +216,6 @@
 				</c:if>
 			</div>
 			
-			<div class="section-project-search-row-div float-container">
-				<p class="project-search-p"><span></span>개의 커뮤니티 게시글이 있습니다.<span class="font-12 red-hover-cursor" id="search-plus3" style="float: right;" >더 보기 <i class="fas fa-angle-double-right"></i></span></p>
-				<div class="section-project-main-search" id="sectionProjectMain3"></div>
-			</div>
-
 		</div>
 	
 	</div>

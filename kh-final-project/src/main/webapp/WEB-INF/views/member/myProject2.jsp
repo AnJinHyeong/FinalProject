@@ -16,16 +16,6 @@
 
 </script>
 
-
- 
-
-
-
-
-
-
-
-
 <section class="main-row topLine">
 
 	<div class="container-1200 mt30 poRelative">
@@ -43,7 +33,7 @@
 		</div>
 	</div>  
 
-	<div class="container-1400 dpFlex pl100 pr100 abc">
+	<div class="container-1400 dpFlex pl100 pr100 abc" style="min-height: 658px;">
 
 		<div class="container-800 hMax600 mt30 mb30 scrollThin">
 
@@ -74,14 +64,6 @@
 		 
 	</div>
 
-
-		
-		
-		
-	
-		
-
-	
 
 </section>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
