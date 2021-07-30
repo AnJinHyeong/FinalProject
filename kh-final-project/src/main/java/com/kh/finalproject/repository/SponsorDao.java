@@ -3,6 +3,7 @@ package com.kh.finalproject.repository;
 import java.util.List;
 
 import com.kh.finalproject.entity.SponsorDto;
+import com.kh.finalproject.vo.ProjectAmountGiveVo;
 import com.kh.finalproject.vo.SponsorListVo;
 import com.kh.finalproject.vo.SponsorVo;
 
@@ -32,4 +33,6 @@ public interface SponsorDao {
 	boolean sponsorCancel(SponsorDto sponsorDto);
 	// 후원객체로 후원정보 가져오기
 	SponsorDto getSponsor(SponsorDto sponsorDto);
+	// 프로젝트 번호로 후원목록 가져오기
+	List<ProjectAmountGiveVo> getSponsorAmountListByProjectNo(int projectNo);
 }

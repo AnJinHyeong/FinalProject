@@ -7,6 +7,7 @@ import com.kh.finalproject.entity.SponsorDto;
 import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectAdminSearchKeywordVo;
 import com.kh.finalproject.vo.ProjectAdminSearchVo;
+import com.kh.finalproject.vo.ProjectAmountGiveVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
 import com.kh.finalproject.vo.ProjectSponsorVo;
 import com.kh.finalproject.vo.ProjectVo;
@@ -84,5 +85,9 @@ public interface ProjectDao {
 	ProjectSponsorVo getSponsorSelect(int projectNo);
 	//admin 프로젝트 검색
 	List<ProjectAdminSearchVo> projectAdminSelectList(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo);
+	// ProjectAmountVo 가져오기
+	List<ProjectAmountGiveVo> getProjectAmountGiveVoList();
+	// 완료된 프로젝트 포인트 지급 컬럼 업데이트
+	void setProjectAmountGiveY(int projectNo);
 	
 }

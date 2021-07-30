@@ -3,6 +3,7 @@ package com.kh.finalproject.service;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +15,12 @@ import com.kh.finalproject.error.SponFailException;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.repository.SponsorDao;
+import com.kh.finalproject.vo.ProjectAmountGiveVo;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class PointServiceImpl implements PointService{
 	
 	@Autowired
@@ -63,7 +68,7 @@ public class PointServiceImpl implements PointService{
 				.memberNo(memberNo)
 				.build();
 		sponsorDao.sponsorCancel(target);
-		memberDao.addPointBySponsorCancel(sponsorDao.getSponsor(target));
+		memberDao.addPoint(sponsorDao.getSponsor(target));
 		
 		int projectNo = sponsorDao.getSponsor(target).getProjectNo();
 		
@@ -75,6 +80,43 @@ public class PointServiceImpl implements PointService{
 				.projectNo(projectNo)
 				.projectPercent(percent)
 				.build());
+	}
+
+	@Override
+	@Transactional
+	public void finishedProjectGiveAmount() {
+		for(ProjectAmountGiveVo projectAmountGiveVo : projectDao.getProjectAmountGiveVoList()) {
+			int projectNo = projectAmountGiveVo.getProjectNo();
+			if(projectAmountGiveVo.getProjectPercent() < 100) {
+				// 프로젝트 달성도 100% 미만 후원자들에게 포인트 지급
+				for(ProjectAmountGiveVo projectAmountGiveVo2 : sponsorDao.getSponsorAmountListByProjectNo(projectNo)) {
+					memberDao.addPoint(SponsorDto.builder()
+							.memberNo(projectAmountGiveVo2.getSponsorMemberNo())
+							.sponsorAmount(projectAmountGiveVo2.getSponsorAmount())
+							.build());
+				}
+				projectDao.setProjectAmountGiveY(projectAmountGiveVo.getProjectNo());
+			}
+			else {
+				// 프로젝트 달성도 100% 이상 제작자에게 포인트 지급
+				memberDao.addPoint(SponsorDto.builder()
+							.memberNo(projectAmountGiveVo.getMemberNo())
+							.sponsorAmount(sponsorDao.currentAmount(projectNo))
+							.build());
+				projectDao.setProjectAmountGiveY(projectAmountGiveVo.getProjectNo());
+			}
+		}
+	}
+	
+	public void test() {
+		log.debug("포인트 지급이 완료되었습니다. test");
+	}
+	
+	@Scheduled(cron = "0 0 0 * * *")
+	@Override
+	public void autoGiveAmountByFinishedProject() {
+//		finishedProjectGiveAmount();
+		test();
 	}
 
 }

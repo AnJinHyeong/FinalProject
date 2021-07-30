@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.SponsorDto;
+import com.kh.finalproject.vo.ProjectAmountGiveVo;
 import com.kh.finalproject.vo.SponsorListVo;
 import com.kh.finalproject.vo.SponsorVo;
 
@@ -80,5 +81,10 @@ public class SponsorDaoImpl implements SponsorDao{
 	@Override
 	public SponsorDto getSponsor(SponsorDto sponsorDto) {
 		return sqlSession.selectOne("sponsor.getSponsor", sponsorDto);
+	}
+
+	@Override
+	public List<ProjectAmountGiveVo> getSponsorAmountListByProjectNo(int projectNo) {
+		return sqlSession.selectList("sponsor.getSponsorAmountListByProjectNo", projectNo);
 	}
 }

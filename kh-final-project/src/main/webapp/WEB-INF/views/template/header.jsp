@@ -163,7 +163,7 @@
 									<li><a href="${root}/sponsor/sponsorList">후원현황</a></li>
 									<li><a href="${root}/member/myProject">내 프로젝트</a></li>
 									<li><a href="${root}/member/myLikeProject">좋아한 프로젝트</a></li>
-									<li><a href="${root}/member/mySettings">내 정보 수정</a></li>
+									<li><a href="${root}/member/myInformationSettings">내 정보 수정</a></li>
 									<li><a href="${root}/member/logout">로그아웃</a></li>
 								</ul>
 							</div>
