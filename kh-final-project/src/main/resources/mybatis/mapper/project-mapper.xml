@@ -19,12 +19,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="proList" parameterType="int" resultType="ProjectDto">
 <!-- 	<![CDATA[ -->
-		select * from project where member_no = #{memberNo} and project_state = 1
+		select * from project where member_no = #{memberNo} and project_state = '1' or project_state = '2'
 <!-- 		]]> -->
 	</select>
 	
 	<select id="proList2" parameterType="int" resultType="ProjectDto">
-		select * from project where member_no = #{memberNo} and project_state = 3
+		select * from project where member_no = #{memberNo} and project_state = '3' or project_state = '4' or project_state = 'x'
 	</select>
 	
 	<select id="get" parameterType="ProjectDto" resultType="ProjectDto">
