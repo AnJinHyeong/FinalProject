@@ -16,7 +16,8 @@
 </head>
 <body>
 	<aside>
-		<div class="admin-logo"><a href="${root}/admin">FüN‿ding</a></div>
+		<div class="admin-logo" style="padding-bottom: 0px;"><a href="${root}/admin">FüN‿ding</a></div>
+		<div class="admin-logo" style="padding-top: 0px; padding-left:90px; font-size: 16px;"><span>ADMIN</span></div>
 		<ul>
 			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">회원</span>
 				<ul class="admin-aside-side_menus">
