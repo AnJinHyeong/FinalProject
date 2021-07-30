@@ -14,10 +14,6 @@
 <br><br>
 <script>
 	var email = $("#memberEmail").val();  
-	$(".mail_check_button").click(function(){
-		
-		
-	});
 </script>
 <style>
 	.mainDiv{
@@ -39,6 +35,44 @@
 .radius-b{
 		height:60px;
 		border-radius:5px;
+	}
+	.joinBtn{
+		border-radius:5px;
+		background:red;
+		color:#fff;
+		border:none;
+		position:relative;
+		height:50px;
+		width:100%;
+  		font-size:1.6em;
+  		padding:0 2em;
+  		cursor:pointer;
+  		transition:800ms ease all;
+  		outline:none;
+	}
+	.joinBtn:hover{
+		background:#fff;
+		color:red;
+	}
+	.joinBtn:before,.joinBtn:after{
+	  	content:'';
+	  	position:absolute;
+	  	top:0;
+	  	right:0;
+	  	height:2px;
+	  	width:0;
+	  	background: #1AAB8A;
+	 	transition:400ms ease all;
+	}
+	.joinBtn:after{
+		right:inherit;
+		top:inherit;
+		left:0;
+		bottom:0;
+	}
+	.joinBtn:hover:before,.joinBtn:hover:after{
+		width:100%;
+		transition:800ms ease all;
 	}
 </style>
 <body>
@@ -99,7 +133,7 @@
 				
 			</div>
 			<div class = "row text-center">
-			<input type = "submit" id= "submit" style= 'cursor:pointer' value = "가입" class = "form-btn form-btn-normal ">
+			<input type = "submit" id= "submit" style= 'cursor:pointer' value = "가입" class = "joinBtn">
 			</div>
 
 		</form>

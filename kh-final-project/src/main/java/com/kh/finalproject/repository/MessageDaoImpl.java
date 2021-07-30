@@ -24,23 +24,32 @@ public class MessageDaoImpl implements MessageDao{
 	}
 
 
+
+
 	@Override
-	public List<MessageDto> list(int memberNo) {
-		List<MessageDto> messageDto = sqlSession.selectList("member.msglist", memberNo);
-		return messageDto;
-	}
-	
-	@Override
-	public List<MessageDto> list2(int memberNo) {
-		List<MessageDto> messageDto = sqlSession.selectList("member.msglist2", memberNo);
-		return messageDto;
+	public List<MessageDto> msgAllByMemberNo(int memberNo) {
+		
+		return sqlSession.selectList("member.msgAllByMemberNo",memberNo);
 	}
 
 
 	@Override
-	public List<MessageDto> list3(int memberNo) {
-		List<MessageDto> messageDto = sqlSession.selectList("member.msglist3", memberNo);
-		return messageDto;
+	public List<MessageDto> msgSendByMemberNo(int memberNo) {
+		return sqlSession.selectList("member.msgSendByMemberNo",memberNo);
+	}
+
+
+	@Override
+	public List<MessageDto> msgReceiverByMemberNo(int memberNo) {
+		return sqlSession.selectList("member.msgReceiverByMemberNo",memberNo);
+	}
+
+
+
+
+	@Override
+	public MessageDto getByMsgNo(int msgNo) {
+		return sqlSession.selectOne("member.getByMsgNo",msgNo);
 	}
 
 }

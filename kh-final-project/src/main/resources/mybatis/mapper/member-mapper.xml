@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id = "insert" parameterType = "MemberDto">
 		INSERT INTO member(member_no,member_id,member_pw,member_nick,member_email,member_introduce)
 		VALUES(member_seq.nextval,#{memberId},#{memberPw},#{memberNick},#{memberEmail},#{memberIntroduce})
-	</insert>
+	</insert> 
 	
 	<insert id ="msgInsert" parameterType ="MessageDto">
 		INSERT INTO message(msg_no,sender_no,msg_title,msg_content,msg_date,receiver_no)
@@ -36,18 +36,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getMsg" parameterType="MessageDto" resultType="MessageDto">
-		select * from message where sender_no = #{senderNo} and msg_no = #{msgNo}
+		select * from message where msg_no = #{msgNo}
 	</select>
+	
 <!-- 	발송메시지함 -->
-	<select id="msglist" parameterType="int" resultType="MessageDto">
+	<select id="msgSendByMemberNo" parameterType="int" resultType="MessageDto">
 		select * from message where sender_no = #{memberNo}
 	</select>
 <!-- 	받은메시지함 -->
-	<select id="msglist2" parameterType="int" resultType="MessageDto">
+	<select id="msgReceiverByMemberNo" parameterType="int" resultType="MessageDto">
 		select * from message where receiver_no = #{memberNo}
 	</select>
 <!-- 	전체 메시지함 -->
-	<select id="msglist3" parameterType="int" resultType="MessageDto">
+	<select id="msgAllByMemberNo" parameterType="int" resultType="MessageDto">
 		select * from message where sender_no = #{memberNo}
 		union
 		select * from message where receiver_no = #{memberNo}
@@ -112,6 +113,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="upIntro" parameterType="MemberDto">
 		update member set member_introduce = #{memberIntroduce} where member_no=#{memberNo}
 	</update>
+	
+	<update id="upNick" parameterType="MemberDto">
+		update member set member_nick = #{memberNick} where member_no=#{memberNo}
+	</update>
+	
+	<update id="upAddress" parameterType="MemberDto">
+		update member set member_address = #{memberAddress} where member_no=#{memberNo}
+	</update>
+	
+	<select id="getByMsgNo" parameterType="MessageDto" resultType="MessageDto">
+		select * from project where msg_no = #{msgNo}
+	</select> 
+	
 
 	<!-- 보유 포인트 조회 -->
 	<select id = "getMemberHavePoint" resultType = "int" parameterType ="int">

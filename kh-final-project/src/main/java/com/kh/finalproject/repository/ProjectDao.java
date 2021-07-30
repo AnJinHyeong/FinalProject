@@ -11,6 +11,8 @@ public interface ProjectDao {
 	
 	//프로젝트 추가
 	void insert(ProjectCategoryVo projectCategoryVo);
+	List<ProjectDto> proList(int memberNo);
+	List<ProjectDto> proList2(int memberNo);
 	//회원이 만든 프로젝트 전체 조회
 	List<ProjectDto> list(int memberNo);
 	//프로젝트 상세 조회(projectNo,memberNo를 이용한)

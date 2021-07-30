@@ -143,7 +143,7 @@ $(document).ready(function(){
 
 										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="#">후원현황</a></li>
 
-										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="#">내 프로젝트</a></li>
+										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="${root}/member/myProject">내 프로젝트</a></li>
 
 										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="#">좋아한 프로젝트</a></li>
 
@@ -152,7 +152,7 @@ $(document).ready(function(){
 										<li style="margin-right:-100px; text-align:left; width:118px; height:25px"><a href="${root}/member/logout">로그아웃</a></li>
 
 									</ul>
-
+ 
 							</li>
 
 						</ul>
