@@ -59,9 +59,9 @@ public class MemberDaoImpl implements MemberDao{
 
 
 	@Override
-	public boolean changePassword(MemberDto memberDto) {
-		int count = sqlSession.update("member.upPw2", memberDto);
-		return count > 0;
+	public void changePassword(MemberDto memberDto) {
+		sqlSession.update("member.upPw2", memberDto);
+	
 	}
 
 
@@ -69,6 +69,19 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public boolean updateIntro(MemberDto memberDto) {
 		int count = sqlSession.update("member.upIntro", memberDto);
+		return count > 0;
+	}
+	
+	
+	@Override
+	public boolean updateNick(MemberDto memberDto) {
+		int count = sqlSession.update("member.upNick", memberDto);
+		return count >0;
+	}
+	
+	@Override
+	public boolean updateAddress(MemberDto memberDto) {
+		int count = sqlSession.update("member.upAddress",memberDto);
 		return count > 0;
 	}
 
@@ -115,6 +128,7 @@ public class MemberDaoImpl implements MemberDao{
 	public boolean checkEmail(String memberEmail) {
 		return sqlSession.selectOne("member.checkEmail", memberEmail) != null;
 	}
+
 
 
 }

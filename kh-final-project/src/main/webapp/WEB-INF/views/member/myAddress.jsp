@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
-<c:set var="isAddress" value="${not empty memberAddress}"></c:set>
+<c:set var="isAddress" value="${empty memberDto.memberAddress}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
  
@@ -260,10 +260,10 @@
 
 					<c:choose>
 						<c:when test="${isAddress}">
-						<div class="addressBox">${memberDto.memberAddress}</div>
+						<div class="addressBox" style="text-align:center; padding-top:100px;">현재 배송지 정보가 없습니다.</div>
 						</c:when>
 						<c:otherwise>
-						<div class="addressBox" style="text-align:center; padding-top:100px;">현재 배송지 정보가 없습니다.</div>
+						<div class="addressBox" style="text-align:center; padding-top:100px;">${memberDto.memberAddress}</div>
 						</c:otherwise>
 					</c:choose> 
 					

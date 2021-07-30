@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
-<c:set var="isIntro" value="${memberIntroduce eq null}"></c:set>
+<c:set var="isIntro" value="${memberDto.memberIntroduce}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
  
@@ -385,6 +385,7 @@
 				<div class="float-container">
 
 					<div class="left title2"><strong>닉네임</strong></div>
+					
 
 					<button type="button" class="right changeTitle" id="changeBtn2">변경</button>
 
@@ -396,12 +397,13 @@
 
 				<div class="changeNick" style="display:none;">
 
-				
+					<form action="upNick" method="post">
 
-					<input type="text" placeholder="바뀔이름" style="width:100%; height:40px;">
+					<input type="text" placeholder="바뀔이름" style="width:100%; height:40px;" name="memberNick">
 
-					<button type="button" class="nickBtn" >저장</button>
+					<button type="submit" class="nickBtn" >저장</button>
 
+					</form>
 					
 
 				</div>
@@ -438,12 +440,13 @@
 					</div>
 
 				<div class="changeIntro" style="display:none;">
-
-					<textarea rows="10" cols="100" style="padding:5px;"></textarea>
+					<form action="upIntro" method="post">
+					<textarea rows="10" cols="100" style="padding:5px;" name="memberIntroduce"></textarea>
 
 					
 
-					<button type="button" class="introBtn" >저장</button>
+					<button type="submit" class="introBtn" >저장</button>
+					</form>
 
 				</div>
 

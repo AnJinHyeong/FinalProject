@@ -2,6 +2,8 @@
 
     pageEncoding="UTF-8"%>
 
+
+
 <!DOCTYPE html>
 
 <html>
@@ -11,6 +13,8 @@
 <meta charset="UTF-8">
 
 <title>문의하기</title>
+
+
 
 <style>
 
@@ -75,9 +79,12 @@
 		<form action="msgInsert" method="post">
 
 			<div>
-				<input type="hidden" name="senderNo" value="${memberNo}">
-				받는 사람 <input type="text"  name="receiverNo" placeholder="받는사람 이름" style='width:70%; margin-bottom:10px; margin-left:30px;' value="">
+				
+				<input type="hidden"  name="receiverNo" style="width:70%; margin-bottom:10px; margin-left:30px;" value="${projectDto.memberNo}" name="receiverNo">
 
+			</div>
+			<div>
+				문의 프로젝트 제목 : ${projectDto.projectTitle}
 			</div>
 
 			<div style="width:100%">
@@ -110,7 +117,7 @@
 
 			<div class="msgContentBox">
 
-				<textarea name="msgContent"style="resize" class="msgContent" placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요"  ></textarea>
+				<textarea name="msgContent"style="resize" class="msgContent" placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요" required></textarea>
 
 			</div>
 

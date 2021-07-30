@@ -17,6 +17,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from project where member_no = #{memberNo}
 	</select>
 	
+	<select id="proList" parameterType="int" resultType="ProjectDto">
+<!-- 	<![CDATA[ -->
+		select * from project where member_no = #{memberNo} and project_state = 1
+<!-- 		]]> -->
+	</select>
+	
+	<select id="proList2" parameterType="int" resultType="ProjectDto">
+		select * from project where member_no = #{memberNo} and project_state = 3
+	</select>
+	
 	<select id="get" parameterType="ProjectDto" resultType="ProjectDto">
 		select * from project where member_no = #{memberNo} and project_no = #{projectNo}
 	</select>

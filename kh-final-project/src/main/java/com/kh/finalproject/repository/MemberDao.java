@@ -17,8 +17,12 @@ public interface MemberDao {
 	
 	void updatePw(MemberDto memberDto);
 	boolean updateEmail(MemberDto memberDto);
-	boolean changePassword(MemberDto memberDto);
+	void changePassword(MemberDto memberDto);
 	boolean updateIntro(MemberDto memberDto);
+
+	boolean updateNick(MemberDto memberDto);
+	boolean updateAddress(MemberDto memberDto);
+
 	
 	int selectHavePoint(int memberNo);
 	List<PayDto>list(int memberNo);
