@@ -27,6 +27,7 @@ public class FileDeleteTest01 {
 	
 	@Test
 	public void test() {
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		String path = "D:/upload/finalproject/";
 		
 		File saveFileList = new File(path);

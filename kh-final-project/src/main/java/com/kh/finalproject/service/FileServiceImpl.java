@@ -23,6 +23,7 @@ public class FileServiceImpl implements FileService {
 
 	@Override
 	public void deleteLocalFileNotInDB() {
+//		@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //		String path = "/Users/anjinhyeong/sts-workspace/upload/project_image";
 		String path = "D:/upload/finalproject/";
 
