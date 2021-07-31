@@ -295,6 +295,11 @@ public class ProjectDaoImpl implements ProjectDao{
 	public void setProjectAmountGiveY(int projectNo) {
 		sqlSession.update("project.setProjectAmountGiveY", projectNo);
 	}
+
+	@Override
+	public List<ProjectDto> getProjectByCategoryNo(int categoryNo) {
+		return sqlSession.selectList("project.getProjectByCategoryNo", categoryNo);
+	}
   
 	@Override
 	public List<ProjectAdminSearchVo> projectAdminSelect1() {
