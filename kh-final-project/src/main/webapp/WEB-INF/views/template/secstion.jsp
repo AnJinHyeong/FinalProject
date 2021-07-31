@@ -265,6 +265,8 @@
 					$("#mainBannerContent").text(resp.bannerContent);
 					$("#mainBannerTextContainer").animate({"background-color": resp.bannerBackgroundColor, 
 															"color": resp.bannerColor}, 300);
+					
+					console.log(resp);
 				}
 			});
 		}

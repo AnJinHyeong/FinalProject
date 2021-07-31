@@ -1,49 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<jsp:include page="/WEB-INF/views/template/adminSidebar.jsp"></jsp:include>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
+
+<jsp:include page="/WEB-INF/views/template/adminSidebar.jsp">
+	<jsp:param value="${root}/css/adminPage2.css" name="adminPage"/>
+</jsp:include>
 
 	<section>
 		<div class="admin-home_content_area">
 			<div class="admin-home_content100">
-				<p class="admin-home-top-p">프로젝트 조회</p>
-			</div>
-		</div>
-		<div class="admin-home_content_area">
-			<div class="admin-home_content100" style="height: 85px; padding: 15px 0;">
-				<div class="admin-project-div1">
-					<p class="admin-home-content-p">조건 검색</p>
-				</div>
-				<div class="admin-project-div2">
-					<select class="admin-project-div2-select1" name="searchType" required>
-						<option>선택</option>
-						<option value="project_no">번호</option>
-						<option value="project_title">제목</option>
-						<option value="project_content">내용</option>
-						<option value="member_info_nick">닉네임</option>
-					</select>
-					<select class="admin-project-div2-select2" name="projectState" required>
-						<option>선택</option>
-						<option value="1">프로젝트 기획중 - 1</option>
-						<option value="2">프로젝트 심사중 - 2</option>
-						<option value="3">프로젝트 펀딩중 - 3</option>
-						<option value="4">프로젝트 펀딩종료 - 4</option>
-						<option value="x">프로젝트 중단 - x</option>
-					</select>
-					<input class="admin-project-div2-input" type="text" required name="keyword" autocomplete="off">
-					<button class="admin-project-div2-btn"><i class="fas fa-search bacWhite"></i></button>
-				</div>
+				<p class="admin-home-top-p">배너 관리</p>
 			</div>
 		</div>
 		
+		<%-- 	<a href="${root}/banner/bannerList">배너 목록</a> --%>
+		
 		<div class="admin-home_content_area">
-			<div class="admin-home_content100" style="min-height: 400px; max-height: 400px; padding: 15px 0;">
-				<div style="width: 100%; border-bottom: 1px solid rgba(0,0,0,0.2); padding: 0 0 5px 5px;">
-					<p class="admin-home-content-p">리스트</p>
+			<div class="admin-home_content100" style="min-height: 400px; max-height: 400px; padding: 10px;">
+				<div style="width: 15%; border-bottom: 1px solid rgba(0,0,0,0.2); padding: 0 0 5px 5px;">
+					<p class="admin-home-content-p">배너 목록</p>
 				</div>
 				<div class="admin-project-div2">
-					<p></p>
-						
+				
+					<table>
+						<thead>
+							<tr>
+								<th>배너번호</th>
+								<th>배너타이틀</th>
+								<th>배너내용</th>
+								<th>배너 배경색</th>
+								<th>배너 글씨색</th>
+								<th>배너이미지번호</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				
+				
+				
+					<c:forEach var="bannerVo" items="${bannerList}">
+						<div>
+							${bannerVo}
+							<form action="${root}/banner/bannerDelete">
+								<input type="text" name="bannerNo" value="${bannerVo.bannerNo}">
+								<input type="text" name="bannerImageNo" value="${bannerVo.bannerImageNo}">
+								<input type="submit" value="삭제">
+							</form>
+						</div>
+						<br>
+					</c:forEach>
+					
+					
+					
+					
+					
+					
 				</div>
 			</div>
 		</div>

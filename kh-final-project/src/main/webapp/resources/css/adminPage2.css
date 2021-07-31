@@ -84,8 +84,8 @@ aside *{
 .admin-home_content100{
 	width:98%;	
 	background-color: white;
-	border: 1px solid rgba(0,0,0,0.2);
-	height: 50px; 
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+	height: 60px; 
 	padding: 15px 5px;
 }
 
@@ -98,7 +98,12 @@ aside *{
 }
 
 .admin-home-top-p{
-	font-size: 20px; 
-	color: #5b5b5b;
+	font-size: 24px;
+	font-weight: bold;
+	color: black;
 }
 
+.admin-home-content-p{
+	font-size: 14px;
+	font-weight: bold;
+}

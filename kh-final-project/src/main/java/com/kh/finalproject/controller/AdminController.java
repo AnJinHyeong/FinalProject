@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.finalproject.repository.BannerDao;
 import com.kh.finalproject.service.AdminService;
 
 @RequestMapping("/admin")
@@ -40,8 +41,12 @@ public class AdminController {
 		return "admin/adminPaySearchAll";
 	}
 
+	@Autowired
+	private BannerDao bannerDao;
+	
 	@GetMapping("/adminBanner")
-	public String adminBanner() {
+	public String adminBanner(Model model) {
+		model.addAttribute("bannerList", bannerDao.getBannerList());
 		return "admin/adminBanner";
 	}
 	
