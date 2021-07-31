@@ -12,7 +12,10 @@
 <title>FüN‿ding - ADMIN</title>
 
     <link rel="stylesheet" type="text/css" href="${root}/css/template.css">
-    <link rel="stylesheet" type="text/css" href="${root}/css/adminPage2.css">
+ 	<link rel="stylesheet" type="text/css" href="${root}/css/admin.css">
+ 	<link rel="stylesheet" type="text/css" href="${root}/css/adminPage2.css">
+ 	<link rel="stylesheet" type="text/css" href="${root}/css/yongbo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>	
     
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     

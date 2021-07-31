@@ -159,9 +159,19 @@ input[type=password]::after placeholder {
 				border:none;
   height: 50px;
   width:15%;
-  color: white;
-  background: black;
+  color: black;
+  background: #fff;
+  border: 1px solid #c1c1c1;
 }
+
+#emailSend:hover{
+	color : #fff;
+	background : red;
+	transition: background-color 0.5s ease-in-out;
+	border: none;
+}
+
+
 #memberEmail{
 	margin-top:20px;
 		marign-left:-50px;

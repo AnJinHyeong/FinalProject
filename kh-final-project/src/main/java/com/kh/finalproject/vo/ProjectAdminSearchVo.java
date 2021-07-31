@@ -17,17 +17,21 @@ public class ProjectAdminSearchVo {
 	private int projectTargetAmount;
 	private int projectPercent;
 	private String projectState;
-	private Date projectRegistDate;
-	private Date projectStartDate;
-	private Date projectEndDate;
+	private String projectRegistDate;
+	private String projectStartDate;
+	private String projectEndDate;
 	private String projectStopCaues;
 	private String projectSummary;
 	private int memberNo;
 	private int categoryNo;
 	private String memberInfoNick;
 	private String memberInfoContent;
-	private int projcetLikeCount;
+	private int projectLikeCount;
+	private String projectAmountGive;
 
 	private String categoryTheme;
+	
+	private String memberNick;
+	private int imageNo;
 	
 }

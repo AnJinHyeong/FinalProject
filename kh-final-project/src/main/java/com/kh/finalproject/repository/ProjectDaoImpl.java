@@ -285,10 +285,6 @@ public class ProjectDaoImpl implements ProjectDao{
 		return projectDto;
 	}
 
-	@Override
-	public List<ProjectAdminSearchVo> projectAdminSelectList(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo) {
-		return sqlSession.selectList("project.projectAdminSelect", projectAdminSearchKeywordVo);
-	}
 	
 	@Override
 	public List<ProjectAmountGiveVo> getProjectAmountGiveVoList() {
@@ -300,4 +296,45 @@ public class ProjectDaoImpl implements ProjectDao{
 		sqlSession.update("project.setProjectAmountGiveY", projectNo);
 	}
   
+	@Override
+	public List<ProjectAdminSearchVo> projectAdminSelect1() {
+		return sqlSession.selectList("project.projectAdminSelect1");
+	}
+	@Override
+	public List<ProjectAdminSearchVo> projectAdminSelect2(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo) {
+		return sqlSession.selectList("project.projectAdminSelect2", projectAdminSearchKeywordVo);
+	}
+	@Override
+	public List<ProjectAdminSearchVo> projectAdminSelect3(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo) {
+		return sqlSession.selectList("project.projectAdminSelect3", projectAdminSearchKeywordVo);
+	}
+	@Override
+	public List<ProjectAdminSearchVo> projectAdminSelect4(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo) {
+		return sqlSession.selectList("project.projectAdminSelect4", projectAdminSearchKeywordVo);
+	}
+
+	@Override
+	public ProjectAdminSearchVo projectAdminSelectOne(int projectNo) {
+		return sqlSession.selectOne("project.projectAdminSelectOne", projectNo);
+	}
+
+	@Override
+	public boolean adminProjectState1(int projectNo) {
+		int count = sqlSession.update("project.adminProjectState1", projectNo);
+		return count > 0;
+	}
+
+	@Override
+	public boolean adminProjectState3(int projectNo) {
+		int count = sqlSession.update("project.adminProjectState3", projectNo);
+		return count > 0;
+	}
+
+	@Override
+	public boolean adminProjectStateX(int projectNo) {
+		int count = sqlSession.update("project.adminProjectStateX", projectNo);
+		return count > 0;
+	}
+
+
 }
