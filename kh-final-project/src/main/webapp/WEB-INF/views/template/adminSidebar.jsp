@@ -11,13 +11,22 @@
 <meta charset="UTF-8">
 <title>FüN‿ding - ADMIN</title>
     <link rel="stylesheet" type="text/css" href="${root}/css/template.css">
-    <link rel="stylesheet" type="text/css" href="${root}/css/adminPage.css">
+    
+    <c:choose>
+    	<c:when test="${empty param.adminPage}">
+    		<link rel="stylesheet" type="text/css" href="${root}/css/adminPage.css">
+    	</c:when>
+    	<c:otherwise>
+    		<link rel="stylesheet" type="text/css" href="${param.adminPage}">
+    	</c:otherwise>
+    </c:choose>
+    	
     
 </head>
 <body>
 	<aside>
 		<div class="admin-logo" style="padding-bottom: 5px;"><a href="${root}/admin">FüN‿ding</a></div>
-		<div class="admin-logo" style="padding: 0 0 30px 0;">ADMIN</div>
+		<div class="admin-logo" style="padding: 0 0 30px 100px; font-size: 14px;">ADMIN</div>
 		<ul>
 			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">회원</span>
 				<ul class="admin-asidze-side_menus">
@@ -38,7 +47,7 @@
 			</li>
 			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">배너</span>
 				<ul class="admin-aside-side_menus">
-					<li><a href="#">배너 관리 </a></li>
+					<li><a href="${root}/admin/adminBanner">배너 관리 </a></li>
 				</ul>
 			</li>
 			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">자유 게시판</span>
