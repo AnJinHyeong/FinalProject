@@ -318,5 +318,23 @@ public class ProjectDaoImpl implements ProjectDao{
 		return sqlSession.selectOne("project.projectAdminSelectOne", projectNo);
 	}
 
+	@Override
+	public boolean adminProjectState1(int projectNo) {
+		int count = sqlSession.update("project.adminProjectState1", projectNo);
+		return count > 0;
+	}
+
+	@Override
+	public boolean adminProjectState3(int projectNo) {
+		int count = sqlSession.update("project.adminProjectState3", projectNo);
+		return count > 0;
+	}
+
+	@Override
+	public boolean adminProjectStateX(int projectNo) {
+		int count = sqlSession.update("project.adminProjectStateX", projectNo);
+		return count > 0;
+	}
+
 
 }

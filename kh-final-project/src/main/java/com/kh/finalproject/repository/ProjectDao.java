@@ -96,8 +96,11 @@ public interface ProjectDao {
 	List<ProjectAdminSearchVo> projectAdminSelect2(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo);
 	List<ProjectAdminSearchVo> projectAdminSelect3(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo);
 	List<ProjectAdminSearchVo> projectAdminSelect4(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo);
-		
+	//admin  프로젝트 상세정보 조회
 	ProjectAdminSearchVo projectAdminSelectOne(int projectNo);
-	
+	//admin 프로젝트 상태 업데이트
+	boolean adminProjectState1(int projectNo);
+	boolean adminProjectState3(int projectNo);
+	boolean adminProjectStateX(int projectNo);
 	
 }

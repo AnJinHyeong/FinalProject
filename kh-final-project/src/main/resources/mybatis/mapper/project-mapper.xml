@@ -369,6 +369,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				C.CATEGORY_THEME
 			from Project P
 				left outer join category C ON P.category_no = C.category_no
+			order by project_no asc
 		]]>
 	</select>
 	<select id="projectAdminSelect2" parameterType="ProjectAdminSearchKeywordVo" resultType="ProjectAdminSearchVo">
@@ -379,6 +380,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from Project P
 				left outer join category C ON P.category_no = C.category_no
 			WHERE  P.PROJECT_STATE = #{projectState} and (instr(P.${searchType}, #{keyword}) > 0)
+			order by project_no asc
 		]]>
 	</select>
 	<select id="projectAdminSelect3" parameterType="ProjectAdminSearchKeywordVo" resultType="ProjectAdminSearchVo">
@@ -389,6 +391,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from Project P
 				left outer join category C ON P.category_no = C.category_no
 			WHERE  P.PROJECT_STATE = #{projectState}
+			order by project_no asc
 		]]>
 	</select>
 	<select id="projectAdminSelect4" parameterType="ProjectAdminSearchKeywordVo" resultType="ProjectAdminSearchVo">
@@ -399,6 +402,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from Project P
 				left outer join category C ON P.category_no = C.category_no
 			WHERE  (instr(P.${searchType}, #{keyword}) > 0)
+			order by project_no asc
 		]]>
 	</select>
 	<!-- 관리자 페이지 프로젝트 상세정보 -->
@@ -414,6 +418,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			left outer join member M ON P.member_no = M.member_no
 		WHERE P.project_no = #{projectNo} AND I.PROJECT_STATE = 'Y'
 	</select>
+	
+	<update id="adminProjectState1" parameterType="int">
+		update project set project_state = '1' where project_no = #{projectNo}
+	</update>
+	<update id="adminProjectState3" parameterType="int">
+		update project set project_state = '3' where project_no = #{projectNo}
+	</update>
+	<update id="adminProjectStateX" parameterType="int">
+		update project set project_state = 'X' where project_no = #{projectNo}
+	</update>
 	
 </mapper>
 

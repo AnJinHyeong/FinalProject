@@ -246,6 +246,17 @@ public class ProjectDataController {
 	public ProjectAdminSearchVo projectAdminSelectOne(@RequestParam int projectNo) {
 		return projectDao.projectAdminSelectOne(projectNo);
 	}
-	
+	@GetMapping("/adminProjectState1")
+	public void adminProjectState1(@RequestParam int projectNo) {
+		projectDao.adminProjectState1(projectNo);
+	}
+	@GetMapping("/adminProjectState3")
+	public void adminProjectState3(@RequestParam int projectNo) {
+		projectDao.adminProjectState3(projectNo);
+	}
+	@GetMapping("/adminProjectStateX")
+	public void adminProjectStateX(@RequestParam int projectNo) {
+		projectDao.adminProjectStateX(projectNo);
+	}
 	
 }
