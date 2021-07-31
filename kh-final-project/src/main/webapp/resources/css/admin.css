@@ -56,5 +56,9 @@
 	padding-right: 20px;
 }
 
+.overflow_nowrap{
+   white-space: pre-wrap;
+   overflow-wrap: anywhere;
+}
 	
 	
