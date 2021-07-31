@@ -313,5 +313,10 @@ public class ProjectDaoImpl implements ProjectDao{
 		return sqlSession.selectList("project.projectAdminSelect4", projectAdminSearchKeywordVo);
 	}
 
+	@Override
+	public ProjectAdminSearchVo projectAdminSelectOne(int projectNo) {
+		return sqlSession.selectOne("project.projectAdminSelectOne", projectNo);
+	}
+
 
 }

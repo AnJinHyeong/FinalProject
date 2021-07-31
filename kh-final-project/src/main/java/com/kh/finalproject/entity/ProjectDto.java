@@ -28,5 +28,5 @@ public class ProjectDto {
 	private String memberInfoNick;
 	private String memberInfoContent;
 	
-	private int projcetLikeCount;
+	private int projectLikeCount;
 }

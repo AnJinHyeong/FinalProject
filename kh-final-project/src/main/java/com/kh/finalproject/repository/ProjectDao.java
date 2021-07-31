@@ -97,6 +97,7 @@ public interface ProjectDao {
 	List<ProjectAdminSearchVo> projectAdminSelect3(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo);
 	List<ProjectAdminSearchVo> projectAdminSelect4(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo);
 		
+	ProjectAdminSearchVo projectAdminSelectOne(int projectNo);
 	
 	
 }

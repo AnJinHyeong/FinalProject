@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+
 .admin-home-content-p{
 
 }
@@ -48,6 +49,12 @@
 	font-size: 15px; 
 	cursor: pointer;
 }
-	
+
+.admin-project-select-p{
+	font-size: 16px; 
+	font-weight: bold;
+	padding-right: 20px;
+}
+
 	
 	

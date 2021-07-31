@@ -401,6 +401,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE  (instr(P.${searchType}, #{keyword}) > 0)
 		]]>
 	</select>
+	<!-- 관리자 페이지 프로젝트 상세정보 -->
+	<select id="projectAdminSelectOne" parameterType="int" resultType="ProjectAdminSearchVo">
+		SELECT
+		    P.*,
+			C.CATEGORY_THEME,
+			I.image_no,
+			M.MEMBER_NICK 
+		from Project P
+			left outer join category C ON P.category_no = C.category_no
+			left outer join IMAGE_FILE I ON P.project_no = I.project_no
+			left outer join member M ON P.member_no = M.member_no
+		WHERE P.project_no = #{projectNo} AND I.PROJECT_STATE = 'Y'
+	</select>
 	
 </mapper>
 

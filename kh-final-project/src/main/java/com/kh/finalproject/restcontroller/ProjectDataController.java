@@ -239,8 +239,12 @@ public class ProjectDataController {
 			List<ProjectAdminSearchVo> projectAdminSearchVo = projectDao.projectAdminSelect1();
 			return projectAdminSearchVo;
 		}
-		
 				
+	}
+	
+	@PostMapping("/projectAdminSelectOne")
+	public ProjectAdminSearchVo projectAdminSelectOne(@RequestParam int projectNo) {
+		return projectDao.projectAdminSelectOne(projectNo);
 	}
 	
 	
