@@ -24,6 +24,8 @@ import com.kh.finalproject.repository.ItemDao;
 import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.repository.SponsorDao;
 import com.kh.finalproject.vo.IndexProjectVo;
+import com.kh.finalproject.vo.ProjectAdminSearchKeywordVo;
+import com.kh.finalproject.vo.ProjectAdminSearchVo;
 import com.kh.finalproject.vo.ProjectInformationVo;
 import com.kh.finalproject.vo.ProjectSponsorVo;
 import com.kh.finalproject.vo.ProjectVo;
@@ -193,5 +195,73 @@ public class ProjectDataController {
 		return projectDao.getProjectByCategoryNo(categoryNo);
 	}
 	
+	@PostMapping("/projectAdminSearch")
+	public List<ProjectAdminSearchVo> projectAdminSearch(
+			@RequestParam String keyword,
+			@RequestParam String projectState,
+			@RequestParam String searchType) {
+		ProjectAdminSearchKeywordVo searchData = ProjectAdminSearchKeywordVo.builder()
+				.searchType(searchType)
+				.projectState(projectState)
+				.keyword(keyword)
+				.build();
+		
+		int length1;
+		int length2;
+		int length3;
+		if(searchType.equals("null")) {
+			length1 = 0;
+		}
+		else{
+			length1 = 1;
+		}
+		if(projectState.equals("null")) {
+			length2 = 0;
+		}
+		else{
+			length2 = 1;
+		}
+		if((keyword == null || keyword.equals(""))) {
+			length3 = 0;
+		}
+		else{
+			length3 = 1;
+		}
+		
+		if(length1 == 1 && length2 == 1 && length3 == 1) {
+			List<ProjectAdminSearchVo> projectAdminSearchVo = projectDao.projectAdminSelect2(searchData);
+			return projectAdminSearchVo;
+		}
+		else if(length1 == 0 && length2 == 1 && length3 == 0) {
+			List<ProjectAdminSearchVo> projectAdminSearchVo = projectDao.projectAdminSelect3(searchData);
+			return projectAdminSearchVo;
+		}
+		else if(length1 == 1 && length2 == 0 && length3 == 1) {
+			List<ProjectAdminSearchVo> projectAdminSearchVo = projectDao.projectAdminSelect4(searchData);
+			return projectAdminSearchVo;
+		}
+		else {
+			List<ProjectAdminSearchVo> projectAdminSearchVo = projectDao.projectAdminSelect1();
+			return projectAdminSearchVo;
+		}
+				
+	}
+	
+	@PostMapping("/projectAdminSelectOne")
+	public ProjectAdminSearchVo projectAdminSelectOne(@RequestParam int projectNo) {
+		return projectDao.projectAdminSelectOne(projectNo);
+	}
+	@GetMapping("/adminProjectState1")
+	public void adminProjectState1(@RequestParam int projectNo) {
+		projectDao.adminProjectState1(projectNo);
+	}
+	@GetMapping("/adminProjectState3")
+	public void adminProjectState3(@RequestParam int projectNo) {
+		projectDao.adminProjectState3(projectNo);
+	}
+	@GetMapping("/adminProjectStateX")
+	public void adminProjectStateX(@RequestParam int projectNo) {
+		projectDao.adminProjectStateX(projectNo);
+	}
 	
 }

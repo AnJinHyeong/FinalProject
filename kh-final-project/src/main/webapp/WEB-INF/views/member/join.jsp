@@ -40,21 +40,21 @@ padding: 32px;
 	}
 	.joinBtn{
 		border-radius:5px;
-		background: black;
-		color:#fff;
-		border:none;
+		background: #fff;
+		color: black;
+		border:1px solid #dcdcdc;
 		position:relative;
 		height:50px;
 		width:100%;
   		font-size:1.6em;
   		padding:0 2em;
   		cursor:pointer;
-  		transition:800ms ease all;
+  		transition:0.3s ease-in-out all;
   		outline:none;
 	}
 	.joinBtn:hover{
-		background:#fff;
-		color:red;
+		background: red;
+		color: #fff;
 	}
 	.joinBtn:before,.joinBtn:after{
 	  	content:'';
@@ -118,7 +118,7 @@ padding: 32px;
 			<div>	<label for = "memberEmail">이메일</label></div>
 				<input type = "email" name="memberEmail" id = "memberEmail" required class = "form-input form-underline radius-b"
 							value = "${param.email}" placeholder = "인증번호를 받기 위한 메일 입력">
-							<button id = "emailSend" disabled style="cursor: pointer;"><i class="fas fa-envelope"></i></button>
+							<button id = "emailSend" disabled ><i class="fas fa-envelope"></i></button>
 								<input type="hidden" name="email" value="${param.email}">
 											
 								<div id = "checkEmail"></div>

@@ -7,7 +7,6 @@
 <script>
 		
 	$(function(){
-	
 		
 		$("#search-btn").on("click",function(){
 			
@@ -167,7 +166,6 @@
 	
 </script>
 
-<!-- 1번 -->
 <script id="searchContent" type="text/template">
 <div class="admin-home-content-list div-select" style="text-align: center;" id="{{projectNo}}">
 	<span style="width: 5%;">{{projectNo}}</span>	
@@ -187,7 +185,6 @@
 </div>
 </script>
 
-<!-- 2번 -->
 <script id="projectSeelctOneContent" type="text/template">
 <div style="width: 100%; height:310px; border-bottom: 1px solid rgba(0,0,0,0.2); padding: 10px; ">
 	<div style="height: 100%; width: 100%; display: flex;">
@@ -233,7 +230,7 @@
 	<section>
 		<div class="admin-home_content_area">
 			<div class="admin-home_content100">
-				<p class="admin-home-top-p">프로젝트 조회/심사</p>
+				<p class="admin-home-top-p">프로젝트 조회</p>
 			</div>
 		</div>
 		<div class="admin-home_content_area">
@@ -282,7 +279,7 @@
 					</div>
 					
 					<div class="admin-home-content-list-div" style="height: 300px;" id="projectSearchDiv">
-						<!-- 1번 -->
+						
 					</div>
 					
 				</div>
@@ -297,7 +294,7 @@
 				</div>
 				
 				<div id="projectSelectOne">
-					<!-- 2번 -->
+					
 				</div>
 			</div>
 		</div>

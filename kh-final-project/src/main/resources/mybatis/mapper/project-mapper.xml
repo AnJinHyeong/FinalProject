@@ -348,14 +348,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</update>
 	
-	<select id="projectAdminSelect" parameterType="ProjectAdminSearchKeywordVo" resultType="ProjectAdminSearchVo">
-		SELECT
-		    P.*,
-			C.CATEGORY_THEME
-		from Project P
-			left outer join category C ON P.category_no = C.category_no
-		WHERE  P.PROJECT_STATE = #{projectState} and (instr(P.#{searchType}, #{keyword}) > 0)
-	</select>
 
 	<select id="getProjectAmountGiveVoList" resultType="ProjectAmountGiveVo">
 		<![CDATA[
@@ -372,6 +364,74 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getProjectByCategoryNo" parameterType="int" resultType="ProjectDto">
 		select * from project where category_no = #{categoryNo} order by project_no desc
 	</select>
+	
+	<!--  관리자 페이지 검색 기능 -->
+	<select id="projectAdminSelect1" resultType="ProjectAdminSearchVo">
+		<![CDATA[
+			SELECT
+			    P.*,
+				C.CATEGORY_THEME
+			from Project P
+				left outer join category C ON P.category_no = C.category_no
+			order by project_no asc
+		]]>
+	</select>
+	<select id="projectAdminSelect2" parameterType="ProjectAdminSearchKeywordVo" resultType="ProjectAdminSearchVo">
+		<![CDATA[
+			SELECT
+			    P.*,
+				C.CATEGORY_THEME
+			from Project P
+				left outer join category C ON P.category_no = C.category_no
+			WHERE  P.PROJECT_STATE = #{projectState} and (instr(P.${searchType}, #{keyword}) > 0)
+			order by project_no asc
+		]]>
+	</select>
+	<select id="projectAdminSelect3" parameterType="ProjectAdminSearchKeywordVo" resultType="ProjectAdminSearchVo">
+		<![CDATA[
+			SELECT
+			    P.*,
+				C.CATEGORY_THEME
+			from Project P
+				left outer join category C ON P.category_no = C.category_no
+			WHERE  P.PROJECT_STATE = #{projectState}
+			order by project_no asc
+		]]>
+	</select>
+	<select id="projectAdminSelect4" parameterType="ProjectAdminSearchKeywordVo" resultType="ProjectAdminSearchVo">
+		<![CDATA[
+			SELECT
+			    P.*,
+				C.CATEGORY_THEME
+			from Project P
+				left outer join category C ON P.category_no = C.category_no
+			WHERE  (instr(P.${searchType}, #{keyword}) > 0)
+			order by project_no asc
+		]]>
+	</select>
+	<!-- 관리자 페이지 프로젝트 상세정보 -->
+	<select id="projectAdminSelectOne" parameterType="int" resultType="ProjectAdminSearchVo">
+		SELECT
+		    P.*,
+			C.CATEGORY_THEME,
+			I.image_no,
+			M.MEMBER_NICK 
+		from Project P
+			left outer join category C ON P.category_no = C.category_no
+			left outer join IMAGE_FILE I ON P.project_no = I.project_no
+			left outer join member M ON P.member_no = M.member_no
+		WHERE P.project_no = #{projectNo} AND I.PROJECT_STATE = 'Y'
+	</select>
+	
+	<update id="adminProjectState1" parameterType="int">
+		update project set project_state = '1' where project_no = #{projectNo}
+	</update>
+	<update id="adminProjectState3" parameterType="int">
+		update project set project_state = '3' where project_no = #{projectNo}
+	</update>
+	<update id="adminProjectStateX" parameterType="int">
+		update project set project_state = 'X' where project_no = #{projectNo}
+	</update>
 	
 </mapper>
 
