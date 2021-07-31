@@ -24,6 +24,7 @@
 				</div>
 				<div class="admin-project-div2">
 				
+				
 					<table>
 						<thead>
 							<tr>
@@ -33,35 +34,29 @@
 								<th>배너 배경색</th>
 								<th>배너 글씨색</th>
 								<th>배너이미지번호</th>
+								<th>삭제</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
+							<c:forEach var="bannerVo" items="${bannerList}">
+								<tr>
+									<td>${bannerVo.bannerNo}</td>
+									<td>${bannerVo.bannerTitle}</td>
+									<td>${bannerVo.bannerContent}</td>
+									<td>${bannerVo.bannerBackgroundColor}</td>
+									<td>${bannerVo.bannerColor}</td>
+									<td>${bannerVo.bannerImageNo}</td>
+									<td>
+										<form action="${root}/banner/bannerDelete">
+											<input type="hidden" name="bannerNo" value="${bannerVo.bannerNo}">
+											<input type="hidden" name="bannerImageNo" value="${bannerVo.bannerImageNo}">
+											<input type="submit" value="삭제">
+										</form>
+									</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
-				
-				
-				
-					<c:forEach var="bannerVo" items="${bannerList}">
-						<div>
-							${bannerVo}
-							<form action="${root}/banner/bannerDelete">
-								<input type="text" name="bannerNo" value="${bannerVo.bannerNo}">
-								<input type="text" name="bannerImageNo" value="${bannerVo.bannerImageNo}">
-								<input type="submit" value="삭제">
-							</form>
-						</div>
-						<br>
-					</c:forEach>
-					
-					
-					
-					
 					
 					
 				</div>

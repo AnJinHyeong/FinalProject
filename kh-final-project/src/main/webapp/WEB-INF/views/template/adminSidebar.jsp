@@ -10,17 +10,9 @@
 <head>
 <meta charset="UTF-8">
 <title>FüN‿ding - ADMIN</title>
+
     <link rel="stylesheet" type="text/css" href="${root}/css/template.css">
-    
-    <c:choose>
-    	<c:when test="${empty param.adminPage}">
-    		<link rel="stylesheet" type="text/css" href="${root}/css/adminPage.css">
-    	</c:when>
-    	<c:otherwise>
-    		<link rel="stylesheet" type="text/css" href="${param.adminPage}">
-    	</c:otherwise>
-    </c:choose>
-    	
+    <link rel="stylesheet" type="text/css" href="${root}/css/adminPage2.css">
     
 </head>
 <body>
