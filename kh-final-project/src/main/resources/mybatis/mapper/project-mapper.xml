@@ -362,7 +362,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!--  관리자 페이지 검색 기능 -->
-	<select id="projectAdminSelect" parameterType="ProjectAdminSearchKeywordVo" resultType="ProjectAdminSearchVo">
+	<select id="projectAdminSelect1" resultType="ProjectAdminSearchVo">
+		<![CDATA[
+			SELECT
+			    P.*,
+				C.CATEGORY_THEME
+			from Project P
+				left outer join category C ON P.category_no = C.category_no
+		]]>
+	</select>
+	<select id="projectAdminSelect2" parameterType="ProjectAdminSearchKeywordVo" resultType="ProjectAdminSearchVo">
 		<![CDATA[
 			SELECT
 			    P.*,
@@ -370,6 +379,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from Project P
 				left outer join category C ON P.category_no = C.category_no
 			WHERE  P.PROJECT_STATE = #{projectState} and (instr(P.${searchType}, #{keyword}) > 0)
+		]]>
+	</select>
+	<select id="projectAdminSelect3" parameterType="ProjectAdminSearchKeywordVo" resultType="ProjectAdminSearchVo">
+		<![CDATA[
+			SELECT
+			    P.*,
+				C.CATEGORY_THEME
+			from Project P
+				left outer join category C ON P.category_no = C.category_no
+			WHERE  P.PROJECT_STATE = #{projectState}
+		]]>
+	</select>
+	<select id="projectAdminSelect4" parameterType="ProjectAdminSearchKeywordVo" resultType="ProjectAdminSearchVo">
+		<![CDATA[
+			SELECT
+			    P.*,
+				C.CATEGORY_THEME
+			from Project P
+				left outer join category C ON P.category_no = C.category_no
+			WHERE  (instr(P.${searchType}, #{keyword}) > 0)
 		]]>
 	</select>
 	

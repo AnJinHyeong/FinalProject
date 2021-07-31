@@ -6,15 +6,26 @@
 <script>
 		
 	$(function(){
+	
 		
-		//페이지 로딩 시 창작자 이미지가 있으면 화면에 송출
-		$.ajax({
-			url :"${pageContext.request.contextPath}/image/member/confirmMemberImage/${projectDto.projectNo}",
-			type: "post",
-			success : function(resp){
-					
-			}
-		
+		$("#search-btn").on("click",function(){
+			console.log($("select[name=searchType]").val());
+			console.log($("select[name=projectState]").val());
+			console.log($("input[name=keyword]").val());
+			
+			$.ajax({
+				url :"${pageContext.request.contextPath}/project/data/projectAdminSearch",
+				type: "post",
+				data:{
+					searchType:$("select[name=searchType]").val(),
+					projectState:$("select[name=projectState]").val(),
+					keyword:$("input[name=keyword]").val()
+				},
+				success : function(resp){
+					console.log(resp);		
+				}
+			
+			});
 		});
 		
 	});	
@@ -33,23 +44,23 @@
 					<p class="admin-home-content-p">조건 검색</p>
 				</div>
 				<div class="admin-project-div2">
-					<select class="admin-project-div2-select1" name="searchType" required>
-						<option >선택</option>
+					<select class="admin-project-div2-select1" name="searchType">
+						<option value="null">선택</option>
 						<option value="project_no">번호</option>
 						<option value="project_title">제목</option>
 						<option value="project_content">내용</option>
 						<option value="member_info_nick">닉네임</option>
 					</select>
-					<select class="admin-project-div2-select2" name="projectState" required>
-						<option>선택</option>
+					<select class="admin-project-div2-select2" name="projectState">
+						<option value="null">선택</option>
 						<option value="1">프로젝트 기획중 - 1</option>
 						<option value="2">프로젝트 심사중 - 2</option>
 						<option value="3">프로젝트 펀딩중 - 3</option>
 						<option value="4">프로젝트 펀딩종료 - 4</option>
 						<option value="x">프로젝트 중단 - x</option>
 					</select>
-					<input class="admin-project-div2-input" type="text" required name="keyword" autocomplete="off">
-					<button class="admin-project-div2-btn"><i class="fas fa-search bacWhite"></i></button>
+					<input class="admin-project-div2-input" type="text" name="keyword" autocomplete="off">
+					<button class="admin-project-div2-btn" id="search-btn"><i class="fas fa-search bacWhite"></i></button>
 				</div>
 			</div>
 		</div>

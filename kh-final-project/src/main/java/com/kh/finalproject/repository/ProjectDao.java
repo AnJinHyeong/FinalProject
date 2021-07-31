@@ -83,11 +83,20 @@ public interface ProjectDao {
 	List<SponsorDto> projectSponsorByProjectNo(int projectNo);
 	//프로젝트 후원자 리스트 조회
 	ProjectSponsorVo getSponsorSelect(int projectNo);
-	//admin 프로젝트 검색
-	List<ProjectAdminSearchVo> projectAdminSelectList(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo);
 	// ProjectAmountVo 가져오기
 	List<ProjectAmountGiveVo> getProjectAmountGiveVoList();
 	// 완료된 프로젝트 포인트 지급 컬럼 업데이트
 	void setProjectAmountGiveY(int projectNo);
+	
+	
+	
+	
+	//admin 프로젝트 검색
+	List<ProjectAdminSearchVo> projectAdminSelect1();
+	List<ProjectAdminSearchVo> projectAdminSelect2(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo);
+	List<ProjectAdminSearchVo> projectAdminSelect3(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo);
+	List<ProjectAdminSearchVo> projectAdminSelect4(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo);
+		
+	
 	
 }
