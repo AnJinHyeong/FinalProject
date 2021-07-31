@@ -8,7 +8,7 @@
 
 <script>
 	$(function(){
-		$(".deleteBanner").on("click", function(e){
+		$("#deleteBanner").on("click", function(e){
 			var deleteOk = confirm("배너를 지우시겠습니까?");
 			if(!deleteOk){
 				e.preventDefault();
@@ -31,10 +31,17 @@
 			$(this).addClass("on");
 		});
 		
-		$(".admin-home-content-list").children().on("click", function(){
-			$(".admin-home-content-list").removeClass("on");
-			$(this).addClass("on");
-		});
+// 		$("#insertBannerBtn").on("click", function(){
+// 			$(".admin-home-content-list2").animate({"width": "100%"}, 100);
+// 			$("#insertBannerBtn").hide('fast');
+// 			$("#insertBannerForm").show('fast');
+// 		});
+		
+// 		$("#insertBannerCancel").on("click", function(){
+// 			$(".admin-home-content-list2").animate({"width": "8%"}, 100);
+// 			$("#insertBannerBtn").show('fast');
+// 			$("#insertBannerForm").hide('fast');
+// 		});
 		
 	});
 </script>
@@ -42,14 +49,14 @@
 	<section>
 		<div class="admin-home_content_area">
 			<div class="admin-home_content100">
-				<p class="admin-home-top-p">배너 관리</p>
+				<p class="admin-home-top-p">카테고리 관리</p>
 			</div>
 		</div>
 		
 		<div class="admin-home_content_area" style="height: 450px;">
 			<div class="admin-home_content100" style="border: none; padding: 10px;">
-				<div style="width: 100%; border-bottom: 1px solid rgba(0,0,0,0.2); padding: 0 0 5px 5px;">
-					<p class="admin-home-content-p">배너 목록</p>
+				<div style="width: 15%; border-bottom: 1px solid rgba(0,0,0,0.2); padding: 0 0 5px 5px;">
+					<p class="admin-home-content-p">카테고리 목록</p>
 				</div>
 				<div class="admin-project-div2">
 				
@@ -76,28 +83,36 @@
 									<form action="${root}/banner/bannerDelete">
 										<input type="hidden" name="bannerNo" value="${bannerVo.bannerNo}">
 										<input type="hidden" name="bannerImageNo" value="${bannerVo.bannerImageNo}">
-										<input class="deleteBanner admin-btn" type="submit" value="삭제">
+										<input id="deleteBanner" class="admin-btn" type="submit" value="삭제">
 									</form>
 								</div>
 							</div>
 						</c:forEach>
 					</div>
 					
-					<div class="admin-home-content-list">
-						<div id="insertBannerForm" style="width: 100%; height: 60px;" class="admin-home-content-list-div">
+<!-- 					<div class="admin-home-content-list2" style="width: 8%;"> -->
+					<div class="admin-home-content-list2">
+<!-- 						<div> -->
+<!-- 							<button style="width: 80px; height: 30px;" type="button" id="insertBannerBtn" class="admin-btn">배너 등록</button> -->
+<!-- 						</div> -->
+						
+<!-- 						<div id="insertBannerForm" style="display: none;"> -->
+						<div id="insertBannerForm">
 							<form action="${root}/banner/bannerInsert" method="post" enctype="multipart/form-data" style="display: flex;">
-								<span style="width: 6%;">배너 등록</span>
-								<input class="admin-inputBox" style="width: 24%; margin-right: 20px; height: 30px;" type="text" name="bannerTitle" placeholder="배너타이틀" required
+								<span style="width: 90px;">배너 등록</span>
+								<input class="admin-inputBox" style="width: 250px; margin-right: 20px; height: 30px;" type="text" name="bannerTitle" placeholder="배너타이틀" required
 								autocomplete="off">
-								<input class="admin-inputBox" style="width: 40%; margin-right: 20px; height: 30px;" type="text" name="bannerContent" placeholder="배너내용" required 
+								<input class="admin-inputBox" style="width: 450px; margin-right: 20px; height: 30px;" type="text" name="bannerContent" placeholder="배너내용" required 
 								autocomplete="off">
-								<input style="width: 8%; margin-right: 20px; height: 30px;" type="color" name="bannerBackgroundColor" value="#ffffff" required>
-								<select class="admin-inputBox" style="width: 8%; margin-right: 20px; height: 30px;" name="bannerColor">
+								<input style="width: 75px; margin-right: 20px; height: 30px;" type="color" name="bannerBackgroundColor" value="#ffffff" required>
+								<select class="admin-inputBox" style="width: 75px; margin-right: 20px; height: 30px;" name="bannerColor">
 									<option value="#000000">검정
 									<option value="#ffffff">흰색
 								</select>
-								<input style="width: 10%; margin-right: 20px; height: 30px;" type="file" name="bannerImage" required>
-								<input style="width: 4%; margin-right: 20px; height: 30px;" type="submit" value="등록" class="admin-btn">
+								<input style="width: 200px; margin-right: 20px; height: 30px;" type="file" name="bannerImage" required>
+								<input style="width: 50px; margin-right: 20px; height: 30px;" type="submit" value="등록" class="admin-btn">
+								
+<!-- 								<button style="width: 50px; height: 30px;" type="button" id="insertBannerCancel" class="admin-btn">취소</button> -->
 							</form>
 						</div>
 					</div>
@@ -109,13 +124,14 @@
 		<div class="admin-home_content_area" style="height: 400px;">
 			<div class="admin-home_content100" style="border: none; padding: 10px;">
 				
-				<div style="width: 100%; border-bottom: 1px solid rgba(0,0,0,0.2); padding: 0 0 5px 5px; margin-bottom: 10px;">
+				<div style="width: 15%; border-bottom: 1px solid rgba(0,0,0,0.2); padding: 0 0 5px 5px; margin-bottom: 10px;">
 					<p class="admin-home-content-p">배너 상세 보기</p>
 				</div>
 				<div class="admin-project-div2" style="display: flex; justify-content: center;">
 				
 					<div style="width:800px; height: 450px;">
-						<img id="targetImage" style="width: 100%; height: 100%; object-fit:cover;">
+						<img id="targetImage" style="width: 100%; height: 100%; object-fit:cover;" 
+						src="${pageContext.request.contextPath}/image/downloadImageMainBanner/">
 					</div>
 					
 					<div id="mainBannerTextContainer" style="width:400px; height: 450px; padding-top: 100px; padding-left: 30px; padding-right: 30px; border: 1px solid rgb(220, 220, 220);">

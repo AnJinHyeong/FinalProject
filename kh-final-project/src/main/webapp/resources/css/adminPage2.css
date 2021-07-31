@@ -123,6 +123,14 @@ aside *{
     background-color: #fff;
 }
 
+.admin-home-content-list.on{
+	background-color: rgb(248, 248, 248);
+}
+
+.admin-home-content-list:hover{
+	background-color: rgb(248, 248, 248);
+}
+
 .admin-home-content-list-div{
 	overflow-y:auto;
 	overflow-x:hidden;
@@ -136,7 +144,7 @@ aside *{
 	text-overflow:ellipsis;
 }
 
-.admin-home-content-list span{
+.admin-home-content-list span, .admin-home-content-list2 span{
 	line-height: 26px;
 }
 
@@ -168,4 +176,13 @@ aside *{
 	background-color: rgb(248, 100, 83);
 	color: #fcfcfc;
 	transition: background-color 0.2s ease-in-out;
+}
+
+.admin-inputBox{
+	border: 1px solid rgb(230, 230, 230);
+	padding-left: 10px;
+}
+
+.div-select:hover{
+	background-color: rgb(248, 248, 248);
 }

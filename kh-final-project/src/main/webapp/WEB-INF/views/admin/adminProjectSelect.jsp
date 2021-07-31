@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="/WEB-INF/views/template/adminSidebar.jsp"></jsp:include>
-<link rel="stylesheet" type="text/css" href="${root}/css/yongbo.css">
+
 <script>
 		
 	$(function(){
@@ -47,6 +47,10 @@
 					
 					$(".div-select").on("click",function(){
 						var projectNo = $(this).attr("id");
+						
+						$(".div-select").removeClass("on");
+						$(this).addClass("on");
+						
 						console.log(projectNo);
 						
 						$.ajax({
@@ -115,7 +119,6 @@
 		
 		
 		
-		
 	});	
 	
 </script>
@@ -124,11 +127,12 @@
 <div class="admin-home-content-list div-select" style="text-align: center;" id="{{projectNo}}">
 	<span style="width: 5%;">{{projectNo}}</span>	
 	<span style="width: 10%;">{{categoryTheme}}</span>	
-	<span style="width: 55%;">{{projectTitle}}</span>
+	<span style="width: 45%;">{{projectTitle}}</span>
 	<span style="width: 10%;">{{projectTargetAmount}}원</span>
 	<span style="width: 10%;">{{projectPercent}}%</span>
 	<span style="width: 5%;">{{projectState}}</span>
 	<span style="width: 5%;"><button class="admin-btn" style="width: 30px;">중단</button></span>
+	<span style="width: 10%;"><button class="admin-btn" style="width: 30px; margin-right:5px;">승인</button><button class="admin-btn" style="width: 30px;">탈락</button></span>
 	<span style="width: 10%;"><button class="admin-btn" style="width: 70px;" id="{{projectNo}}">페이지 이동</button></span>
 </div>
 </script>
@@ -215,11 +219,12 @@
 					<div class="admin-home-content-list" style="text-align: center; width: 99%;">
 						<span style="width: 5%;">번호</span>
 						<span style="width: 10%;">카테고리</span>
-						<span style="width: 55%;">타이틀</span>
+						<span style="width: 45%;">타이틀</span>
 						<span style="width: 10%;">목표금액</span>
 						<span style="width: 10%;">달성률</span>
 						<span style="width: 5%;">상태</span>
 						<span style="width: 5%;">중단</span>
+						<span style="width: 10%;">승인심사</span>
 						<span style="width: 10%;">페이지이동</span>
 					</div>
 					
