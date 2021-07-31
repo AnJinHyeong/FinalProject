@@ -223,7 +223,7 @@
 		
 		var startPlayRolling = setTimeout(function() {
 			imageRollingNext($("#imageNextBtn"));
-		}, 3000);
+		}, 4000);
 		
 		$("#imageNextBtn, #imagePreBtn").one("click", function() {
 			clearTimeout(startPlayRolling);
@@ -235,14 +235,14 @@
 			clearInterval(playRolling);
 			playRolling = setInterval(function() {
 				imageRollingNext($("#imageNextBtn"));
-			}, 3000);
+			}, 4000);
 			
 			$(".mainBannerImage").each(function(index, item){
 				if($(this).css("left") == "-" + width + "px"){
 					$(this).css("left", maxLeft + "px");
 				}
 				else{
-					$(this).animate({"left": (Number($(this).css("left").split("px")[0]) - width) + "px"}, 300, "swing", function(){
+					$(this).stop().animate({"left": (Number($(this).css("left").split("px")[0]) - width) + "px"}, 300, "swing", function(){
 						btn.prop("disabled", false);
 					});
 				}
@@ -263,7 +263,7 @@
 				success : function(resp) {
 					$("#mainBannerTitle").text(resp.bannerTitle);
 					$("#mainBannerContent").text(resp.bannerContent);
-					$("#mainBannerTextContainer").animate({"background-color": resp.bannerBackgroundColor, 
+					$("#mainBannerTextContainer").stop().animate({"background-color": resp.bannerBackgroundColor, 
 															"color": resp.bannerColor}, 300);
 				}
 			});
@@ -287,7 +287,7 @@
 					$(this).css("left", "-" + width + "px");
 				}
 				else{
-					$(this).animate({"left": (Number($(this).css("left").split("px")[0]) + width) + "px"}, 300, "swing", function(){
+					$(this).stop().animate({"left": (Number($(this).css("left").split("px")[0]) + width) + "px"}, 300, "swing", function(){
 						btn.prop("disabled", false);
 					});
 				}
@@ -308,7 +308,7 @@
 				success : function(resp) {
 					$("#mainBannerTitle").text(resp.bannerTitle);
 					$("#mainBannerContent").text(resp.bannerContent);
-					$("#mainBannerTextContainer").animate({"background-color": resp.bannerBackgroundColor, 
+					$("#mainBannerTextContainer").stop().animate({"background-color": resp.bannerBackgroundColor, 
 															"color": resp.bannerColor}, 300);
 				}
 			});

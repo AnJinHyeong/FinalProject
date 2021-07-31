@@ -56,7 +56,7 @@ public class AdminController {
 	
 	@GetMapping("/adminCategory")
 	public String adminCategory(Model model) {
-//		model.addAttribute("categoryList",);
+		model.addAttribute("categoryList", categoryDao.getCategoryList());
 		return "admin/adminCategory";
 	}
 	

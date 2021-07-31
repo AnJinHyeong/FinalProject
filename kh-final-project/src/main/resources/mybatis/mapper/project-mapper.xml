@@ -368,6 +368,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update project set project_amount_give = 'Y' where project_no = #{projectNo}
 	</update>
 	
+	<!-- 카테고리 번호로 프로젝트 정보 가져오기 -->
+	<select id="getProjectByCategoryNo" parameterType="int" resultType="ProjectDto">
+		select * from project where category_no = #{categoryNo} order by project_no desc
+	</select>
+	
 </mapper>
 
 

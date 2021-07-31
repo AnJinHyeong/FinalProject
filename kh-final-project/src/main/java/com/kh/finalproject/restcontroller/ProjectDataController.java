@@ -188,5 +188,10 @@ public class ProjectDataController {
 		return projectDao.getSponsorSelect(sponsorNo);
 	}
 	
+	@PostMapping("/getProjectByCategoryNo")
+	public List<ProjectDto> getProjectByCategoryNo(@RequestParam int categoryNo) {
+		return projectDao.getProjectByCategoryNo(categoryNo);
+	}
+	
 	
 }
