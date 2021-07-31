@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace ="admin">
+
+<select id = "memberSearchAll" resultType = "AdminMemberVO">
+
+SELECT member_no, member_id, member_nick, 
+member_have_point, member_email, 
+member_grade, member_address FROM member
+
+</select>
+
+<select id = "paySearchAll" resultType = "AdminMemberVO">
+
+SELECT pay_no, pay_tid, pay_price, pay_date, member_id, member_nick 
+FROM  pay, member 
+WHERE pay.member_no = member.member_no(+)
+
+</select>
+
+</mapper>

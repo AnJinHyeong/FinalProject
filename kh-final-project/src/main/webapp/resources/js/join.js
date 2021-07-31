@@ -154,6 +154,7 @@ $(function () {
 					 }
 						else{
 							$("#emailSend").css("cursor","pointer");
+							$('.fas fa-envelope:before').css("content", "\f0e00");
 							$("#emailSend").attr("disabled",false);
 							$("#checkEmail").css("color", "black");
 							$("#checkEmail").text('');
