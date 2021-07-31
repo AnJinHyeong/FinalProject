@@ -75,12 +75,10 @@
 		padding-bottom:20px;
 	}
 	a:hover{
-		color:green;
 	}
 	
 
 </style>
-<hr class="hrClass">
 <div class="container-800 mainDiv" style="height: 770px;" >
 	<div class="loginForm">
 		<div class="text-left titleDiv">

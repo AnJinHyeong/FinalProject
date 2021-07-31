@@ -11,28 +11,24 @@
 <meta charset="UTF-8">
 <title>FüN‿ding - ADMIN</title>
     <link rel="stylesheet" type="text/css" href="${root}/css/template.css">
-    <link rel="stylesheet" type="text/css" href="${root}/css/adminPage2.css">
-    <link rel="stylesheet" type="text/css" href="${root}/css/admin2.css">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <link rel="stylesheet" type="text/css" href="${root}/css/adminPage.css">
     
 </head>
 <body>
 	<aside>
-		<div class="admin-logo" style="padding-bottom: 0px;"><a href="${root}/admin">FüN‿ding</a></div>
-		<div class="admin-logo" style="padding-top: 0px; padding-left:90px; font-size: 16px;"><span>ADMIN</span></div>
+		<div class="admin-logo" style="padding-bottom: 5px;"><a href="${root}/admin">FüN‿ding</a></div>
+		<div class="admin-logo" style="padding: 0 0 30px 0;">ADMIN</div>
 		<ul>
 			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">회원</span>
-				<ul class="admin-aside-side_menus">
-					<li><a href="#">회원 관리</a></li>
-					<li><a href="#">회원 결제 관리</a></li>
+				<ul class="admin-asidze-side_menus">
+					<li><a href="${root}/admin/adminMemberSearchAll">회원 관리</a></li>
+					<li><a href="${root}/admin/adminPaySearchAll">회원 결제 관리</a></li>
 				</ul>
 			</li>
 			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">프로젝트</span>
 				<ul class="admin-aside-side_menus">
-					<li><a href="${root}/admin/adminProjectSelect">프로젝트 조회/심사</a></li>
-					<li><a href="${root}/admin/adminProjectSelect">프로젝트 관리</a></li>
 					<li><a href="#">카테고리 심사</a></li>
+					<li><a href="${root}/admin/adminProjectSelect">프로젝트 조회/심사</a></li>
 				</ul>
 			</li>
 			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">문의함</span>
