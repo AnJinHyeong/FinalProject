@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.finalproject.repository.BannerDao;
+import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.service.AdminService;
 
 @RequestMapping("/admin")
@@ -48,6 +49,15 @@ public class AdminController {
 	public String adminBanner(Model model) {
 		model.addAttribute("bannerList", bannerDao.getBannerList());
 		return "admin/adminBanner";
+	}
+	
+	@Autowired
+	private CategoryDao categoryDao;
+	
+	@GetMapping("/adminCategory")
+	public String adminCategory(Model model) {
+//		model.addAttribute("categoryList",);
+		return "admin/adminCategory";
 	}
 	
 }
