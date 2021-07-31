@@ -364,8 +364,6 @@
 
 <div class="section-row">
 
-<%-- 	<a href="${root}/banner/bannerInsert">배너 등록</a> --%>
-<%-- 	<a href="${root}/banner/bannerList">배너 목록</a> --%>
 <%-- 	<a href="${root}/deleteLocalFileNotInDB">로컬 파일 정리</a> --%>
 <%-- 	<a href="${root}/givePointByFinishedProject">종료프로젝트 포인트 지급</a> --%>
 	

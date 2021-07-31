@@ -14,6 +14,8 @@
     <link rel="stylesheet" type="text/css" href="${root}/css/template.css">
     <link rel="stylesheet" type="text/css" href="${root}/css/adminPage2.css">
     
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    
 </head>
 <body>
 	<aside>
@@ -28,7 +30,7 @@
 			</li>
 			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">프로젝트</span>
 				<ul class="admin-aside-side_menus">
-					<li><a href="#">카테고리 심사</a></li>
+					<li><a href="${root}/admin/adminCategory">카테고리 심사</a></li>
 					<li><a href="${root}/admin/adminProjectSelect">프로젝트 조회/심사</a></li>
 				</ul>
 			</li>
