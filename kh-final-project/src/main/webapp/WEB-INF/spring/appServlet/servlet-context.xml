@@ -64,6 +64,7 @@
 			<exclude-mapping path="/project/projectSearchAll"/>
 			<exclude-mapping path="/project/projectCategorySearchAll/**"/>
 			<exclude-mapping path="/member/login"/>
+			<exclude-mapping path="/member/join"/>
 			<beans:bean class="com.kh.finalproject.interceptor.MemberLoginInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>

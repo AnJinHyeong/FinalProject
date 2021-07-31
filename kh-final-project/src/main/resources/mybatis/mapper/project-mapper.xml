@@ -348,14 +348,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</update>
 	
-	<select id="projectAdminSelect" parameterType="ProjectAdminSearchKeywordVo" resultType="ProjectAdminSearchVo">
-		SELECT
-		    P.*,
-			C.CATEGORY_THEME
-		from Project P
-			left outer join category C ON P.category_no = C.category_no
-		WHERE  P.PROJECT_STATE = #{projectState} and (instr(P.#{searchType}, #{keyword}) > 0)
-	</select>
 
 	<select id="getProjectAmountGiveVoList" resultType="ProjectAmountGiveVo">
 		<![CDATA[
@@ -367,6 +359,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="setProjectAmountGiveY" parameterType="int">
 		update project set project_amount_give = 'Y' where project_no = #{projectNo}
 	</update>
+	
+	
+	<!--  관리자 페이지 검색 기능 -->
+	<select id="projectAdminSelect" parameterType="ProjectAdminSearchKeywordVo" resultType="ProjectAdminSearchVo">
+		<![CDATA[
+			SELECT
+			    P.*,
+				C.CATEGORY_THEME
+			from Project P
+				left outer join category C ON P.category_no = C.category_no
+			WHERE  P.PROJECT_STATE = #{projectState} and (instr(P.${searchType}, #{keyword}) > 0)
+		]]>
+	</select>
 	
 </mapper>
 
