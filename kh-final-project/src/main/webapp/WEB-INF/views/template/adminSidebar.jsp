@@ -11,8 +11,8 @@
 <meta charset="UTF-8">
 <title>FüN‿ding - ADMIN</title>
     <link rel="stylesheet" type="text/css" href="${root}/css/template.css">
-    <link rel="stylesheet" type="text/css" href="${root}/css/adminPage.css">
-    <link rel="stylesheet" type="text/css" href="${root}/css/admin.css">
+    <link rel="stylesheet" type="text/css" href="${root}/css/adminPage2.css">
+    <link rel="stylesheet" type="text/css" href="${root}/css/admin2.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     
@@ -42,7 +42,7 @@
 			</li>
 			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">배너</span>
 				<ul class="admin-aside-side_menus">
-					<li><a href="#">배너 관리 </a></li>
+					<li><a href="${root}/admin/adminBanner">배너 관리 </a></li>
 				</ul>
 			</li>
 			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">자유 게시판</span>

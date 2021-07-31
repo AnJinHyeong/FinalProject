@@ -19,7 +19,11 @@ public class AdminController {
 		return "admin/adminProjectSelect";
 	}
 
-
+	@GetMapping("/adminBanner")
+	public String adminBanner() {
+		
+		return "admin/adminBanner";
+	}
 
 
 	
