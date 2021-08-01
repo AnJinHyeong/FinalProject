@@ -62,8 +62,11 @@ public class AdminController {
 		return "admin/adminCategory";
 	}
 	
-	@Autowired
-	private ProjectDao projectDao;
+	@GetMapping("/adminRequest")
+	public String adminRequest(Model model) {
+		
+		return "admin/adminRequest";
+	}
 	
 	
 	

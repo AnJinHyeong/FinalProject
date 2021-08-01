@@ -49,7 +49,7 @@
 			</li>
 			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">자유 게시판</span>
 				<ul class="admin-aside-side_menus">
-					<li><a href="#">게시글 조회/관리</a></li>
+					<li><a href="${root}/admin/adminRequest">게시글 조회/관리</a></li>
 				</ul>
 			</li>
 			<li class="admin-aside-top_menu" style="margin-top: 100px;"><span class=""></span>

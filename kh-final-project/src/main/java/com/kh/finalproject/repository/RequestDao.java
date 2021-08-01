@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.kh.finalproject.entity.RequestDto;
 import com.kh.finalproject.entity.RequestReplyDto;
+import com.kh.finalproject.vo.RequestAdminSearchKeywordVo;
+import com.kh.finalproject.vo.RequestAdminSearchVo;
 import com.kh.finalproject.vo.RequestReplyVo;
 import com.kh.finalproject.vo.RequestVo;
 
@@ -45,5 +47,17 @@ public interface RequestDao {
 	boolean requestEdit(RequestDto requestDto);
 	//게시글 수정시 정보 불러오기
 	RequestDto requestEditgetByRequestNo(int requestNo);
+	
+	
+	//admin 검색 조회
+	List<RequestVo> requestAdminSelect1();
+	List<RequestVo> requestAdminSelect2(RequestAdminSearchKeywordVo requestAdminSearchKeywordVo);
+	List<RequestVo> requestAdminSelect3(RequestAdminSearchKeywordVo requestAdminSearchKeywordVo);
+	List<RequestVo> requestAdminSelect4(RequestAdminSearchKeywordVo requestAdminSearchKeywordVo);
+	
+	//admin 게시글 삭제
+	boolean adminDeleteRequest(int requestNo);
+	//admin 게시글 상세정보 조회
+	RequestAdminSearchVo adminRequestSelectOne(int requestNo);
 	
 }

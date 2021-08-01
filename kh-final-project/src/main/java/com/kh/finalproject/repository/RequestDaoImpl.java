@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.RequestDto;
 import com.kh.finalproject.entity.RequestReplyDto;
+import com.kh.finalproject.vo.RequestAdminSearchKeywordVo;
+import com.kh.finalproject.vo.RequestAdminSearchVo;
 import com.kh.finalproject.vo.RequestReplyVo;
 import com.kh.finalproject.vo.RequestVo;
 
@@ -113,6 +115,35 @@ public class RequestDaoImpl implements RequestDao{
 	@Override
 	public RequestDto requestEditgetByRequestNo(int requestNo) {
 		return sqlSession.selectOne("request.requestEditgetByRequestNo", requestNo);
+	}
+
+	@Override
+	public List<RequestVo> requestAdminSelect1() {
+		return sqlSession.selectList("request.requestAdminSelect1");
+	}
+	
+	@Override
+	public List<RequestVo> requestAdminSelect2(RequestAdminSearchKeywordVo requestAdminSearchKeywordVo) {
+		return sqlSession.selectList("request.requestAdminSelect2", requestAdminSearchKeywordVo);
+	}
+	@Override
+	public List<RequestVo> requestAdminSelect3(RequestAdminSearchKeywordVo requestAdminSearchKeywordVo) {
+		return sqlSession.selectList("request.requestAdminSelect3", requestAdminSearchKeywordVo);
+	}
+	@Override
+	public List<RequestVo> requestAdminSelect4(RequestAdminSearchKeywordVo requestAdminSearchKeywordVo) {
+		return sqlSession.selectList("request.requestAdminSelect4", requestAdminSearchKeywordVo);
+	}
+
+	@Override
+	public boolean adminDeleteRequest(int requestNo) {
+		int count = sqlSession.delete("request.adminDeleteRequest", requestNo);
+		return count > 0;
+	}
+
+	@Override
+	public RequestAdminSearchVo adminRequestSelectOne(int requestNo) {
+		return sqlSession.selectOne("request.adminRequestSelectOne", requestNo);
 	}
 	
 }

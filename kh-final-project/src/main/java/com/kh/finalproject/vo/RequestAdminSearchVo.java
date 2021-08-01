@@ -8,12 +8,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
-public class RequestVo {
+public class RequestAdminSearchVo {
 	
 	private int requestNo;
 	private String requestTitle;
 	private String requestContent;
-	private Date requestDate;
+	private String requestDate;
 	private int requestView;
 	private int requestCategoryNo;
 	private int requestMemberNo;
@@ -22,10 +22,6 @@ public class RequestVo {
 	
 	private String categoryTheme;
 	
-	private int requestLikeNo;
-	private int requestLikeMemberNo;
-	private Date requestLikeDate;
-	
-	private String requestMemberNick;
+	private String memberNick;
 	
 }

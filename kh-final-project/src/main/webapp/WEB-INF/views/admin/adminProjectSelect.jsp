@@ -212,7 +212,7 @@
 			</div>
 								
 			<p class="admin-project-select-p">프로젝트 중단사유 : {{projectStopCaues}}</p>
-			<p class="admin-project-select-p">프로젝트 프로젝트 포인트 지급상황 : {{projectAmountGive}}</p>
+			<p class="admin-project-select-p">프로젝트 포인트 지급상황 : {{projectAmountGive}}</p>
 		</div>
 
 		<div style="order: 2; height: 100%; width: 20%;">
@@ -264,7 +264,7 @@
 		</div>
 		
 		<div class="admin-home_content_area">
-			<div class="admin-home_content100" style="min-height: 400px; max-height: 400px; padding: 15px 0;">
+			<div class="admin-home_content100" style="height:420px; padding: 15px 0;">
 				<div style="width: 100%; border-bottom: 1px solid rgba(0,0,0,0.2); padding: 0 0 5px 5px;">
 					<p class="admin-home-content-p">리스트</p>
 				</div>
