@@ -8,7 +8,9 @@ import com.kh.finalproject.vo.AdminMemberVO;
 
 @Service
 public interface AdminService {
-	List<AdminMemberVO> memberSearchAll();
-	List<AdminMemberVO> paySearchAll();
+	List<AdminMemberVO> memberSearchAll(String searchOption, String keyWord);
+	List<AdminMemberVO> paySearchAll(String searchOption, String keyWord);
+	int memberCount(String searchOption, String keyWord);
+	int payCount(String searchOption, String keyWord);
 	
 }
