@@ -7,9 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data @AllArgsConstructor @NoArgsConstructor @Builder
-public class ProjectLikeVo {
-	
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
+public class ProjectImageVo {
 	private int projectNo;
 	private String projectTitle;
 	private String projectContent;
@@ -22,7 +21,6 @@ public class ProjectLikeVo {
 	private Date projectEndDate;
 	private String projectStopCaues;
 	private String projectSummary;
-	private int projcetLikeCount;
 	
 	private int memberNo;
 	private int categoryNo;
@@ -30,10 +28,7 @@ public class ProjectLikeVo {
 	private String memberInfoNick;
 	private String memberInfoContent;
 	
-	private int likeProjectNo;
-	private int likeMemberNo;
-	private Date likeDate;
+	private int projectLikeCount;
 	
 	private int imageNo;
-	
 }
