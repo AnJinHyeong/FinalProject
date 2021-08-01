@@ -9,6 +9,7 @@ import com.kh.finalproject.vo.ProjectAdminSearchKeywordVo;
 import com.kh.finalproject.vo.ProjectAdminSearchVo;
 import com.kh.finalproject.vo.ProjectAmountGiveVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
+import com.kh.finalproject.vo.ProjectImageVo;
 import com.kh.finalproject.vo.ProjectSponsorVo;
 import com.kh.finalproject.vo.ProjectVo;
 import com.kh.finalproject.vo.SearchVo;
@@ -17,8 +18,14 @@ public interface ProjectDao {
 	
 	//프로젝트 추가
 	void insert(ProjectCategoryVo projectCategoryVo);
+	
+	// 프로젝트 리스트 사진 x
 	List<ProjectDto> proList(int memberNo);
 	List<ProjectDto> proList2(int memberNo);
+	// 프로젝트 리스트 사진 o
+	List<ProjectImageVo> proListWithImageNo(int memberNo);
+	List<ProjectImageVo> proList2WithImageNo(int memberNo);
+	
 	//회원이 만든 프로젝트 전체 조회
 	List<ProjectDto> list(int memberNo);
 	//프로젝트 상세 조회(projectNo,memberNo를 이용한)

@@ -104,8 +104,11 @@
 					$("#sponsorVoList").empty();
 					for (var i = 0; i < resp.length; i++) {
 						var template = $("#sponsorVoListTemplate").html();
+						var imageUrl = "${root}/image/project/projectMainDownload/" + resp[i].imageNo;
 						template = template.replace("{{projectTitle}}", resp[i].projectTitle);
 						template = template.replace("{{projectNo}}", resp[i].projectNo);
+						template = template.replace("{{projectImage}}", 
+								"style='background-image: url(" + imageUrl + ");'");
 						$("#sponsorVoList").append(template);
 					}
 
@@ -225,7 +228,7 @@
 
 	<div class="projectInsert3 w100p pb30">
 		<button class="btn btn-hover w100p h80 sponsorProject">
-			<div class="project-main-img w80 h100p"></div>
+			<div class="project-main-img w80 h100p" {{projectImage}}></div>
 			<div class="btn-text projectTitle">{{projectTitle}}</div>
 			<div class="dpNone projectNo">{{projectNo}}</div>
 		</button>
@@ -291,7 +294,7 @@
 		</div>
 	</div>
 
-	<div class="container-1400 dpFlex pl100 pr100">
+	<div class="container-1200 dpFlex">
 
 		<div class="container-800 hMax600 mt30 mb30 scrollThin">
 
@@ -300,7 +303,15 @@
 
 					<div class="projectInsert3 w100p pb30">
 						<button class="btn btn-hover w100p h80 sponsorProject">
-							<div class="project-main-img w80 h100p"></div>
+							<c:choose>
+								<c:when test="${sponsorVo.imageNo == 0}">
+									<div class="project-main-img w80 h100p"></div>
+								</c:when>
+								<c:otherwise>
+									<div class="project-main-img w80 h100p"
+										style="background-image: url('${root}/image/project/projectMainDownload/${sponsorVo.imageNo}');"></div>
+								</c:otherwise>
+							</c:choose>
 							<div class="btn-text projectTitle">${sponsorVo.projectTitle}</div>
 							<div class="dpNone projectNo">${sponsorVo.projectNo}</div>
 						</button>
