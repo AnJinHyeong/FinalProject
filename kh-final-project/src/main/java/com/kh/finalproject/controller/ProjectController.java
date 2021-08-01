@@ -436,5 +436,10 @@ public class ProjectController {
 		return "redirect:/member/myProject";
 	}
 	
+	@PostMapping("/projectCategoryUpdate")
+	public String projectCategoryUpdate(@ModelAttribute ProjectDto projectDto){
+		projectDao.updateProjectCategory(projectDto);
+		return "redirect:/admin/adminCategory";
+	}
 	
 }

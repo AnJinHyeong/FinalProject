@@ -297,7 +297,7 @@ public class ProjectDaoImpl implements ProjectDao{
 	}
 
 	@Override
-	public List<ProjectDto> getProjectByCategoryNo(int categoryNo) {
+	public List<ProjectCategoryVo> getProjectByCategoryNo(int categoryNo) {
 		return sqlSession.selectList("project.getProjectByCategoryNo", categoryNo);
 	}
   
@@ -339,6 +339,11 @@ public class ProjectDaoImpl implements ProjectDao{
 	public boolean adminProjectStateX(int projectNo) {
 		int count = sqlSession.update("project.adminProjectStateX", projectNo);
 		return count > 0;
+	}
+
+	@Override
+	public void updateProjectCategory(ProjectDto projectDto) {
+		sqlSession.update("project.updateProjectCategory", projectDto);
 	}
 
 

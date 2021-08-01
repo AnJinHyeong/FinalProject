@@ -88,7 +88,9 @@ public interface ProjectDao {
 	// 완료된 프로젝트 포인트 지급 컬럼 업데이트
 	void setProjectAmountGiveY(int projectNo);
 	// 카테고리 번호로 프로젝트 정보 가져오기
-	List<ProjectDto> getProjectByCategoryNo(int categoryNo);
+	List<ProjectCategoryVo> getProjectByCategoryNo(int categoryNo);
+	// 프로젝트 카테고리 변경
+	void updateProjectCategory(ProjectDto projectDto);
 	
 	
 	
