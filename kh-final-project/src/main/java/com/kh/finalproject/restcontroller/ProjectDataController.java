@@ -26,6 +26,7 @@ import com.kh.finalproject.repository.SponsorDao;
 import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectAdminSearchKeywordVo;
 import com.kh.finalproject.vo.ProjectAdminSearchVo;
+import com.kh.finalproject.vo.ProjectCategoryVo;
 import com.kh.finalproject.vo.ProjectInformationVo;
 import com.kh.finalproject.vo.ProjectSponsorVo;
 import com.kh.finalproject.vo.ProjectVo;
@@ -188,6 +189,11 @@ public class ProjectDataController {
 	@PostMapping("/getSponsorSelect")
 	public ProjectSponsorVo getSponsorSelect(@RequestParam int sponsorNo){
 		return projectDao.getSponsorSelect(sponsorNo);
+	}
+	
+	@PostMapping("/getProjectByCategoryNo")
+	public List<ProjectCategoryVo> getProjectByCategoryNo(@RequestParam int categoryNo) {
+		return projectDao.getProjectByCategoryNo(categoryNo);
 	}
 	
 	@PostMapping("/projectAdminSearch")

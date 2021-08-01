@@ -123,9 +123,9 @@ CREATE SEQUENCE image_file_seq;
 #sponsor table
 create table sponsor(
 sponsor_no number(19) primary key,
-member_no references member(member_no) not null,
+member_no references member(member_no) on delete set null,
 gift_no references gift(gift_no),
-project_no references project(project_no) not null,
+project_no references project(project_no) on delete set null,
 sponsor_amount number(19) not null check(sponsor_amount >= 0),
 sponsor_date date default sysdate not null,
 sponsor_cancel char(1) check (sponsor_cancel ='Y')
@@ -134,6 +134,7 @@ sponsor_cancel char(1) check (sponsor_cancel ='Y')
 create sequence sponsor_seq;
 
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #peoject_like
 CREATE TABLE project_like(
 like_project_no REFERENCES project(project_no) ON DELETE SET NULL,

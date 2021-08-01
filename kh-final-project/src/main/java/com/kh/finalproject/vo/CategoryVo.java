@@ -6,12 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class SponsorVo {
-	private int projectNo;
-	private String projectTitle;
-	private int sumSponsorAmount;
+public class CategoryVo {
+	private int categoryNo;
+	private String categoryTheme;
+	private Integer categorySuper;
+	private String categoryApprove;
 	
-	private int memberNo;
-	
-	private int imageNo;
+	private String categorySuperTheme;
 }

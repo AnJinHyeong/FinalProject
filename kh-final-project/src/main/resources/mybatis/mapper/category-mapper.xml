@@ -27,6 +27,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{categoryNo}, #{categoryTheme})
 	</insert>
 	
+	<insert id="categoryInsert" parameterType="CategoryVo">
+		insert into category values(category_seq.nextval, #{categoryTheme}, #{categorySuper, jdbcType=INTEGER}, #{categoryApprove})
+	</insert>
+	
 	<select id="approveCheck" resultType="String" parameterType="int">
 		SELECT CATEGORY_APPROVE FROM category where category_no = #{categoryNo}
 	</select>
@@ -42,6 +46,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="childCategory" resultType="CategoryDto" parameterType="int">
 		SELECT * FROM category WHERE category_super = #{categoryNo} AND CATEGORY_APPROVE = 'Y' AND category_super IS NOT NULL
 	</select>
+	
+	<select id="getCategoryList" resultType="CategoryVo">
+		select C1.category_no, C1.category_theme, C1.category_super, C2.category_theme category_super_theme, C1.category_approve from category C1
+			left outer join category C2 on C1.category_super = C2.category_no order by category_approve nulls first, category_no desc
+	</select>
+	
+	<!-- 카테고리 번호로 카테고리 지우기 -->
+	<delete id="deleteCategoryByCategoryNo" parameterType="int">
+		delete category where category_no = #{categoryNo}
+	</delete>
+	
+	<!-- 카테고리 승인 -->
+	<update id="categorySetApproveY" parameterType="int">
+		update category set category_approve = 'Y' where category_no = #{categoryNo}
+	</update>
 	
 </mapper>
 

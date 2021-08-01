@@ -18,13 +18,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="proList" parameterType="int" resultType="ProjectDto">
-<!-- 	<![CDATA[ -->
-		select * from project where member_no = #{memberNo} and project_state = '1' or project_state = '2'
-<!-- 		]]> -->
+		select * from project where member_no = #{memberNo} and (project_state = '1' or project_state = '2')
 	</select>
 	
 	<select id="proList2" parameterType="int" resultType="ProjectDto">
-		select * from project where member_no = #{memberNo} and project_state = '3' or project_state = '4' or project_state = 'x'
+		select * from project where member_no = #{memberNo} and (project_state = '3' or project_state = '4' or project_state = 'x')
+	</select>
+	
+	<select id="proListWithImageNo" parameterType="int" resultType="ProjectImageVo">
+		select P.*, I.image_no from project P
+    		left outer join image_file I on P.project_no = I.project_no and I.project_state = 'Y' 
+    		where P.member_no = #{memberNo} and (P.project_state = '1' or P.project_state = '2')
+    		order by P.project_no desc
+	</select>
+	
+	<select id="proList2WithImageNo" parameterType="int" resultType="ProjectImageVo">
+		select P.*, I.image_no from project P
+    		left outer join image_file I on P.project_no = I.project_no and I.project_state = 'Y' 
+    		where P.member_no = #{memberNo} and (P.project_state = '3' or P.project_state = '4' or P.project_state = 'x')
+    		order by P.project_no desc
 	</select>
 	
 	<select id="get" parameterType="ProjectDto" resultType="ProjectDto">
@@ -360,6 +372,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update project set project_amount_give = 'Y' where project_no = #{projectNo}
 	</update>
 	
+	<!-- 카테고리 번호로 프로젝트 정보 가져오기 -->
+	<select id="getProjectByCategoryNo" parameterType="int" resultType="ProjectCategoryVo">
+		select P.project_no, P.project_title, P.category_no, C.category_theme from project P
+   			left outer join category C on P.category_no = C.category_no where P.category_no = #{categoryNo} order by project_no desc
+	</select>
 	
 	<!--  관리자 페이지 검색 기능 -->
 	<select id="projectAdminSelect1" resultType="ProjectAdminSearchVo">
@@ -427,6 +444,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<update id="adminProjectStateX" parameterType="int">
 		update project set project_state = 'X' where project_no = #{projectNo}
+	</update>
+	
+	<update id="updateProjectCategory" parameterType="ProjectDto">
+		update project set category_no = #{categoryNo} where project_no = #{projectNo}
 	</update>
 	
 </mapper>

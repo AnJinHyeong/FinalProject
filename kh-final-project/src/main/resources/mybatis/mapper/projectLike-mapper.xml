@@ -25,9 +25,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="myLikeProjectList" resultType="ProjectLikeVo" parameterType="int">
 		select
 		    P.*,
-		    PL.*
+		    PL.*,
+            I.image_no
 		from Project P
 		    inner join project_like PL on P.project_no = PL.like_project_no
+		    left outer join image_file I on P.project_no = I.project_no and I.project_state = 'Y'
 		WHERE PL.like_member_no = #{likeMemberNo}
 	</select>
 	

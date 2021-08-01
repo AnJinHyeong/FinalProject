@@ -14,6 +14,7 @@ import com.kh.finalproject.vo.ProjectAdminSearchKeywordVo;
 import com.kh.finalproject.vo.ProjectAdminSearchVo;
 import com.kh.finalproject.vo.ProjectAmountGiveVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
+import com.kh.finalproject.vo.ProjectImageVo;
 import com.kh.finalproject.vo.ProjectProgressVo;
 import com.kh.finalproject.vo.ProjectSponsorVo;
 import com.kh.finalproject.vo.ProjectVo;
@@ -273,7 +274,7 @@ public class ProjectDaoImpl implements ProjectDao{
 		return sqlSession.selectOne("project.getSponsorSelect", sponsorNo);
   }
 	
-  @Override
+	@Override
 	public List<ProjectDto> proList(int memberNo) {
 		List<ProjectDto> projectDto = sqlSession.selectList("project.proList", memberNo);
 		return projectDto;
@@ -284,7 +285,16 @@ public class ProjectDaoImpl implements ProjectDao{
 		List<ProjectDto> projectDto = sqlSession.selectList("project.proList2", memberNo);
 		return projectDto;
 	}
+	
+	@Override
+	public List<ProjectImageVo> proListWithImageNo(int memberNo) {
+		return sqlSession.selectList("project.proListWithImageNo", memberNo);
+	}
 
+	@Override
+	public List<ProjectImageVo> proList2WithImageNo(int memberNo) {
+		return sqlSession.selectList("project.proList2WithImageNo", memberNo);
+	}
 	
 	@Override
 	public List<ProjectAmountGiveVo> getProjectAmountGiveVoList() {
@@ -294,6 +304,11 @@ public class ProjectDaoImpl implements ProjectDao{
 	@Override
 	public void setProjectAmountGiveY(int projectNo) {
 		sqlSession.update("project.setProjectAmountGiveY", projectNo);
+	}
+
+	@Override
+	public List<ProjectCategoryVo> getProjectByCategoryNo(int categoryNo) {
+		return sqlSession.selectList("project.getProjectByCategoryNo", categoryNo);
 	}
   
 	@Override
@@ -334,6 +349,11 @@ public class ProjectDaoImpl implements ProjectDao{
 	public boolean adminProjectStateX(int projectNo) {
 		int count = sqlSession.update("project.adminProjectStateX", projectNo);
 		return count > 0;
+	}
+
+	@Override
+	public void updateProjectCategory(ProjectDto projectDto) {
+		sqlSession.update("project.updateProjectCategory", projectDto);
 	}
 
 

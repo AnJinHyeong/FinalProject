@@ -300,8 +300,8 @@ public class MemberController {
 			HttpSession session,
 			Model model) {
 		int memberNo = (int)session.getAttribute("memberNo");
-		List<ProjectDto> projectDto = projectDao.proList(memberNo);
-		model.addAttribute("projectDto", projectDto);
+//		List<ProjectDto> projectDto = projectDao.proList(memberNo);
+		model.addAttribute("projectDto", projectDao.proListWithImageNo(memberNo));
 		
 		return "member/myProject";
 	}
@@ -341,8 +341,8 @@ public class MemberController {
 			HttpSession session,
 			Model model) {
 		int memberNo = (int)session.getAttribute("memberNo");
-		List<ProjectDto> find = projectDao.proList2(memberNo);
-		model.addAttribute("projectDto", find);
+//		List<ProjectDto> find = projectDao.proList2(memberNo);
+		model.addAttribute("projectDto", projectDao.proList2WithImageNo(memberNo));
 		
 		return "member/myProject2";
 	}

@@ -12,8 +12,19 @@
 	background-color: #e8e8e8; 
 }
 </style>
-<script>
 
+<script>
+	$(function(){
+		$(".projectListBtn").on("click", function(){
+			var projectNo = $(this).find(".projectNo").text();
+			$(location).attr('href', "${pageContext.request.contextPath}/project/"+ projectNo +"/projectMain");
+		});
+		
+		$(".projectDeleteBtn").on("click", function(){
+			var projectNo = $(this).siblings(".projectListBtn").find(".projectNo").text();
+			$(location).attr('href', "${pageContext.request.contextPath}/project/projectDelete/" + projectNo);
+		});
+	});
 </script>
 
 <section class="main-row topLine">
@@ -33,9 +44,9 @@
 		</div>
 	</div>  
 
-	<div class="container-1200 dpFlex pl100 pr100 abc" style="min-height: 673px;">
+	<div class="container-1200 dpFlex abc" style="min-height: 673px;">
 
-		<div class="container-800 hMax600 mt30 mb30 scrollThin">
+		<div class="container-1200 hMax600 mt30 mb30 scrollThin">
 
 		<c:choose>
 			<c:when  test="${isProject}">
@@ -43,19 +54,32 @@
 				<div class="w100p pb30"><a href="${pageContext.request.contextPath}/project/projectInsert">프로젝트 작성하러 가기</a></div>
 			</c:when>
 		<c:otherwise>
-			<div style="font-size:20px;margin-top:20px; margin-bottom:20px;">진행 중 </div>
+		
 			<div style="projectInsert3 w100p pb30;">
 				<c:forEach var="projectDto" items="${projectDto}">
-					<div class="float-container" style="border-bottom:solid 1px #3d3d3d; padding:20px;">
-						<div class="left" class="project-main-img w80 h100p">이미지</div>
-						<div class="left projectNo" style="margin-left:10px;">${projectDto.memberNo}</div>
-						<div class="left projectNo" style="margin-left:10px;">${projectDto.projectNo}</div>
-						<div class="left btn-text projectTitle" style="margin-left:10px;"><strong>${projectDto.projectTitle}</strong></div>
-						<div class="right" style="border:solid 1px gray; padding : 10px; margin-left:10px;"><a href="${pageContext.request.contextPath}/project/projectDelete/${projectDto.projectNo}"><strong id="deleteSt">삭제</strong></a></div>
-						<div class="right" style="border:solid 1px gray; padding : 10px; "><a href="${pageContext.request.contextPath}/project/${projectDto.projectNo}/projectMain"><strong>수정</strong></a></div>
-					</div> 
+				
+					<div class="projectInsert3 w100p pb30 dpFlex dpFlexCenter">
+						<button class="btn btn-hover w95p h80 projectListBtn">
+							<c:choose>
+								<c:when test="${projectDto.imageNo == 0}">
+									<div class="project-main-img w80 h100p"></div>
+								</c:when>
+								<c:otherwise>
+									<div class="project-main-img w80 h100p"
+										style="background-image: url('${root}/image/project/projectMainDownload/${projectDto.imageNo}');"></div>
+								</c:otherwise>
+							</c:choose>
+							<div class="btn-text projectTitle">${projectDto.projectTitle}</div>
+							<div class="dpNone projectNo">${projectDto.projectNo}</div>
+						</button>
+						<button class="btn btn-hover w5p h40 projectDeleteBtn mr10 ml10">
+							<div class="btn-text projectTitle">삭제</div>
+						</button>
+					</div>
+				
 				</c:forEach>
-			</div>	
+			</div>
+			
 		</c:otherwise>
 		</c:choose>
 		</div>
