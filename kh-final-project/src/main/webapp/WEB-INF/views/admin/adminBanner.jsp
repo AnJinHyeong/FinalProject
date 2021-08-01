@@ -51,7 +51,7 @@
 				<div style="width: 100%; border-bottom: 1px solid rgba(0,0,0,0.2); padding: 0 0 5px 5px;">
 					<p class="admin-home-content-p">배너 목록</p>
 				</div>
-				<div class="admin-project-div2">
+				<div class="admin-project-div2" style="display: block;">
 				
 					<div class="admin-home-content-list">
 						<span style="width: 6%;">배너번호</span>
@@ -63,7 +63,7 @@
 						<span style="width: 4%;">삭제</span>
 					</div>
 					
-					<div class="admin-home-content-list-div" style="height: 280px;">
+					<div class="admin-home-content-list-div" style="height: 250px;">
 						<c:forEach var="bannerVo" items="${bannerList}">
 							<div class="admin-home-content-list target">
 								<span class="bannerNo" style="width: 6%;">${bannerVo.bannerNo}</span>

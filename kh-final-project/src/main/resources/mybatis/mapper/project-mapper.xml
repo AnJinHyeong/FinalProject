@@ -361,8 +361,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- 카테고리 번호로 프로젝트 정보 가져오기 -->
-	<select id="getProjectByCategoryNo" parameterType="int" resultType="ProjectDto">
-		select * from project where category_no = #{categoryNo} order by project_no desc
+	<select id="getProjectByCategoryNo" parameterType="int" resultType="ProjectCategoryVo">
+		select P.project_no, P.project_title, P.category_no, C.category_theme from project P
+   			left outer join category C on P.category_no = C.category_no where P.category_no = #{categoryNo} order by project_no desc
 	</select>
 	
 	<!--  관리자 페이지 검색 기능 -->
@@ -431,6 +432,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<update id="adminProjectStateX" parameterType="int">
 		update project set project_state = 'X' where project_no = #{projectNo}
+	</update>
+	
+	<update id="updateProjectCategory" parameterType="ProjectDto">
+		update project set category_no = #{categoryNo} where project_no = #{projectNo}
 	</update>
 	
 </mapper>

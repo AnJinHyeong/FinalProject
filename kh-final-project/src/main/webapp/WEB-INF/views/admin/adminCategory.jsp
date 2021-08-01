@@ -46,6 +46,37 @@
 
 		$(".target").on("click", function() {
 			var categoryNo = $(this).children(".categoryNo").text();
+			$.ajax({
+				url : "${pageContext.request.contextPath}/project/data/getProjectByCategoryNo",
+				type : "post",
+				data : {
+					categoryNo : categoryNo
+				},
+				success : function(resp){
+					$("#projectListByCategory").empty();
+					for(var i = 0 ; i < resp.length ; i++){
+						var template = $("#projectListByCategoryNoTemplate").html();
+						template = template.replace("{{projectNo}}", resp[i].projectNo);
+						template = template.replace("{{projectTitle}}", resp[i].projectTitle);
+						template = template.replace("{{projectCategory}}", resp[i].categoryTheme);
+						template = template.replace("{{projectNo}}", resp[i].projectNo);
+						$("#projectListByCategory").append(template);
+					}
+					
+					$(".admin-home-content-list").on("click", function() {
+						$(".admin-home-content-list").removeClass("on");
+						$(this).addClass("on");
+					});
+					
+					$(".updateProjectCategory").on("submit", function(e){
+						e.preventDefault();
+						var updateOk = confirm("카테고리를 변경하시겠습니까?");
+						if (updateOk) {
+							this.submit();
+						}
+					});
+				}
+			});
 		});
 
 		$(".admin-home-content-list").on("click", function() {
@@ -54,6 +85,28 @@
 		});
 
 	});
+</script>
+
+<script id="projectListByCategoryNoTemplate" type="text/template">
+
+	<div class="admin-home-content-list">
+		<span style="width: 15%;">{{projectNo}}</span>
+		<span style="width: 30%;">{{projectTitle}}</span>
+		<span style="width: 25%;">{{projectCategory}}</span>
+
+		<form action="${root}/project/projectCategoryUpdate" method="post" style="width: 30%; display: flex;" class="updateProjectCategory">
+			<input type="hidden" name="projectNo" value="{{projectNo}}">
+			<select class="admin-inputBox" style="width: 50%; margin-right: 16%;" name="categoryNo" required>
+				<option></option>
+				<c:forEach var="categoryDto" items="${categoryList}">
+					<option value="${categoryDto.categoryNo}">${categoryDto.categoryTheme}
+				</c:forEach>
+			</select>
+			<input style="width: 17%;" type="submit" value="변경" class="admin-btn">
+		</form>
+		
+	</div>
+
 </script>
 
 <section>
@@ -68,7 +121,7 @@
 			<div style="width: 100%; border-bottom: 1px solid rgba(0, 0, 0, 0.2); padding: 0 0 5px 5px;">
 				<p class="admin-home-content-p">카테고리 목록</p>
 			</div>
-			<div class="admin-project-div2">
+			<div class="admin-project-div2" style="display: block;">
 
 				<div class="admin-home-content-list">
 					<span style="width: 10%;">카테고리 번호</span> <span style="width: 30%;">카테고리 이틀</span> <span style="width: 30%;">상위 카테고리</span> <span
@@ -76,7 +129,7 @@
 					>카테고리 승인여부</span> <span style="width: 10%;">삭제/승인</span>
 				</div>
 
-				<div class="admin-home-content-list-div" style="height: 280px;">
+				<div class="admin-home-content-list-div" style="height: 250px;">
 					<c:forEach var="categoryDto" items="${categoryList}">
 						<div class="admin-home-content-list target">
 							<span class="categoryNo" style="width: 10%;">${categoryDto.categoryNo}</span> <span class="categoryTheme" style="width: 30%;">${categoryDto.categoryTheme}</span>
@@ -124,19 +177,16 @@
 			</div>
 			<div class="admin-project-div2" style="display: flex; justify-content: center;">
 
-				<div style="width: 800px; height: 450px;"></div>
-
-				<div id="mainBannerTextContainer"
-					style="width: 400px; height: 450px; padding-top: 100px; padding-left: 30px; padding-right: 30px; border: 1px solid rgb(220, 220, 220);"
-				>
-
-					<div class="mb20 h80">
-						<span id="mainBannerTitle" style="font-size: 30px; font-weight: bold"></span>
+				<div style="width: 100%;">
+					<div class="admin-home-content-list">
+						<span style="width: 15%;">프로젝트 번호</span>
+						<span style="width: 30%;">프로젝트 이름</span>
+						<span style="width: 25%;">프로젝트 카테고리</span>
+						<span style="width: 20%;">변경할 카테고리</span>
+						<span style="width: 10%;">변경</span>
 					</div>
-					<div class="mb50 h80">
-						<span id="mainBannerContent" style="font-size: 12px;"></span>
+					<div id="projectListByCategory" class="admin-home-content-list-div" style="height: 250px;">
 					</div>
-
 				</div>
 
 			</div>
