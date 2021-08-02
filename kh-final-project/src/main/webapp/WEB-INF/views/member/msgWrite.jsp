@@ -18,46 +18,42 @@
 
 <style>
 
-	.mainContext{
+*{
+	box-sizing : border-box;
+}
 
-		width: 100%;
+textarea.msgTextarea {
+	margin-bottom: 20px;
+	width: 100%;
+	padding: 10px;
+	height: 200px;
+	resize: none;
+}
 
-		height: 100%;
+input.msgTitle, select.msgTitle{
+	width: 100%;
+	margin-bottom: 20px;
+	height: 40px;
+	padding: 10px;
+}
 
-	}
+input, textarea, select{
+	border: 1px solid rgb(220, 220, 220);
+}
 
-	.msgContentBox{
+input.msgSendBtn{
+	height: 40px;
+	background-color: #fff; 
+	color: black;
+	border: 1px solid rgb(240, 240, 240);
+	cursor: pointer;
+	width: 100%;
+}
 
-		width : 100%;
-
-		height : 200;
-
-	}
-
-	textarea{
-
-	width:585px; 
-
-	height:200px; 
-
-    resize:none;/* 크기고정 */ 
-
-/*   resize: horizontal; // 가로크기만 조절가능 
-
-	resize: vertical;  세로크기만 조절가능  */
-
-	#textBox{
-
-	
-
-	}
-
-	.textBtn{
-
-		width:580px;
-
-	}
-
+input.msgSendBtn:hover{
+	background: rgb(248, 100, 83);
+	color: #fcfcfc;
+	transition: background 0.2s ease-in-out;
 }
 
 </style>
@@ -72,7 +68,7 @@
 
 <body>
 
-	<div class="mainContext" >
+	<div class="mainContext" style="padding: 0 20px;">
 
 		<div><h1>문의 답장</h1></div>
 
@@ -83,15 +79,13 @@
 				<input type="hidden"  name="receiverNo" style="width:70%; margin-bottom:10px; margin-left:30px;" value="${projectDto.memberNo}" name="receiverNo">
 
 			</div>
-			<div>
+			<div style="margin-bottom: 20px;">
 				문의 프로젝트 제목 : ${projectDto.projectTitle}
 			</div>
 
 			<div style="width:100%">
 
-				문의 내용 
-
-				<select name="msgTitle"  style="width:70%; margin-left:30px; margin-bottom:30px;">
+				<select class="msgTitle" name="msgTitle">
 
 					<option value="" selected>문의 유형</option>	
 
@@ -117,11 +111,11 @@
 
 			<div class="msgContentBox">
 
-				<textarea name="msgContent"style="resize" class="msgContent" placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요" required></textarea>
+				<textarea class="msgTextarea" name="msgContent" placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요" required></textarea>
 
 			</div>
 
-			<input type="submit" class="textBtn" style="width:100%;" value="전송">
+			<input type="submit" class="msgSendBtn" style="width:100%;" value="전송">
 
 		</form>
 
