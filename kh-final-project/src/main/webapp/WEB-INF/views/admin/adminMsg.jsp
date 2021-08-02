@@ -1,13 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
- 
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
  
-
+<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
+<c:set var="isLogin" value="${not empty memberNo}"></c:set>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
 <c:set var="isMsg" value="${empty messageDto}"></c:set>
@@ -20,10 +19,28 @@
 
 <c:set var="isMsg3" value="${empty messageDto3}"></c:set>
 
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+  
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FüN‿ding - ADMIN</title>
+    <link rel="stylesheet" type="text/css" href="${root}/css/template.css">
+	<link rel="stylesheet" type="text/css" href="${root}/css/common.css">
+	<link rel="stylesheet" type="text/css" href="${root}/css/project.css">
+	<link rel="stylesheet" type="text/css" href="${root}/css/yb.css">
+	<link rel="stylesheet" type="text/css" href="${root}/css/yongbo.css">
+	<link rel="stylesheet" type="text/css" href="${root}/css/projectBoard.css">
+	<link rel="stylesheet" type="text/css" href="${root}/css/templateSection.css">
+	<link rel="stylesheet" type="text/css" href="${root}/css/requestBoard.css">
+    <link rel="stylesheet" type="text/css" href="${root}/css/adminPage.css">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 
-
-
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    
+</head>
 <script>
 
 	$(function(){
@@ -85,9 +102,7 @@
  
 
 		});
-
 		
-
 		function replaceMsgSummarizeTemplate(resp) {
 
 			var template = $("#msgSummarizeTemplate").html();
@@ -146,45 +161,11 @@
 			});	
 
 	});
-		 
 		
-
-		 
-
-}); 
-
-	$(".deleteBtn").on("click", function(){
-			var msgNo = $(this).find(".msgNo").text();
-			
-			$(location).attr('href',"${pageContext.request.contextPath}/member/data/deleteMsg"+msgNo);
+		
 	});
-
-	
-	function showMsg() { 
-
-		 
-		
-		window.open("${root}/member/msgReWrite","a","width=600, height=430, left=400, top=100 ,status=no,toolbar=no");
-		
- 
-
-	}
-
-  
-	
-	
- 
-	
- 
- 
-
-</script>
-
- 
-
- 
-
- <script id="msgSummarizeTemplate" type="text/template"> 
+	</script>
+	<script id="msgSummarizeTemplate" type="text/template"> 
  
  
 	
@@ -247,8 +228,8 @@
 		
 			
  			<button class="w100p project-btn btn3 project-btn-hover" onclick="showMsg()"><i class="far fa-envelope"></i>문의 답글 보내기</button>
- 			<button class="deleteBtn w100p project-btn btn3 project-btn-hover"name="deleteBtn" id="deleteBtn">메시지 삭제</button>
-
+ 			<button class="w100p project-btn btn3 project-btn-hover" onclick="showMsg()">메시지 삭제</button>
+			
  			
 
  	</div> 
@@ -257,22 +238,25 @@
  
 
  </script>  
+<body>
+	<aside>
+		<div class="admin-logo"><a href="#">FüN‿ding</a></div>
+		<ul>
+			<li class="admin-aside-top_menu"><span class="">회원</span>
+				<ul class="admin-aside-side_menus">
+					<li><a href="#">회원</a></li>
+					<li><a href="#">회원</a></li>
+				</ul>
+			</li>
+			<li class="admin-aside-top_menu"><span class=""></span>
+				<ul class="admin-aside-side_menus">
+					<li><a href="#">메인 페이지</a></li>
+				</ul>
+			</li>
+		</ul>
+	</aside>
 
- 
-<style>
-.rect{
-	border:solid 1px gray;
-	
-}
-.rect:active{
-	background-color:#5d5d5d;
-}
-</style>
- 
-
- 
-
-<section class="main-row topLine" >
+	<section class="main-row topLine" >
 
  
 
@@ -292,7 +276,7 @@
 
 		<div class="w1200 h35" style="margin: 0 auto;"> 
 
-			<ul class="project-main-ul">
+			<ul class="project-main-ul" style="margin-left:10px;">
 
 				<li class="project-main-li main-li-on ab"><a class="main-li-a cursorPointer"><i class="far fa-envelope"></i>&nbsp;전체 메시지함</a></li>
 
@@ -305,9 +289,7 @@
 		</div>
 
 	</div>
-
- 
-
+	
 	<div class="container-1400 dpFlex pl100 pr100">
 
  
@@ -470,23 +452,8 @@
  
 
 		</div>
-
- 
-
 		<div class="container-300 h700 mt30 mb30 boc200 bosSolid bow1 bora5 p30" id="msgSummarize"></div>
-
- 
-
 	</div>
-
- 
-
- 
-
- 
-
-</section>
-
- 
-
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+	</section>
+</body>
+</html>

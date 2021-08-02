@@ -12,8 +12,34 @@
 
 <meta charset="UTF-8">
 
-<title>문의하기 답장</title>
+<title>문의하기</title>
+<script>
 
+$.ajax({
+
+	url : "${pageContext.request.contextPath}/member/data/msgInformation",
+
+	type : 'post',
+
+	data : {
+
+		"msgNo" : msgNo
+
+	},
+
+	success : function(resp) {
+
+		replaceMsgSummarizeTemplate(resp);
+
+		
+		
+		
+
+	} 
+
+});	
+
+</script>
 
 
 <style>
@@ -80,44 +106,18 @@
 
 			<div>
 				
-				<input type="hidden"  name="receiverNo" style="width:70%; margin-bottom:10px; margin-left:30px;" value="${projectDto.memberNo}" name="receiverNo">
-
+				<input type="hidden"  name="receiverNo" style="width:70%; margin-bottom:10px; margin-left:30px;" value="${msgVo.senderNo}" name="receiverNo">
+				<input type="hidden"  name="msgTitle" style="width:70%; margin-bottom:10px; margin-left:30px;" value="문의내용답장" name="msgTitle">
 			</div>
 			<div>
-				문의 프로젝트 제목 : ${projectDto.projectTitle}
+				문의 내용 : ${msgVo.msgContent}
 			</div>
-
-			<div style="width:100%">
-
-				문의 내용 
-
-				<select name="msgTitle"  style="width:70%; margin-left:30px; margin-bottom:30px;">
-
-					<option value="" selected>문의 유형</option>	
-
-					<option value="선물/후원">선물/후원</option>	
-
-					<option value="프로젝트">프로젝트</option>
-
-					<option value="교환/환불">교환/환불</option>
-
-					<option value="기타">기타</option>
-
-				</select>
-
-			</div>
-
-			
-
-			<div>
-
-							
-
-			</div>
+				
+		
 
 			<div class="msgContentBox">
 
-				<textarea name="msgContent"style="resize" class="msgContent" placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요" required></textarea>
+				<textarea name="msgContent"style="resize" class="msgContent" placeholder="문의 답신할 내용을 적어주세요" required></textarea>
 
 			</div>
 
