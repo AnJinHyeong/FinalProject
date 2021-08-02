@@ -149,7 +149,7 @@
 						console.log(msgNo);
 						$(location).attr('href',"${root}/member/deleteMsg?msgNo="+msgNo);
 				});
-
+ 
 					 
 
 				} 
