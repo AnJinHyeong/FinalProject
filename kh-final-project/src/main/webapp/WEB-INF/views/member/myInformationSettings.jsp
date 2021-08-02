@@ -278,7 +278,6 @@
 			url :"${pageContext.request.contextPath}/image/member/confirm",
 			type: "post",
 			success : function(resp){
-				console.log(resp);
 				if(resp == 1){
 					$.ajax({
 						url :"${pageContext.request.contextPath}/image/member/getByMemberNo",

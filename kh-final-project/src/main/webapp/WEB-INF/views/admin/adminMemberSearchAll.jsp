@@ -31,13 +31,6 @@ margin-top: 30px;
 margin-left: 10px;
 }
 
-.admin-project-div2-select1 {
-width: 100px;
-}
-
-.admin-project-div2-input{
-    width: 55%;
-}
 
 #searchDiv{
 display:none;
@@ -60,11 +53,9 @@ display:none;
 			<div class="admin-project-div1">
 				<p class="admin-home-content-p">조건 검색</p>
 			</div>
-			<div class="admin-project-div2">
-
-				<form action="" method="post">
-					<select class="admin-project-div2-select1" name="searchOption"
-						required>
+			<form action="" method="post">
+				<div class="admin-project-div2">
+					<select class="admin-project-div2-select1" name="searchOption" required style="width: 10%;">
 						<option value="all"
 							<c:out value = "${map.searchOption == 'all'?'selected' : ' '}"/>>모두</option>
 						<option value="member_id"
@@ -85,13 +76,12 @@ display:none;
 						<option value="4">프로젝트 펀딩종료 - 4</option>
 						<option value="x">프로젝트 중단 - x</option>
 					</select> -->
-					<input class="admin-project-div2-input" type="text" required
-						name="keyWord" autocomplete="off" value="${map.keyWord}" placeholder = "검색어를 입력하세요">
+					<input class="admin-project-div2-input" type="text" required name="keyWord" autocomplete="off" value="${map.keyWord}" placeholder = "검색어를 입력하세요" style="width: 90%;">
 					<button class="admin-project-div2-btn">
 						<i class="fas fa-search bacWhite"></i>
 					</button>
-				</form>
-			</div>
+				</div>
+			</form>
 		</div>
 	</div>
 
