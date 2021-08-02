@@ -155,9 +155,10 @@
             } 
 
          });   
-         $(".ab").click();
+         
    });
        
+	$(".ab").click();
       
    
        
@@ -330,7 +331,7 @@
 
  
 
-               <div class="projectInsert3 w80p pb30">
+               <div class="projectInsert3 w100p pb30">
 
                   <button class="btn btn-hover w100p h80 msgBtn"> 
 
@@ -383,7 +384,7 @@
 
             
 
-               <div class="projectInsert3 w80p pb30">
+               <div class="projectInsert3 w100p pb30">
 
                   <button class="btn btn-hover w100p h80 msgBtn"> 
 
@@ -433,7 +434,7 @@
 
             <c:forEach var="messageDto3" items="${messageDto3}">
 
-               <div class="projectInsert3 w80p pb30">
+               <div class="projectInsert3 w100p pb30">
 
                   <button class="btn btn-hover w100p h80 msgBtn"> 
 
