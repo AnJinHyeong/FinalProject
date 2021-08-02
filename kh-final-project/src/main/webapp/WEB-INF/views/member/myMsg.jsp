@@ -27,7 +27,6 @@
 <script>
 
 	$(function(){
-
 		
 
 		$(".project-main-li").on("click", function() {
@@ -145,11 +144,9 @@
 
 			});	
 	});
-		 
-		
 
+	$(".ab").click();
 		 
-
 }); 
 
 	$(".deleteBtn").on("click", function(){

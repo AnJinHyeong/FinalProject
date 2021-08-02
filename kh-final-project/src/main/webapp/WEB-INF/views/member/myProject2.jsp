@@ -72,9 +72,6 @@
 							<div class="btn-text projectTitle">${projectDto.projectTitle}</div>
 							<div class="dpNone projectNo">${projectDto.projectNo}</div>
 						</button>
-						<button class="btn btn-hover w5p h40 projectDeleteBtn mr10 ml10">
-							<div class="btn-text projectTitle">삭제</div>
-						</button>
 					</div>
 				
 				</c:forEach>
