@@ -14,11 +14,16 @@ public class MsgVo {
 	private int senderNo;
 	private String msgTitle;
 	private String msgContent;
-	private Date msgDate;
+	private String msgDate;
 	private int receiverNo;
+	private String memberId;
+	private String memberId2;
+
+
 	
 	private String senderNick;
 	private String receiverNick;
 	
 	private String keyword;
+
 }
