@@ -26,6 +26,8 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <script>
 	$(function(){
+		$('input').attr('autocomplete','off');
+		
 		$.ajax({
 			url :"${pageContext.request.contextPath}/header/getMemberHavePoint",
 			type: "post",

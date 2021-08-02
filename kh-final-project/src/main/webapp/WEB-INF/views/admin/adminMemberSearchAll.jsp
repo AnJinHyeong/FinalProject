@@ -7,10 +7,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- 1번 -->
 <script id="searchContent" type="text/template">
-
-
-
-
 <div class="admin-home-content-list div-select" style="text-align: center;" id="{{projectNo}}">
 	<span style="width: 5%;">{{row.memberNo}}</span>	
 	<span style="width: 10%;">{{categoryTheme}}</span>	
@@ -90,7 +86,7 @@ display:none;
 						<option value="x">프로젝트 중단 - x</option>
 					</select> -->
 					<input class="admin-project-div2-input" type="text" required
-						name="keyWord" autocomplete="off" value="${map.keyWord}">
+						name="keyWord" autocomplete="off" value="${map.keyWord}" placeholder = "검색어를 입력하세요">
 					<button class="admin-project-div2-btn">
 						<i class="fas fa-search bacWhite"></i>
 					</button>

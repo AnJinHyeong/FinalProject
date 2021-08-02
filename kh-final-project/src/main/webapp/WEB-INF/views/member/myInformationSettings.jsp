@@ -273,7 +273,7 @@
 
 	$(function() {
 		
-	
+		
 		$.ajax({
 			url :"${pageContext.request.contextPath}/image/member/confirm",
 			type: "post",

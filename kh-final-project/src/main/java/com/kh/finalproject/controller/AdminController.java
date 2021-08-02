@@ -2,27 +2,24 @@ package com.kh.finalproject.controller;
 
 import java.util.List;
 
-
 import javax.servlet.http.HttpSession;
-
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalproject.entity.MessageDto;
-import com.kh.finalproject.repository.MessageDao;
-
 import com.kh.finalproject.repository.BannerDao;
 import com.kh.finalproject.repository.CategoryDao;
+import com.kh.finalproject.repository.MessageDao;
 import com.kh.finalproject.service.AdminService;
 import com.kh.finalproject.vo.AdminMemberVO;
+import com.kh.finalproject.vo.MsgVo;
 
 
 @RequestMapping("/admin")
@@ -32,7 +29,7 @@ public class AdminController {
 	@Autowired
 	MessageDao messageDao;
 
-  @Autowired
+	@Autowired
 	AdminService adminService;
 	
 
@@ -43,24 +40,22 @@ public class AdminController {
 
 	@GetMapping("/adminMsg") 
 	public String adminMsg(HttpSession session,Model model) {
-		int memberNo = (int)session.getAttribute("memberNo");
-		List<MessageDto> find = messageDao.msgAllByMemberNo(memberNo);
-
-		model.addAttribute("messageDto", find);
-
-		
-
-		List<MessageDto> find2 = messageDao.msgReceiverByMemberNo(memberNo);
-
-		model.addAttribute("messageDto2", find2);
-
-		
-
-		List<MessageDto> find3 = messageDao.msgSendByMemberNo(memberNo);
-
-		model.addAttribute("messageDto3", find3);
+		model.addAttribute("msgVoList", messageDao.msgAll());
 		return "admin/adminMsg";
 	}
+	
+	@PostMapping("/adminMsg")
+	public String adminMsg(HttpSession session,Model model, @RequestParam String keyword) {
+		if(keyword.equals("")) {
+			model.addAttribute("msgVoList", messageDao.msgAll());
+		}
+		else {
+			model.addAttribute("msgVoList", messageDao.msgAll(keyword));
+		}
+		return "admin/adminMsg";
+	}
+	
+	
 	@GetMapping("/adminMsgWrite")
 	public String adminMsgWrite() {
 		return "/admin/adminMsgWrite";

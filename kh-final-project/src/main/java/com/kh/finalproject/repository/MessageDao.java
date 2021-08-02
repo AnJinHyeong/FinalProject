@@ -19,4 +19,13 @@ public interface MessageDao {
 	
 	boolean deleteMsg(MessageDto messageDto);
 	
+	// 메시지 전체 가져오기
+	List<MsgVo> msgAll();
+
+	// 닉네임 조회 메시지 가져오기
+	List<MsgVo> msgAll(String keyword);
+	
+	
+	//admin 메세지 상세보기
+	MsgVo adminMsgSelectOne(int msgNo);
 }
