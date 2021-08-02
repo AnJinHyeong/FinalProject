@@ -278,6 +278,7 @@
 			url :"${pageContext.request.contextPath}/image/member/confirm",
 			type: "post",
 			success : function(resp){
+				console.log(resp);
 				if(resp == 1){
 					$.ajax({
 						url :"${pageContext.request.contextPath}/image/member/getByMemberNo",
@@ -287,14 +288,18 @@
 						success : function(resp){
 							var url = "${pageContext.request.contextPath}/image/member/memberDownload/"+resp.imageNo;
 							$("#preview").attr("src",url);
+						},
+						error :function(resp){
+							$("#preview").attr("src","${pageContext.request.contextPath}/image/memberImageNull.png");
 						}
 						
-					});				
+					});			
 				}
 				else{
 					$("#preview").attr("src","${pageContext.request.contextPath}/image/memberImageNull.png");
 				}
 			}
+			
 		
 		});
 					
@@ -430,7 +435,7 @@
 				</div>
 
 				<div class="targetDiv changePro dpNone" style="display: none; margin-top: 10px; margin-bottom: 10px;">
-					<div style="width: 250px; height: 250px;">
+					<div style="width: 250px; height: 220px;">
 						<input class="" type="file" id="memberImage">
 						<img src="" style="width: 200px; height: 200px; border-radius: 70%; border: 1px solid #DCDCDC;" id="preview">
 					</div>
@@ -489,7 +494,7 @@
 					<form action="upPw2" method="post" class="float-container">
 
 						<div class="left w700">
-							<input class="left h30 w700 p10 project-border-normal mb30" type="password" name="memberPw" placeholder="현재 비밀번호" autocomplete="off" required>
+							<input class="left h30 w700 p10 project-border-normal mb30" type="password" name="nowPw" placeholder="현재 비밀번호" autocomplete="off" required>
 
 							<input class="left h30 w700 p10 project-border-normal mb10" type="password" name="newPw" placeholder="변경할 비밀번호" autocomplete="off" required>
 							<input class="left h30 w700 p10 project-border-normal" type="password" name="newPwCheck" placeholder="변경할 비밀번호 확인" autocomplete="off" required>

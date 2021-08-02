@@ -167,7 +167,7 @@
 							<button class="project-btn btn2">프로젝트 펀딩</button>
 						</c:when>
 						<c:when test="${projectDto.projectState == '4'}">
-							<button class="project-btn btn2">프로젝트 펀딩종료</button>
+							<button class="project-btn btn2">종료된 프로젝트</button>
 						</c:when>
 						<c:otherwise>
 							<button class="project-btn btn2">프로젝트 중단</button>

@@ -55,10 +55,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 	전체 메시지함 -->
 	<select id="msgAllByMemberNo" parameterType="int" resultType="MessageDto">
 		select * from message where sender_no = #{memberNo} or receiver_no = #{memberNo} order by msg_no DESC
-	</select>
+	</select> 
 <!-- 	메시지 삭제 -->
- 	<delete id="deleteByMsg" parameterType="string">
- 		delete message where msg_no = #{msgNo};
+ 	<delete id="deleteByMsg" parameterType="MessageDto">
+ 		delete message where msg_no = #{msgNo}
  	</delete>
 
 <!-- 	로그인 구문 -->
@@ -123,8 +123,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update member set member_email = #{memberEmail} where member_no =#{memberNo}
 	</update>
 	
-	<update id="upPw2" parameterType="MemberDto">
-		update member set member_pw = #{memberPw} where member_no = #{memberNo}
+
+	<update id="upPw2" parameterType="MemberVo">
+		update member set member_pw = #{newPw} where member_pw =#{nowPw}
 	</update>
 	
 	<update id="upIntro" parameterType="MemberDto">
@@ -140,7 +141,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="getByMsgNo" parameterType="MessageDto" resultType="MessageDto">
-		select * from project where msg_no = #{msgNo}
+		select * from message where msg_no = #{msgNo}
 	</select> 
 	
 	<select id="getByMsgNo2" parameterType="int" resultType="MsgVo">
