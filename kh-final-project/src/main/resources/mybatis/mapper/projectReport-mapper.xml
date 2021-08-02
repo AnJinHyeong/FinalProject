@@ -10,8 +10,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into project_report values(project_report_seq.nextval, #{reportProjectNo}, #{reportMemberNo}, #{reportContent}, sysdate)
 	</insert>
 	
-	<select id="getProjectReportList" resultType="ProjectReportDto">
-		select * from project_report
+	<select id="projectReportList1" resultType="ProjectReportListVo" >
+		select R.report_project_no, P.project_title, count(*) report_count from project_report R
+   			left outer join project P on R.report_project_no = P.project_no group by R.report_project_no, P.project_title
+   			order by report_count desc
+	</select>
+	
+	<select id="projectReportList2" parameterType="int" resultType="ProjectReportListVo">
+		select * from project_report R
+		    left outer join project P on R.report_project_no = P.project_no
+		    left outer join member M on R.report_member_no = M.member_no
+		    where R.report_project_no = #{reportProjectNo} order by report_no desc
 	</select>
 	
 </mapper>
