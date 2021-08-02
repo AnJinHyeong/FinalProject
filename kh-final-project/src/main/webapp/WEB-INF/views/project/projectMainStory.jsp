@@ -15,7 +15,6 @@
 		var checkUnload = false;
 		$("#inputArea").one("input", function(){
 			checkUnload = true;
-			console.log("ddd");
 		});	
 		
 		var ImagesStarted = [];

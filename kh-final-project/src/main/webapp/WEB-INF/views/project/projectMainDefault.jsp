@@ -312,11 +312,9 @@
 						});
 
 						if(files && filesLength){//파일 저장소 존재 및 0번 위치에 파일 존재
-							console.log("파일이 선택되었습니다");
 						
 //			 				jquery ajax에서 파일 업로드를 하려면 formData 객체가 필요
 							var fd = new FormData();
-							console.log(fd);
 //			 				fd.append(이름,데이터또는 파일);
 							fd.append("f",files0);
 							
@@ -348,11 +346,9 @@
 					}
 					else{//등록된 이미지가 없을 경우 등록
 						if(files && filesLength){//파일 저장소 존재 및 0번 위치에 파일 존재
-							console.log("파일이 선택되었습니다");
 						
 //			 				jquery ajax에서 파일 업로드를 하려면 formData 객체가 필요
 							var fd = new FormData();
-							console.log(fd);
 //			 				fd.append(이름,데이터또는 파일);
 							fd.append("f",files0);
 							

@@ -46,7 +46,6 @@
 		
 		$(".sponsorListDivOne").on("click",function(){
 			var sponsorNo = $(this).attr("id");
-			console.log(sponsorNo);
 			$.ajax({
 				url : "${pageContext.request.contextPath}/project/data/getSponsorSelect",
 				type : 'post',
@@ -54,7 +53,6 @@
 					sponsorNo:sponsorNo
 				},
 				success : function(resp) {
-					console.log(resp);
 					$("#sponsorDiv").empty();
 					
 					var template = $("#sponsorDivContent").html();

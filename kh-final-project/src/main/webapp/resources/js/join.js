@@ -181,7 +181,6 @@ $(function () {
 			 type: "get",
 			 url: "../check/emailKey?email=" + email,
 		        success:function(data){
-		            console.log("data : " + data);
 		            code = data;
 		        }               
 		 });

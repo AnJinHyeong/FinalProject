@@ -19,6 +19,18 @@
     
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     
+    <script>
+    	$(function(){
+    		$(".okCheck").on("click", function(e){
+    			var thisText = $(this).text()
+    			var okCheck = confirm(thisText + "하시겠습니까?");
+    			if(!okCheck){
+    				e.preventDefault();
+    			}
+    		});
+    	});
+    </script>
+    
 </head>
 <body>
 	<aside>
@@ -40,6 +52,7 @@
 			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">문의함</span>
 				<ul class="admin-aside-side_menus">
 					<li><a href="${root}/admin/adminMsg">관리자 문의</a></li>
+					<li><a href="${root}/admin/reportList">신고 관리</a></li>
 				</ul>
 			</li>
 			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">배너</span>
@@ -54,8 +67,8 @@
 			</li>
 			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">스케쥴러 기능</span>
 				<ul class="admin-aside-side_menus">
-					<li><a href="${root}/deleteLocalFileNotInDB">로컬 파일 정리</a></li>
-					<li><a href="${root}/givePointByFinishedProject">종료 프로젝트 정산</a></li>
+					<li><a href="${root}/deleteLocalFileNotInDB" class="okCheck">로컬 파일 정리</a></li>
+					<li><a href="${root}/givePointByFinishedProject" class="okCheck">종료 프로젝트 정산</a></li>
 				</ul>
 			</li>
 			<li class="admin-aside-top_menu" style="margin-top: 50px;"><span class=""></span>

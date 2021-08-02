@@ -96,8 +96,6 @@
 						$(".div-select").removeClass("on");
 						$(this).addClass("on");
 						
-						console.log(projectNo);
-						
 						$.ajax({
 							url :"${pageContext.request.contextPath}/project/data/projectAdminSelectOne",
 							type: "post",

@@ -9,7 +9,7 @@
 	$(function(){
 		
 		
-		$(".admin-home-content-list").not(".target").on("click", function(){
+		$(".admin-home-content-list").on("click", function(){
 			var idNo = $(this).attr("id");
 			
 			$.ajax({
@@ -60,20 +60,7 @@
 	<section>
 		<div class="admin-home_content_area">
 			<div class="admin-home_content100">
-				<p class="admin-home-top-p">문의 관리</p>
-			</div>
-		</div>
-		<div class="admin-home_content_area">
-			<div class="admin-home_content100" style="height: 85px; padding: 15px 0;">
-				<div class="admin-project-div1">
-					<p class="admin-home-content-p">조건 검색</p>
-				</div>
-				<form action="" method="post">
-					<div class="admin-project-div2">
-						<input class="admin-project-div2-input" type="text" name="keyword" autocomplete="off" style="width: 100%; border: none;">
-						<button class="admin-project-div2-btn" id="search-btn"><i class="fas fa-search bacWhite"></i></button>
-					</div>
-				</form>
+				<p class="admin-home-top-p">신고 관리</p>
 			</div>
 		</div>
 		
@@ -83,12 +70,12 @@
 					<p class="admin-home-content-p">리스트</p>
 				</div>
 				<div class="admin-project-div2"  style="display: inline;">
-					<div class="admin-home-content-list target" style="text-align: center; width: 99%;">
-						<span style="width: 5%;">번호</span>
-						<span style="width: 10%;">발신닉네임</span>
-						<span style="width: 55%;">타이틀</span>
-						<span style="width: 10%;">수신닉네임</span>
-						<span style="width: 20%;">보낸일자</span>
+					<div class="admin-home-content-list" style="text-align: center; width: 99%;">
+						<span style="width: 5%;">신고번호</span>
+						<span style="width: 10%;">프로젝트번호</span>
+						<span style="width: 55%;">아이디번호</span>
+						<span style="width: 10%;">신고내용</span>
+						<span style="width: 20%;">신고일자</span>
 					</div>
 					
 					<div class="admin-home-content-list-div" style="height: 300px;" id="projectSearchDiv">
