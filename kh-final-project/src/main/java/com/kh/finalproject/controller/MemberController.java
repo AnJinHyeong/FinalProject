@@ -189,10 +189,12 @@ public class MemberController {
 	public String join() {
 		return "member/join";
 	}
+	
 	@RequestMapping("/myPage")
 	public String myPage() {
 		return "member/myPage";
 	}
+	
 	@GetMapping("/msgReWrite")
 
 	public String msgReWrite(@ModelAttribute MessageDto messageDto, Model model,@RequestParam int msgNo) {
