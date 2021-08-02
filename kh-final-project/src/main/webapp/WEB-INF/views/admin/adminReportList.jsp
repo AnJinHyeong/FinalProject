@@ -9,7 +9,7 @@
 	$(function(){
 		
 		
-		$(".admin-home-content-list").on("click", function(){
+		$(".admin-home-content-list").not(".target").on("click", function(){
 			var idNo = $(this).attr("id");
 			
 			$.ajax({
@@ -70,22 +70,18 @@
 					<p class="admin-home-content-p">리스트</p>
 				</div>
 				<div class="admin-project-div2"  style="display: inline;">
-					<div class="admin-home-content-list" style="text-align: center; width: 99%;">
-						<span style="width: 5%;">신고번호</span>
-						<span style="width: 10%;">프로젝트번호</span>
-						<span style="width: 55%;">아이디번호</span>
-						<span style="width: 10%;">신고내용</span>
-						<span style="width: 20%;">신고일자</span>
+					<div class="admin-home-content-list target" style="text-align: center; width: 99%;">
+						<span style="width: 15%;">프로젝트번호</span>
+						<span style="width: 70%;">신고내용</span>
+						<span style="width: 15%;">신고횟수</span>
 					</div>
 					
 					<div class="admin-home-content-list-div" style="height: 300px;" id="projectSearchDiv">
-						<c:forEach var="msgVo" items="${msgVoList}">
-							<div class="admin-home-content-list" style="text-align: center; width: 100%;" id="${msgVo.msgNo}">
-								<span style="width: 5%;">${msgVo.msgNo}</span> 
-								<span style="width: 10%;">${msgVo.senderNick}</span> 
-								<span style="width: 55%;">${msgVo.msgTitle}</span>
-								<span style="width: 10%;">${msgVo.receiverNick}</span> 
-								<span style="width: 20%;">${msgVo.msgDate}</span>
+						<c:forEach var="adminProjectReportList1" items="${adminProjectReportList1}">
+							<div class="admin-home-content-list" style="text-align: center; width: 100%;" id="${adminProjectReportList1.reportProjectNo}">
+								<span style="width: 15%;">${adminProjectReportList1.reportProjectNo}</span> 
+								<span style="width: 70%;">${adminProjectReportList1.projectTitle}</span> 
+								<span style="width: 15%;">${adminProjectReportList1.reportCount}</span>
 							</div>
 						</c:forEach>
 					</div>
