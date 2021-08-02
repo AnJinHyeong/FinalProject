@@ -11,6 +11,16 @@
 		
 	});
 	
+	function showMsg2() { 
+
+		 
+		
+		window.open("${pageContext.request.contextPath}/admin/adminMsgWrite","a","width=600, height=430, left=400, top=100 ,status=no,toolbar=no");
+		
+ 
+
+	}
+	
 </script>
 	
 	<footer class="main-row">
@@ -22,7 +32,7 @@
 			</p>
 			<br>
 			<p style="color: #fff; font-size: 12px; text-align: right; ">&copy; 2021 FüN‿ding ,.</p>
-			<button class="footer-btn" ><i class="fas fa-bullhorn footer-btn-i"></i> 문의 하기</button>
+			<button class="footer-btn" onclick="showMsg2()"><i class="fas fa-bullhorn footer-btn-i"></i> 문의 하기</button>
 		</div>
 		<div class="footer-notice">
 			<p style="color: #fff; font-size: 12px; padding: 0 40px;">
