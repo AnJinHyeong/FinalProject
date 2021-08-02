@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.MessageDto;
+import com.kh.finalproject.vo.MsgVo;
 
 
 @Repository
@@ -51,5 +52,21 @@ public class MessageDaoImpl implements MessageDao{
 	public MessageDto getByMsgNo(int msgNo) {
 		return sqlSession.selectOne("member.getByMsgNo",msgNo);
 	}
+	
+	@Override
+	public MsgVo getByMsgNo2(int msgNo) {
+		return sqlSession.selectOne("member.getByMsgNo2",msgNo);
+	}
+
+
+
+
+	@Override
+	public boolean deleteMsg(MessageDto messageDto) {
+		int count = sqlSession.delete("member.deleteByMsg",messageDto);
+		return count > 0;
+	}
+	
+	
 
 }

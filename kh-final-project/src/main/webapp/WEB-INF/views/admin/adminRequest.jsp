@@ -94,14 +94,8 @@
 							
 						});
 						
-					});
-					
-					//div 클릭시 프로젝트 상세 정보 댓글 조회
-					$(".div-select").on("click",function(){
-						var requestNo = $(this).attr("id");
-						
 						$.ajax({
-							url :"${pageContext.request.contextPath}/request/adminRequestSelectOne",
+							url :"${pageContext.request.contextPath}/request/adminReplyList",
 							type: "post",
 							data:{
 								requestNo:requestNo
@@ -113,8 +107,8 @@
 								for(var i=0; i < resp.length; i++){
 									var template = $("#requestSeelctOneReplyContent").html();
 									
-									template = template.replace("{{memberNick}}", resp[i].requestNo);
-									template = template.replace("{{requestReplyContent}}", resp[i].requestTitle);
+									template = template.replace("{{memberNick}}", resp[i].memberNick);
+									template = template.replace("{{requestReplyContent}}", resp[i].requestReplyContent);
 									
 									$("#requestSelectOneReply").append(template);
 								}
@@ -122,7 +116,9 @@
 							
 						});
 						
+						
 					});
+					
 					
 				}
 			
@@ -172,17 +168,12 @@
 </script>
 
 <script id="requestSeelctOneReplyContent" type="text/template">
-<div class="admin-project-div2"  style="display: inline; text-align: left; width:100%; height: 500px; padding: 10px;">
-	<p class="admin-project-select-p">댓글</p>
-	<div class="admin-home-content-list-div" style="width: 700px; height: 500px; margin:0 auto;">
-		<div class="admin-home-content-list">
-			<p>{{memberNick}}</p>	
-		</div>
-		<div>
+	<div class="admin-home-content-list-div" style="width: 100%; height: 70px; margin:5px auto; ">
+		<div class="admin-home-content-list" style="display: block;">
+			<p style="width:100%; margin-bottom: 5px;">{{memberNick}}</p>	
 			<pre class="overflow_nowrap" style="height: 20px; width: 100%;">{{requestReplyContent}}</pre>
 		</div>
 	</div>
-</div>
 </script>
 
 	<section>
@@ -251,8 +242,10 @@
 				<div id="requestSelectOne">
 					
 				</div>
-				<div id="requestSelectOneReply">
-					
+				<div>
+					<p class="admin-home-content-p" style="padding: 5px; border-bottom: 1px solid rgba(0,0,0,0.2); margin-top: 5px;">댓글</p>
+					<div class="admin-project-div2"  style="display: inline; text-align: left; width:100%; height: 500px; padding: 10px;" id="requestSelectOneReply">
+					</div>
 				</div>
 			</div>
 		</div>

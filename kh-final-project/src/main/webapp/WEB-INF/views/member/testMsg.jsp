@@ -2,7 +2,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:set var="msgList" value="${msgAllByMemberNo}"></c:set>
+
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <c:set var="isMsg" value="${empty messageDto}"></c:set>
 
@@ -18,6 +18,7 @@
 			$(".project-main-li").removeClass("main-li-on");
 			$(this).addClass("main-li-on");
 		});
+		
 		$(".ab").on("click",function(){
 			$('.a').css('display','block');
 
@@ -43,75 +44,31 @@
 
 		});
 		
-		function replaceMsgSummarizeTemplate(resp) {
-			var template = $("#msgSummarizeTemplate").html();
-
-			template = template.replace("{{msgTitle}}", resp.msgTitle);
-			template = template.replace("{{msgDate}}", resp.msgDate);
-			template = template.replace("{{msgContent}}", resp.msgContent);
-			template = template.replace("{{receiverNo}}", resp.receiverNo);
-			template = template.replace("{{msgNo}}", resp.msgNo);
-			
-			
-			$("#msgSummarize").append(template);
-		}
+		$(".msgBtn").on("click",function(){
+			$('.msgD1').css('display','block');
+			$('.msgD2').css('display','none');
+			$('.msgD3').css('display','none');
+		});
 		
-		$(".msgBtn").on("click", function() {
-			$("#msgSummarize").empty();
-			var msgNo = $(this).find(".msgNo").text();
-			var that = $(this);
-			$.ajax({
-				url : "${pageContext.request.contextPath}/member/data/msgInformation",
-				type : 'post',
-				data : {
-					"msgNo" : msgNo
-				},
-				success : function(resp) {
-					replaceMsgSummarizeTemplate(resp);
-				}
-		});		
-	});
+		$(".msgBtn2").on("click",function(){
+			$('.msgD1').css('display','none');
+			$('.msgD2').css('display','block');
+			$('.msgD3').css('display','none');
+		});
 		
+		$(".msgBtn3").on("click",function(){
+			$('.msgD1').css('display','none');
+			$('.msgD2').css('display','none');
+			$('.msgD3').css('display','block');
+		});
+		
+		
+		
+		
+	
 	});
 	
 	
-
-</script>
-
-
-<script id="msgSummarizeTemplate" type="text/template">
-
-	<div class="h500">
-
-		<div class="h200">
-		
-			<pre class="wordBreak preWrap fs18 fBold h80">{{msgTitle}}</pre>
-
-			<pre class="fs12 fBold mb30 taRight"> {{msgDate}}</pre>
-		
-			<pre class="fs12 fBold mb10">{{msgNo}}</pre>
-
-			<pre class="fs12 fBold mb10">{{senderNo}}</pre>
-
-			<pre class="fs12 fBold mb10">문의 내용</pre>
-
-		</div>		
-
-		<div class="bac250 boc220 bosSolid bow1 w100p h270 p20 scrollThin">
-			
-			<pre class="fs12 fBold mb10 ml10">{{msgContent}}</pre>
-			
-				
-			</div>
-		</div>
-
-	</div>
-	  
-	<div class="h100">
-		<form id="moveToProjectDetailForm" action="${root}/member/msgWrite" method="get">
-			<button class="w100p project-btn btn3 project-btn-hover">문의 답글 보내기</button>
-		</form>
-	</div>
 
 </script>
 
@@ -138,52 +95,93 @@
 	<div class="container-1400 dpFlex pl100 pr100">
 
 		<div class="container-800 hMax600 mt30 mb30 scrollThin">
-	
-			<div id="msgList" class="a" style="display:none;">
+				<div id="msgList" class="a" style="display:none;">
+			<c:choose>
+				<c:when test="${isMsg}">
+					<div class="w100p pb10 mt20" style="text-align:center;"><i class="fas fa-envelope" style="width:20px;heigth:20px;"></i></div>
+					<div class="w100p pb10 mt10" style="text-align:center;">새로운 메시지가 없습니다.</div>
+				</c:when>
+				<c:otherwise>
 				<c:forEach var="messageDto" items="${messageDto}">
-
+ 
 					<div class="projectInsert3 w100p pb30">
 						<button class="btn btn-hover w100p h80 msgBtn"> 
-							<div>${memberDto.memberNick}</div>
+						
 							<div class="btn-text msgTitle">${messageDto.msgTitle}</div>
 							<div class="btn-text receiverNo" style="margin-left:300px;">${messageDto.receiverNo}</div>
 						</button>
 					</div>
  
 				</c:forEach> 
-			</div>
+				</c:otherwise>
+			</c:choose>
+				</div>
 			
 			<div id="msgList2" class="b" style="display:none;">
+			<c:choose>
+				<c:when test="${isMsg2}">
+				<div class="w100p pb10 mt20" style="text-align:center;"><i class="fas fa-envelope" style="width:20px;heigth:20px;"></i></div>
+					<div class="w100p pb10 mt10" style="text-align:center;">새로운 메시지가 없습니다.</div>
+				</c:when>
+				<c:otherwise>
 				<c:forEach var="messageDto2" items="${messageDto2}">
-
+				
 					<div class="projectInsert3 w100p pb30">
 						<button class="btn btn-hover w100p h80"> 
-							<div>${memberDto.memberNick}</div>
+							
 							<div class="btn-text msgTitle">${messageDto2.msgTitle}</div>
 							<div class="btn-text receiverNo" style="margin-left:300px;">${messageDto2.senderNo}</div>
 						</button>
 					</div>
  
 				</c:forEach> 
+				</c:otherwise>
+			</c:choose>
 			</div>
 			
 			<div id="msgList3" class="c" style="display:none;">
+			<c:choose>
+			<c:when test="${isMsg3}">
+			<div class="w100p pb10 mt20" style="text-align:center;"><i class="fas fa-envelope" style="width:20px;heigth:20px;"></i></div>
+					<div class="w100p pb10 mt10" style="text-align:center;">새로운 메시지가 없습니다.</div>
+			</c:when>
+			<c:otherwise>
 				<c:forEach var="messageDto3" items="${messageDto3}">
-
 					<div class="projectInsert3 w100p pb30">
 						<button class="btn btn-hover w100p h80"> 
-							<div>${memberDto.memberNick}</div>
+						
 							<div class="btn-text msgTitle">${messageDto3.msgTitle}</div>
 							<div class="btn-text receiverNo" style="margin-left:300px;">${messageDto3.receiverNo}</div>
 						</button>
 					</div>
  
 				</c:forEach> 
+				</c:otherwise>
+			</c:choose>
 			</div>
 
 		</div>
 
-		<div class="container-300 h600 mt30 mb30 boc200 bosSolid bow1 bora5 p30" id="msgSummarize"></div>
+		<div class="container-300 h600 mt30 mb30 boc200 bosSolid bow1 bora5 p30" id="msgSummarize">
+		
+			<div style="display:none;" class="msgD1">
+				1번
+			
+			
+			</div>
+			<div style="display:none;" class="msgD2">
+				2번
+			
+			
+			</div>
+			<div style="display:none;" class="msgD3">
+				3번
+			
+			
+			</div>
+		
+		
+		</div>
 
 	</div>
 
@@ -192,5 +190,3 @@
 </section>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-
-
