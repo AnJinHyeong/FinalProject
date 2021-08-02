@@ -278,6 +278,7 @@
 			url :"${pageContext.request.contextPath}/image/member/confirm",
 			type: "post",
 			success : function(resp){
+				console.log(resp);
 				if(resp == 1){
 					$.ajax({
 						url :"${pageContext.request.contextPath}/image/member/getByMemberNo",
@@ -287,14 +288,18 @@
 						success : function(resp){
 							var url = "${pageContext.request.contextPath}/image/member/memberDownload/"+resp.imageNo;
 							$("#preview").attr("src",url);
+						},
+						error :function(resp){
+							$("#preview").attr("src","${pageContext.request.contextPath}/image/memberImageNull.png");
 						}
 						
-					});				
+					});			
 				}
 				else{
 					$("#preview").attr("src","${pageContext.request.contextPath}/image/memberImageNull.png");
 				}
 			}
+			
 		
 		});
 					
@@ -430,7 +435,7 @@
 				</div>
 
 				<div class="targetDiv changePro dpNone" style="display: none; margin-top: 10px; margin-bottom: 10px;">
-					<div style="width: 250px; height: 250px;">
+					<div style="width: 250px; height: 220px;">
 						<input class="" type="file" id="memberImage">
 						<img src="" style="width: 200px; height: 200px; border-radius: 70%; border: 1px solid #DCDCDC;" id="preview">
 					</div>
