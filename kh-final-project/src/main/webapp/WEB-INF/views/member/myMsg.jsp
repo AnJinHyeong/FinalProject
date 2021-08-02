@@ -138,7 +138,18 @@
 					replaceMsgSummarizeTemplate(resp);
 
 					
+					$(".showMsg").on("click", function(){
+				  		var msgNo = $(this).parent().siblings(".target").find(".msgNo").text();
+				  		console.log(msgNo);
+				  		window.open("${root}/member/msgReWrite?msgNo=" + msgNo,"a","width=600, height=430, left=400, top=100 ,status=no,toolbar=no");
+				  	});
 					
+					$(".deleteBtn").on("click", function(){
+						var msgNo = $(this).parent().siblings(".target").find("msgNo").text();
+						
+						$(location).attr('href',"${pageContext.request.contextPath}/member/data/deleteMsg"+msgNo);
+				});
+
 					
 
 				} 
@@ -148,27 +159,14 @@
 	});
 		 
 		
-
+	
 		 
 
 }); 
 
-	$(".deleteBtn").on("click", function(){
-			var msgNo = $(this).find(".msgNo").text();
-			
-			$(location).attr('href',"${pageContext.request.contextPath}/member/data/deleteMsg"+msgNo);
-	});
 
 	
-	function showMsg() { 
 
-		 
-		
-		window.open("${root}/member/msgReWrite","a","width=600, height=430, left=400, top=100 ,status=no,toolbar=no");
-		
- 
-
-	}
 
   
 	
@@ -188,7 +186,7 @@
  
  
 	
- 	<div class="h500">
+ 	<div class="h500 target">
  
  
 
@@ -246,7 +244,7 @@
 
 		
 			
- 			<button class="w100p project-btn btn3 project-btn-hover" onclick="showMsg()"><i class="far fa-envelope"></i>문의 답글 보내기</button>
+ 			<button class="w100p project-btn btn3 project-btn-hover showMsg"><i class="far fa-envelope"></i>문의 답글 보내기</button>
  			<button class="deleteBtn w100p project-btn btn3 project-btn-hover"name="deleteBtn" id="deleteBtn">메시지 삭제</button>
 
  			

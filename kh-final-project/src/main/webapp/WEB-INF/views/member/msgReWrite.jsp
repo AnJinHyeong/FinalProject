@@ -15,29 +15,7 @@
 <title>문의하기</title>
 <script>
 
-$.ajax({
 
-	url : "${pageContext.request.contextPath}/member/data/msgInformation",
-
-	type : 'post',
-
-	data : {
-
-		"msgNo" : msgNo
-
-	},
-
-	success : function(resp) {
-
-		replaceMsgSummarizeTemplate(resp);
-
-		
-		
-		
-
-	} 
-
-});	
 
 </script>
 

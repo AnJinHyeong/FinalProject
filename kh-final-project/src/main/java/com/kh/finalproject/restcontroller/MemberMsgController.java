@@ -44,7 +44,7 @@ public class MemberMsgController {
 	}
 	
 	@PostMapping("/msgInformation")
-	public MsgVo msgInformation(HttpSession session, @RequestParam int msgNo,Model model, Locale locale)
+	public MsgVo msgInformation(HttpSession session, @RequestParam int msgNo,Model model)
 	{
 		MsgVo msgVo = messageDao.getByMsgNo2(msgNo);
 		return MsgVo.builder()
@@ -56,13 +56,9 @@ public class MemberMsgController {
 				.senderNo(msgVo.getSenderNo())
 				.build();
 	} 
-	@PostMapping("/{msgNo}/deleteMsg")
-	public String deleteMsg(HttpSession session,@PathVariable int msgNo,Model model) {
-		 
-		MessageDto messageDto = MessageDto.builder()
-				.msgNo(msgNo)
-				.build();
-		
+	@PostMapping("/deleteMsg")
+	public String deleteMsg(HttpSession session,@RequestParam int msgNo,Model model) {
+		MessageDto messageDto = messageDao.getByMsgNo(msgNo);
 		boolean deleteM = messageDao.deleteMsg(messageDto);
 		if(deleteM){
 			model.addAttribute("msg","메시지 삭제가 완료되었습니다.");

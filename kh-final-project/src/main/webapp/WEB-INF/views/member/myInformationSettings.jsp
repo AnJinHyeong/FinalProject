@@ -490,7 +490,7 @@
 					<form action="upPw2" method="post" class="float-container">
 
 						<div class="left w700">
-							<input class="left h30 w700 p10 project-border-normal mb30" type="password" name="memberPw" placeholder="현재 비밀번호" autocomplete="off" required>
+							<input class="left h30 w700 p10 project-border-normal mb30" type="password" name="nowPw" placeholder="현재 비밀번호" autocomplete="off" required>
 
 							<input class="left h30 w700 p10 project-border-normal mb10" type="password" name="newPw" placeholder="변경할 비밀번호" autocomplete="off" required>
 							<input class="left h30 w700 p10 project-border-normal" type="password" name="newPwCheck" placeholder="변경할 비밀번호 확인" autocomplete="off" required>

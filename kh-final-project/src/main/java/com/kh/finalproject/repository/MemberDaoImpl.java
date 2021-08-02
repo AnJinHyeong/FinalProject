@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.PayDto;
 import com.kh.finalproject.entity.SponsorDto;
+import com.kh.finalproject.vo.MemberVo;
+
 
 @Repository
 public class MemberDaoImpl implements MemberDao{
@@ -59,9 +61,9 @@ public class MemberDaoImpl implements MemberDao{
 
 
 	@Override
-	public void changePassword(MemberDto memberDto) {
-		sqlSession.update("member.upPw2", memberDto);
-	
+	public boolean changePassword(MemberVo memberVo) {
+		int count = sqlSession.update("member.upPw2", memberVo);
+		return count > 0;
 	}
 
 
