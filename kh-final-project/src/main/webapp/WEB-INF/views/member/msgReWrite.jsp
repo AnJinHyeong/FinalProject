@@ -103,7 +103,7 @@ $.ajax({
 		<div><h1>문의 답장</h1></div>
 
 		<form action="msgInsert" method="post">
-
+			<input type="hidden" name="msgNo" value="${msgNo}">
 			<div>
 				
 				<input type="hidden"  name="receiverNo" style="width:70%; margin-bottom:10px; margin-left:30px;" value="${msgVo.senderNo}" name="receiverNo">

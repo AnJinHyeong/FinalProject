@@ -124,7 +124,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<update id="upPw2" parameterType="MemberDto">
-		update member set member_pw = #{memberPw} where member_no=#{memberNo}
+		update member set member_pw = #{memberPw} where member_no = #{memberNo}
 	</update>
 	
 	<update id="upIntro" parameterType="MemberDto">

@@ -174,8 +174,8 @@ public class MemberController {
 		return "member/myPage";
 	}
 	@GetMapping("/msgReWrite")
-	public String msgReWrite(@ModelAttribute MessageDto messageDto, Model model) {
-		
+	public String msgReWrite(@ModelAttribute MessageDto messageDto, Model model, @RequestParam int msgNo) {
+		model.addAttribute("msgNo", msgNo);
 		return "member/msgReWrite";
 	}
 	
