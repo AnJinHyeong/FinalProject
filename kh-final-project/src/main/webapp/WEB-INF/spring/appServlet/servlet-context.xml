@@ -52,25 +52,26 @@
 		- MemberLoginInterceptor : 비회원 접근 차단 
 	-->
 	
-	<interceptors>
-		<interceptor>
-			<mapping path="/project/**"/>
-			<mapping path="/member/**"/>
-			<mapping path="/sponsor/**"/>
-			<exclude-mapping path="/project/projectHeader"/>
-			<exclude-mapping path="/project/data/**"/>
-			<exclude-mapping path="/project/projectList"/>
-			<exclude-mapping path="/project/projectSearch"/>
-			<exclude-mapping path="/project/projectSearchAll"/>
-			<exclude-mapping path="/project/projectCategorySearchAll/**"/>
-			<exclude-mapping path="/member/login"/>
-			<exclude-mapping path="/member/join"/>
-			<exclude-mapping path="/member/myId"/>
-			<exclude-mapping path="/member/myPw"/>
-			<exclude-mapping path="/member/getPw"/>
-			<beans:bean class="com.kh.finalproject.interceptor.MemberLoginInterceptor"></beans:bean>
-		</interceptor>
-	</interceptors>
+<!-- 	<interceptors> -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/project/**"/> -->
+<!-- 			<mapping path="/member/**"/> -->
+<!-- 			<mapping path="/sponsor/**"/> -->
+<!-- 			<exclude-mapping path="/project/projectHeader"/> -->
+<!-- 			<exclude-mapping path="/project/data/**"/> -->
+<!-- 			<exclude-mapping path="/project/projectList"/> -->
+<!-- 			<exclude-mapping path="/project/projectSearch"/> -->
+<!-- 			<exclude-mapping path="/project/projectSearchAll"/> -->
+<!-- 			<exclude-mapping path="/project/projectCategorySearchAll/**"/> -->
+<!-- 			<exclude-mapping path="/member/login"/> -->
+<!-- 			<exclude-mapping path="/member/join"/> -->
+<!-- 			<exclude-mapping path="/member/myId"/> -->
+<!-- 			<exclude-mapping path="/member/myPw"/> -->
+<!-- 			<exclude-mapping path="/member/getPw"/> -->
+<!-- 			<exclude-mapping path="/member/memberInsert"/> -->
+<!-- 			<beans:bean class="com.kh.finalproject.interceptor.MemberLoginInterceptor"></beans:bean> -->
+<!-- 		</interceptor> -->
+<!-- 	</interceptors> -->
 	
 	<interceptors>
 		<interceptor>
