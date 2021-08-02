@@ -269,6 +269,142 @@
     }
 </script>
 
+<script>
+
+	$(function() {
+		
+	
+		$.ajax({
+			url :"${pageContext.request.contextPath}/image/member/confirm",
+			type: "post",
+			success : function(resp){
+				if(resp == 1){
+					$.ajax({
+						url :"${pageContext.request.contextPath}/image/member/getByMemberNo",
+						type: "get",
+						processData : false,
+						contentType : false,
+						success : function(resp){
+							var url = "${pageContext.request.contextPath}/image/member/memberDownload/"+resp.imageNo;
+							$("#preview").attr("src",url);
+						}
+						
+					});				
+				}
+				else{
+					$("#preview").attr("src","${pageContext.request.contextPath}/image/memberImageNull.png");
+				}
+			}
+		
+		});
+					
+		
+		
+		//프로젝트 사진 등록 후 보여주기
+		$("#memberImage").on("input",function(){
+			var files = this.files;
+			var filesLength = this.files.length > 0;
+			var files0 = this.files[0];
+			$.ajax({
+				url :"${pageContext.request.contextPath}/image/member/confirm",
+				type: "post",
+				success : function(resp){
+					console.log(resp);
+					if(resp == 1){//등록된 이미지가 있을경우 지우고 다시 등록
+						var fileOn = 1;
+						//이미지 삭제
+						$.ajax({
+							url :"${pageContext.request.contextPath}/image/member/delete",
+							type: "post",
+							success : function(resp){
+								console.log(resp);
+							}
+						});
+		
+						if(files && filesLength){//파일 저장소 존재 및 0번 위치에 파일 존재
+							console.log("파일이 선택되었습니다");
+						
+		//	 				jquery ajax에서 파일 업로드를 하려면 formData 객체가 필요
+							var fd = new FormData();
+							console.log(fd);
+		//	 				fd.append(이름,데이터또는 파일);
+							fd.append("f",files0);
+							
+							var that = this;//$("input[name=f]")
+							
+		//	 				(주의) 반드시 ajax file upload에서는 다음 두 가지 설정을 해야 한다.
+		//	 				1. processData : false 설정
+		//	 				2. contentType : false 설정
+		//	 				3. type : "post" 설정
+							$.ajax({
+								url :"${pageContext.request.contextPath}/image/member/upload",
+								type: "post",
+								processData : false,
+								contentType : false,
+								data: fd,
+								success : function(resp){
+									$("#preview").empty();
+									var url = "${pageContext.request.contextPath}/image/member/memberDownload/"+resp.imageNo;
+									$("#preview").attr("src",url);
+								},
+								error :function(resp){
+									window.alert("업로드 실패!");
+								}
+							
+							});
+							
+						}
+					
+					}
+					else{//등록된 이미지가 없을 경우 등록
+						console.log(files);
+						console.log(filesLength);
+						if(files && filesLength){//파일 저장소 존재 및 0번 위치에 파일 존재
+							console.log("파일이 선택되었습니다");
+						
+		//	 				jquery ajax에서 파일 업로드를 하려면 formData 객체가 필요
+							var fd = new FormData();
+							console.log(fd);
+		//	 				fd.append(이름,데이터또는 파일);
+							fd.append("f",files0);
+							
+							var that = this;//$("input[name=f]")
+							
+		//	 				(주의) 반드시 ajax file upload에서는 다음 두 가지 설정을 해야 한다.
+		//	 				1. processData : false 설정
+		//	 				2. contentType : false 설정
+		//	 				3. type : "post" 설정
+							$.ajax({
+								url :"${pageContext.request.contextPath}/image/member/upload",
+								type: "post",
+								processData : false,
+								contentType : false,
+								data: fd,
+								success : function(resp){
+									console.log(resp);
+									var url = "${pageContext.request.contextPath}/image/member/memberDownload/"+resp.imageNo;
+									$("#preview").attr("src",url);
+								},
+								error :function(resp){
+									window.alert("업로드 실패!");
+								}
+							
+							});
+							
+						}
+					}
+						
+				}
+			
+			});
+			
+		});
+		
+		
+	});
+	
+	
+</script>
 
 <section class="main-row topLine">
 
@@ -280,7 +416,7 @@
 
 	<div class="mt30 bottomLine poRelative"></div>
 
-	<div class="container-1200 dpFlex hMin700">
+	<div class="container-1200 dpFlex " style="min-height: 708px;">
 
 		<div class="container-800 mt30 mb30 scrollThin">
 
@@ -294,7 +430,10 @@
 				</div>
 
 				<div class="targetDiv changePro dpNone" style="display: none; margin-top: 10px; margin-bottom: 10px;">
-					<div>프로필사진업로드</div>
+					<div style="width: 250px; height: 250px;">
+						<input class="" type="file" id="memberImage">
+						<img src="" style="width: 200px; height: 200px; border-radius: 70%; border: 1px solid #DCDCDC;" id="preview">
+					</div>
 					<button type="button" class="imgBtn">저장</button>
 				</div>
 			</div>
