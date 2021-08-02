@@ -156,8 +156,9 @@ public class AdminController {
 		return "admin/adminRequest";
 	}
 	
-	
-	
-	
+	@GetMapping("/reportList")
+	public String reportList() {
+		return "admin/reportList";
+	}
 
 }

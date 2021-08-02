@@ -10,6 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into project_report values(project_report_seq.nextval, #{reportProjectNo}, #{reportMemberNo}, #{reportContent}, sysdate)
 	</insert>
 	
+	<select id="getProjectReportList" resultType="ProjectReportDto">
+		select * from project_report
+	</select>
+	
 </mapper>
 
 
