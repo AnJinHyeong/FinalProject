@@ -1,6 +1,9 @@
 package com.kh.finalproject.controller;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.mail.MessagingException;
 
@@ -16,9 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.finalproject.entity.EmailAuthDto;
+
+
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.MessageDto;
 import com.kh.finalproject.entity.ProjectDto;
@@ -27,6 +30,7 @@ import com.kh.finalproject.repository.MessageDao;
 import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.repository.ProjectLikeDao;
 import com.kh.finalproject.service.EmailService;
+import com.kh.finalproject.vo.MsgVo;
 import com.kh.finalproject.vo.ProjectLikeVo;
 
 
@@ -42,34 +46,9 @@ public class MemberController {
 	
 	@Autowired
 	private MessageDao messageDao;
-	@GetMapping("/testMsg")
-	public String testMsg(HttpSession session,Model model) {
-		int memberNo = (int)session.getAttribute("memberNo");
+
 	
-		
-	
-		
-		MemberDto mdb=memberDao.getByMemberNo(memberNo);
-		model.addAttribute("memberDto",mdb);
-		
-		List<MessageDto> find = messageDao.msgAllByMemberNo(memberNo);
 
-		model.addAttribute("messageDto", find);
-
-		
-
-		List<MessageDto> find2 = messageDao.msgReceiverByMemberNo(memberNo);
-
-		model.addAttribute("messageDto2", find2);
-
-		
-
-		List<MessageDto> find3 = messageDao.msgSendByMemberNo(memberNo);
-
-		model.addAttribute("messageDto3", find3);
-		
-		return "member/testMsg";
-	}
 	@RequestMapping("/redirectMember")
 	public String redirectMember() {
 		return "member/redirectMember";
@@ -82,6 +61,10 @@ public class MemberController {
 		
 		model.addAttribute("memberDto",find);
 		return "member/mySettings";
+	}
+	@GetMapping("/closeMember")
+	public String closeMember() {
+		return "member/closeMember";
 	}
 	@GetMapping("/myAccount")
 	public String myAccount(HttpSession session,Model model) {
@@ -173,12 +156,14 @@ public class MemberController {
 	}
 	@GetMapping("/myAddress")
 	public String myAddress(HttpSession session,Model model) {
-		int memberNo = (int) session.getAttribute("memberNo");
+		int memberNo = (int) session.getAttribute("memberNo"); 
 		MemberDto find = memberDao.getByMemberNo(memberNo);
 		
 		model.addAttribute("memberDto",find);
 		return "member/myAddress";
 	}
+	
+
 	
 	@RequestMapping("/join")
 	public String join() {
@@ -188,11 +173,16 @@ public class MemberController {
 	public String myPage() {
 		return "member/myPage";
 	}
-
+	@GetMapping("/msgReWrite")
+	public String msgReWrite(@ModelAttribute MessageDto messageDto, Model model, @RequestParam int msgNo) {
+		model.addAttribute("msgNo", msgNo);
+		return "member/msgReWrite";
+	}
 	
 	@RequestMapping(value="/myMsg" , method = {RequestMethod.GET, RequestMethod.POST})
-	public String myMsg(HttpSession session,Model model) {
+	public String myMsg(Locale locale,HttpSession session,Model model) {
 		int memberNo = (int)session.getAttribute("memberNo");
+		
 		List<MessageDto> find = messageDao.msgAllByMemberNo(memberNo);
 
 		model.addAttribute("messageDto", find);
@@ -208,6 +198,7 @@ public class MemberController {
 		List<MessageDto> find3 = messageDao.msgSendByMemberNo(memberNo);
 
 		model.addAttribute("messageDto3", find3);
+		
 
 		return "member/myMsg";
 	} 
@@ -226,6 +217,20 @@ public class MemberController {
 		model.addAttribute("projectDto", projectDto);
 		return "member/msgWrite";
 	}
+	
+	@PostMapping("/msgInsert")
+	public String msgInsert(Model model) {
+	    
+		try {
+			model.addAttribute("msg","쪽지가 발송되었습니다.");
+			model.addAttribute("url","/member/closeMember");
+			
+		}catch(Exception e) {
+			model.addAttribute("msg","쪽지가 발송이 실패했습니다.");
+			model.addAttribute("url","/member/closeMember");
+		}
+		return "member/redirectMember";
+	}
 
 	@PostMapping("/{projectNo}/msgInsert")
 	public String msgInsert(@PathVariable int projectNo,@ModelAttribute MessageDto messageDto,Model model,HttpSession session) throws Exception{
@@ -235,11 +240,11 @@ public class MemberController {
 		messageDao.msgWrite2(messageDto);
 		try {
 			model.addAttribute("msg","쪽지가 발송되었습니다.");
-			model.addAttribute("url","/");
+			model.addAttribute("url","/member/closeMember");
 			
 		}catch(Exception e) {
 			model.addAttribute("msg","쪽지가 발송이 실패했습니다.");
-			model.addAttribute("url","/");
+			model.addAttribute("url","/member/closeMember");
 		}
 		return "member/redirectMember";
 	}

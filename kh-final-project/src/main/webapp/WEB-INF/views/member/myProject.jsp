@@ -61,10 +61,11 @@
 		<c:choose>
 
 			<c:when test="${isProject}">
-
+				<div style="min-height:600px;">
 				<div class="w100p pb30">현재 진행중인 프로젝트가 없습니다.</div>
 
 				<div class="w100p pb30"><a href="${pageContext.request.contextPath}/project/projectInsert">프로젝트 작성하러 가기</a></div>
+				</div>
 
 			</c:when>
 

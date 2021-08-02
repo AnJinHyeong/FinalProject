@@ -46,18 +46,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 <!-- 	발송메시지함 -->
 	<select id="msgSendByMemberNo" parameterType="int" resultType="MessageDto">
-		select * from message where sender_no = #{memberNo}
+		select * from message where sender_no = #{memberNo} ORDER BY msg_no DESC
 	</select>
 <!-- 	받은메시지함 -->
 	<select id="msgReceiverByMemberNo" parameterType="int" resultType="MessageDto">
-		select * from message where receiver_no = #{memberNo}
+		select * from message where receiver_no = #{memberNo} ORDER BY msg_no DESC
 	</select>
 <!-- 	전체 메시지함 -->
 	<select id="msgAllByMemberNo" parameterType="int" resultType="MessageDto">
-		select * from message where sender_no = #{memberNo}
-		union
-		select * from message where receiver_no = #{memberNo}
+		select * from message where sender_no = #{memberNo} or receiver_no = #{memberNo} order by msg_no DESC
 	</select>
+<!-- 	메시지 삭제 -->
+ 	<delete id="deleteByMsg" parameterType="string">
+ 		delete message where msg_no = #{msgNo};
+ 	</delete>
+
 <!-- 	로그인 구문 -->
 	<!-- 로그인 -->
 	<select id="login" parameterType="MemberDto" resultType="MemberDto">
@@ -68,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 	비밀번호 초기화 구문 -->
 	<update id="pwUp" parameterType="MemberDto">
 		update member set member_pw = #{memberPw} where member_email = #{memberEmail}
-	</update>
+	</update> 
 	
 <!-- 이메일 인증키 저장 구문 -->
 	<insert id="insert2" parameterType="EmailAuthDto">
@@ -121,7 +124,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<update id="upPw2" parameterType="MemberDto">
-		update member set member_pw = #{memberPw} where member_no=#{memberNo}
+		update member set member_pw = #{memberPw} where member_no = #{memberNo}
 	</update>
 	
 	<update id="upIntro" parameterType="MemberDto">
@@ -138,6 +141,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getByMsgNo" parameterType="MessageDto" resultType="MessageDto">
 		select * from project where msg_no = #{msgNo}
+	</select> 
+	
+	<select id="getByMsgNo2" parameterType="int" resultType="MsgVo">
+		select * from message where msg_no = #{msgNo}
 	</select> 
 	
 
