@@ -23,7 +23,8 @@ public class ImageDaoImpl implements ImageDao{
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //	private final File baseDir = new File("/Users/anjinhyeong/sts-workspace/upload/project_image");//저장 경로 //안진형
-	private final File baseDir = new File("D:/upload/finalproject");//저장 경로
+//	private final File baseDir = new File("D:/upload/finalproject");//저장 경로
+	private final File baseDir = new File("D:/upload/kh7d");
 	
 	@Override
 	public ImageDto insertProjectMain(ImageDto imageDto) {
