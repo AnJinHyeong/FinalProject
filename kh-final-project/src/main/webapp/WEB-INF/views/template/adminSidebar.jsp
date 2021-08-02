@@ -52,11 +52,18 @@
 					<li><a href="${root}/admin/adminRequest">게시글 조회/관리</a></li>
 				</ul>
 			</li>
-			<li class="admin-aside-top_menu" style="margin-top: 100px;"><span class=""></span>
+			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">스케쥴러 기능</span>
+				<ul class="admin-aside-side_menus">
+					<li><a href="${root}/deleteLocalFileNotInDB">로컬 파일 정리</a></li>
+					<li><a href="${root}/givePointByFinishedProject">종료 프로젝트 정산</a></li>
+				</ul>
+			</li>
+			<li class="admin-aside-top_menu" style="margin-top: 50px;"><span class=""></span>
 				<ul class="admin-aside-side_menus">
 					<li><a href="${root}/" style="color: #fff;">메인 페이지</a></li>
 				</ul>
 			</li>
+	
 		</ul>
 	</aside>
 	
