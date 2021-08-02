@@ -4,22 +4,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
- 
+ <jsp:include page="/WEB-INF/views/template/adminSidebar.jsp"></jsp:include>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <c:set var="isLogin" value="${not empty memberNo}"></c:set>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
-
 <c:set var="isMsg" value="${empty messageDto}"></c:set>
-
- 
-
 <c:set var="isMsg2" value="${empty messageDto2}"></c:set>
-
- 
-
 <c:set var="isMsg3" value="${empty messageDto3}"></c:set>
 
-  
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +36,8 @@
 <script>
 
 	$(function(){
-
+		
+		 $(".w1200 h35").css("margin", "0");
 		
 
 		$(".project-main-li").on("click", function() {
@@ -56,50 +49,21 @@
 		});
 
 		$(".ab").on("click",function(){
-
 			$('.a').css('display','block');
-
- 
-
            	$('.b').css('display','none');
-
- 
-
            	$('.c').css('display','none');
-
- 
-
 		});
 
 		$(".bc").on("click",function(){
-
 			$('.a').css('display','none');
-
- 
-
            	$('.b').css('display','block');
-
- 
-
            	$('.c').css('display','none');
-
- 
-
 		});
 
 		$(".cd").on("click",function(){
-
 			$('.a').css('display','none');
-
- 
-
            	$('.b').css('display','none');
-
- 
-
            	$('.c').css('display','block');
-
- 
 
 		});
 		
@@ -130,31 +94,17 @@
 		 
 
 		$(".msgBtn").on("click", function() {
-
 			$("#msgSummarize").empty();
-
 			var msgNo = $(this).find(".msgNo").text();
 			
-
 			$.ajax({
-
 				url : "${pageContext.request.contextPath}/member/data/msgInformation",
-
 				type : 'post',
-
 				data : {
-
 					"msgNo" : msgNo
-
 				},
-
 				success : function(resp) {
-
 					replaceMsgSummarizeTemplate(resp);
-
-					
-					
-					
 
 				} 
 
@@ -238,36 +188,47 @@
  
 
  </script>  
+ <style>
+ 
+
+ .admin-home_content100{
+	width:98%;
+	border: none;
+	    border-bottom: 1px solid rgba(0,0,0,0.2);
+	background-color: white;
+	padding: 15px 5px;
+	height: 70px;
+}
+ 
+ .admin-home-top-p {
+    font-size: 24px;
+    color: #5b5b5b;
+}
+ 
+ .w1200 {
+ width:0px;
+    padding-left: 20px;
+
+}
+ 
+ 
+element.style {
+    margin: 1px;
+}
+
+ </style>
+ 
+ 
 <body>
-	<aside>
-		<div class="admin-logo"><a href="#">FüN‿ding</a></div>
-		<ul>
-			<li class="admin-aside-top_menu"><span class="">회원</span>
-				<ul class="admin-aside-side_menus">
-					<li><a href="#">회원</a></li>
-					<li><a href="#">회원</a></li>
-				</ul>
-			</li>
-			<li class="admin-aside-top_menu"><span class=""></span>
-				<ul class="admin-aside-side_menus">
-					<li><a href="#">메인 페이지</a></li>
-				</ul>
-			</li>
-		</ul>
-	</aside>
 
 	<section class="main-row topLine" >
 
  
 
-	<div class="container-1200 mt30 poRelative">
-
-		<p class="fs34 pl20">
-
-			<strong><i class="far fa-envelope"></i>메시지</strong>
-
-		</p>
-
+	<div class="admin-home_content_area">
+		<div class="admin-home_content100">
+			<p class="admin-home-top-p">메세지	 조회</p>
+		</div>
 	</div>
 
  
@@ -301,50 +262,45 @@
 			<c:choose>
 
 				<c:when test="${isMsg}">
-
 					<div class="w100p pb10 mt20" style="text-align:center;"><i class="fas fa-envelope" style="width:20px;heigth:20px;"></i></div>
-
 					<div class="w100p pb10 mt10" style="text-align:center;">새로운 메시지가 없습니다.</div>
-
 				</c:when>
-
 				<c:otherwise>
-
 				<c:forEach var="messageDto" items="${messageDto}">
+				
+			<div class="admin-project-div2" style="display: inline;">
+				<div class="admin-home-content-list"
+					style="text-align: center; width: 99%;">
+					<span style="width: 33%;">메세지 제목</span> 
+					<span style="width: 33%;">보내는 사람</span>
+					<span style="width: 33%;">내용</span> 
+				</div>
+				</div>
+				
+								<div class="admin-home-content-list-div" style="height: 300px;"
+					id="projectSearchDiv">
+										<div class="projectInsert3 w80p pb30">
+																<button class="btn btn-hover w100p h80 msgBtn"> 		 
 
- 
+						<div class="admin-home-content-list div-select" style="text-align: center;" id="{{projectNo}}">
+							<span style="width: 10%;">${messageDto.msgTitle}</span>
+							 <span style="width: 10%;">${messageDto.receiverNo}</span>
+							  <span style="width: 10%;">${fn:substring(messageDto.msgContent,0,5)}</span> 	
 
-					<div class="projectInsert3 w80p pb30">
-
-						<button class="btn btn-hover w100p h80 msgBtn"> 
-
-						 
-							<table>
-							<tr>
-							<td width="90px"  style="margin-top:60px; text-align:center;" class="msgTitle">${messageDto.msgTitle}</td>
-
-							<td width="90px"  style="margin-top:40px; margin-left:50px;" class="receiverNo">${messageDto.receiverNo}</td>
-
-							<td width="90px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto.msgContent,0,5)}</td>
-							</tr>
-							</table>
-							<div class="dpNone msgNo" >${messageDto.msgNo}</div>
-						</button>
-						
+							  							</div>
+							  								<div class="dpNone msgNo" >${messageDto.msgNo}</div>
+						</button>				
+						</div>
+						</div>
+						</c:forEach>
+	
+				
 
 
-						 
 
-					</div>  
-
- 
-
-				</c:forEach> 
-
+			
 				</c:otherwise>
-
 			</c:choose>
-
 				</div>
 
 			
@@ -426,11 +382,8 @@
 							<table>
 							<tr>
 							<td width="90px"  style="margin-top:40px;" class="msgTitle">${messageDto3.msgTitle}</td>
-
 							<td width="90px"  style="margin-top:40px; margin-left:50px;" class="receiverNo">${messageDto3.receiverNo}</td>
-
 							<td width="90px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto3.msgContent,0,5)}</td>
-
 							</tr>
 							</table>
 							<div class="dpNone msgNo" >${messageDto3.msgNo}</div>
