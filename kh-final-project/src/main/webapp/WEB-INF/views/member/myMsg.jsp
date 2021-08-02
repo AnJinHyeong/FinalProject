@@ -143,7 +143,7 @@
 				  		console.log(msgNo);
 				  		window.open("${root}/member/msgReWrite?msgNo=" + msgNo,"a","width=600, height=430, left=400, top=100 ,status=no,toolbar=no");
 				  	});
-					
+					 
 					$(".deleteBtn").on("click", function(){
 						var msgNo = $(this).parent().siblings(".target").find(".msgNo").text();
 						console.log(msgNo);
