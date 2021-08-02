@@ -138,7 +138,7 @@
 		</div>
 	</div>
 
-	<div class="container-1400 dpFlex pl100 pr100">
+	<div class="container-1400 dpFlex pl100 pr100" style="min-height: 673px;">
 
 		<div class="container-800 hMax600 mt30 mb30 scrollThin">
 				<div id="msgList" class="a" style="display:none;">
