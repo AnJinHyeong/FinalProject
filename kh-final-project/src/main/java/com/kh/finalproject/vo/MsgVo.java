@@ -16,5 +16,9 @@ public class MsgVo {
 	private String msgContent;
 	private Date msgDate;
 	private int receiverNo;
-
+	
+	private String senderNick;
+	private String receiverNick;
+	
+	private String keyword;
 }
