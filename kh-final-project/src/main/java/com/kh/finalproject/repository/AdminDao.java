@@ -10,5 +10,5 @@ public interface AdminDao {
 	List<AdminMemberVO> paySearchAll(String searchOption, String keyWord);
 	int memberCount(String searchOption, String keyWord);
 	int payCount(String searchOption, String keyWord);
-	List<ProjectReportDto> projectReportList(int ProjectNo);
+	
 }

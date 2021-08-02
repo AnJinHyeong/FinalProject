@@ -49,9 +49,5 @@ SqlSession sqlSession;
 		return sqlSession.selectOne("admin.payCount", map);
 	}
 
-	@Override
-	public List<ProjectReportDto> projectReportList(int projectNo) {
-		return sqlSession.selectList("admin,projectReportList", projectNo);
-	}
 
 }

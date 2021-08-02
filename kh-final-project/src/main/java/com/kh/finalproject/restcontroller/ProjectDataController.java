@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.finalproject.entity.GiftDto;
 import com.kh.finalproject.entity.ItemDto;
 import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.entity.ProjectReportDto;
 import com.kh.finalproject.entity.SponsorDto;
 import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.repository.GiftDao;
 import com.kh.finalproject.repository.ItemDao;
 import com.kh.finalproject.repository.ProjectDao;
+import com.kh.finalproject.repository.ProjectReportDao;
 import com.kh.finalproject.repository.SponsorDao;
 import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectAdminSearchKeywordVo;
@@ -263,6 +265,14 @@ public class ProjectDataController {
 	@GetMapping("/adminProjectStateX")
 	public void adminProjectStateX(@RequestParam int projectNo) {
 		projectDao.adminProjectStateX(projectNo);
+	}
+	
+	@Autowired
+	private ProjectReportDao projectReportDao;
+	
+	@PostMapping("/adminProjectReportList2")
+	public List<ProjectReportDto> adminProjectReportList2(@RequestParam int projectNo){
+		return projectReportDao.projectReportList2(projectNo);
 	}
 	
 }
