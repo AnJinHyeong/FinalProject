@@ -462,8 +462,8 @@ else if(mainBannerImageCount == 1){
 			</div>
 		</div>
 		
-		<div class="section-projectRequest-row-div" style="height: 400px;">
-			<a href="${pageContext.request.contextPath}/requestBoard/requestBoard"><p class="section-project-minaP" >프로젝트 소통 게시판 <i class="fc150 ml10 fas fa-angle-right"></i></p></a>
+		<div class="section-project-row-div" style="height: 400px;">
+			<a href="${pageContext.request.contextPath}/requestBoard/requestBoard"><span class="section-project-minaP" >프로젝트 소통 게시판 <i class="fc150 ml10 fas fa-angle-right"></i></span></a>
 			
 			<div style="display: flex; justify-content: center; 1200px; height: 300px;">
 				<div style="width: 45%; height: 300px; border: 1px solid #dcdcdc; border-radius: 8px; margin: 10px 0; padding: 20px; margin-right: 20px;" id="requestLikeList">

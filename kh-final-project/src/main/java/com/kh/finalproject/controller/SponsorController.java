@@ -11,10 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kh.finalproject.entity.ProjectDto;
-import com.kh.finalproject.entity.SponsorDto;
-import com.kh.finalproject.repository.MemberDao;
-import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.repository.SponsorDao;
 import com.kh.finalproject.service.PointService;
 
@@ -24,12 +20,6 @@ public class SponsorController {
 
 	@Autowired
 	private SponsorDao sponsorDao;
-	
-	@Autowired
-	private MemberDao memberDao;
-	
-	@Autowired
-	private ProjectDao projectDao;
 	
 	@GetMapping("/sponsorList")
 	public String sponsorList(HttpSession session, Model model) {
