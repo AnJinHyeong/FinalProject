@@ -25,4 +25,7 @@ public interface MessageDao {
 	// 닉네임 조회 메시지 가져오기
 	List<MsgVo> msgAll(String keyword);
 	
+	
+	//admin 메세지 상세보기
+	MsgVo adminMsgSelectOne(int msgNo);
 }

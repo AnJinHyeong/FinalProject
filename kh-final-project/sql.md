@@ -13,6 +13,8 @@ member_address VARCHAR2(200)
 
 CREATE SEQUENCE member_seq;
 
+
+##프로젝트
 #project table
 CREATE TABLE project(
 project_no NUMBER(19) PRIMARY KEY,
@@ -32,12 +34,17 @@ category_no REFERENCES category(category_no) ON DELETE SET NULL,
 member_info_nick varchar2(30),
 member_info_content varchar2(1000),
 project_amount_give char(1) check(project_amount_give in ('Y')),
+<<<<<<< HEAD
+project_like_count number(19) DEFAULT 0
+=======
 project_like_count number(19) DEFAULT 0 not null
+>>>>>>> refs/remotes/origin/main
 );
 
 CREATE SEQUENCE project_seq;
 
 
+##카테고리
 #category table
 create table category(
 category_no number(19) primary key,
@@ -132,16 +139,25 @@ sponsor_cancel char(1) check (sponsor_cancel ='Y')
 create sequence sponsor_seq;
 
 
+<<<<<<< HEAD
+##프로젝트 좋아요
+=======
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+>>>>>>> refs/remotes/origin/main
 #project_like
 CREATE TABLE project_like(
+<<<<<<< HEAD
+like_project_no REFERENCES project(project_no) ON DELETE CASCADE,
+like_member_no references member(member_no) ON DELETE CASCADE,
+=======
 like_project_no REFERENCES project(project_no) ON DELETE cascade,
 like_member_no references member(member_no) on delete cascade,
+>>>>>>> refs/remotes/origin/main
 like_date DATE DEFAULT sysdate,
 constraint project_like_pk primary key(like_project_no, like_member_no) 
 );
 
-
+##프로젝트 커뮤니티 
 #project_community
 CREATE TABLE project_community(
 project_community_no number(19) PRIMARY KEY,
@@ -154,6 +170,7 @@ project_no references project(project_no) ON DELETE CASCADE
 CREATE SEQUENCE project_community_seq;
 
 
+##프로젝트 신고하기
 #project_report
 CREATE TABLE project_report(
 report_no NUMBER(19) PRIMARY KEY,
@@ -177,7 +194,7 @@ banner_color char(7) default '#000000' not null
 
 create sequence banner_seq;
 
-
+##요청게시판(자유게시판)
 #request
 CREATE TABLE request(
 request_no number(19) PRIMARY KEY,
@@ -193,6 +210,7 @@ request_member_no REFERENCES member(member_no) ON DELETE SET NULL
 
 CREATE SEQUENCE request_seq;
 
+##요청게시판 좋아요
 #request_like
 CREATE TABLE request_like(
 request_like_no references request(request_no) ON DELETE CASCADE,
@@ -201,6 +219,7 @@ request_like_date DATE DEFAULT sysdate,
 constraint request_like_pk primary key(request_like_no, request_like_member_no) 
 );
 
+##요청게시판 댓글
 #request_reply
 CREATE TABLE request_reply(
 request_reply_pk_no number(19) PRIMARY KEY,

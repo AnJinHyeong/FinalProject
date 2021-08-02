@@ -103,7 +103,8 @@
 			template = template.replace("{{msgContent}}", resp.msgContent);
 
 			template = template.replace("{{senderNo}}", resp.senderNo);
-
+			template = template.replace("{{memberId}}",resp.memberId);
+			template = template.replace("{{memberId2}}",resp.memberId2);
 			
 
 			
@@ -206,9 +207,8 @@
 
  
 
-		<pre class="fs12 fBold mb10">보내는 사람 : {{receiverNo}}</pre> 
-
-			<pre class="fs12 fBold mb10">받는 사람 : {{senderNo}}</pre> 
+			<pre class="fs12 fBold mb10">보내는 사람 : {{memberId}}</pre> 
+			<pre class="fs12 fBold mb10">받는 사람 : {{memberId2}}</pre> 
 
  
 
