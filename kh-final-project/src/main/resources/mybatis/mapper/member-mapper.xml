@@ -123,6 +123,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update member set member_email = #{memberEmail} where member_no =#{memberNo}
 	</update>
 	
+
 	<update id="upPw2" parameterType="MemberVo">
 		update member set member_pw = #{newPw} where member_pw =#{nowPw}
 	</update>
