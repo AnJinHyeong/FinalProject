@@ -39,7 +39,7 @@
 			</li>
 			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">문의함</span>
 				<ul class="admin-aside-side_menus">
-					<li><a href="#">관리자 문의</a></li>
+					<li><a href="${root}/admin/adminMsg">관리자 문의</a></li>
 				</ul>
 			</li>
 			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">배너</span>

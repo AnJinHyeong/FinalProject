@@ -278,7 +278,7 @@
 
 		<p class="fs34 pl20">
 
-			<strong><i class="far fa-envelope"></i>메시지</strong>
+			<strong>메시지</strong>
 
 		</p>
 
@@ -292,11 +292,11 @@
 
 			<ul class="project-main-ul">
 
-				<li class="project-main-li main-li-on ab"><a class="main-li-a cursorPointer"><i class="far fa-envelope"></i>&nbsp;전체 메시지함</a></li>
+				<li class="project-main-li main-li-on ab"><a class="main-li-a cursorPointer">전체 메시지함</a></li>
 
-				<li class="project-main-li bc"><a class="main-li-a cursorPointer"><i class="far fa-envelope"></i>&nbsp;수신 메시지함</a></li>
+				<li class="project-main-li bc"><a class="main-li-a cursorPointer">수신 메시지함</a></li>
 
-				<li class="project-main-li cd"><a class="main-li-a cursorPointer"><i class="far fa-envelope"></i>&nbsp;발신 메시지함</a></li>
+				<li class="project-main-li cd"><a class="main-li-a cursorPointer">발신 메시지함</a></li>
 
 			</ul>
 

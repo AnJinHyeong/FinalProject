@@ -434,7 +434,6 @@
 						<input class="" type="file" id="memberImage">
 						<img src="" style="width: 200px; height: 200px; border-radius: 70%; border: 1px solid #DCDCDC;" id="preview">
 					</div>
-					<button type="button" class="imgBtn">저장</button>
 				</div>
 			</div>
 
