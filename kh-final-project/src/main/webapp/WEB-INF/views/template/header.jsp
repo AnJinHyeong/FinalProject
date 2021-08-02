@@ -61,16 +61,18 @@
 			$(".headerProject").toggle();
 		});
 		
-		$.ajax({
-			url :"${pageContext.request.contextPath}/member/getMember",
-			type: "post",
-			success : function(resp){
-				if(resp.memberGrade == "관리자"){
-					$("#isNotAdmin").hide();
-					$("#isAdmin").show();
+		if(${isLogin}){
+			$.ajax({
+				url :"${pageContext.request.contextPath}/member/getMember",
+				type: "post",
+				success : function(resp){
+					if(resp.memberGrade == "관리자"){
+						$("#isNotAdmin").hide();
+						$("#isAdmin").show();
+					}
 				}
-			}
-		});
+			});
+		}
 		
 	});
 	

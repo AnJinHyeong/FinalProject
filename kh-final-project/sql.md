@@ -4,10 +4,10 @@ member_no number PRIMARY key,
 member_id varchar2(30) not null unique,
 member_pw varchar2(30) not null,
 member_nick varchar2(30) not null,
-member_have_point number(19) default 0,
+member_have_point number(19) default 0 not null check(member_have_point >= 0),
 member_email varchar2(30) not null unique,
 member_introduce varchar2(1000),
-member_grade varchar2(30) default '사용자' check (member_grade in('관리자','사용자','블랙')) ,   
+member_grade varchar2(30) default '사용자' not null check (member_grade in('관리자','사용자')),   
 member_address VARCHAR2(200)
 );
 
@@ -30,11 +30,15 @@ project_end_date DATE,
 project_stop_causes varchar2(4000),
 project_summary varchar2(150) not null,
 member_no references member(member_no) on delete SET NULL,
-category_no REFERENCES category(category_no) ON DELETE SET NULL
+category_no REFERENCES category(category_no) ON DELETE SET NULL,
 member_info_nick varchar2(30),
 member_info_content varchar2(1000),
 project_amount_give char(1) check(project_amount_give in ('Y')),
+<<<<<<< HEAD
 project_like_count number(19) DEFAULT 0
+=======
+project_like_count number(19) DEFAULT 0 not null
+>>>>>>> refs/remotes/origin/main
 );
 
 CREATE SEQUENCE project_seq;
@@ -54,12 +58,10 @@ create sequence category_seq;
 
 #email_auth table
 create table email_auth(
-    auth_no number(19) primary key,
-    auth_key varchar2(30) not null,
-    auth_time date not null
+    email varchar2(256) primary key,
+    no char(9) not null,
+    time date default sysdate not null
 );
-
-CREATE SEQUENCE auth_seq nocache;
 
 
 #item table
@@ -91,7 +93,6 @@ pay_tid VARCHAR2(30) NOT NULL,
 pay_price NUMBER(19) NOT NULL,
 pay_status VARCHAR2(20) CHECK(pay_status IN ('결제 요청','결제 완료')) NOT NULL,
 pay_date DATE,
-pay_all_price NUMBER(19) DEFAULT 0,
 member_no REFERENCES member(member_no) ON DELETE SET NULL
 );
 DROP SEQUENCE pay_seq;
@@ -138,11 +139,20 @@ sponsor_cancel char(1) check (sponsor_cancel ='Y')
 create sequence sponsor_seq;
 
 
+<<<<<<< HEAD
 ##프로젝트 좋아요
+=======
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+>>>>>>> refs/remotes/origin/main
 #project_like
 CREATE TABLE project_like(
+<<<<<<< HEAD
 like_project_no REFERENCES project(project_no) ON DELETE CASCADE,
 like_member_no references member(member_no) ON DELETE CASCADE,
+=======
+like_project_no REFERENCES project(project_no) ON DELETE cascade,
+like_member_no references member(member_no) on delete cascade,
+>>>>>>> refs/remotes/origin/main
 like_date DATE DEFAULT sysdate,
 constraint project_like_pk primary key(like_project_no, like_member_no) 
 );
@@ -220,3 +230,17 @@ request_reply_date DATE DEFAULT sysdate
 );
 
 CREATE SEQUENCE request_reply_seq;
+
+
+#Message
+create table message(
+    msg_no number(19) primary key,
+    sender_no references member(member_no) on delete SET NULL,
+    msg_title varchar2(50) not null,
+    msg_content varchar2(1000),
+    msg_date DATE default sysdate not null,
+    receiver_no references member(member_no) on delete Set null
+);
+
+create sequence msg_seq;
+

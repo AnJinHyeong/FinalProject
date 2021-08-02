@@ -119,9 +119,9 @@ style="background-image: url('${root}/image/insertBackground.jpg');">
 
 		<div class="projectInsert2 container-800 pt20">
 			
-			<c:if test="${projectDto.projectNo != null}">
+			<c:if test="${projectDto.projectNo != null && (projectDto.projectState == 2 || projectDto.projectState == 1)}">
 				<div class="projectInsert3 mb30">
-					<p class="fRed fBold f16 pb10">
+					<p class="fRed fBold fs16 pb10">
 						<i class="fas fa-exclamation-circle"></i> 작성 중인 프로젝트가 있습니다.
 					</p>
 						
@@ -144,9 +144,9 @@ style="background-image: url('${root}/image/insertBackground.jpg');">
 
 
 			<div>
-				<p class="f24 fBold pb10">멋진 아이디어가 있으시군요!</p>
-				<p class="f24 fBold pb10">어떤 프로젝트를 계획 중이신가요?</p>
-				<p class="f16 pb20">나중에 변경 가능하니 너무 걱정마세요.</p>
+				<p class="fs24 fBold pb10">멋진 아이디어가 있으시군요!</p>
+				<p class="fs24 fBold pb10">어떤 프로젝트를 계획 중이신가요?</p>
+				<p class="fs16 pb20">나중에 변경 가능하니 너무 걱정마세요.</p>
 			</div>
 
 
@@ -176,8 +176,8 @@ style="background-image: url('${root}/image/insertBackground.jpg');">
 
 			<div id="result">
 				<div>
-					<p class="f24 fBold pb10">프로젝트를 간단하게 소개해주세요.</p>
-					<p class="f16 pb20">나중에 수정 가능하니 편하게 적어주세요.</p>
+					<p class="fs24 fBold pb10">프로젝트를 간단하게 소개해주세요.</p>
+					<p class="fs16 pb20">나중에 수정 가능하니 편하게 적어주세요.</p>
 				</div>
 				
 				<form id="projectInsertForm" action="projectInsert" method="post">
@@ -185,9 +185,9 @@ style="background-image: url('${root}/image/insertBackground.jpg');">
 					<div class="bottomLine mb10">
 						<textarea name="projectSummary" placeholder="프로젝트 요약을 입력해주세요." class="w100p h120 textarea-fix project-normal-border" required></textarea>
 						<div class="float-container">
-							<p id="textMin" class="f12 pb10 pt10 left fRed">최소 10자 이상 입력해주세요</p>
-							<p id="textMax" class="f12 pb10 pt10 left fRed">최대 50자 이하로 입력해주세요</p>
-							<p id="textSize" class="f12 pb10 pt10 right">(<span id="textSizeSpan">0</span><span>/50</span>)</p>
+							<p id="textMin" class="fs12 pb10 pt10 left fRed">최소 10자 이상 입력해주세요</p>
+							<p id="textMax" class="fs12 pb10 pt10 left fRed">최대 50자 이하로 입력해주세요</p>
+							<p id="textSize" class="fs12 pb10 pt10 right">(<span id="textSizeSpan">0</span><span>/50</span>)</p>
 						</div>
 					</div>
 				
