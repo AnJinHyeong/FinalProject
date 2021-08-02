@@ -60,6 +60,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<delete id="deleteByMsg" parameterType="string">
  		delete message where msg_no = #{msgNo};
  	</delete>
+ 	
+<!--  	<select id="msgMemberAll" parameterType="int"> -->
+<!--  		select M3.member_nick,M1.msg_no,M1.sender_no ,M1.receiver_no ,M1.msg_date,M1.msg_content,M1.msg_title from message M1 ,member M2 , member M3 where M1.sender_no = M2.member_no AND M1.receiver_no=m3.member_no and sender_no = #{memberNo}; -->
+<!--  	</select> -->
 
 <!-- 	로그인 구문 -->
 	<!-- 로그인 -->

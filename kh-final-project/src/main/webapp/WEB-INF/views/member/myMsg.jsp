@@ -97,21 +97,21 @@
 			template = template.replace("{{msgTitle}}", resp.msgTitle);
 
 			template = template.replace("{{msgDate}}", resp.msgDate);
-
+ 
 			template = template.replace("{{receiverNo}}", resp.receiverNo);
 
 			template = template.replace("{{msgContent}}", resp.msgContent);
 
 			template = template.replace("{{senderNo}}", resp.senderNo);
+			template = template.replace("{{memberId}}",resp.memberId);
+			template = template.replace("{{memberId2}}",resp.memberId2);
 
 			
-
-			
-
+				
 			$("#msgSummarize").append(template);
 
 		}
-
+ 
 		 
 
 		$(".msgBtn").on("click", function() {
@@ -208,11 +208,11 @@
 
  
 
-		<pre class="fs12 fBold mb10">보내는 사람 : {{receiverNo}}</pre> 
+		
+			<pre class="fs12 fBold mb10">보내는 사람 : {{memberId}}</pre> 
+			<pre class="fs12 fBold mb10">받는 사람 : {{memberId2}}</pre> 
 
-			<pre class="fs12 fBold mb10">받는 사람 : {{senderNo}}</pre> 
-
- 
+  	 
 
  			<pre class="fs12 fBold mb10">문의 내용</pre> 
 
@@ -366,7 +366,7 @@
 				</div>
 
 			
-
+ 
 			<div id="msgList2" class="b" style="display:none;">
 
 			<c:choose>

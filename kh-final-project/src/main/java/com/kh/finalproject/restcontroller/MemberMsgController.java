@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.MessageDto;
-
+import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.MessageDao;
 import com.kh.finalproject.vo.MsgVo;
 
@@ -28,6 +29,8 @@ public class MemberMsgController {
 
 	@Autowired
 	private MessageDao messageDao; 
+	@Autowired
+	private MemberDao memberDao;
 	
 	@PostMapping("/messageList/{index}")
 	public List<MessageDto> approveCheck(HttpSession session, @PathVariable int index){
@@ -47,13 +50,19 @@ public class MemberMsgController {
 	public MsgVo msgInformation(HttpSession session, @RequestParam int msgNo,Model model, Locale locale)
 	{
 		MsgVo msgVo = messageDao.getByMsgNo2(msgNo);
+		int a =msgVo.getSenderNo();
+		int b =msgVo.getReceiverNo();
+		MemberDto memberDto = memberDao.getByMemberNo(a);
+		MemberDto memberDto2 = memberDao.getByMemberNo(b);
 		return MsgVo.builder()
 				.msgNo(msgNo)
-				.msgTitle(msgVo.getMsgTitle())
+	 			.msgTitle(msgVo.getMsgTitle())
 				.msgDate(msgVo.getMsgDate())
 				.receiverNo(msgVo.getReceiverNo())
 				.msgContent(msgVo.getMsgContent())
 				.senderNo(msgVo.getSenderNo())
+				.memberId(memberDto.getMemberId())
+				.memberId2(memberDto2.getMemberId())
 				.build();
 	} 
 	@PostMapping("/{msgNo}/deleteMsg")
