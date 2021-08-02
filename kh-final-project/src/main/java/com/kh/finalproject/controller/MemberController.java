@@ -30,6 +30,7 @@ import com.kh.finalproject.repository.MessageDao;
 import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.repository.ProjectLikeDao;
 import com.kh.finalproject.service.EmailService;
+import com.kh.finalproject.vo.MemberVo;
 import com.kh.finalproject.vo.MsgVo;
 import com.kh.finalproject.vo.ProjectLikeVo;
 
@@ -139,16 +140,18 @@ public class MemberController {
 //		return "member/myInformationSettings";
 	}
 	@PostMapping("/upPw2")
-	public String upPw2(HttpSession session,Model model,@ModelAttribute MemberDto memberDto){
+	public String upPw2(HttpSession session,Model model,@ModelAttribute MemberVo memberVo){
 		
 		int memberNo = (int)session.getAttribute("memberNo");
-		memberDto.setMemberNo(memberNo);
-		memberDao.changePassword(memberDto);
-		try{
+		memberVo.setMemberNo(memberNo);
+		boolean upPw2 = memberDao.changePassword(memberVo);
+		
+		
+		if(upPw2){
 			model.addAttribute("msg","비밀번호 변경이 완료되었습니다. 다시 로그인해주세요.");
 			model.addAttribute("url","/member/logout");
 			
-		}catch(Exception e)	{
+		}else{
 			model.addAttribute("msg","비밀번호 변경이 실패했습니다.");
 			model.addAttribute("url","/member/myAccount");
 		}
@@ -174,13 +177,16 @@ public class MemberController {
 		return "member/myPage";
 	}
 	@GetMapping("/msgReWrite")
-	public String msgReWrite(@ModelAttribute MessageDto messageDto, Model model, @RequestParam int msgNo) {
+
+	public String msgReWrite(@ModelAttribute MessageDto messageDto, Model model,@RequestParam int msgNo) {
 		model.addAttribute("msgNo", msgNo);
+		MsgVo msgVo = messageDao.getByMsgNo2(msgNo);
+		model.addAttribute("msgVo", msgVo);
 		return "member/msgReWrite";
 	}
 	
 	@RequestMapping(value="/myMsg" , method = {RequestMethod.GET, RequestMethod.POST})
-	public String myMsg(Locale locale,HttpSession session,Model model) {
+	public String myMsg(HttpSession session,Model model) {
 		int memberNo = (int)session.getAttribute("memberNo");
 		
 		List<MessageDto> find = messageDao.msgAllByMemberNo(memberNo);
