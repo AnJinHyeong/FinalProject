@@ -81,4 +81,12 @@ public class MessageDaoImpl implements MessageDao{
 		return sqlSession.selectList("member.msgAllByKeyword", keyword);
 	}
 
+
+
+
+	@Override
+	public MsgVo adminMsgSelectOne(int msgNo) {
+		return sqlSession.selectOne("member.adminMsgSelectOne", msgNo);
+	}
+
 }
