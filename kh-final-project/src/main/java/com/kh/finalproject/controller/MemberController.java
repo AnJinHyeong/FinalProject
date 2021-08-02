@@ -121,6 +121,23 @@ public class MemberController {
 		}
 		return "member/redirectMember";
 	}
+	@GetMapping("/deleteMsg")
+	public String deleteMsg(HttpSession session,@RequestParam int msgNo,Model model) {
+		model.addAttribute("msgNo", msgNo);
+		MessageDto messageDto = messageDao.getByMsgNo(msgNo);
+		boolean deleteM = messageDao.deleteMsg(messageDto);
+		if(deleteM){
+			model.addAttribute("msg","메시지 삭제가 완료되었습니다.");
+			model.addAttribute("url","/member/myMsg");
+			 
+		}else	{
+			model.addAttribute("msg","메시지 삭제가 실패했습니다.");
+			model.addAttribute("url","/member/myMsg");
+		}
+		return "member/redirectMember";
+		
+	}
+	
 	@PostMapping("/upAddress")
 	public String upAddress(HttpSession session,Model model,@ModelAttribute MemberDto memberDto) {
 		int memberNo = (int) session.getAttribute("memberNo");

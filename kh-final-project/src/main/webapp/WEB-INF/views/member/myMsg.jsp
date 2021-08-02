@@ -145,18 +145,18 @@
 				  	});
 					
 					$(".deleteBtn").on("click", function(){
-						var msgNo = $(this).parent().siblings(".target").find("msgNo").text();
-						
-						$(location).attr('href',"${pageContext.request.contextPath}/member/data/deleteMsg"+msgNo);
+						var msgNo = $(this).parent().siblings(".target").find(".msgNo").text();
+						console.log(msgNo);
+						$(location).attr('href',"${root}/member/deleteMsg?msgNo="+msgNo);
 				});
 
-					
+					 
 
 				} 
 
 			});	
-
 	});
+			$(".ab").click();
 		 
 		
 	
@@ -245,7 +245,7 @@
 		
 			
  			<button class="w100p project-btn btn3 project-btn-hover showMsg"><i class="far fa-envelope"></i>문의 답글 보내기</button>
- 			<button class="deleteBtn w100p project-btn btn3 project-btn-hover"name="deleteBtn" id="deleteBtn">메시지 삭제</button>
+ 			<button class="w100p project-btn btn3 project-btn-hover deleteBtn">메시지 삭제</button>
 
  			
 
@@ -330,7 +330,7 @@
 
  
 
-					<div class="projectInsert3 w80p pb30">
+					<div class="projectInsert3 w100p pb30">
 
 						<button class="btn btn-hover w100p h80 msgBtn"> 
 
@@ -383,7 +383,7 @@
 
 				
 
-					<div class="projectInsert3 w80p pb30">
+					<div class="projectInsert3 w100p pb30">
 
 						<button class="btn btn-hover w100p h80 msgBtn"> 
 
@@ -433,7 +433,7 @@
 
 				<c:forEach var="messageDto3" items="${messageDto3}">
 
-					<div class="projectInsert3 w80p pb30">
+					<div class="projectInsert3 w100p pb30">
 
 						<button class="btn btn-hover w100p h80 msgBtn"> 
 
