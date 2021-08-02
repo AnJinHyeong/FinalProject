@@ -10,4 +10,8 @@ public interface PointService {
 	void usePoint(int projectNo, HttpSession session, SponsorDto sponsorDto);
 	
 	void cancelSponsor(HttpSession session, @RequestParam int sponsorNo);
+	
+	void finishedProjectGiveAmount();
+
+	void autoGiveAmountByFinishedProject();
 }

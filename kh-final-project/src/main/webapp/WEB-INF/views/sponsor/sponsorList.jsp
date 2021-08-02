@@ -104,8 +104,11 @@
 					$("#sponsorVoList").empty();
 					for (var i = 0; i < resp.length; i++) {
 						var template = $("#sponsorVoListTemplate").html();
+						var imageUrl = "${root}/image/project/projectMainDownload/" + resp[i].imageNo;
 						template = template.replace("{{projectTitle}}", resp[i].projectTitle);
 						template = template.replace("{{projectNo}}", resp[i].projectNo);
+						template = template.replace("{{projectImage}}", 
+								"style='background-image: url(" + imageUrl + ");'");
 						$("#sponsorVoList").append(template);
 					}
 
@@ -122,9 +125,11 @@
 							success : function(resp) {
 
 								replaceProjectSummarizeTemplate(resp);
-								var action = $("#moveToProjectDetailForm").attr("action");
-								action = action + projectNo;
-								$("#moveToProjectDetailForm").attr("action", action);
+								
+								$("#moveToProjectDetailBtn").on("click", function(){
+									url = "${pageContext.request.contextPath}/projectBoard/" + projectNo
+									$(location).attr('href',url);
+								});
 								
 								$.ajax({
 									url : "${pageContext.request.contextPath}/project/data/sponsorListByProjectNo/" + that.index(),
@@ -159,9 +164,10 @@
 				success : function(resp) {
 					
 					replaceProjectSummarizeTemplate(resp);
-					var action = $("#moveToProjectDetailForm").attr("action");
-					action = action + projectNo;
-					$("#moveToProjectDetailForm").attr("action", action);
+					$("#moveToProjectDetailBtn").on("click", function(){
+						url = "${pageContext.request.contextPath}/projectBoard/" + projectNo
+						$(location).attr('href',url);
+					});
 					
 					$.ajax({
 						url : "${pageContext.request.contextPath}/project/data/sponsorListByProjectNo/" + that.index(),
@@ -213,9 +219,7 @@
 	</div>
 	
 	<div class="h100">
-		<form id="moveToProjectDetailForm" action="${root}/projectBoard/${projectNo}" method="get">
-			<button class="w100p project-btn btn3 project-btn-hover">상세 페이지로 이동</button>
-		</form>
+		<button id="moveToProjectDetailBtn" class="w100p project-btn btn3 project-btn-hover">상세 페이지로 이동</button>
 	</div>
 
 </script>
@@ -224,7 +228,7 @@
 
 	<div class="projectInsert3 w100p pb30">
 		<button class="btn btn-hover w100p h80 sponsorProject">
-			<div class="project-main-img w80 h100p"></div>
+			<div class="project-main-img w80 h100p" {{projectImage}}></div>
 			<div class="btn-text projectTitle">{{projectTitle}}</div>
 			<div class="dpNone projectNo">{{projectNo}}</div>
 		</button>
@@ -290,7 +294,7 @@
 		</div>
 	</div>
 
-	<div class="container-1400 dpFlex pl100 pr100">
+	<div class="container-1200 dpFlex">
 
 		<div class="container-800 hMax600 mt30 mb30 scrollThin">
 
@@ -299,7 +303,15 @@
 
 					<div class="projectInsert3 w100p pb30">
 						<button class="btn btn-hover w100p h80 sponsorProject">
-							<div class="project-main-img w80 h100p"></div>
+							<c:choose>
+								<c:when test="${sponsorVo.imageNo == 0}">
+									<div class="project-main-img w80 h100p"></div>
+								</c:when>
+								<c:otherwise>
+									<div class="project-main-img w80 h100p"
+										style="background-image: url('${root}/image/project/projectMainDownload/${sponsorVo.imageNo}');"></div>
+								</c:otherwise>
+							</c:choose>
 							<div class="btn-text projectTitle">${sponsorVo.projectTitle}</div>
 							<div class="dpNone projectNo">${sponsorVo.projectNo}</div>
 						</button>

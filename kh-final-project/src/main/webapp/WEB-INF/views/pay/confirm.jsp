@@ -85,7 +85,7 @@
 </div>
 </div>
 
-<div id = "nomalAll">	
+<div id = "nomalAll" style="margin-bottom: 60px;">	
 <br>
 <div class = nomalBorder> 
 	<span id ="nomalTitle">결제 조회</span>

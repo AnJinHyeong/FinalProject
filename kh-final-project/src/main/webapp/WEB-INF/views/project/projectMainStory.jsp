@@ -188,7 +188,7 @@
 </script>
 
 <script id="addFileImageTemplate" type="text/template">
-	<img name="{{iImage}}" class="w700" style="margin: 0 50px;">
+	<img name="{{iImage}}" class="w600" style="margin: 0 50px;">
 </script>
 
 
@@ -219,7 +219,7 @@
 					<form action="projectMainStory" method="post">
 
 
-						<div class="w100p h500 bacWhite scrollThin inputFocusNone" style="padding: 50px 200px;" id="inputArea" contenteditable="true">
+						<div class="w100p h500 bacWhite scrollThin inputFocusNone" style="padding: 50px 250px;" id="inputArea" contenteditable="true">
 
 							${projectDto.projectContent}
 						</div>

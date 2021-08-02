@@ -5,6 +5,8 @@ import java.util.List;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.PayDto;
 import com.kh.finalproject.entity.SponsorDto;
+import com.kh.finalproject.vo.MemberVo;
+import com.kh.finalproject.vo.MsgVo;
 
 public interface MemberDao {
 	boolean checkId(String memberId);
@@ -17,7 +19,7 @@ public interface MemberDao {
 	
 	void updatePw(MemberDto memberDto);
 	boolean updateEmail(MemberDto memberDto);
-	void changePassword(MemberDto memberDto);
+	boolean changePassword(MemberVo memberVo);
 	boolean updateIntro(MemberDto memberDto);
 
 	boolean updateNick(MemberDto memberDto);
@@ -32,6 +34,6 @@ public interface MemberDao {
 	// 포인트 사용, 보유포인트 감소
 	void usePoint(SponsorDto sponsorDto);
 	// 후원 취소, 보유포인트 환급
-	void addPointBySponsorCancel(SponsorDto sponsorDto);
+	void addPoint(SponsorDto sponsorDto);
 
 }

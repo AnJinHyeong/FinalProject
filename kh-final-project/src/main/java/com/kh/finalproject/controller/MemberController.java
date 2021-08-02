@@ -30,6 +30,7 @@ import com.kh.finalproject.repository.MessageDao;
 import com.kh.finalproject.repository.ProjectDao;
 import com.kh.finalproject.repository.ProjectLikeDao;
 import com.kh.finalproject.service.EmailService;
+import com.kh.finalproject.vo.MemberVo;
 import com.kh.finalproject.vo.MsgVo;
 import com.kh.finalproject.vo.ProjectLikeVo;
 
@@ -120,6 +121,23 @@ public class MemberController {
 		}
 		return "member/redirectMember";
 	}
+	@GetMapping("/deleteMsg")
+	public String deleteMsg(HttpSession session,@RequestParam int msgNo,Model model) {
+		model.addAttribute("msgNo", msgNo);
+		MessageDto messageDto = messageDao.getByMsgNo(msgNo);
+		boolean deleteM = messageDao.deleteMsg(messageDto);
+		if(deleteM){
+			model.addAttribute("msg","메시지 삭제가 완료되었습니다.");
+			model.addAttribute("url","/member/myMsg");
+			 
+		}else	{
+			model.addAttribute("msg","메시지 삭제가 실패했습니다.");
+			model.addAttribute("url","/member/myMsg");
+		}
+		return "member/redirectMember";
+		
+	}
+	
 	@PostMapping("/upAddress")
 	public String upAddress(HttpSession session,Model model,@ModelAttribute MemberDto memberDto) {
 		int memberNo = (int) session.getAttribute("memberNo");
@@ -127,25 +145,30 @@ public class MemberController {
 		boolean upAddress=memberDao.updateAddress(memberDto);
 		if(upAddress){
 			model.addAttribute("msg","주소 변경이 완료되었습니다.");
-			model.addAttribute("url","/member/myAccount");
+//			model.addAttribute("url","/member/myAccount");
+			model.addAttribute("url","/member/myInformationSettings");
 			
 		}else	{
 			model.addAttribute("msg","주소 변경이 실패했습니다.");
-			model.addAttribute("url","/member/myAccount");
+//			model.addAttribute("url","/member/myAccount");
+			model.addAttribute("url","/member/myInformationSettings");
 		}
 		return "member/redirectMember";
+//		return "member/myInformationSettings";
 	}
 	@PostMapping("/upPw2")
-	public String upPw2(HttpSession session,Model model,@ModelAttribute MemberDto memberDto){
+	public String upPw2(HttpSession session,Model model,@ModelAttribute MemberVo memberVo){
 		
 		int memberNo = (int)session.getAttribute("memberNo");
-		memberDto.setMemberNo(memberNo);
-		memberDao.changePassword(memberDto);
-		try{
+		memberVo.setMemberNo(memberNo);
+		boolean upPw2 = memberDao.changePassword(memberVo);
+		
+		
+		if(upPw2){
 			model.addAttribute("msg","비밀번호 변경이 완료되었습니다. 다시 로그인해주세요.");
 			model.addAttribute("url","/member/logout");
 			
-		}catch(Exception e)	{
+		}else{
 			model.addAttribute("msg","비밀번호 변경이 실패했습니다.");
 			model.addAttribute("url","/member/myAccount");
 		}
@@ -171,13 +194,16 @@ public class MemberController {
 		return "member/myPage";
 	}
 	@GetMapping("/msgReWrite")
-	public String msgReWrite(@ModelAttribute MessageDto messageDto, Model model) {
-		
+
+	public String msgReWrite(@ModelAttribute MessageDto messageDto, Model model,@RequestParam int msgNo) {
+		model.addAttribute("msgNo", msgNo);
+		MsgVo msgVo = messageDao.getByMsgNo2(msgNo);
+		model.addAttribute("msgVo", msgVo);
 		return "member/msgReWrite";
 	}
 	
 	@RequestMapping(value="/myMsg" , method = {RequestMethod.GET, RequestMethod.POST})
-	public String myMsg(Locale locale,HttpSession session,Model model) {
+	public String myMsg(HttpSession session,Model model) {
 		int memberNo = (int)session.getAttribute("memberNo");
 		
 		List<MessageDto> find = messageDao.msgAllByMemberNo(memberNo);
@@ -302,8 +328,8 @@ public class MemberController {
 			HttpSession session,
 			Model model) {
 		int memberNo = (int)session.getAttribute("memberNo");
-		List<ProjectDto> projectDto = projectDao.proList(memberNo);
-		model.addAttribute("projectDto", projectDto);
+//		List<ProjectDto> projectDto = projectDao.proList(memberNo);
+		model.addAttribute("projectDto", projectDao.proListWithImageNo(memberNo));
 		
 		return "member/myProject";
 	}
@@ -343,8 +369,8 @@ public class MemberController {
 			HttpSession session,
 			Model model) {
 		int memberNo = (int)session.getAttribute("memberNo");
-		List<ProjectDto> find = projectDao.proList2(memberNo);
-		model.addAttribute("projectDto", find);
+//		List<ProjectDto> find = projectDao.proList2(memberNo);
+		model.addAttribute("projectDto", projectDao.proList2WithImageNo(memberNo));
 		
 		return "member/myProject2";
 	}
@@ -417,6 +443,15 @@ public class MemberController {
 		return "member/redirectMember";
 		
 	}
-
+	
+	@GetMapping("/myInformationSettings")
+	public String myInformationSettings(HttpSession session,Model model) {
+		
+		int memberNo = (int) session.getAttribute("memberNo");
+		MemberDto find = memberDao.getByMemberNo(memberNo);
+		
+		model.addAttribute("memberDto",find);
+		return "member/myInformationSettings";
+	}
 
 }

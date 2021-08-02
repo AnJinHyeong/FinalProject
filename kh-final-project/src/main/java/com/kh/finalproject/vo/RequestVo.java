@@ -26,4 +26,6 @@ public class RequestVo {
 	private int requestLikeMemberNo;
 	private Date requestLikeDate;
 	
+	private String requestMemberNick;
+	
 }

@@ -26,35 +26,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 내가 후원한 후원 프로젝트 목록/후원금액(진행중) -->
 	<select id="sponsorStartedProjectListByMemberNo" resultType="SponsorVo" parameterType="int">
 		<![CDATA[
-			select project_no, project_title, sum(sponsor_amount) sum_sponsor_amount from(
-				select P.project_start_date, P.project_end_date, P.project_no, P.project_title, S.sponsor_amount
+			select project_no, project_title, sum(sponsor_amount) sum_sponsor_amount, image_no from(
+				select P.project_start_date, P.project_end_date, P.project_no, P.project_title, S.sponsor_amount, I.image_no
 				    from sponsor S
 				left outer join project P on P.project_no = S.project_no
+				left outer join image_file I on P.project_no = I.project_no and I.project_state = 'Y' 
 				    where S.member_no = #{memberNo} and sysdate > P.project_start_date and P.project_end_date > sysdate and S.sponsor_cancel is null
-				) group by project_title, project_no
+				) group by project_title, project_no, image_no
 		]]>
 	</select>
 	
 	<!-- 내가 후원한 후원 프로젝트 목록/후원금액(종료) -->
 	<select id="sponsorFinishedProjectListByMemberNo" resultType="SponsorVo" parameterType="int">
 		<![CDATA[
-			select project_no, project_title, sum(sponsor_amount) sum_sponsor_amount from(
-				select P.project_start_date, P.project_end_date, P.project_no, P.project_title, S.sponsor_amount
+			select project_no, project_title, sum(sponsor_amount) sum_sponsor_amount, image_no from(
+				select P.project_start_date, P.project_end_date, P.project_no, P.project_title, S.sponsor_amount, I.image_no
 				    from sponsor S
 				left outer join project P on P.project_no = S.project_no
+				left outer join image_file I on P.project_no = I.project_no and I.project_state = 'Y' 
 				    where S.member_no = #{memberNo} and P.project_end_date < sysdate and S.sponsor_cancel is null
-				) group by project_title, project_no
+				) group by project_title, project_no, image_no
 		]]>
 	</select>
 	
 	<!-- 내가 후원한 후원 프로젝트 목록/후원금액(취소) -->
 	<select id="sponsorCanceledProjectListByMemberNo" resultType="SponsorVo" parameterType="int">
-		select project_no, project_title from(
-			select P.project_start_date, P.project_no, P.project_title, S.sponsor_amount
+		select project_no, project_title, image_no from(
+			select P.project_start_date, P.project_no, P.project_title, S.sponsor_amount, I.image_no
 			    from sponsor S
 			left outer join project P on P.project_no = S.project_no
+			left outer join image_file I on P.project_no = I.project_no and I.project_state = 'Y' 
 			    where S.member_no = #{memberNo} and sponsor_cancel = 'Y'
-			) group by project_title, project_no
+			) group by project_title, project_no, image_no
 	</select>
 	
 	<!-- 내가 후원한 특정 프로젝트 후원금액 -->
@@ -86,6 +89,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 후원객체로 후원정보 가져오기 -->
 	<select id="getSponsor" parameterType="SponsorDto" resultType="SponsorDto">
 		select * from sponsor where sponsor_no = #{sponsorNo} and member_no = #{memberNo}
+	</select>
+	
+	<!-- 프로젝트 번호로 후원금액 목록 가져오기 -->
+	<select id="getSponsorAmountListByProjectNo" resultType="ProjectAmountGiveVo" parameterType="int">
+		select member_no sponsor_member_no, sum(sponsor_amount) sponsor_amount from sponsor where project_no = #{projectNo} group by member_no
 	</select>
 	
 </mapper>

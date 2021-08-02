@@ -154,17 +154,17 @@
 			$("#report2").hide();
 		});
 		
-		
-		//펀딩 기간 계산
-		const modal = document.querySelector('.report-modal'); 
-		const btnOpenPopup = document.querySelector('#report'); 
-		btnOpenPopup.addEventListener('click', () => { modal.style.display = 'block'; });
+		if(${not empty memberNo}){
+			const modal = document.querySelector('.report-modal'); 
+			const btnOpenPopup = document.querySelector('#report'); 
+			btnOpenPopup.addEventListener('click', () => { modal.style.display = 'block'; });
+		}
 		
 		$("#modal-cancel").on("click",function(){
 			$(".report-modal").hide();
 		});
 		
-		
+		//펀딩 기간 계산
 		var today = new Date();
 		var dd = today.getDate();
 		var mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
@@ -186,9 +186,9 @@
 	   	var ar1 = sdd.split('-');
 	   	var ar2 = startday.split('-');
 	   	var ar3 = endday.split('-');
-	   	var da1 = new Date(ar1[0], ar1[1], ar1[2]);
-   		var da2 = new Date(ar2[0], ar2[1], ar2[2]);
-   		var da3 = new Date(ar3[0], ar3[1], ar3[2]);
+	   	var da1 = new Date(ar1[0], ar1[1], ar1[2]);//현재시간 오늘날짜
+   		var da2 = new Date(ar2[0], ar2[1], ar2[2]);//펀딩시작날짜
+   		var da3 = new Date(ar3[0], ar3[1], ar3[2]);//펀딩종료날짜
    		
 	   	var dif = da1 >= da2;//펀딩 시작전
 	   	var dif2 = da3 - da1;//펀딩 종료일까지 일수 계산
@@ -217,7 +217,7 @@
 			$("#project-board-mid").show();
 		}
 		
-		var dif2 = da3 - da2;
+		var dif2 = da3 - da1;
 	   	var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
 	   	var cMonth = cDay * 30;// 월 만듬
 	   	var cYear = cMonth * 12; // 년 만듬
@@ -320,11 +320,12 @@
 						</div>
 					</div>
 					
-					<div class="project-board-flex-div4" style="background-color: #f6f6f6; width: 100%; height: 150px; border-radius: 3%; text-align: left; border: 1px solid #ededed;">
+					<div class="project-board-flex-div4" style="background-color: #f6f6f6; width: 100%; height: 170px; border-radius: 3%; text-align: left; border: 1px solid #ededed;">
 						<p style="padding: 5px 10px 0 10px; font-size: 15px; color: black; font: bold;"><span class="font-12 red"><i class="fas fa-file"></i></span> 프로젝트 간단 소개</p>
 						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">${projectDto.projectSummary}</p>
 						<p style="padding: 25px 10px 0 10px; font-size: 15px; color: black; font: bold;"><span class="font-12 red"><i class="fas fa-coins"></i></span> 프로젝트 결제 안내</p>
 						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">목표 금액인 ${projectDto.projectTargetAmount}원이 모여야만 결제됩니다.</p>
+						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">후원은 ${projectDto.projectEndDate} 00:00:00 에 종료 됩니다.</p>
 						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">결제는 프로젝트 예정 종료일인 ${projectDto.projectEndDate} 이후 ${plus7.substring(0, 10)} 이내에 다 함께 진행됩니다.</p>
 					</div>
 
@@ -352,11 +353,12 @@
 						</div>
 					</div>
 					
-					<div class="project-board-flex-div4" style="background-color: #f6f6f6; width: 100%; height: 150px; border-radius: 3%; text-align: left; border: 1px solid #ededed;">
+					<div class="project-board-flex-div4" style="background-color: #f6f6f6; width: 100%; height: 170px; border-radius: 3%; text-align: left; border: 1px solid #ededed;">
 						<p style="padding: 5px 10px 0 10px; font-size: 15px; color: black; font: bold;"><span class="font-12 red"><i class="fas fa-file"></i></span> 프로젝트 간단 소개</p>
 						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">${projectDto.projectSummary}</p>
 						<p style="padding: 25px 10px 0 10px; font-size: 15px; color: black; font: bold;"><span class="font-12 red"><i class="fas fa-coins"></i></span> 프로젝트 결제 안내</p>
 						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">목표 금액인 ${projectDto.projectTargetAmount}원이 모여야만 결제됩니다.</p>
+						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">후원은 ${projectDto.projectEndDate} 00:00:00 에 종료 됩니다.</p>
 						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">결제는 프로젝트 예정 종료일인 ${projectDto.projectEndDate} 이후 ${plus7.substring(0, 10)} 이내에 다 함께 진행됩니다.</p>
 					</div>
 
@@ -390,16 +392,17 @@
 						</div>
 					</div>
 					
-					<div class="project-board-flex-div4" style="background-color: #f6f6f6; width: 100%; height: 150px; border-radius: 3%; text-align: left; border: 1px solid #ededed;">
+					<div class="project-board-flex-div4" style="background-color: #f6f6f6; width: 100%; height: 170px; border-radius: 3%; text-align: left; border: 1px solid #ededed;">
 						<p style="padding: 5px 10px 0 10px; font-size: 15px; color: black; font: bold;"><span class="font-12 red"><i class="fas fa-file"></i></span> 프로젝트 간단 소개</p>
 						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">${projectDto.projectSummary}</p>
 						<p style="padding: 25px 10px 0 10px; font-size: 15px; color: black; font: bold;"><span class="font-12 red"><i class="fas fa-coins"></i></span> 프로젝트 결제 안내</p>
 						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">목표 금액인 ${projectDto.projectTargetAmount}원이 모여야만 결제됩니다.</p>
+						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">후원은 ${projectDto.projectEndDate} 00:00:00 에 종료 됩니다.</p>
 						<p style="padding: 5px 10px 0 10px; font-size: 12px; color: #6b6565;">결제는 프로젝트 예정 종료일인 ${projectDto.projectEndDate} 이후 ${plus7.substring(0, 10)} 이내에 다 함께 진행됩니다.</p>
 					</div>
 
 					<div class="project-board-flex-div4">
-						<button class="project-board-div4-funding" style="width: 430px;">현재 프로젝트는 펀이 종료된 상태 입니다.</button>
+						<button class="project-board-div4-funding" style="width: 430px;">현재 프로젝트는 펀딩이 종료된 상태 입니다.</button>
 					</div>
 				</div>
 				

@@ -18,6 +18,8 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public boolean projectApprovalUpdate4() {
 		int count = sqlSession.update("project.projectApprovalUpdate4");
+		
+		
 		log.info("프로젝트 상태 4업데이트");
 		return count > 0;
 	}

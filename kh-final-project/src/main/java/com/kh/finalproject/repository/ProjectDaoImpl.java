@@ -10,7 +10,11 @@ import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.entity.SponsorDto;
 import com.kh.finalproject.service.SearchService;
 import com.kh.finalproject.vo.IndexProjectVo;
+import com.kh.finalproject.vo.ProjectAdminSearchKeywordVo;
+import com.kh.finalproject.vo.ProjectAdminSearchVo;
+import com.kh.finalproject.vo.ProjectAmountGiveVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
+import com.kh.finalproject.vo.ProjectImageVo;
 import com.kh.finalproject.vo.ProjectProgressVo;
 import com.kh.finalproject.vo.ProjectSponsorVo;
 import com.kh.finalproject.vo.ProjectVo;
@@ -270,7 +274,7 @@ public class ProjectDaoImpl implements ProjectDao{
 		return sqlSession.selectOne("project.getSponsorSelect", sponsorNo);
   }
 	
-  @Override
+	@Override
 	public List<ProjectDto> proList(int memberNo) {
 		List<ProjectDto> projectDto = sqlSession.selectList("project.proList", memberNo);
 		return projectDto;
@@ -281,5 +285,76 @@ public class ProjectDaoImpl implements ProjectDao{
 		List<ProjectDto> projectDto = sqlSession.selectList("project.proList2", memberNo);
 		return projectDto;
 	}
+	
+	@Override
+	public List<ProjectImageVo> proListWithImageNo(int memberNo) {
+		return sqlSession.selectList("project.proListWithImageNo", memberNo);
+	}
+
+	@Override
+	public List<ProjectImageVo> proList2WithImageNo(int memberNo) {
+		return sqlSession.selectList("project.proList2WithImageNo", memberNo);
+	}
+	
+	@Override
+	public List<ProjectAmountGiveVo> getProjectAmountGiveVoList() {
+		return sqlSession.selectList("project.getProjectAmountGiveVoList");
+	}
+
+	@Override
+	public void setProjectAmountGiveY(int projectNo) {
+		sqlSession.update("project.setProjectAmountGiveY", projectNo);
+	}
+
+	@Override
+	public List<ProjectCategoryVo> getProjectByCategoryNo(int categoryNo) {
+		return sqlSession.selectList("project.getProjectByCategoryNo", categoryNo);
+	}
   
+	@Override
+	public List<ProjectAdminSearchVo> projectAdminSelect1() {
+		return sqlSession.selectList("project.projectAdminSelect1");
+	}
+	@Override
+	public List<ProjectAdminSearchVo> projectAdminSelect2(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo) {
+		return sqlSession.selectList("project.projectAdminSelect2", projectAdminSearchKeywordVo);
+	}
+	@Override
+	public List<ProjectAdminSearchVo> projectAdminSelect3(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo) {
+		return sqlSession.selectList("project.projectAdminSelect3", projectAdminSearchKeywordVo);
+	}
+	@Override
+	public List<ProjectAdminSearchVo> projectAdminSelect4(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo) {
+		return sqlSession.selectList("project.projectAdminSelect4", projectAdminSearchKeywordVo);
+	}
+
+	@Override
+	public ProjectAdminSearchVo projectAdminSelectOne(int projectNo) {
+		return sqlSession.selectOne("project.projectAdminSelectOne", projectNo);
+	}
+
+	@Override
+	public boolean adminProjectState1(int projectNo) {
+		int count = sqlSession.update("project.adminProjectState1", projectNo);
+		return count > 0;
+	}
+
+	@Override
+	public boolean adminProjectState3(int projectNo) {
+		int count = sqlSession.update("project.adminProjectState3", projectNo);
+		return count > 0;
+	}
+
+	@Override
+	public boolean adminProjectStateX(int projectNo) {
+		int count = sqlSession.update("project.adminProjectStateX", projectNo);
+		return count > 0;
+	}
+
+	@Override
+	public void updateProjectCategory(ProjectDto projectDto) {
+		sqlSession.update("project.updateProjectCategory", projectDto);
+	}
+
+
 }

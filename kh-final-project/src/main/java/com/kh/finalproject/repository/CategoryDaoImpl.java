@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.CategoryDto;
+import com.kh.finalproject.vo.CategoryVo;
 
 @Repository
 public class CategoryDaoImpl implements CategoryDao{
@@ -59,6 +60,24 @@ public class CategoryDaoImpl implements CategoryDao{
 		return sqlSession.selectList("category.childCategoryList",categoryNo);
 	}
 
-	
+	@Override
+	public List<CategoryVo> getCategoryList() {
+		return sqlSession.selectList("category.getCategoryList");
+	}
+
+	@Override
+	public void deleteCategoryByCategoryNo(int categoryNo) {
+		sqlSession.delete("category.deleteCategoryByCategoryNo", categoryNo);
+	}
+
+	@Override
+	public void categorySetApproveY(int categoryNo) {
+		sqlSession.update("category.categorySetApproveY", categoryNo);
+	}
+
+	@Override
+	public void categoryInsert(CategoryVo categoryVo) {
+		sqlSession.insert("category.categoryInsert", categoryVo);
+	}
 	
 }

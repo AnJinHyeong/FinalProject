@@ -97,7 +97,7 @@
 			template = template.replace("{{msgTitle}}", resp.msgTitle);
 
 			template = template.replace("{{msgDate}}", resp.msgDate);
- 
+
 			template = template.replace("{{receiverNo}}", resp.receiverNo);
 
 			template = template.replace("{{msgContent}}", resp.msgContent);
@@ -105,13 +105,14 @@
 			template = template.replace("{{senderNo}}", resp.senderNo);
 			template = template.replace("{{memberId}}",resp.memberId);
 			template = template.replace("{{memberId2}}",resp.memberId2);
+			
 
 			
-				
+
 			$("#msgSummarize").append(template);
 
 		}
- 
+
 		 
 
 		$(".msgBtn").on("click", function() {
@@ -138,37 +139,35 @@
 					replaceMsgSummarizeTemplate(resp);
 
 					
-					
-					
+					$(".showMsg").on("click", function(){
+				  		var msgNo = $(this).parent().siblings(".target").find(".msgNo").text();
+				  		console.log(msgNo);
+				  		window.open("${root}/member/msgReWrite?msgNo=" + msgNo,"a","width=600, height=430, left=400, top=100 ,status=no,toolbar=no");
+				  	});
+					 
+					$(".deleteBtn").on("click", function(){
+						var msgNo = $(this).parent().siblings(".target").find(".msgNo").text();
+						console.log(msgNo);
+						$(location).attr('href',"${root}/member/deleteMsg?msgNo="+msgNo);
+				});
+  
+					 
 
 				} 
 
 			});	
-
 	});
+			$(".ab").click();
 		 
 		
-
+	
 		 
 
 }); 
 
-	$(".deleteBtn").on("click", function(){
-			var msgNo = $(this).find(".msgNo").text();
-			
-			$(location).attr('href',"${pageContext.request.contextPath}/member/data/deleteMsg"+msgNo);
-	});
 
 	
-	function showMsg() { 
 
-		 
-		
-		window.open("${root}/member/msgReWrite","a","width=600, height=430, left=400, top=100 ,status=no,toolbar=no");
-		
- 
-
-	}
 
   
 	
@@ -188,7 +187,7 @@
  
  
 	
- 	<div class="h500">
+ 	<div class="h500 target">
  
  
 
@@ -208,11 +207,10 @@
 
  
 
-		
 			<pre class="fs12 fBold mb10">보내는 사람 : {{memberId}}</pre> 
 			<pre class="fs12 fBold mb10">받는 사람 : {{memberId2}}</pre> 
 
-  	 
+ 
 
  			<pre class="fs12 fBold mb10">문의 내용</pre> 
 
@@ -246,8 +244,8 @@
 
 		
 			
- 			<button class="w100p project-btn btn3 project-btn-hover" onclick="showMsg()"><i class="far fa-envelope"></i>문의 답글 보내기</button>
- 			<button class="deleteBtn w100p project-btn btn3 project-btn-hover"name="deleteBtn" id="deleteBtn">메시지 삭제</button>
+ 			<button class="w100p project-btn btn3 project-btn-hover showMsg"><i class="far fa-envelope"></i>문의 답글 보내기</button>
+ 			<button class="w100p project-btn btn3 project-btn-hover deleteBtn">메시지 삭제</button>
 
  			
 
@@ -280,7 +278,7 @@
 
 		<p class="fs34 pl20">
 
-			<strong><i class="far fa-envelope"></i>메시지</strong>
+			<strong>메시지</strong>
 
 		</p>
 
@@ -294,11 +292,11 @@
 
 			<ul class="project-main-ul">
 
-				<li class="project-main-li main-li-on ab"><a class="main-li-a cursorPointer"><i class="far fa-envelope"></i>&nbsp;전체 메시지함</a></li>
+				<li class="project-main-li main-li-on ab"><a class="main-li-a cursorPointer">전체 메시지함</a></li>
 
-				<li class="project-main-li bc"><a class="main-li-a cursorPointer"><i class="far fa-envelope"></i>&nbsp;수신 메시지함</a></li>
+				<li class="project-main-li bc"><a class="main-li-a cursorPointer">수신 메시지함</a></li>
 
-				<li class="project-main-li cd"><a class="main-li-a cursorPointer"><i class="far fa-envelope"></i>&nbsp;발신 메시지함</a></li>
+				<li class="project-main-li cd"><a class="main-li-a cursorPointer">발신 메시지함</a></li>
 
 			</ul>
 
@@ -332,7 +330,7 @@
 
  
 
-					<div class="projectInsert3 w80p pb30">
+					<div class="projectInsert3 w100p pb30">
 
 						<button class="btn btn-hover w100p h80 msgBtn"> 
 
@@ -366,7 +364,7 @@
 				</div>
 
 			
- 
+
 			<div id="msgList2" class="b" style="display:none;">
 
 			<c:choose>
@@ -385,7 +383,7 @@
 
 				
 
-					<div class="projectInsert3 w80p pb30">
+					<div class="projectInsert3 w100p pb30">
 
 						<button class="btn btn-hover w100p h80 msgBtn"> 
 
@@ -435,7 +433,7 @@
 
 				<c:forEach var="messageDto3" items="${messageDto3}">
 
-					<div class="projectInsert3 w80p pb30">
+					<div class="projectInsert3 w100p pb30">
 
 						<button class="btn btn-hover w100p h80 msgBtn"> 
 
@@ -483,7 +481,7 @@
 
  
 
- 
+  
 
 </section>
 

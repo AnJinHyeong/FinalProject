@@ -101,7 +101,7 @@
 							<button class="project-btn btn2">프로젝트 펀딩</button>
 						</c:when>
 						<c:when test="${projectDto.projectState == '4'}">
-							<button class="project-btn btn2">프로젝트 펀딩종료</button>
+							<button class="project-btn btn2">종료된 프로젝트</button>
 						</c:when>
 						<c:otherwise>
 							<button class="project-btn btn2">프로젝트 중단</button>
@@ -179,15 +179,19 @@
 							</div>
 						</form>
 					</c:when>
-					<c:when test="${projectDto.projectState == '3'}">
+					<c:when test="${projectDto.projectState == 'x'}">
+						<div class="project-approval-div-d" style="text-align: center;">
+							<button class="project-approval-btn3"><span style="font-size: 13px;">프로젝트 중단</span></button>	
+							<p class="font-12" style="margin-top: 10px; color: #F86453;"><i class="fas fa-exclamation-circle"></i> 현재 프로젝트는 중단된 상태입니다.</p>
+							<p class="font-12" style="margin-top: 10px; color: #F86453;">설정하신 펀딩 시작일부터 펀딩이 시작됩니다.</p>
+						</div>
+					</c:when>
+					<c:otherwise>
 						<div class="project-approval-div-d" style="text-align: center;">
 							<button class="project-approval-btn3"><span style="font-size: 13px;">심사완료</span></button>	
 							<p class="font-12" style="margin-top: 10px; color: #F86453;"><i class="fas fa-exclamation-circle"></i> 현재 프로젝트의 심사가 완료되었습니다.</p>
 							<p class="font-12" style="margin-top: 10px; color: #F86453;">설정하신 펀딩 시작일부터 펀딩이 시작됩니다.</p>
 						</div>
-					</c:when>
-					<c:otherwise>
-						
 					</c:otherwise>
 				</c:choose>
 				

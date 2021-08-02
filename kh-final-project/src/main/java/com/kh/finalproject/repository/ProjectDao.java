@@ -5,7 +5,11 @@ import java.util.List;
 import com.kh.finalproject.entity.ProjectDto;
 import com.kh.finalproject.entity.SponsorDto;
 import com.kh.finalproject.vo.IndexProjectVo;
+import com.kh.finalproject.vo.ProjectAdminSearchKeywordVo;
+import com.kh.finalproject.vo.ProjectAdminSearchVo;
+import com.kh.finalproject.vo.ProjectAmountGiveVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
+import com.kh.finalproject.vo.ProjectImageVo;
 import com.kh.finalproject.vo.ProjectSponsorVo;
 import com.kh.finalproject.vo.ProjectVo;
 import com.kh.finalproject.vo.SearchVo;
@@ -14,8 +18,14 @@ public interface ProjectDao {
 	
 	//프로젝트 추가
 	void insert(ProjectCategoryVo projectCategoryVo);
+	
+	// 프로젝트 리스트 사진 x
 	List<ProjectDto> proList(int memberNo);
 	List<ProjectDto> proList2(int memberNo);
+	// 프로젝트 리스트 사진 o
+	List<ProjectImageVo> proListWithImageNo(int memberNo);
+	List<ProjectImageVo> proList2WithImageNo(int memberNo);
+	
 	//회원이 만든 프로젝트 전체 조회
 	List<ProjectDto> list(int memberNo);
 	//프로젝트 상세 조회(projectNo,memberNo를 이용한)
@@ -80,5 +90,28 @@ public interface ProjectDao {
 	List<SponsorDto> projectSponsorByProjectNo(int projectNo);
 	//프로젝트 후원자 리스트 조회
 	ProjectSponsorVo getSponsorSelect(int projectNo);
+	// ProjectAmountVo 가져오기
+	List<ProjectAmountGiveVo> getProjectAmountGiveVoList();
+	// 완료된 프로젝트 포인트 지급 컬럼 업데이트
+	void setProjectAmountGiveY(int projectNo);
+	// 카테고리 번호로 프로젝트 정보 가져오기
+	List<ProjectCategoryVo> getProjectByCategoryNo(int categoryNo);
+	// 프로젝트 카테고리 변경
+	void updateProjectCategory(ProjectDto projectDto);
+	
+	
+	
+	
+	//admin 프로젝트 검색
+	List<ProjectAdminSearchVo> projectAdminSelect1();
+	List<ProjectAdminSearchVo> projectAdminSelect2(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo);
+	List<ProjectAdminSearchVo> projectAdminSelect3(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo);
+	List<ProjectAdminSearchVo> projectAdminSelect4(ProjectAdminSearchKeywordVo projectAdminSearchKeywordVo);
+	//admin  프로젝트 상세정보 조회
+	ProjectAdminSearchVo projectAdminSelectOne(int projectNo);
+	//admin 프로젝트 상태 업데이트
+	boolean adminProjectState1(int projectNo);
+	boolean adminProjectState3(int projectNo);
+	boolean adminProjectStateX(int projectNo);
 	
 }

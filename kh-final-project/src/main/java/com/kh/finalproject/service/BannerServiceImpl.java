@@ -40,7 +40,10 @@ public class BannerServiceImpl implements BannerService {
 										.bannerColor(bannerVo.getBannerColor())
 										.build());
 
-		File dir = new File("D:/upload/finalproject");
+//		@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//		File dir = new File("D:/upload/finalproject");
+		File dir = new File("/Users/anjinhyeong/sts-workspace/upload/project_image");
+
 		dir.mkdirs();
 		String fileName = String.valueOf(imageNo);
 		File target = new File(dir, fileName);
