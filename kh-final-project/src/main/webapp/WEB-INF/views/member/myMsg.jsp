@@ -119,7 +119,6 @@
 			$("#msgSummarize").empty();
 
 			var msgNo = $(this).find(".msgNo").text();
-			
 
 			$.ajax({
 
@@ -137,14 +136,14 @@
 
 					replaceMsgSummarizeTemplate(resp);
 
-					
-					
-					
-
+					$(".showMsg").on("click", function(){
+				  		var msgNo = $(this).parent().siblings(".target").find(".msgNo").text();
+				  		console.log(msgNo);
+				  		window.open("${root}/member/msgReWrite?msgNo=" + msgNo,"a","width=600, height=430, left=400, top=100 ,status=no,toolbar=no");
+				  	});
 				} 
 
 			});	
-
 	});
 		 
 		
@@ -159,25 +158,6 @@
 			$(location).attr('href',"${pageContext.request.contextPath}/member/data/deleteMsg"+msgNo);
 	});
 
-	
-	function showMsg() { 
-
-		 
-		
-		window.open("${root}/member/msgReWrite","a","width=600, height=430, left=400, top=100 ,status=no,toolbar=no");
-		
- 
-
-	}
-
-  
-	
-	
- 
-	
- 
- 
-
 </script>
 
  
@@ -188,68 +168,28 @@
  
  
 	
- 	<div class="h500">
- 
- 
-
- 		<div class="h200"> 
+ 	<div class="h500 target">
+ 		<div class="h200">
 
 			<pre class="msgNo" name="msgNo">{{msgNo}}</pre>
-
  			<pre class="wordBreak preWrap fs18 fBold h80">{{msgTitle}}</pre> 
-
- 
-
 			<pre class="fs12 fBold mb30 taRight">날짜 : {{msgDate}}</pre> 
- 
-		
-
-			
-
- 
-
-		<pre class="fs12 fBold mb10">보내는 사람 : {{receiverNo}}</pre> 
-
+			<pre class="fs12 fBold mb10">보내는 사람 : {{receiverNo}}</pre> 
 			<pre class="fs12 fBold mb10">받는 사람 : {{senderNo}}</pre> 
-
- 
-
- 			<pre class="fs12 fBold mb10">문의 내용</pre> 
-
- 
+ 			<pre class="fs12 fBold mb10">문의 내용</pre>
 
  		</div>		
 
- 
-
  		<div class="bac250 boc220 bosSolid bow1 w100p h270 p20 scrollThin"> 
-
-			
-
  			<pre class="fs12 fBold mb10 ml10">{{msgContent}}</pre> 
+ 		</div>
 
-			
-
-				
-
- 			</div>
-
- 		</div> 
-
- 
-
- 	 
-
-	  
+ 	</div>
 
  	<div class="h100">
 
-		
-			
- 			<button class="w100p project-btn btn3 project-btn-hover" onclick="showMsg()"><i class="far fa-envelope"></i>문의 답글 보내기</button>
+ 			<button class="w100p project-btn btn3 project-btn-hover showMsg"><i class="far fa-envelope"></i>문의 답글 보내기</button>
  			<button class="deleteBtn w100p project-btn btn3 project-btn-hover"name="deleteBtn" id="deleteBtn">메시지 삭제</button>
-
- 			
 
  	</div> 
 	
@@ -308,7 +248,7 @@
 
  
 
-	<div class="container-1400 dpFlex pl100 pr100">
+	<div class="container-1200 dpFlex">
 
  
 
@@ -332,7 +272,7 @@
 
  
 
-					<div class="projectInsert3 w80p pb30">
+					<div class="projectInsert3 w100p pb30">
 
 						<button class="btn btn-hover w100p h80 msgBtn"> 
 
@@ -385,7 +325,7 @@
 
 				
 
-					<div class="projectInsert3 w80p pb30">
+					<div class="projectInsert3 w100p pb30">
 
 						<button class="btn btn-hover w100p h80 msgBtn"> 
 
@@ -435,7 +375,7 @@
 
 				<c:forEach var="messageDto3" items="${messageDto3}">
 
-					<div class="projectInsert3 w80p pb30">
+					<div class="projectInsert3 w100p pb30">
 
 						<button class="btn btn-hover w100p h80 msgBtn"> 
 
