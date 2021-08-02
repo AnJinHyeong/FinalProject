@@ -382,9 +382,6 @@ else if(mainBannerImageCount == 1){
 </script>
 
 <div class="section-row">
-
-<%-- 	<a href="${root}/deleteLocalFileNotInDB">로컬 파일 정리</a> --%>
-<%-- 	<a href="${root}/givePointByFinishedProject">종료프로젝트 포인트 지급</a> --%>
 	
 	<div class="dpFlex dpFlexXCenter mt20 mb20 boc220 bow1 bosSolid">
 		<div id="mainBannerContainer" class="dpInlineBlock w800 h450 scrollNone poRelative">
