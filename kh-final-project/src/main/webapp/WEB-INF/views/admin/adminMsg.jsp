@@ -111,9 +111,6 @@
 			});	
 
 	});
-		
-		
-	});
 	</script>
 	<script id="msgSummarizeTemplate" type="text/template"> 
  
@@ -256,7 +253,38 @@ element.style {
  
 
 		<div class="container-800 hMax600 mt30 mb30 scrollThin">
-
+		
+			<div>
+				<form action="" method="post">
+					<input type="text" name="keyword">
+					<input type="submit" value="검색">
+				</form>
+			</div>
+		
+		
+		
+			<div>
+				<c:forEach var="msgVo" items="${msgVoList}">
+					<div>
+						<span>${msgVo.msgNo}</span>
+						<span>${msgVo.senderNick}</span>
+						<span>${msgVo.msgTitle}</span>
+						<span>${msgVo.receiverNick}</span>
+						<span>${msgVo.msgDate}</span>
+						
+						<c:if test="${msgVo.receiverNo == 1}">
+							<span>관리자한테 온 메시지 : ${msgVo.msgContent}</span>
+						</c:if>
+					</div>
+				</c:forEach>
+			</div>
+			
+			
+			
+			
+			
+			
+			
 				<div id="msgList" class="a" style="display:none;">
 
 			<c:choose>
@@ -405,7 +433,7 @@ element.style {
  
 
 		</div>
-		<div class="container-300 h700 mt30 mb30 boc200 bosSolid bow1 bora5 p30" id="msgSummarize"></div>
+		<div class="container-300 h700 mt30 mb30 boc200 bosSolid bow1 bora5 p30 target" id="msgSummarize"></div>
 	</div>
 	</section>
 </body>

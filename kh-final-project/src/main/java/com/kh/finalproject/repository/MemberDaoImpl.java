@@ -10,6 +10,7 @@ import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.PayDto;
 import com.kh.finalproject.entity.SponsorDto;
 import com.kh.finalproject.vo.MemberVo;
+import com.kh.finalproject.vo.MsgVo;
 
 
 @Repository
@@ -130,7 +131,5 @@ public class MemberDaoImpl implements MemberDao{
 	public boolean checkEmail(String memberEmail) {
 		return sqlSession.selectOne("member.checkEmail", memberEmail) != null;
 	}
-
-
 
 }

@@ -44,18 +44,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from message where msg_no = #{msgNo}
 	</select>
 	
-<!-- 	발송메시지함 -->
+<!-- 	특정 멤버 발송메시지함 -->
 	<select id="msgSendByMemberNo" parameterType="int" resultType="MessageDto">
 		select * from message where sender_no = #{memberNo} ORDER BY msg_no DESC
 	</select>
-<!-- 	받은메시지함 -->
+<!-- 	특정 멤버 받은메시지함 -->
 	<select id="msgReceiverByMemberNo" parameterType="int" resultType="MessageDto">
 		select * from message where receiver_no = #{memberNo} ORDER BY msg_no DESC
 	</select>
-<!-- 	전체 메시지함 -->
+<!-- 	특정 멤버 전체 메시지함 -->
 	<select id="msgAllByMemberNo" parameterType="int" resultType="MessageDto">
 		select * from message where sender_no = #{memberNo} or receiver_no = #{memberNo} order by msg_no DESC
-	</select> 
+	</select>
+	
+<!-- 	전체 메시지함 -->
+	<select id="msgAll" resultType="MsgVo">
+		select message.msg_no, message.sender_no, M1.member_nick sender_nick, message.msg_title, message.msg_content, 
+			message.receiver_no, M2.member_nick receiver_nick, msg_date from message
+			    left outer join member M1 on message.sender_no = M1.member_no
+			    left outer join member M2 on message.receiver_no = M2.member_no order by message.msg_no desc
+	</select>
+	
+<!-- 	전체 메시지함 검색 -->
+	<select id="msgAllByKeyword" resultType="MsgVo" parameterType="String">
+		select message.msg_no, message.sender_no, M1.member_nick sender_nick, message.msg_title, message.msg_content, 
+			message.receiver_no, M2.member_nick receiver_nick, msg_date from message
+			    left outer join member M1 on message.sender_no = M1.member_no
+			    left outer join member M2 on message.receiver_no = M2.member_no 
+            where instr(M1.member_nick, #{keyword}) > 0 or instr(M2.member_nick, #{keyword}) > 0 or instr(message.msg_no, #{keyword}) > 0 
+            	or instr(message.msg_title, #{keyword}) > 0
+        order by message.msg_no desc
+	</select>
+	
+	
 <!-- 	메시지 삭제 -->
  	<delete id="deleteByMsg" parameterType="MessageDto">
  		delete message where msg_no = #{msgNo}
