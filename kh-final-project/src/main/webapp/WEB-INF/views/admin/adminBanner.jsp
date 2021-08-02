@@ -118,7 +118,7 @@
 						<img id="targetImage" style="width: 100%; height: 100%; object-fit:cover;">
 					</div>
 					
-					<div id="mainBannerTextContainer" style="width:400px; height: 450px; padding-top: 100px; padding-left: 30px; padding-right: 30px; border: 1px solid rgb(220, 220, 220);">
+					<div id="mainBannerTextContainer" style="width:400px; height: 450px; padding-top: 100px; padding-left: 30px; padding-right: 30px; border: 1px solid rgb(220, 220, 220); text-align: left;">
 						
 						<div class="mb20 h80">
 							<span id="mainBannerTitle" style="font-size: 30px; font-weight: bold"></span>

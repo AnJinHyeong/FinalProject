@@ -8,7 +8,7 @@
 
 <style>
 	html, body{
-		background-color: rgba(180, 253, 11, 0.05);
+		background-color: rgba(180, 253, 11, 0.03);
 		padding: 0px;
 		margin: 0px;
 	}

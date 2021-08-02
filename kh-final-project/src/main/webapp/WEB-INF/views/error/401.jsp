@@ -8,7 +8,7 @@
 
 <style>
 	html, body{
-		background-color: rgba(180, 253, 11, 0.05);
+		background-color: rgba(180, 253, 11, 0.03);
 		padding: 0px;
 		margin: 0px;
 	}
@@ -40,7 +40,7 @@
 
 <div id="result">
 	<div style="width: 700px; text-align: center; font-size: 100px; font-weight: bold; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 1">
-		<span>500 ERROR <i class="fas fa-dog"></i></span>
+		<span>401 ERROR <i class="fas fa-dog"></i></span>
 		<a style="font-size: 24px; text-decoration: none; color: black;" href="${root}">홈으로</a>
 	</div>
 </div>
