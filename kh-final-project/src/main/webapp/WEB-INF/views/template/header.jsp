@@ -26,6 +26,8 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <script>
 	$(function(){
+		$('input').attr('autocomplete','off');
+		
 		$.ajax({
 			url :"${pageContext.request.contextPath}/header/getMemberHavePoint",
 			type: "post",
@@ -59,16 +61,18 @@
 			$(".headerProject").toggle();
 		});
 		
-		$.ajax({
-			url :"${pageContext.request.contextPath}/member/getMember",
-			type: "post",
-			success : function(resp){
-				if(resp.memberGrade == "관리자"){
-					$("#isNotAdmin").hide();
-					$("#isAdmin").show();
+		if(${isLogin}){
+			$.ajax({
+				url :"${pageContext.request.contextPath}/member/getMember",
+				type: "post",
+				success : function(resp){
+					if(resp.memberGrade == "관리자"){
+						$("#isNotAdmin").hide();
+						$("#isAdmin").show();
+					}
 				}
-			}
-		});
+			});
+		}
 		
 	});
 	

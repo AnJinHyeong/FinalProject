@@ -17,7 +17,6 @@ input:focus{outline:none}
 select:focus{outline:none}
 textarea:focus{outline:none}
 
-
 .align-column {
 	display: flex;
 	flex-direction: column;

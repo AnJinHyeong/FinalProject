@@ -19,4 +19,11 @@ public class MsgVo {
 	private String memberId;
 	private String memberId2;
 
+
+	
+	private String senderNick;
+	private String receiverNick;
+	
+	private String keyword;
+
 }

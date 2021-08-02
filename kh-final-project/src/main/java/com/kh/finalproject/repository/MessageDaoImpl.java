@@ -67,6 +67,18 @@ public class MessageDaoImpl implements MessageDao{
 		return count > 0;
 	}
 	
-	
+
+	@Override
+	public List<MsgVo> msgAll() {
+		return sqlSession.selectList("member.msgAll");
+	}
+
+
+
+
+	@Override
+	public List<MsgVo> msgAll(String keyword) {
+		return sqlSession.selectList("member.msgAllByKeyword", keyword);
+	}
 
 }

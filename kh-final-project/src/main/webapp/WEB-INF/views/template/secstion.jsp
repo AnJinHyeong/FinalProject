@@ -221,6 +221,14 @@
 		
 		var playRolling;
 		
+		
+if(mainBannerImageCount >= 2){
+	if(mainBannerImageCount == 2){
+		mainBannerImageCount = 4;
+		var mainBannerImageCount2 = 2;
+		maxLeft = (mainBannerImageCount - 2) * width;
+	}
+		
 		var startPlayRolling = setTimeout(function() {
 			imageRollingNext($("#imageNextBtn"));
 		}, 4000);
@@ -249,6 +257,9 @@
 			});
 			
 			currentNo = currentNo + 1;
+			if(mainBannerImageCount2 == 2){
+				currentNo = (currentNo + 1) % 2 + 1;
+			}
 			if (currentNo > mainBannerImageCount){
 				currentNo = 1;
 			}
@@ -294,6 +305,9 @@
 			});
 			
 			currentNo = currentNo - 1;
+			if(mainBannerImageCount2 == 2){
+				currentNo = (currentNo + 1) % 2 + 1;
+			}
 			if(currentNo < 1){
 				currentNo = mainBannerImageCount;
 			}
@@ -326,6 +340,11 @@
 				$(this).css("left", (Number($(this).css("left").split("px")[0]) + width) + "px");
 			}
 		});
+		
+}
+else if(mainBannerImageCount == 1){
+	$(".mainBannerImage").css("left", "0px");
+}		
 		
 	});
 	
@@ -374,6 +393,13 @@
 					<img class="w800 h100p rollingImage" src="${pageContext.request.contextPath}/image/downloadImageMainBanner/${imageDto.imageNo}">
 				</div>
 			</c:forEach>
+			<c:if test="${mainBannerImageCount == 2}">
+				<c:forEach var="imageDto" items="${mainBannerImageList}" varStatus="status">
+					<div class="mainBannerImage w100p h100p poAbsolute" style="left: ${(status.index + 1) * 800}px;">
+						<img class="w800 h100p rollingImage" src="${pageContext.request.contextPath}/image/downloadImageMainBanner/${imageDto.imageNo}">
+					</div>
+				</c:forEach>
+			</c:if>
 		</div>
 		<div id="mainBannerTextContainer" class="dpInlineBlock w400 h450 scrollNone pl30 pr30 pt100" style="background-color: ${startBannerDto.bannerBackgroundColor}; color: ${startBannerDto.bannerColor}">
 		

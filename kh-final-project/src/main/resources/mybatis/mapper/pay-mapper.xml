@@ -20,8 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{payPrice},
 		'결제 요청',
 		systimestamp,
-		#{memberNo},
-		0
+		#{memberNo}
 		)
 	</insert>
 

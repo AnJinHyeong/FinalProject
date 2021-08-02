@@ -6,7 +6,6 @@ import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.PayDto;
 import com.kh.finalproject.entity.SponsorDto;
 import com.kh.finalproject.vo.MemberVo;
-import com.kh.finalproject.vo.MsgVo;
 
 public interface MemberDao {
 	boolean checkId(String memberId);
