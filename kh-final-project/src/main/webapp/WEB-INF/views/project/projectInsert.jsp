@@ -142,7 +142,7 @@ style="background-image: url('${root}/image/insertBackground.jpg');">
 				</div>
 			</c:if>
 
-
+ 
 			<div>
 				<p class="fs24 fBold pb10">멋진 아이디어가 있으시군요!</p>
 				<p class="fs24 fBold pb10">어떤 프로젝트를 계획 중이신가요?</p>

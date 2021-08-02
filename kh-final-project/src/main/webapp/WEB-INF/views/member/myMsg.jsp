@@ -1,14 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+ 
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+ 
+
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
+
 <c:set var="isMsg" value="${empty messageDto}"></c:set>
+
+ 
+
 <c:set var="isMsg2" value="${empty messageDto2}"></c:set>
+
+ 
+
 <c:set var="isMsg3" value="${empty messageDto3}"></c:set>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
+
 
 <script>
 
@@ -89,7 +103,8 @@
 			template = template.replace("{{msgContent}}", resp.msgContent);
 
 			template = template.replace("{{senderNo}}", resp.senderNo);
-
+			template = template.replace("{{memberId}}",resp.memberId);
+			template = template.replace("{{memberId2}}",resp.memberId2);
 			
 
 			
@@ -144,32 +159,100 @@
 	});
 			$(".ab").click();
 		 
+		
+	
+		 
 
 }); 
 
 
+	
+
+
+  
+	
+	
+ 
+	
+ 
+ 
+
 </script>
 
+ 
+
+ 
+
  <script id="msgSummarizeTemplate" type="text/template"> 
+ 
+ 
+	
  	<div class="h500 target">
+ 
+ 
+
  		<div class="h200"> 
+
 			<pre class="msgNo" name="msgNo">{{msgNo}}</pre>
+
  			<pre class="wordBreak preWrap fs18 fBold h80">{{msgTitle}}</pre> 
+
+ 
+
 			<pre class="fs12 fBold mb30 taRight">날짜 : {{msgDate}}</pre> 
-			<pre class="fs12 fBold mb10">보내는 사람 : {{receiverNo}}</pre> 
-			<pre class="fs12 fBold mb10">받는 사람 : {{senderNo}}</pre> 
+ 
+		
+
+			
+
+ 
+
+			<pre class="fs12 fBold mb10">보내는 사람 : {{memberId}}</pre> 
+			<pre class="fs12 fBold mb10">받는 사람 : {{memberId2}}</pre> 
+
+ 
+
  			<pre class="fs12 fBold mb10">문의 내용</pre> 
+
+ 
+
  		</div>		
 
+ 
+
  		<div class="bac250 boc220 bosSolid bow1 w100p h270 p20 scrollThin"> 
+
+			
+
  			<pre class="fs12 fBold mb10 ml10">{{msgContent}}</pre> 
- 		</div>
- 	</div> 
+
+			
+
+				
+
+ 			</div>
+
+ 		</div> 
+
+ 
+
+ 	 
+
+	  
 
  	<div class="h100">
- 		<button class="w100p project-btn btn3 project-btn-hover showMsg"><i class="far fa-envelope"></i>문의 답글 보내기</button>
- 		<button class="w100p project-btn btn3 project-btn-hover deleteBtn">메시지 삭제</button>
+
+		
+			
+ 			<button class="w100p project-btn btn3 project-btn-hover showMsg"><i class="far fa-envelope"></i>문의 답글 보내기</button>
+ 			<button class="w100p project-btn btn3 project-btn-hover deleteBtn">메시지 삭제</button>
+
+ 			
+
  	</div> 
+	
+	
+ 
 
  </script>  
 
@@ -263,8 +346,14 @@
 							</table>
 							<div class="dpNone msgNo" >${messageDto.msgNo}</div>
 						</button>
+						
+
+
+						 
 
 					</div>  
+
+ 
 
 				</c:forEach> 
 
@@ -273,6 +362,8 @@
 			</c:choose>
 
 				</div>
+
+			
 
 			<div id="msgList2" class="b" style="display:none;">
 
@@ -287,25 +378,44 @@
 				</c:when>
 
 				<c:otherwise>
-					<c:forEach var="messageDto2" items="${messageDto2}">
-						<div class="projectInsert3 w100p pb30">
-							<button class="btn btn-hover w100p h80 msgBtn"> 
-								<table>
-									<tr>
-										<td width="90px"  style="margin-top:40px;" class="msgTitle">${messageDto2.msgTitle}</td>
-										<td width="90px"  style="margin-top:40px; margin-left:50px;" class="receiverNo">${messageDto2.receiverNo}</td>
-										<td width="90px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto2.msgContent,0,5)}</td>
-									</tr>
-								</table>
-								<div class="dpNone msgNo" >${messageDto2.msgNo}</div>
-							</button>
-						</div>
-					</c:forEach> 
+
+				<c:forEach var="messageDto2" items="${messageDto2}">
+
+				
+
+					<div class="projectInsert3 w100p pb30">
+
+						<button class="btn btn-hover w100p h80 msgBtn"> 
+
+							
+							<table>
+							<tr>
+							<td width="90px"  style="margin-top:40px;" class="msgTitle">${messageDto2.msgTitle}</td>
+
+							<td width="90px"  style="margin-top:40px; margin-left:50px;" class="receiverNo">${messageDto2.receiverNo}</td>
+
+							<td width="90px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto2.msgContent,0,5)}</td>
+
+							</tr>
+							</table>
+
+							<div class="dpNone msgNo" >${messageDto2.msgNo}</div>
+
+						</button>
+
+					</div>
+
+ 
+
+				</c:forEach> 
+
 				</c:otherwise>
 
 			</c:choose>
 
 			</div>
+
+			
 
 			<div id="msgList3" class="c" style="display:none;">
 
@@ -327,6 +437,8 @@
 
 						<button class="btn btn-hover w100p h80 msgBtn"> 
 
+						
+
 							<table>
 							<tr>
 							<td width="90px"  style="margin-top:40px;" class="msgTitle">${messageDto3.msgTitle}</td>
@@ -343,6 +455,8 @@
 
 					</div>
 
+ 
+
 				</c:forEach> 
 
 				</c:otherwise>
@@ -351,12 +465,26 @@
 
 			</div>
 
+ 
+
 		</div>
+
+ 
 
 		<div class="container-300 h700 mt30 mb30 boc200 bosSolid bow1 bora5 p30" id="msgSummarize"></div>
 
+ 
+
 	</div>
 
+ 
+
+ 
+
+  
+
 </section>
+
+ 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

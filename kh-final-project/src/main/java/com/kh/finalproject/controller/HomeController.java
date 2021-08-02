@@ -39,7 +39,7 @@ public class HomeController {
 	@GetMapping("/deleteLocalFileNotInDB")
 	public String deleteLocalFileNotInDB() {
 		fileService.deleteLocalFileNotInDB();
-		return "redirect:/";
+		return "redirect:/admin";
 	}
 	
 	@Autowired
@@ -48,7 +48,7 @@ public class HomeController {
 	@GetMapping("/givePointByFinishedProject")
 	public String givePointByFinishedProject() {
 		pointService.finishedProjectGiveAmount();
-		return "redirect:/";
+		return "redirect:/admin";
 	}
 	
 }
