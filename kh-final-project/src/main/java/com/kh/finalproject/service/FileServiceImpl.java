@@ -45,17 +45,18 @@ public class FileServiceImpl implements FileService {
 				targetFile.delete();
 			}
 		}
+		info();
 	}
 	
-	public void test() {
-		log.debug("로컬 파일 정리가 완료되었습니다. test");
+	public void info() {
+		log.info("로컬 파일 정리가 완료되었습니다.");
 	}
 	
 	@Scheduled(cron = "0 0 0 * * *")
 	@Override
 	public void autoClearDeleteLocalFileNotInDB() {
-		test();
-//		deleteLocalFileNotInDB();
+		deleteLocalFileNotInDB();
+		info();
 	}
 
 }

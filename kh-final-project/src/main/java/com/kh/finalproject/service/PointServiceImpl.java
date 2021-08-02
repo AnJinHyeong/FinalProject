@@ -106,17 +106,19 @@ public class PointServiceImpl implements PointService{
 				projectDao.setProjectAmountGiveY(projectAmountGiveVo.getProjectNo());
 			}
 		}
+		info();
 	}
 	
-	public void test() {
-		log.debug("포인트 지급이 완료되었습니다. test");
+	public void info() {
+		log.info("포인트 지급이 완료되었습니다.");
 	}
 	
 	@Scheduled(cron = "0 0 0 * * *")
 	@Override
+	// 00:00:00 마다 완료된 프로젝트 포인트 정산
 	public void autoGiveAmountByFinishedProject() {
-//		finishedProjectGiveAmount();
-		test();
+		finishedProjectGiveAmount();
+		info();
 	}
 
 }
