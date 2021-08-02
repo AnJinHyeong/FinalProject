@@ -65,6 +65,9 @@
 			<exclude-mapping path="/project/projectCategorySearchAll/**"/>
 			<exclude-mapping path="/member/login"/>
 			<exclude-mapping path="/member/join"/>
+			<exclude-mapping path="/member/myId"/>
+			<exclude-mapping path="/member/myPw"/>
+			<exclude-mapping path="/member/getPw"/>
 			<exclude-mapping path="/member/memberInsert"/>
 			<beans:bean class="com.kh.finalproject.interceptor.MemberLoginInterceptor"></beans:bean>
 		</interceptor>
@@ -74,6 +77,17 @@
 		<interceptor>
 			<mapping path="/projectBoard/**/projectBoardCommunity"/>
 			<beans:bean class="com.kh.finalproject.interceptor.MemberLoginInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/admin/**"/>
+			<mapping path="/banner/**"/>
+			<exclude-mapping path="/banner/data/**"/>
+			<exclude-mapping path="/admin/adminMsgWrite"/>
+			<exclude-mapping path="/admin/adminMsgInsert"/>
+			<beans:bean class="com.kh.finalproject.interceptor.AdminInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>
 	
