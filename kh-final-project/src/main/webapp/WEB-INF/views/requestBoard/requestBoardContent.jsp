@@ -85,6 +85,16 @@
 			
 		});
 		
+		$('#editIcon').hover(function() {
+			  $("#editI").removeClass('fas');
+			  $("#editI").removeClass('fa-pencil-alt');
+			  $("#editI").text("수정");
+			}, function(){
+				$("#editI").addClass('fas');
+				$("#editI").addClass('fa-pencil-alt');
+				$("#editI").text("");
+			});
+		
 		
 		
 		
@@ -114,11 +124,16 @@
 		
 		<div class="container-1000 hMin300 mt30 mb10" style="border: 1px solid #dcdcdc; border-radius: 8px; padding: 20px;">
 			
-			<div style="padding-left: 10px;">
-				<p class="font-20 ">${request.requestTitle} 
+			<div style="padding-left: 10px;" class="float-container">
+				<p class="font-20 left" style="width: 95%;">${request.requestTitle} 
 					<span class="font-20 red request-Like-Btn" id="requestLikeBtn"><i class=' fa-heart' id="requestLikeIcon"></i> <span style="font-size: 14px;" id="likeCount">${request.requestLikeCount}</span></span>
 				</p>
-				
+				<c:if test="${memberNo == request.requestMemberNo}">
+					<p class="right" style="width: 5%; text-align: right;">
+						<a id="editIcon" class="red" style="font-size: 14px;" href="${pageContext.request.contextPath}/requestBoard/requestBoardEdit/${request.requestNo}"><i id="editI" class="fas fa-pencil-alt"></i></a>
+						<a class="font-20 red" href="${pageContext.request.contextPath}/requestBoard/requestDelete/${request.requestNo}">x</a>
+					</p>
+				</c:if>
 			</div>
 			<div class="float-container" style="margin: 10px 0; border-bottom: 1px solid red; padding: 10px 0 10px 10px; color: #7c7c7c;">
 				 <span class="font-12 left">${request.categoryTheme}</span>

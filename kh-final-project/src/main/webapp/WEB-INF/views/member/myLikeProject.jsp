@@ -3,6 +3,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
+
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <script>
@@ -38,13 +40,21 @@
 	
 	<div class="container-1200" style="margin: 0 auto; height: 700px;">
 	
-		<div class="container-800 hMax600 mt30 mb30 scrollThin">
+		<div class="container-1200 hMax600 mt30 mb30 scrollThin">
 	
 			<c:forEach var="likeList" items="${likeList}">
 				
 				<div class="projectInsert3 w100p pb30">
 					<button class="btn btn-hover w100p h80 myLikeProject" id="${likeList.projectNo}">
-						<div class="project-main-img w80 h100p"></div>
+						<c:choose>
+							<c:when test="${likeList.imageNo == 0}">
+								<div class="project-main-img w80 h100p"></div>
+							</c:when>
+							<c:otherwise>
+								<div class="project-main-img w80 h100p"
+									style="background-image: url('${root}/image/project/projectMainDownload/${likeList.imageNo}');"></div>
+							</c:otherwise>
+						</c:choose>
 						<div class="btn-text projectTitle">${likeList.projectTitle}</div>
 						<div class="dpNone projectNo">${likeList.projectNo}</div>
 					</button>

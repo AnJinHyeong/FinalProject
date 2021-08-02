@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 public class ProjectCategoryVo {
 	private int projectNo;
 	private String projectSummary;
+	private String projectTitle;
 	
 	private int memberNo;
 	

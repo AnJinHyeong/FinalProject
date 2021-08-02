@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from banner where banner_no = 
 			(select main_banner from(
 			    select rownum rn, TMP.* from( 
-			        select main_banner from image_file order by image_no desc) TMP)
+			        select main_banner from image_file order by image_no desc) TMP where main_banner is not null)
 			    where rn = #{indexNo})
     </select>
     

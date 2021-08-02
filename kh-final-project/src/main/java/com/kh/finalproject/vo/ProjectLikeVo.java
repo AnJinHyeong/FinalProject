@@ -34,4 +34,6 @@ public class ProjectLikeVo {
 	private int likeMemberNo;
 	private Date likeDate;
 	
+	private int imageNo;
+	
 }

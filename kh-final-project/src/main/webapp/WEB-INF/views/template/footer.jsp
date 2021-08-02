@@ -4,10 +4,6 @@
 <script>
 	$(function(){
 		
-		$(".footer-btn").hover(function(){
-			$(".footer-btn-i").style.color = "black";
-		});
-		
 		
 	});
 	

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace ="admin">
+
+	<!-- 멤버 전체 조회 및 검색 조회 -->
+	<select id = "memberSearchAll" resultType = "AdminMemberVO">
+		SELECT member_no, member_id, member_nick, 
+		member_have_point, member_email, 
+		member_grade, member_address FROM member
+		<!-- WHERE절 include 태그로 삽입 -->
+ 		<include refid = "searchMember"></include> 
+		ORDER BY member_no
+	</select>
+
+	<!-- 결제 전체 조회 및 검색 조회 -->
+	<select id = "paySearchAll" resultType = "AdminMemberVO">
+		SELECT pay_no, pay_tid, pay_price, pay_date, member_id, member_nick 
+		FROM  pay  
+		JOIN member
+		ON pay.member_no = member.member_no
+		<include refid = "searchPay"></include>
+		ORDER BY pay_no
+	</select>
+
+	<!-- 멤버조회수 카운트 -->
+	<select id = "memberCount" resultType ="int">
+		SELECT COUNT(*) FROM member
+ 		<include refid = "searchMember"></include>
+	</select>
+
+	<!-- 결제조회수 카운트 -->
+	<select id = "payCount" resultType ="int">
+		SELECT COUNT(*) 
+		FROM pay
+		JOIN member
+		ON pay.member_no = member.member_no
+		<include refid = "searchPay"></include>
+	</select>
+
+	<!-- 회원 조건 검색 반복 구문 -->
+	<sql id = "searchMember">
+		<choose>
+			<!-- 전체 내용으로 검색일때 -->
+			<when test = "searchOption == 'all' ">
+				WHERE member_id LIKE '%' | | #{keyWord} | |'%'
+				OR member_nick LIKE '%' | | #{keyWord} | |'%'
+				OR member_email LIKE '%' | | #{keyWord} | |'%'
+				OR member_grade LIKE '%' | | #{keyWord} | |'%'
+			</when>
+			<!-- 키워드 검색일때 -->
+			<otherwise>
+			WHERE ${searchOption} LIKE  '%' | | #{keyWord}  | | '%'
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<!-- 결제 조건 검색 반복 구문 -->	
+		<sql id = "searchPay">
+		<choose>
+			<!-- 전체 내용으로 검색일때 -->
+			<when test = "searchOption == 'all' ">
+				WHERE pay_no LIKE '%' | | #{keyWord} | |'%'
+				OR pay_tid LIKE '%' | | #{keyWord} | |'%'
+				OR pay_date LIKE '%' | | #{keyWord} | |'%'
+				OR member_id LIKE '%' | | #{keyWord} | |'%'
+				OR member_nick LIKE '%' | | #{keyWord} | |'%'
+			</when>
+			<!-- 키워드 검색일때 -->
+			<otherwise>
+			WHERE ${searchOption}  LIKE  '%' | | #{keyWord}  | | '%'
+			</otherwise>
+		</choose>
+	</sql>
+
+	<!-- 결제 전체 조회 및 검색 조회
+	<select id = "paySearchAll" resultType = "AdminMemberVO">
+		SELECT pay_no, pay_tid, pay_price, pay_date, member_id, member_nick 
+		FROM  pay, member 
+		WHERE pay.member_no = member.member_no(+)
+	</select> -->
+
+</mapper>

@@ -93,6 +93,81 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM request WHERE instr(request_title, #{keyword}) > 0 ORDER BY request_no asc
 	</select>
 	
+	<delete id="deleteRequest" parameterType="RequestDto">
+		delete request where request_no = #{requestNo} and request_member_no = #{requestMemberNo}
+	</delete>
+	
+	<update id="requestEdit" parameterType="RequestDto">
+		update request 
+		set request_title = #{requestTitle}, request_category_no = #{requestCategoryNo}, request_content = #{requestContent} 
+		where request_no = #{requestNo} and request_member_no = #{requestMemberNo}
+	</update>
+	
+	<select id="requestEditgetByRequestNo" parameterType="int" resultType="RequestDto">
+		select * from request where request_no = #{requestNo}
+	</select>
+	
+	
+	<!--  관리자 페이지 검색 기능 -->
+	<select id="requestAdminSelect1" resultType="RequestVo">
+		<![CDATA[
+			select
+			    R.*,
+			    C.CATEGORY_THEME 
+			from request R
+			    INNER join category C on R.request_category_no = C.category_no 
+			    ORDER BY REQUEST_NO asc
+		]]>
+	</select>
+	<select id="requestAdminSelect2" parameterType="RequestAdminSearchKeywordVo" resultType="RequestVo">
+		<![CDATA[
+			select
+			    R.*,
+			    C.CATEGORY_THEME 
+			from request R
+			    INNER join category C on R.request_category_no = C.category_no 
+			ORDER BY ${requestOrderBy} desc
+		]]>
+	</select>
+	<select id="requestAdminSelect3" parameterType="RequestAdminSearchKeywordVo" resultType="RequestVo">
+		<![CDATA[
+			select
+			    R.*,
+			    C.CATEGORY_THEME 
+			from request R
+			    INNER join category C on R.request_category_no = C.category_no 
+			WHERE (instr(R.${searchType} , #{keyword}) > 0)
+			ORDER BY REQUEST_NO asc
+		]]>
+	</select>
+	<select id="requestAdminSelect4" parameterType="RequestAdminSearchKeywordVo" resultType="RequestVo">
+		<![CDATA[
+			select
+			    R.*,
+			    C.CATEGORY_THEME 
+			from request R
+			    INNER join category C on R.request_category_no = C.category_no 
+			WHERE (instr(R.${searchType} , #{keyword}) > 0)
+			ORDER BY ${requestOrderBy} desc
+		]]>
+	</select>
+	
+	<delete id="adminDeleteRequest" parameterType="int">
+		delete reqeust where request_no = #{requestNo}
+	</delete>
+	
+	<select id="adminRequestSelectOne" parameterType="int" resultType="RequestAdminSearchVo">
+		SELECT
+			R.*,
+			C.CATEGORY_THEME,
+			M.MEMBER_NICK 
+		FROM
+			request R
+			left outer join category C ON R.REQUEST_category_no = C.category_no
+			left outer join member M ON R.request_member_no = M.member_no
+		WHERE request_no = #{requestNo}
+	</select>
+	
 </mapper>
 
 

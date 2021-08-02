@@ -31,7 +31,7 @@ public class BannerController {
 		
 		bannerService.insertMainBanner(bannerVo);
 		
-		return "redirect:/";
+		return "redirect:bannerList";
 	}
 	
 	@Autowired
@@ -40,7 +40,7 @@ public class BannerController {
 	@GetMapping("/bannerList")
 	public String bannerList(Model model) {
 		model.addAttribute("bannerList", bannerDao.getBannerList());
-		return "banner/bannerList";
+		return "admin/adminBanner";
 	}
 	
 	@GetMapping("/bannerDelete")

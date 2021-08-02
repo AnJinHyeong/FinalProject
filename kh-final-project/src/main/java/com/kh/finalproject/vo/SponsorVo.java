@@ -12,4 +12,6 @@ public class SponsorVo {
 	private int sumSponsorAmount;
 	
 	private int memberNo;
+	
+	private int imageNo;
 }

@@ -46,30 +46,49 @@ aside *{
 }
 .admin-aside-top_menu{
 	 padding: 1rem 0;
+	 list-style:none;
 }
 .admin-aside-top_menu li{
 	margin-top: 10px;
+	list-style:none;
+	font-size: 17px;
 }
-.admin-aside-top_menu li:hover > a{
-	color:#ff9f43;
+.admin-aside-top_menu li > a{
+	color:#c1c1c1;
 	cursor: pointer;
 }
-
-
-
+.admin-aside-top_menu li:hover > a{
+	color:#fff;
+	cursor: pointer;
+	font-weight: bold;
+}
+.admin-aside-main-span{
+	font-size: 13px;
+	font-weight: bold;
+}
 
 .admin-home_content_area{
 	width: 100%;
-	min-height: 300px;
+	min-height: 50px;
 	margin-bottom: 0.5rem;
 	display: flex;
 	justify-content: space-around;
 }
-.admin-home_content{
+
+.admin-home_content50{
 	width:49%;	
 	background-color: white;
 	border: 1px solid rgba(0,0,0,0.2);
 }
+
+.admin-home_content100{
+	width:98%;	
+	background-color: white;
+	border: 1px solid rgba(0,0,0,0.2);
+	height: 50px; 
+	padding: 15px 5px;
+}
+
 .admin-home_chart_area{
 	width: 100%;
 	min-height: 530px;
@@ -78,4 +97,8 @@ aside *{
 	justify-content: space-around;
 }
 
+.admin-home-top-p{
+	font-size: 20px; 
+	color: #5b5b5b;
+}
 
