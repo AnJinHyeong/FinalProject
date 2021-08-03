@@ -59,7 +59,7 @@
 	<!--  단일 결제이므로 수량은 1로 고정-->
 	<input type="hidden" name="quantity" value = 1>
 	
-	<p class = moneyText>현재 보유 금액 : <strong>5000P</strong></p>
+	<p class = moneyText><strong></strong></p>
 	<p class = moneyText>충전하실 포인트 유형을 선택해주세요 </p>
 	<div class = radioBorder>
 	<input type = "radio" id = "10under" name ="radio" value = "trueUnder">	
