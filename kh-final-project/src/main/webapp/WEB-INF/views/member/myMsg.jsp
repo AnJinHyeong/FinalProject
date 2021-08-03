@@ -267,13 +267,14 @@
 
 					<div class="projectInsert3 w100p pb30">
 
-						<button class="btn btn-hover w100p h80 msgBtn"> 
+						<button class="btn btn-hover w100p h40 msgBtn"> 
 
 						 
-							<table>
+							<table style="table-layout: fixed; width:100%;">
 							<tr>
-							<td width="250px"  style="margin-top:60px; text-align:center;" class="msgTitle">${messageDto.msgTitle}</td>
-							<td width="400px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto.msgContent,0,5)}</td>
+							<td width="35%" style="margin-top:40px; padding-right:30px;" class="msgTitle overflow">${messageDto.msgTitle}</td>
+							<td width="65%" style="margin-top:40px; padding-right:30px; text-align:left; word-break:break-all;" class="overflow">${messageDto.msgContent}</td>
+
 							</tr>
 							</table>
 							<div class="dpNone msgNo" >${messageDto.msgNo}</div>
@@ -317,13 +318,13 @@
 
 					<div class="projectInsert3 w100p pb30">
 
-						<button class="btn btn-hover w100p h80 msgBtn"> 
+						<button class="btn btn-hover w100p h40 msgBtn"> 
 
 							
-							<table>
+							<table style="table-layout: fixed; width:100%;">
 							<tr>
-							<td width="250px"  style="margin-top:40px;" class="msgTitle">${messageDto2.msgTitle}</td>
-							<td width="400px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto2.msgContent,0,5)}</td>
+							<td width="35%" style="margin-top:40px; padding-right:30px;" class="msgTitle overflow">${messageDto2.msgTitle}</td>
+							<td width="65%" style="margin-top:40px; padding-right:30px; text-align:left; word-break:break-all;" class="overflow">${messageDto2.msgContent}</td>
 
 							</tr>
 							</table>
@@ -364,14 +365,14 @@
 
 					<div class="projectInsert3 w100p pb30">
 
-						<button class="btn btn-hover w100p h80 msgBtn"> 
+						<button class="btn btn-hover w100p h40 msgBtn"> 
 
-						
+						 
 
-							<table>
+							<table style="table-layout: fixed; width:100%;">
 							<tr>
-							<td width="250px"  style="margin-top:40px;" class="msgTitle">${messageDto3.msgTitle}</td>
-							<td width="400px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto3.msgContent,0,5)}</td>
+							<td width="35%" style="margin-top:40px; padding-right:30px;" class="msgTitle overflow">${messageDto3.msgTitle}</td>
+							<td width="65%" style="margin-top:40px; padding-right:30px; text-align:left; word-break:break-all; padding-right:30px;" class="overflow">${messageDto3.msgContent}</td>
 
 							</tr>
 							</table>
