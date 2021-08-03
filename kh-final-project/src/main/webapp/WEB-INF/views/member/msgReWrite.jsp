@@ -70,7 +70,7 @@
 
 <body>
 
-	<div class="mainContext" >
+	<div class="mainContext" > 
 
 		<div><h1>문의 답장</h1></div>
 
