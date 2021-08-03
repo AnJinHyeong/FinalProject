@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
  
@@ -205,7 +204,7 @@
 		
 
 			
-
+ 
  
 
 			<pre class="fs12 fBold mb10">보내는 사람 : {{memberId}}</pre> 
@@ -225,7 +224,7 @@
 
 			
 
- 			<pre class="fs12 fBold mb10 ml10">{{msgContent}}</pre> 
+ 			<pre class="fs12 fBold mb10 ml10" style="white-space: pre-wrap; word-break: break-all;">{{msgContent}}</pre> 
 
 			
 
@@ -338,11 +337,10 @@
 						 
 							<table>
 							<tr>
-							<td width="90px"  style="margin-top:60px; text-align:center;" class="msgTitle">${messageDto.msgTitle}</td>
+							<td width="250px"  style="margin-top:60px; text-align:center;" class="msgTitle">${messageDto.msgTitle}</td>
 
-							<td width="90px"  style="margin-top:40px; margin-left:50px;" class="receiverNo">${messageDto.receiverNo}</td>
-
-							<td width="90px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto.msgContent,0,5)}</td>
+			 
+							<td width="400px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto.msgContent,0,5)}</td>
 							</tr>
 							</table>
 							<div class="dpNone msgNo" >${messageDto.msgNo}</div>
@@ -391,11 +389,10 @@
 							
 							<table>
 							<tr>
-							<td width="90px"  style="margin-top:40px;" class="msgTitle">${messageDto2.msgTitle}</td>
+							<td width="250px"  style="margin-top:40px;" class="msgTitle">${messageDto2.msgTitle}</td>
 
-							<td width="90px"  style="margin-top:40px; margin-left:50px;" class="receiverNo">${messageDto2.receiverNo}</td>
 
-							<td width="90px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto2.msgContent,0,5)}</td>
+							<td width="400px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto2.msgContent,0,5)}</td>
 
 							</tr>
 							</table>
@@ -437,16 +434,16 @@
 					<div class="projectInsert3 w100p pb30">
 
 						<button class="btn btn-hover w100p h80 msgBtn"> 
+ 
+						
+ 
+							<table>
+							<tr>
+							<td width="250px"  style="margin-top:40px;" class="msgTitle">${messageDto3.msgTitle}</td>
 
 						
 
-							<table>
-							<tr>
-							<td width="90px"  style="margin-top:40px;" class="msgTitle">${messageDto3.msgTitle}</td>
-
-							<td width="90px"  style="margin-top:40px; margin-left:50px;" class="receiverNo">${messageDto3.receiverNo}</td>
-
-							<td width="90px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto3.msgContent,0,5)}</td>
+							<td width="400px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto3.msgContent,0,5)}</td>
 
 							</tr>
 							</table>

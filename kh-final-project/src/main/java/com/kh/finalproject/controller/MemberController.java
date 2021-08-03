@@ -83,11 +83,11 @@ public class MemberController {
 		boolean upEmail=memberDao.updateEmail(memberDto);
 		if(upEmail){
 			model.addAttribute("msg","이메일 변경이 완료되었습니다.");
-			model.addAttribute("url","/member/myAccount");
+			model.addAttribute("url","/member/myInformationSettings");
 			
 		}else	{
 			model.addAttribute("msg","이메일 변경이 실패했습니다.");
-			model.addAttribute("url","/member/myAccount");
+			model.addAttribute("url","/member/myInformationSettings");
 		}
 		return "member/redirectMember";
 	}
@@ -98,11 +98,11 @@ public class MemberController {
 		boolean upIntro=memberDao.updateIntro(memberDto);
 		if(upIntro){
 			model.addAttribute("msg","소개글 변경이 완료되었습니다.");
-			model.addAttribute("url","/member/mySettings");
+			model.addAttribute("url","/member/myInformationSettings");
 			
 		}else	{
 			model.addAttribute("msg","소개글 변경이 실패했습니다.");
-			model.addAttribute("url","/member/mySettings");
+			model.addAttribute("url","/member/myInformationSettings");
 		}
 		return "member/redirectMember";
 	}
@@ -113,11 +113,11 @@ public class MemberController {
 		boolean upNick=memberDao.updateNick(memberDto);
 		if(upNick){
 			model.addAttribute("msg","닉네임 변경이 완료되었습니다.");
-			model.addAttribute("url","/member/mySettings");
+			model.addAttribute("url","/member/myInformationSettings");
 			
 		}else	{
 			model.addAttribute("msg","닉네임 변경이 실패했습니다.");
-			model.addAttribute("url","/member/mySettings");
+			model.addAttribute("url","/member/myInformationSettings");
 		}
 		return "member/redirectMember";
 	}
@@ -170,7 +170,7 @@ public class MemberController {
 			
 		}else{
 			model.addAttribute("msg","비밀번호 변경이 실패했습니다.");
-			model.addAttribute("url","/member/myAccount");
+			model.addAttribute("url","/member/myInformationSettings");
 		}
 		return "member/redirectMember";
 	}

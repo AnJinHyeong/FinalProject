@@ -117,7 +117,7 @@
 
 			<div class="msgContentBox">
 
-				<textarea name="msgContent"style="resize" class="msgContent" placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요" required></textarea>
+				<textarea cols="20"name="msgContent"style="resize" class="msgContent" placeholder="프로젝트 진행자에게 문의하고 싶은 내용을 적어주세요" required></textarea>
 
 			</div>
 
