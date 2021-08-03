@@ -103,6 +103,13 @@
 		</interceptor>
 	</interceptors>
 	
+	<interceptors>
+		<interceptor>
+			<mapping path="/projectBoard/**"/>
+			<beans:bean class="com.kh.finalproject.interceptor.SponsorInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
+	
 	<!-- 
 		파일 업로드 도구
 		= multipart/form-data를 처리하는 도구
