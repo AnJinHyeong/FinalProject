@@ -76,7 +76,7 @@ display:none;
 						<option value="4">프로젝트 펀딩종료 - 4</option>
 						<option value="x">프로젝트 중단 - x</option>
 					</select> -->
-					<input class="admin-project-div2-input" type="text" required name="keyWord" autocomplete="off" value="${map.keyWord}" placeholder = "검색어를 입력하세요" style="width: 90%;">
+					<input class="admin-project-div2-input" type="text" name="keyWord" autocomplete="off" value="${map.keyWord}" placeholder = "검색어를 입력하세요" style="width: 90%;">
 					<button class="admin-project-div2-btn">
 						<i class="fas fa-search bacWhite"></i>
 					</button>
