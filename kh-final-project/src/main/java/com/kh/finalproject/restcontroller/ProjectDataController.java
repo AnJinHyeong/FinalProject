@@ -17,17 +17,20 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.finalproject.entity.GiftDto;
 import com.kh.finalproject.entity.ItemDto;
 import com.kh.finalproject.entity.ProjectDto;
+import com.kh.finalproject.entity.ProjectReportDto;
 import com.kh.finalproject.entity.SponsorDto;
 import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.repository.GiftDao;
 import com.kh.finalproject.repository.ItemDao;
 import com.kh.finalproject.repository.ProjectDao;
+import com.kh.finalproject.repository.ProjectReportDao;
 import com.kh.finalproject.repository.SponsorDao;
 import com.kh.finalproject.vo.IndexProjectVo;
 import com.kh.finalproject.vo.ProjectAdminSearchKeywordVo;
 import com.kh.finalproject.vo.ProjectAdminSearchVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
 import com.kh.finalproject.vo.ProjectInformationVo;
+import com.kh.finalproject.vo.ProjectReportListVo;
 import com.kh.finalproject.vo.ProjectSponsorVo;
 import com.kh.finalproject.vo.ProjectVo;
 import com.kh.finalproject.vo.SearchVo;
@@ -265,8 +268,17 @@ public class ProjectDataController {
 		projectDao.adminProjectStateX(projectNo);
 	}
 	
+	@Autowired
+	private ProjectReportDao projectReportDao;
+	
+	@PostMapping("/adminProjectReportList2")
+	public List<ProjectReportListVo> adminProjectReportList2(@RequestParam int reportProjectNo){
+		return projectReportDao.projectReportList2(reportProjectNo);
+	}
+	
 	@PostMapping("/updateProjectStopCauses")
 	public void updateProjectStopCauses(@RequestParam String stopCauses, @RequestParam int projectNo) {
 		projectDao.updateProjectStopCauses(projectNo, stopCauses);
 	}
+	
 }

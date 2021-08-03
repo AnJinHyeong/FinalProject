@@ -28,7 +28,7 @@ public class AdminInterceptor implements HandlerInterceptor{
 			return false;
 		}
 		else if(!memberDto.getMemberGrade().equals("관리자")) {
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath()+"/");
 			return false;
 		}
 		else {

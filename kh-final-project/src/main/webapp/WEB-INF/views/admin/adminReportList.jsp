@@ -9,28 +9,36 @@
 	$(function(){
 		
 		
-		$(".admin-home-content-list").not(".target").on("click", function(){
-			var idNo = $(this).attr("id");
+		$(".admin-home-content-list").on("click", function(){
+			var reportProjectNo = $(this).attr("id");
+			
+			$(".admin-home-content-list").removeClass("on");
+			$(this).addClass("on");
 			
 			$.ajax({
-				url : "${pageContext.request.contextPath}/member/data/adminMsgSelectOne",
+				url : "${pageContext.request.contextPath}/project/data/adminProjectReportList2",
 				type : "post",
 				data : {
-					msgNo : idNo
+					reportProjectNo : reportProjectNo
 				},
 				success : function(resp){
-					$("#msgSelectOne").empty();
+					$("#reportSelectOne").empty();
 					
-					var template = $("#msgSeelctOneContent").html();
 					
-					template = template.replace("{{msgNo}}", resp.msgNo);
-					template = template.replace("{{msgTitle}}", resp.msgTitle);
-					template = template.replace("{{msgDate}}", resp.msgDate);
-					template = template.replace("{{senderNick}}", resp.senderNick);
-					template = template.replace("{{receiverNick}}", resp.receiverNick);
-					template = template.replace("{{msgContent}}", resp.msgContent);
+					for(var i=0; i<resp.length; i++){
+						var template = $("#reportSeelctOneContent").html();
+	
+						template = template.replace("{{reportNo}}", resp[i].reportNo);
+						template = template.replace("{{reportProjectNo}}", resp[i].reportProjectNo);
+						template = template.replace("{{reportContent}}", resp[i].reportContent);
+						template = template.replace("{{memberNick}}", resp[i].memberNick);
+						template = template.replace("{{reportDate}}", resp[i].reportDate);
+						
+						$("#reportSelectOne").append(template);
+					}
 					
-					$("#msgSelectOne").append(template);
+					
+					
 				}
 			});
 			
@@ -40,20 +48,13 @@
 		
 </script>
 
- <script id="msgSeelctOneContent" type="text/template">
-<div style="width: 100%; height:310px; border-bottom: 1px solid rgba(0,0,0,0.2); padding: 10px; ">
-	<div style="height: 100%; width: 100%; display: flex;">
-		<div style="order: 1; height: 100%; width: 100%;">
-			<span class="admin-project-select-p">&lt; {{msgNo}} &gt;</span>
-			<span class="admin-project-select-p">{{msgTitle}}</span>
-			<span class="admin-project-select-p"><i class="far fa-calendar-alt"></i> {{msgDate}}</span>
-								
-			<p class="admin-project-select-p">보낸 사람 : {{senderNick}}</p>
-			<p class="admin-project-select-p">받는 사람 : {{receiverNick}}</p>
-			<p class="admin-project-select-p" style="border-bottom: 1px solid rgba(0,0,0,0.2); margin:5px 0;">내용</p>
-			<p class="admin-project-select-p">{{msgContent}}</p>
-		</div>
-	</div>
+ <script id="reportSeelctOneContent" type="text/template">
+<div class="admin-home-content-list" style="text-align: center; width: 100%;">
+	<span style="width: 5%;">{{reportNo}}</span> 
+	<span style="width: 10%;">{{reportProjectNo}}</span> 
+	<span style="width: 55%;">{{reportContent}}</span>
+	<span style="width: 10%;">{{memberNick}}</span> 
+	<span style="width: 20%;">{{reportDate}}</span>
 </div>
 </script> 
 
@@ -94,10 +95,18 @@
 		<div class="admin-home_content_area">
 			<div class="admin-home_content100" style="min-height: 4000px; padding: 15px 0;">
 				<div style="width: 100%; border-bottom: 1px solid rgba(0,0,0,0.2); padding: 0 0 5px 5px;">
-					<p class="admin-home-content-p">문의 내용</p>
+					<p class="admin-home-content-p">신고 내역</p>
 				</div>
 				
-				<div id="msgSelectOne">
+				<div class="admin-home-content-list" style="text-align: center; width: 100%;">
+					<span style="width: 5%;">신고 번호</span> 
+					<span style="width: 10%;">프로젝트 번호</span> 
+					<span style="width: 55%;">내용</span>
+					<span style="width: 10%;">회원 닉네임</span> 
+					<span style="width: 20%;">신고 일자</span>
+				</div>
+				
+				<div id="reportSelectOne">
 					
 				</div>
 			</div>

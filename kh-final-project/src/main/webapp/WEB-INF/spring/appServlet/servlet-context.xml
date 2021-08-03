@@ -77,6 +77,7 @@
 			<exclude-mapping path="/member/myId"/>
 			<exclude-mapping path="/member/myPw"/>
 			<exclude-mapping path="/member/getPw"/>
+			<exclude-mapping path="/member/getId"/>
 			<exclude-mapping path="/member/memberInsert"/>
 			<beans:bean class="com.kh.finalproject.interceptor.MemberLoginInterceptor"></beans:bean>
 		</interceptor>

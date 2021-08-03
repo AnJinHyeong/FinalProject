@@ -59,7 +59,7 @@
 					});
 					
 					//div 클릭시 프로젝트 상세 정보 조회
-					$(".div-select").on("click",function(){
+					$(".div-select").not(".target").on("click",function(){
 						var requestNo = $(this).attr("id");
 						
 						$(".div-select").removeClass("on");
@@ -213,7 +213,7 @@
 					<p class="admin-home-content-p">리스트</p>
 				</div>
 				<div class="admin-project-div2"  style="display: inline;">
-					<div class="admin-home-content-list" style="text-align: center; width: 99%;">
+					<div class="admin-home-content-list target" style="text-align: center; width: 99%;">
 						<span style="width: 5%;">번호</span>
 						<span style="width: 10%;">카테고리</span>
 						<span style="width: 45%;">타이틀</span>

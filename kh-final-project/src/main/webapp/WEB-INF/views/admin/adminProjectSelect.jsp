@@ -103,7 +103,7 @@
 					});
 					
 					//div 클릭시 프로젝트 상세 정보 조회
-					$(".div-select").on("click",function(){
+					$(".div-select").not(".target").on("click",function(){
 						var projectNo = $(this).attr("id");
 						
 						$(".div-select").removeClass("on");
@@ -263,7 +263,7 @@
 					<p class="admin-home-content-p">조건 검색</p>
 				</div>
 				<div class="admin-project-div2">
-					<select class="admin-project-div2-select1" name="searchType">
+					<select class="admin-project-div2-select1 target" name="searchType">
 						<option value="null">선택</option>
 						<option value="project_no">번호</option>
 						<option value="project_title">타이틀</option>
