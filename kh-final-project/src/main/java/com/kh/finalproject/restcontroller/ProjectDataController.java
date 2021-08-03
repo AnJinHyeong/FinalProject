@@ -265,4 +265,8 @@ public class ProjectDataController {
 		projectDao.adminProjectStateX(projectNo);
 	}
 	
+	@PostMapping("/updateProjectStopCauses")
+	public void updateProjectStopCauses(@RequestParam String stopCauses, @RequestParam int projectNo) {
+		projectDao.updateProjectStopCauses(projectNo, stopCauses);
+	}
 }

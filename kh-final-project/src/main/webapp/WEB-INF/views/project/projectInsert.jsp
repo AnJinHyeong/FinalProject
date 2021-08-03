@@ -119,7 +119,7 @@ style="background-image: url('${root}/image/insertBackground.jpg');">
 
 		<div class="projectInsert2 container-800 pt20">
 			
-			<c:if test="${projectDto.projectNo != null && (projectDto.projectState == 2 || projectDto.projectState == 1)}">
+			<c:if test="${projectDto.projectNo != null && (projectDto.projectState == '2' || projectDto.projectState == '1')}">
 				<div class="projectInsert3 mb30">
 					<p class="fRed fBold fs16 pb10">
 						<i class="fas fa-exclamation-circle"></i> 작성 중인 프로젝트가 있습니다.

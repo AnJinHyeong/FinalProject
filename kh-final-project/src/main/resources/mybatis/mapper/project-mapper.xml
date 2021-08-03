@@ -450,6 +450,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update project set category_no = #{categoryNo} where project_no = #{projectNo}
 	</update>
 	
+	<update id="updateProjectStopCauses" parameterType="map">
+		update project set project_stop_causes = #{stopCauses} where project_no = #{projectNo}
+	</update>
+	
 </mapper>
 
 
