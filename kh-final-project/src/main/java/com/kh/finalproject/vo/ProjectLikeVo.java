@@ -20,7 +20,7 @@ public class ProjectLikeVo {
 	private Date projectRegistDate;
 	private Date projectStartDate;
 	private Date projectEndDate;
-	private String projectStopCaues;
+	private String projectStopCauses;
 	private String projectSummary;
 	private int projcetLikeCount;
 	

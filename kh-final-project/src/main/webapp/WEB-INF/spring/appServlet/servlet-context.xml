@@ -52,7 +52,13 @@
 		- MemberLoginInterceptor : 비회원 접근 차단 
 	-->
 	
-	<interceptors>
+
+	<!-- 
+		인터셉터 설정
+		- MemberLoginInterceptor : 비회원 접근 차단 
+	-->
+	
+	<interceptors> 
 		<interceptor>
 			<mapping path="/project/**"/>
 			<mapping path="/member/**"/>
@@ -71,7 +77,10 @@
 			<exclude-mapping path="/member/myId"/>
 			<exclude-mapping path="/member/myPw"/>
 			<exclude-mapping path="/member/getPw"/>
+			<exclude-mapping path="/member/getId"/>
 			<exclude-mapping path="/member/memberInsert"/>
+			<exclude-mapping path="/member/redirectMember"/>
+			
 			<beans:bean class="com.kh.finalproject.interceptor.MemberLoginInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>
@@ -94,6 +103,12 @@
 		</interceptor>
 	</interceptors>
 	
+	<interceptors>
+		<interceptor>
+			<mapping path="/projectBoard/**"/>
+			<beans:bean class="com.kh.finalproject.interceptor.SponsorInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
 	
 	<!-- 
 		파일 업로드 도구

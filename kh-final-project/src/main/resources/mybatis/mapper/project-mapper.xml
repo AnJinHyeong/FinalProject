@@ -26,7 +26,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="proListWithImageNo" parameterType="int" resultType="ProjectImageVo">
-		select P.*, I.image_no from project P
+		select 
+			P.*, 
+			I.image_no 
+		from project P
     		left outer join image_file I on P.project_no = I.project_no and I.project_state = 'Y' 
     		where P.member_no = #{memberNo} and (P.project_state = '1' or P.project_state = '2')
     		order by P.project_no desc
@@ -448,6 +451,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="updateProjectCategory" parameterType="ProjectDto">
 		update project set category_no = #{categoryNo} where project_no = #{projectNo}
+	</update>
+	
+	<update id="updateProjectStopCauses" parameterType="map">
+		update project set project_stop_causes = #{stopCauses} where project_no = #{projectNo}
 	</update>
 	
 </mapper>

@@ -25,119 +25,64 @@
 
 
 <script>
-
 	$(function(){
-
 		
-
 		$(".project-main-li").on("click", function() {
-
 			$(".project-main-li").removeClass("main-li-on");
-
 			$(this).addClass("main-li-on");
-
 		});
-
 		$(".ab").on("click",function(){
-
 			$('.a').css('display','block');
-
  
-
            	$('.b').css('display','none');
-
  
-
            	$('.c').css('display','none');
-
  
-
 		});
-
 		$(".bc").on("click",function(){
-
 			$('.a').css('display','none');
-
  
-
            	$('.b').css('display','block');
-
  
-
            	$('.c').css('display','none');
-
  
-
 		});
-
 		$(".cd").on("click",function(){
-
 			$('.a').css('display','none');
-
  
-
            	$('.b').css('display','none');
-
  
-
            	$('.c').css('display','block');
-
  
-
 		});
-
 		
-
 		function replaceMsgSummarizeTemplate(resp) {
-
 			var template = $("#msgSummarizeTemplate").html();
-
  			template = template.replace("{{msgNo}}",resp.msgNo);
-
 			template = template.replace("{{msgTitle}}", resp.msgTitle);
-
 			template = template.replace("{{msgDate}}", resp.msgDate);
-
 			template = template.replace("{{receiverNo}}", resp.receiverNo);
-
 			template = template.replace("{{msgContent}}", resp.msgContent);
-
 			template = template.replace("{{senderNo}}", resp.senderNo);
 			template = template.replace("{{memberId}}",resp.memberId);
 			template = template.replace("{{memberId2}}",resp.memberId2);
 			
-
 			
-
 			$("#msgSummarize").append(template);
-
 		}
-
 		 
-
 		$(".msgBtn").on("click", function() {
-
 			$("#msgSummarize").empty();
-
 			var msgNo = $(this).find(".msgNo").text();
 			
-
 			$.ajax({
-
 				url : "${pageContext.request.contextPath}/member/data/msgInformation",
-
 				type : 'post',
-
 				data : {
-
 					"msgNo" : msgNo
-
 				},
-
 				success : function(resp) {
-
 					replaceMsgSummarizeTemplate(resp);
-
 					
 					$(".showMsg").on("click", function(){
 				  		var msgNo = $(this).parent().siblings(".target").find(".msgNo").text();
@@ -150,9 +95,7 @@
 				});
   
 					 
-
 				} 
-
 			});	
 	});
 			$(".ab").click();
@@ -160,13 +103,8 @@
 		
 	
 		 
-
 }); 
-
-
 	
-
-
   
 	
 	
@@ -174,7 +112,6 @@
 	
  
  
-
 </script>
 
  
@@ -191,7 +128,7 @@
 
  		<div class="h200"> 
 
-			<pre class="msgNo" name="msgNo">{{msgNo}}</pre>
+			<pre class="msgNo" name="msgNo" style="display:none">{{msgNo}}</pre>
 
  			<pre class="wordBreak preWrap fs18 fBold h80">{{msgTitle}}</pre> 
 
@@ -222,7 +159,7 @@
 
 			
 
- 			<pre class="fs12 fBold mb10 ml10">{{msgContent}}</pre> 
+ 			<pre class="fs12 fBold mb10 ml10" style="white-space: pre-wrap;word-break: break-all;">{{msgContent}}</pre> 
 
 			
 
@@ -330,16 +267,14 @@
 
 					<div class="projectInsert3 w100p pb30">
 
-						<button class="btn btn-hover w100p h80 msgBtn"> 
+						<button class="btn btn-hover w100p h40 msgBtn"> 
 
 						 
-							<table>
+							<table style="table-layout: fixed; width:100%;">
 							<tr>
-							<td width="90px"  style="margin-top:60px; text-align:center;" class="msgTitle">${messageDto.msgTitle}</td>
+							<td width="35%" style="margin-top:40px; padding-right:30px;" class="msgTitle overflow">${messageDto.msgTitle}</td>
+							<td width="65%" style="margin-top:40px; padding-right:30px; text-align:left; word-break:break-all;" class="overflow">${messageDto.msgContent}</td>
 
-							<td width="90px"  style="margin-top:40px; margin-left:50px;" class="receiverNo">${messageDto.receiverNo}</td>
-
-							<td width="90px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto.msgContent,0,5)}</td>
 							</tr>
 							</table>
 							<div class="dpNone msgNo" >${messageDto.msgNo}</div>
@@ -383,16 +318,13 @@
 
 					<div class="projectInsert3 w100p pb30">
 
-						<button class="btn btn-hover w100p h80 msgBtn"> 
+						<button class="btn btn-hover w100p h40 msgBtn"> 
 
 							
-							<table>
+							<table style="table-layout: fixed; width:100%;">
 							<tr>
-							<td width="90px"  style="margin-top:40px;" class="msgTitle">${messageDto2.msgTitle}</td>
-
-							<td width="90px"  style="margin-top:40px; margin-left:50px;" class="receiverNo">${messageDto2.receiverNo}</td>
-
-							<td width="90px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto2.msgContent,0,5)}</td>
+							<td width="35%" style="margin-top:40px; padding-right:30px;" class="msgTitle overflow">${messageDto2.msgTitle}</td>
+							<td width="65%" style="margin-top:40px; padding-right:30px; text-align:left; word-break:break-all;" class="overflow">${messageDto2.msgContent}</td>
 
 							</tr>
 							</table>
@@ -433,17 +365,14 @@
 
 					<div class="projectInsert3 w100p pb30">
 
-						<button class="btn btn-hover w100p h80 msgBtn"> 
+						<button class="btn btn-hover w100p h40 msgBtn"> 
 
-						
+						 
 
-							<table>
+							<table style="table-layout: fixed; width:100%;">
 							<tr>
-							<td width="90px"  style="margin-top:40px;" class="msgTitle">${messageDto3.msgTitle}</td>
-
-							<td width="90px"  style="margin-top:40px; margin-left:50px;" class="receiverNo">${messageDto3.receiverNo}</td>
-
-							<td width="90px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto3.msgContent,0,5)}</td>
+							<td width="35%" style="margin-top:40px; padding-right:30px;" class="msgTitle overflow">${messageDto3.msgTitle}</td>
+							<td width="65%" style="margin-top:40px; padding-right:30px; text-align:left; word-break:break-all; padding-right:30px;" class="overflow">${messageDto3.msgContent}</td>
 
 							</tr>
 							</table>
