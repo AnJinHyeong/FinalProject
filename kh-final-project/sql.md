@@ -209,8 +209,8 @@ constraint request_like_pk primary key(request_like_no, request_like_member_no)
 ##요청게시판 댓글
 #request_reply
 CREATE TABLE request_reply(
-request_reply_no number(19) PRIMARY KEY,
-request_no references request(request_no) ON DELETE CASCADE,
+request_reply_pk_no number(19) PRIMARY KEY,
+request_reply_no references request(request_no) ON DELETE CASCADE,
 request_reply_member_no references member(member_no) ON DELETE CASCADE,
 request_reply_content varchar2(300) NOT NULL,
 request_reply_date DATE DEFAULT sysdate
