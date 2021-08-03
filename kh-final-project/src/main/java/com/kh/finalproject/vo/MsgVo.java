@@ -20,7 +20,6 @@ public class MsgVo {
 	private String memberId2;
 
 
-	
 	private String senderNick;
 	private String receiverNick;
 	

@@ -177,8 +177,8 @@
 									<div class="request-insert-div2">
 										<div>
 											<p class="request-insert-p">카테고리</p>
-											<select class="request-insert-select" id="parentsCategory" name="requestCategoryNo">
-												<option>선택해주세요.</option>
+											<select class="request-insert-select" id="parentsCategory" name="requestCategoryNo" required>
+												<option value="">선택해주세요.</option>
 												<c:forEach var="category" items="${category}">
 													<option value="${category.categoryNo}">${category.categoryTheme}</option>
 												</c:forEach>

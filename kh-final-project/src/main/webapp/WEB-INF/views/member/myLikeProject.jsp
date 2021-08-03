@@ -16,7 +16,6 @@
 		});
 		
 		$(".myLikeProject").on("click",function(){
-			console.log("클릭");
 			var projectNo = $(this).attr("id");
 			location.href="${pageContext.request.contextPath}/projectBoard/"+projectNo+"";
 		});

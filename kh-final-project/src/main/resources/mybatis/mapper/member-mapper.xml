@@ -189,6 +189,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update member set member_have_point = member_have_point + #{sponsorAmount} where member_no = #{memberNo} 
 	</update>
 	
+	<select id="adminMsgSelectOne" parameterType="int" resultType="MsgVo">
+		select message.msg_no, message.sender_no, M1.member_nick sender_nick, message.msg_title, message.msg_content, 
+			message.receiver_no, M2.member_nick receiver_nick, msg_date 
+			from message 
+			    left outer join member M1 on message.sender_no = M1.member_no
+			    left outer join member M2 on message.receiver_no = M2.member_no 
+			   WHERE message.MSG_NO = #{msgNo} order by message.msg_no DESC
+	</select>
+	
 
 	
 </mapper>

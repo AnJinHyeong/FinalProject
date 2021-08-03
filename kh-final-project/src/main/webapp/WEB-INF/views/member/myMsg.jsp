@@ -25,136 +25,77 @@
 
 
 <script>
-
 	$(function(){
-
 		
-
 		$(".project-main-li").on("click", function() {
-
 			$(".project-main-li").removeClass("main-li-on");
-
 			$(this).addClass("main-li-on");
-
 		});
-
 		$(".ab").on("click",function(){
-
 			$('.a').css('display','block');
-
  
-
            	$('.b').css('display','none');
-
  
-
            	$('.c').css('display','none');
-
  
-
 		});
-
 		$(".bc").on("click",function(){
-
 			$('.a').css('display','none');
-
  
-
            	$('.b').css('display','block');
-
  
-
            	$('.c').css('display','none');
-
  
-
 		});
-
 		$(".cd").on("click",function(){
-
 			$('.a').css('display','none');
-
  
-
            	$('.b').css('display','none');
-
  
-
            	$('.c').css('display','block');
-
  
-
 		});
-
 		
-
 		function replaceMsgSummarizeTemplate(resp) {
-
 			var template = $("#msgSummarizeTemplate").html();
-
  			template = template.replace("{{msgNo}}",resp.msgNo);
-
 			template = template.replace("{{msgTitle}}", resp.msgTitle);
-
 			template = template.replace("{{msgDate}}", resp.msgDate);
-
 			template = template.replace("{{receiverNo}}", resp.receiverNo);
-
 			template = template.replace("{{msgContent}}", resp.msgContent);
-
 			template = template.replace("{{senderNo}}", resp.senderNo);
 			template = template.replace("{{memberId}}",resp.memberId);
 			template = template.replace("{{memberId2}}",resp.memberId2);
 			
-
 			
-
 			$("#msgSummarize").append(template);
-
 		}
-
 		 
-
 		$(".msgBtn").on("click", function() {
-
 			$("#msgSummarize").empty();
-
 			var msgNo = $(this).find(".msgNo").text();
 			
-
 			$.ajax({
-
 				url : "${pageContext.request.contextPath}/member/data/msgInformation",
-
 				type : 'post',
-
 				data : {
-
 					"msgNo" : msgNo
-
 				},
-
 				success : function(resp) {
-
 					replaceMsgSummarizeTemplate(resp);
-
 					
 					$(".showMsg").on("click", function(){
 				  		var msgNo = $(this).parent().siblings(".target").find(".msgNo").text();
-				  		console.log(msgNo);
 				  		window.open("${root}/member/msgReWrite?msgNo=" + msgNo,"a","width=600, height=430, left=400, top=100 ,status=no,toolbar=no");
 				  	});
 					 
 					$(".deleteBtn").on("click", function(){
 						var msgNo = $(this).parent().siblings(".target").find(".msgNo").text();
-						console.log(msgNo);
 						$(location).attr('href',"${root}/member/deleteMsg?msgNo="+msgNo);
 				});
   
 					 
-
 				} 
-
 			});	
 	});
 			$(".ab").click();
@@ -162,13 +103,8 @@
 		
 	
 		 
-
 }); 
-
-
 	
-
-
   
 	
 	
@@ -176,7 +112,6 @@
 	
  
  
-
 </script>
 
  
@@ -193,7 +128,7 @@
 
  		<div class="h200"> 
 
-			<pre class="msgNo" name="msgNo">{{msgNo}}</pre>
+			<pre class="msgNo" name="msgNo" style="display:none">{{msgNo}}</pre>
 
  			<pre class="wordBreak preWrap fs18 fBold h80">{{msgTitle}}</pre> 
 
@@ -204,7 +139,7 @@
 		
 
 			
- 
+
  
 
 			<pre class="fs12 fBold mb10">보내는 사람 : {{memberId}}</pre> 
@@ -224,7 +159,7 @@
 
 			
 
- 			<pre class="fs12 fBold mb10 ml10" style="white-space: pre-wrap; word-break: break-all;">{{msgContent}}</pre> 
+ 			<pre class="fs12 fBold mb10 ml10" style="white-space: pre-wrap;word-break: break-all;">{{msgContent}}</pre> 
 
 			
 
@@ -338,8 +273,6 @@
 							<table>
 							<tr>
 							<td width="250px"  style="margin-top:60px; text-align:center;" class="msgTitle">${messageDto.msgTitle}</td>
-
-			 
 							<td width="400px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto.msgContent,0,5)}</td>
 							</tr>
 							</table>
@@ -390,8 +323,6 @@
 							<table>
 							<tr>
 							<td width="250px"  style="margin-top:40px;" class="msgTitle">${messageDto2.msgTitle}</td>
-
-
 							<td width="400px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto2.msgContent,0,5)}</td>
 
 							</tr>
@@ -434,15 +365,12 @@
 					<div class="projectInsert3 w100p pb30">
 
 						<button class="btn btn-hover w100p h80 msgBtn"> 
- 
+
 						
- 
+
 							<table>
 							<tr>
 							<td width="250px"  style="margin-top:40px;" class="msgTitle">${messageDto3.msgTitle}</td>
-
-						
-
 							<td width="400px"  style="margin-top:40px; margin-left:50px;">${fn:substring(messageDto3.msgContent,0,5)}</td>
 
 							</tr>

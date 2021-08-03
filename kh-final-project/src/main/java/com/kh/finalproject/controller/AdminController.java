@@ -17,9 +17,9 @@ import com.kh.finalproject.entity.MessageDto;
 import com.kh.finalproject.repository.BannerDao;
 import com.kh.finalproject.repository.CategoryDao;
 import com.kh.finalproject.repository.MessageDao;
+import com.kh.finalproject.repository.ProjectReportDao;
 import com.kh.finalproject.service.AdminService;
 import com.kh.finalproject.vo.AdminMemberVO;
-import com.kh.finalproject.vo.MsgVo;
 
 
 @RequestMapping("/admin")
@@ -156,8 +156,13 @@ public class AdminController {
 		return "admin/adminRequest";
 	}
 	
+	@Autowired
+	private ProjectReportDao projectReportDao;
 	
-	
-	
+	@GetMapping("/reportList")
+	public String reportList(Model model) {
+		model.addAttribute("adminProjectReportList1", projectReportDao.projectReportList1());
+		return "admin/adminReportList";
+	}
 
 }

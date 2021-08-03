@@ -68,7 +68,11 @@ public class MemberMsgController {
 				.build();
 	} 
 	
-
+	@PostMapping("/adminMsgSelectOne")
+	public MsgVo adminMsgSelectOne(@RequestParam int msgNo){
+		MsgVo msgVo = messageDao.adminMsgSelectOne(msgNo);
+		return msgVo;
+	} 
 
 	
 }

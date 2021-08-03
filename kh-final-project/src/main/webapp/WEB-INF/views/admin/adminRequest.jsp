@@ -101,7 +101,6 @@
 								requestNo:requestNo
 							},
 							success : function(resp){
-								console.log(resp);
 								$("#requestSelectOneReply").empty();
 								
 								for(var i=0; i < resp.length; i++){
