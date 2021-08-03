@@ -48,17 +48,30 @@
 					
 					//프로젝트 상태 변경
 					$(".updateBtnX").on("click",function(){
+						var stopCauses = prompt("중단사유를 입력해주세요.", "");
 						var projectNo = $(this).attr("id");
-						$.ajax({
-							url :"${pageContext.request.contextPath}/project/data/adminProjectStateX",
-							type: "get",
-							data:{
-								projectNo:projectNo
-							},
-							success : function(resp){
-								window.alert("프로젝트 상태가 'X'로 변경되었습니다.");
-							}
-						});
+						
+						if(stopCauses){
+							$.ajax({
+								url :"${pageContext.request.contextPath}/project/data/updateProjectStopCauses",
+								type: "post",
+								data:{
+									stopCauses:stopCauses,
+									projectNo:projectNo
+								}
+							});
+							
+							$.ajax({
+								url :"${pageContext.request.contextPath}/project/data/adminProjectStateX",
+								type: "get",
+								data:{
+									projectNo:projectNo
+								},
+								success : function(resp){
+									window.alert("프로젝트 상태가 'X'로 변경되었습니다.");
+								}
+							});
+						}
 					});
 					
 					$(".updateBtn3").on("click",function(){
@@ -123,11 +136,11 @@
 								template = template.replace("{{projectStartDate}}", resp.projectStartDate);
 								template = template.replace("{{projectEndDate}}", resp.projectEndDate);
 								
-								if(resp.projectStopCaues != null){
-									template = template.replace("{{projectStopCaues}}", resp.projectStopCaues);
+								if(resp.projectStopCauses != null){
+									template = template.replace("{{projectStopCauses}}", resp.projectStopCauses);
 								}
 								else{
-									template = template.replace("{{projectStopCaues}}", "");
+									template = template.replace("{{projectStopCauses}}", "");
 								}
 								
 								if(resp.projectAmountGive != null){
@@ -219,7 +232,7 @@
 				<p class="admin-project-select-p">프로젝트 종료 시작일자 : {{projectEndDate}}</p>
 			</div>
 								
-			<p class="admin-project-select-p">프로젝트 중단사유 : {{projectStopCaues}}</p>
+			<p class="admin-project-select-p">프로젝트 중단사유 : {{projectStopCauses}}</p>
 			<p class="admin-project-select-p">프로젝트 포인트 지급상황 : {{projectAmountGive}}</p>
 		</div>
 

@@ -276,4 +276,9 @@ public class ProjectDataController {
 		return projectReportDao.projectReportList2(reportProjectNo);
 	}
 	
+	@PostMapping("/updateProjectStopCauses")
+	public void updateProjectStopCauses(@RequestParam String stopCauses, @RequestParam int projectNo) {
+		projectDao.updateProjectStopCauses(projectNo, stopCauses);
+	}
+	
 }

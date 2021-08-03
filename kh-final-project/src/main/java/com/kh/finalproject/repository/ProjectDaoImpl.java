@@ -1,6 +1,8 @@
 package com.kh.finalproject.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -354,6 +356,14 @@ public class ProjectDaoImpl implements ProjectDao{
 	@Override
 	public void updateProjectCategory(ProjectDto projectDto) {
 		sqlSession.update("project.updateProjectCategory", projectDto);
+	}
+
+	@Override
+	public void updateProjectStopCauses(int projectNo, String stopCauses) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("projectNo", projectNo);
+		map.put("stopCauses", stopCauses);
+		sqlSession.update("project.updateProjectStopCauses", map);
 	}
 
 

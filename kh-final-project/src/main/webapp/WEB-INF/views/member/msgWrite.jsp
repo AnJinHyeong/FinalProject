@@ -17,11 +17,9 @@
 
 
 <style>
-
 *{
 	box-sizing : border-box;
 }
-
 textarea.msgTextarea {
 	margin-bottom: 20px;
 	width: 100%;
@@ -29,18 +27,15 @@ textarea.msgTextarea {
 	height: 200px;
 	resize: none;
 }
-
 input.msgTitle, select.msgTitle{
 	width: 100%;
 	margin-bottom: 20px;
 	height: 40px;
 	padding: 10px;
 }
-
 input, textarea, select{
 	border: 1px solid rgb(220, 220, 220);
 }
-
 input.msgSendBtn{
 	height: 40px;
 	background-color: #fff; 
@@ -49,20 +44,14 @@ input.msgSendBtn{
 	cursor: pointer;
 	width: 100%;
 }
-
 input.msgSendBtn:hover{
 	background: rgb(248, 100, 83);
 	color: #fcfcfc;
 	transition: background 0.2s ease-in-out;
 }
-
 </style>
 
-<script>
 
-	
-
-</script>
 
 </head>
 

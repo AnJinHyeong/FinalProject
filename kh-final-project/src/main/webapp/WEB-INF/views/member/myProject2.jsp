@@ -69,7 +69,17 @@
 										style="background-image: url('${root}/image/project/projectMainDownload/${projectDto.imageNo}');"></div>
 								</c:otherwise>
 							</c:choose>
-							<div class="btn-text projectTitle">${projectDto.projectTitle}</div>
+							<c:choose>
+								<c:when test="${projectDto.projectStopCauses == null}">
+									<div class="btn-text projectTitle">${projectDto.projectTitle}</div>
+								</c:when>
+								<c:otherwise>
+									<div class="btn-text projectStopCauses" style="color: red; font-weight: bold;">
+										<pre>이 프로젝트는 중단되었습니다.</pre>
+										<pre>중단사유 : ${projectDto.projectStopCauses}</pre>
+									</div>
+								</c:otherwise>
+							</c:choose>
 							<div class="dpNone projectNo">${projectDto.projectNo}</div>
 						</button>
 					</div>
