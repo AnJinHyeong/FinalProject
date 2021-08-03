@@ -125,7 +125,7 @@ CREATE SEQUENCE image_file_seq;
 create table sponsor(
 sponsor_no number(19) primary key,
 member_no references member(member_no) on delete set null,
-gift_no references gift(gift_no),
+gift_no references gift(gift_no) on delete set null,
 project_no references project(project_no) on delete set null,
 sponsor_amount number(19) not null check(sponsor_amount >= 0),
 sponsor_date date default sysdate not null,
@@ -209,8 +209,8 @@ constraint request_like_pk primary key(request_like_no, request_like_member_no)
 ##요청게시판 댓글
 #request_reply
 CREATE TABLE request_reply(
-request_reply_pk_no number(19) PRIMARY KEY,
-request_reply_no references request(request_no) ON DELETE CASCADE,
+request_reply_no number(19) PRIMARY KEY,
+request_no references request(request_no) ON DELETE CASCADE,
 request_reply_member_no references member(member_no) ON DELETE CASCADE,
 request_reply_content varchar2(300) NOT NULL,
 request_reply_date DATE DEFAULT sysdate

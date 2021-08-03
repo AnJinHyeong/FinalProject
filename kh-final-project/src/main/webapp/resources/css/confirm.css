@@ -62,8 +62,8 @@ text-align:left;
 #10upName{
     color: rgb(61, 61, 61);
 }
-#10underMoney{
-	left: 300px;
+select[name="total_amount"]{
+	margin-left: 100px;
 }
 
 input[id = "10upMoney"]{

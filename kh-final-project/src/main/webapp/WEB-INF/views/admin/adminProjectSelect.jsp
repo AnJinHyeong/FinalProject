@@ -112,7 +112,6 @@
 								template = template.replace("{{memberNick}}", resp.memberNick);
 								template = template.replace("{{projectLikeCount}}", resp.projectLikeCount);
 								template = template.replace("{{projectState}}", resp.projectState);
-								
 								template = template.replace("{{categoryTheme}}", resp.categoryTheme);
 								template = template.replace("{{projectTitle}}", resp.projectTitle);
 								template = template.replace("{{projectTargetAmount}}", resp.projectTargetAmount);
@@ -120,8 +119,6 @@
 								template = template.replace("{{projectSummary}}", resp.projectSummary);
 								template = template.replace("{{memberInfoNick}}", resp.memberInfoNick);
 								template = template.replace("{{memberInfoContent}}", resp.memberInfoContent);
-								
-								
 								template = template.replace("{{projectRegistDate}}", resp.projectRegistDate);
 								template = template.replace("{{projectStartDate}}", resp.projectStartDate);
 								template = template.replace("{{projectEndDate}}", resp.projectEndDate);
@@ -146,6 +143,19 @@
 								template = template.replace("{{projectContent}}", resp.projectContent);
 								
 								$("#projectSelectOne").append(template);
+								
+								$.ajax({
+									url : "${pageContext.request.contextPath}/category/data/categoryApproveCheck",
+									type : "post",
+									data : {
+										categoryNo : resp.categoryNo
+									},
+									success : function(resp){
+										if(resp != "Y"){
+											$("#projectSelectOne").find(".target").css("color", "red");
+										}
+									}
+								});
 							}
 							
 						});
@@ -195,7 +205,7 @@
 			<span class="admin-project-select-p"><i class="fas fa-heart"></i> {{projectLikeCount}}</span>
 			<span class="admin-project-select-p">상태 : {{projectState}}</span>
 								
-			<p class="admin-project-select-p">{{categoryTheme}}</p>
+			<p class="admin-project-select-p target">{{categoryTheme}}</p>
 			<p class="admin-project-select-p">타이틀 : {{projectTitle}}</p>
 			<p class="admin-project-select-p">목표금액 : {{projectTargetAmount}}</p>
 			<p class="admin-project-select-p">목표 달성률 : {{projectPercent}}%</p>
