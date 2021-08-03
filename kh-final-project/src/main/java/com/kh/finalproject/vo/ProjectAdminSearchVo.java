@@ -20,7 +20,7 @@ public class ProjectAdminSearchVo {
 	private String projectRegistDate;
 	private String projectStartDate;
 	private String projectEndDate;
-	private String projectStopCaues;
+	private String projectStopCauses;
 	private String projectSummary;
 	private int memberNo;
 	private int categoryNo;

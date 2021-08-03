@@ -113,5 +113,7 @@ public interface ProjectDao {
 	boolean adminProjectState1(int projectNo);
 	boolean adminProjectState3(int projectNo);
 	boolean adminProjectStateX(int projectNo);
+
+	void updateProjectStopCauses(int projectNo, String stopCauses);
 	
 }

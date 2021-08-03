@@ -109,7 +109,24 @@ public class PayController {
 	}
 	
 	
-//	@GetMapping("/cancel")
-//	@GetMapping("/fail")
-//	
+	@GetMapping("/cancel")
+	public String cancel(HttpSession session) {
+		session.removeAttribute("partner_order_id");
+		session.removeAttribute("partner_user_id");
+		session.removeAttribute("tid");
+		session.removeAttribute("total_amount");
+		
+		return "pay/resultCancel";
+	}
+	
+	@GetMapping("/fail")
+	public String fail(HttpSession session) {
+		session.removeAttribute("partner_order_id");
+		session.removeAttribute("partner_user_id");
+		session.removeAttribute("tid");
+		session.removeAttribute("total_amount");
+		
+		return "pay/resultFail";
+	}
+	
 }
