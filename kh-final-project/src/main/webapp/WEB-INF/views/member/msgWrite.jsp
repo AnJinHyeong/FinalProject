@@ -75,7 +75,7 @@ input.msgSendBtn:hover{
 			<div style="width:100%">
 
 				<select class="msgTitle" name="msgTitle">
-
+ 
 					<option value="" selected>문의 유형</option>	
 
 					<option value="선물/후원">선물/후원</option>	
