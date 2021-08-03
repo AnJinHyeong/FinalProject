@@ -41,7 +41,8 @@ public class BannerServiceImpl implements BannerService {
 										.build());
 
 //		@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-		File dir = new File("D:/upload/kh7d");
+		File dir = new File("C:/upload/kh7d");
+		//		File dir = new File("D:/upload/kh7d");
 //		File dir = new File("D:/upload/finalproject");
 //		File dir = new File("/Users/anjinhyeong/sts-workspace/upload/project_image");
 

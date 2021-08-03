@@ -35,7 +35,7 @@ public class AdminController {
 
 	@GetMapping("")
 	public String adminHome() {
-		return "admin/adminHome";
+		return "admin/adminMemberSearchAll";
 	}
 
 	@GetMapping("/adminMsg") 

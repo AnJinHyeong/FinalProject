@@ -25,9 +25,9 @@ public class FileServiceImpl implements FileService {
 	public void deleteLocalFileNotInDB() {
 //		@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //		String path = "/Users/anjinhyeong/sts-workspace/upload/project_image";
-		String path = "D:/upload/kh7d/";
+//		String path = "D:/upload/kh7d/";
 //		String path = "D:/upload/finalproject/";
-
+		String path = "C:/upload/kh7d/";
 		File saveFileList = new File(path);
 
 		File[] fileList = saveFileList.listFiles();
