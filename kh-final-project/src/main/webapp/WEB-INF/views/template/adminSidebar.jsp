@@ -33,10 +33,10 @@
     
 </head>
 <body>
-	<aside>
+	<aside style="overflow: auto;" class="scrollThin">
 		<div class="admin-logo" style="padding-bottom: 5px;"><a href="${root}/admin">FüN‿ding</a></div>
 		<div class="admin-logo" style="padding: 0 0 30px 100px; font-size: 14px;">ADMIN</div>
-		<ul>
+		<ul style="margin-bottom: 50px;">
 			<li class="admin-aside-top_menu"><span class="admin-aside-main-span">회원</span>
 				<ul class="admin-asidze-side_menus">
 					<li><a href="${root}/admin/adminMemberSearchAll">회원 관리</a></li>
