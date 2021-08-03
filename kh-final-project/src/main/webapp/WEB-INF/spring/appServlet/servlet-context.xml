@@ -52,6 +52,12 @@
 		- MemberLoginInterceptor : 비회원 접근 차단 
 	-->
 	
+
+	<!-- 
+		인터셉터 설정
+		- MemberLoginInterceptor : 비회원 접근 차단 
+	-->
+	
 	<interceptors>
 		<interceptor>
 			<mapping path="/project/**"/>
@@ -93,7 +99,6 @@
 			<beans:bean class="com.kh.finalproject.interceptor.AdminInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>
-	
 	
 	<!-- 
 		파일 업로드 도구
