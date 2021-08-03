@@ -200,7 +200,7 @@ public class MemberController {
 	public String msgReWrite(@ModelAttribute MessageDto messageDto, Model model,@RequestParam int msgNo) {
 		model.addAttribute("msgNo", msgNo);
 		MsgVo msgVo = messageDao.getByMsgNo2(msgNo);
-		model.addAttribute("msgVo", msgVo);
+		model.addAttribute("msgVo", msgVo);	
 		return "member/msgReWrite";
 	}
 	
@@ -244,8 +244,17 @@ public class MemberController {
 	}
 	
 	@PostMapping("/msgInsert")
-	public String msgInsert(Model model) {
-	    
+	public String msgInsert(Model model,HttpSession session,@ModelAttribute MessageDto messageDto) {
+		int receiverNo = messageDto.getReceiverNo();
+	    int senderNo2 = (int)session.getAttribute("memberNo");
+	    if(receiverNo==senderNo2) {
+	    	model.addAttribute("msg","자기 자신한테는 보낼 수 없습니다.");
+			model.addAttribute("url","/member/closeMember");
+			return "member/redirectMember";
+	    }
+	    messageDto.setSenderNo(senderNo2);
+	    messageDto.setReceiverNo(receiverNo);
+	    messageDao.msgWrite2(messageDto);
 		try {
 			model.addAttribute("msg","쪽지가 발송되었습니다.");
 			model.addAttribute("url","/member/closeMember");

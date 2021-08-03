@@ -70,7 +70,7 @@
 
 <body>
 
-	<div class="mainContext" >
+	<div class="mainContext" > 
 
 		<div><h1>문의 답장</h1></div>
 
@@ -78,7 +78,7 @@
 			<input type="hidden" name="msgNo" value="${msgNo}">
 			<div>
 				
-				<input type="hidden"  name="receiverNo" style="width:70%; margin-bottom:10px; margin-left:30px;" value="${msgVo.senderNo}" name="receiverNo">
+				<input type="hidden"  name="receiverNo" style="width:70%; margin-bottom:10px; margin-left:30px;" value="${msgVo.senderNo}">
 				<input type="hidden"  name="msgTitle" style="width:70%; margin-bottom:10px; margin-left:30px;" value="문의내용답장" name="msgTitle">
 			</div>
 			<div>

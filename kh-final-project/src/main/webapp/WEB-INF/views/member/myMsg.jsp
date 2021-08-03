@@ -67,7 +67,6 @@
 			template = template.replace("{{memberId}}",resp.memberId);
 			template = template.replace("{{memberId2}}",resp.memberId2);
 			
-			
 			$("#msgSummarize").append(template);
 		}
 		 
@@ -83,6 +82,18 @@
 				},
 				success : function(resp) {
 					replaceMsgSummarizeTemplate(resp);
+					
+					$.ajax({
+						url : "${pageContext.request.contextPath}/member/getMember",
+						type : "post",
+						success : function(resp){
+							if($(".targetSender").text() == resp.memberId){
+								$(".target2").hide();
+							}
+						}
+					});
+					
+					
 					
 					$(".showMsg").on("click", function(){
 				  		var msgNo = $(this).parent().siblings(".target").find(".msgNo").text();
@@ -129,6 +140,7 @@
  		<div class="h200"> 
 
 			<pre class="msgNo" name="msgNo" style="display:none">{{msgNo}}</pre>
+			<pre class="senderNo" name="senderNo" style="display:none">{{senderNo}}</pre>
 
  			<pre class="wordBreak preWrap fs18 fBold h80">{{msgTitle}}</pre> 
 
@@ -142,8 +154,8 @@
 
  
 
-			<pre class="fs12 fBold mb10">보내는 사람 : {{memberId}}</pre> 
-			<pre class="fs12 fBold mb10">받는 사람 : {{memberId2}}</pre> 
+			<pre class="fs12 fBold mb10">보내는 사람 : <span class="targetSender">{{memberId}}</span></pre> 
+			<pre class="fs12 fBold mb10">받는 사람 : <span class="targetReceiver">{{memberId2}}</span></pre> 
 
  
 
@@ -179,7 +191,7 @@
 
 		
 			
- 			<button class="w100p project-btn btn3 project-btn-hover showMsg"><i class="far fa-envelope"></i>문의 답글 보내기</button>
+ 			<button class="w100p project-btn btn3 project-btn-hover showMsg target2"><i class="far fa-envelope"></i>문의 답글 보내기</button>
  			<button class="w100p project-btn btn3 project-btn-hover deleteBtn">메시지 삭제</button>
 
  			
