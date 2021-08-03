@@ -4,12 +4,13 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
 	.mainDiv{
+	margin-top: 80px;
 		width:50%;
-		min-height: 600px;
+		min-height: 550px;
 		padding:50px;
 	}
 	.pwForm{
-		width: 80%;
+		width: 60%;
 		margin-top : 20px;
 		margin:0 auto;
 		border:1px groove #E4E4E4;
