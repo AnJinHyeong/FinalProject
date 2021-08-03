@@ -22,12 +22,13 @@ public class ProjectReportDaoImpl implements ProjectReportDao{
 
 	@Override
 	public List<ProjectReportListVo> projectReportList1() {
-		return sqlSession.selectList("admin,projectReportList1");
+		return sqlSession.selectList("projectReport.projectReportList1");
 	}
 
 	@Override
-	public List<ProjectReportDto> projectReportList2(int projectNo) {
-		return sqlSession.selectList("admin,projectReportList2", projectNo);
+	public List<ProjectReportListVo> projectReportList2(int reportProjectNo) {
+		return sqlSession.selectList("projectReport.projectReportList2", reportProjectNo);
 	}
+
 	
 }

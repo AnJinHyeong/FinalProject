@@ -30,6 +30,7 @@ import com.kh.finalproject.vo.ProjectAdminSearchKeywordVo;
 import com.kh.finalproject.vo.ProjectAdminSearchVo;
 import com.kh.finalproject.vo.ProjectCategoryVo;
 import com.kh.finalproject.vo.ProjectInformationVo;
+import com.kh.finalproject.vo.ProjectReportListVo;
 import com.kh.finalproject.vo.ProjectSponsorVo;
 import com.kh.finalproject.vo.ProjectVo;
 import com.kh.finalproject.vo.SearchVo;
@@ -271,8 +272,8 @@ public class ProjectDataController {
 	private ProjectReportDao projectReportDao;
 	
 	@PostMapping("/adminProjectReportList2")
-	public List<ProjectReportDto> adminProjectReportList2(@RequestParam int projectNo){
-		return projectReportDao.projectReportList2(projectNo);
+	public List<ProjectReportListVo> adminProjectReportList2(@RequestParam int reportProjectNo){
+		return projectReportDao.projectReportList2(reportProjectNo);
 	}
 	
 }

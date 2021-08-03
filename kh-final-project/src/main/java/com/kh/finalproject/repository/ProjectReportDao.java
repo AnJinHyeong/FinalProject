@@ -9,8 +9,7 @@ public interface ProjectReportDao {
 	
 	//신고하기
 	void insert(ProjectReportDto projectReportDto);
-	
 	List<ProjectReportListVo> projectReportList1();
-	List<ProjectReportDto> projectReportList2(int projectNo);
-	
+	List<ProjectReportListVo> projectReportList2(int reportProjectNo);
+
 }

@@ -5,9 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data @AllArgsConstructor @NoArgsConstructor @Builder
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class ProjectReportListVo {
-
-	private int projectNo;
+	private int reportNo;
+	private int reportProjectNo;
+	private String projectTitle;
+	private int reportCount;
+	private String reportContent;
+	private String reportDate;
+	
+	private String memberNick;
 	
 }
