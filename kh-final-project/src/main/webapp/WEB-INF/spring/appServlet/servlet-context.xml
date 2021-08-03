@@ -58,6 +58,8 @@
 			<mapping path="/member/**"/>
 			<mapping path="/sponsor/**"/>
 			<mapping path="/admin/**"/>
+			<mapping path="/category/**"/>
+			<mapping path="/pay/**"/>
 			<exclude-mapping path="/project/projectHeader"/>
 			<exclude-mapping path="/project/data/**"/>
 			<exclude-mapping path="/project/projectList"/>
