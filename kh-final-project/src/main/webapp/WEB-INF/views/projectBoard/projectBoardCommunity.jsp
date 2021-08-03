@@ -185,7 +185,6 @@
 	   	var dif2 = da3 - da1;//펀딩 종료일까지 일수 계산
 	   	var dif3 = da3 <= da1;//펀딩 종료 시점
 	   	
-	   	console.log(dif3);
 		if(dif == false){
 			$("#day-open1").hide();
 			$("#day-open2").show();

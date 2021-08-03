@@ -60,20 +60,7 @@
 	<section>
 		<div class="admin-home_content_area">
 			<div class="admin-home_content100">
-				<p class="admin-home-top-p">문의 관리</p>
-			</div>
-		</div>
-		<div class="admin-home_content_area">
-			<div class="admin-home_content100" style="height: 85px; padding: 15px 0;">
-				<div class="admin-project-div1">
-					<p class="admin-home-content-p">조건 검색</p>
-				</div>
-				<form action="" method="post">
-					<div class="admin-project-div2">
-						<input class="admin-project-div2-input" type="text" name="keyword" autocomplete="off" style="width: 100%; border: none;">
-						<button class="admin-project-div2-btn" id="search-btn"><i class="fas fa-search bacWhite"></i></button>
-					</div>
-				</form>
+				<p class="admin-home-top-p">신고 관리</p>
 			</div>
 		</div>
 		
@@ -84,21 +71,17 @@
 				</div>
 				<div class="admin-project-div2"  style="display: inline;">
 					<div class="admin-home-content-list target" style="text-align: center; width: 99%;">
-						<span style="width: 5%;">번호</span>
-						<span style="width: 10%;">발신닉네임</span>
-						<span style="width: 55%;">타이틀</span>
-						<span style="width: 10%;">수신닉네임</span>
-						<span style="width: 20%;">보낸일자</span>
+						<span style="width: 15%;">프로젝트번호</span>
+						<span style="width: 70%;">신고내용</span>
+						<span style="width: 15%;">신고횟수</span>
 					</div>
 					
 					<div class="admin-home-content-list-div" style="height: 300px;" id="projectSearchDiv">
-						<c:forEach var="msgVo" items="${msgVoList}">
-							<div class="admin-home-content-list" style="text-align: center; width: 100%;" id="${msgVo.msgNo}">
-								<span style="width: 5%;">${msgVo.msgNo}</span> 
-								<span style="width: 10%;">${msgVo.senderNick}</span> 
-								<span style="width: 55%;">${msgVo.msgTitle}</span>
-								<span style="width: 10%;">${msgVo.receiverNick}</span> 
-								<span style="width: 20%;">${msgVo.msgDate}</span>
+						<c:forEach var="adminProjectReportList1" items="${adminProjectReportList1}">
+							<div class="admin-home-content-list" style="text-align: center; width: 100%;" id="${adminProjectReportList1.reportProjectNo}">
+								<span style="width: 15%;">${adminProjectReportList1.reportProjectNo}</span> 
+								<span style="width: 70%;">${adminProjectReportList1.projectTitle}</span> 
+								<span style="width: 15%;">${adminProjectReportList1.reportCount}</span>
 							</div>
 						</c:forEach>
 					</div>

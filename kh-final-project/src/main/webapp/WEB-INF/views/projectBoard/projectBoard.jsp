@@ -194,7 +194,6 @@
 	   	var dif2 = da3 - da1;//펀딩 종료일까지 일수 계산
 	   	var dif3 = da3 <= da1;//펀딩 종료 시점
 	   	
-	   	console.log(dif3);
 		if(dif == false){
 			$("#day-open1").hide();
 			$("#day-open2").show();
@@ -337,7 +336,7 @@
 							<span class="font-20 red" id="report1"><i class="far fa-tired"></i></span>
 							<span class="font-12 red" id="report2">신고하기</span>
 						</button>
-						<button class="project-board-div4-funding">프로젝트 후원</button>
+						<button id="sponsorFocusBtn" class="project-board-div4-funding">프로젝트 후원</button>
 					</div>
 				</div>
 				
