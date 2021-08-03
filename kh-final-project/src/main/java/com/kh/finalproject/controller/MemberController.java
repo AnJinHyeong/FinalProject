@@ -291,7 +291,7 @@ public class MemberController {
 	@PostMapping(value = "/memberInsert")
 	public String memberInsert(@ModelAttribute MemberDto memberDto) {
 		memberDao.memberInsert(memberDto);
-		return "index";
+		return "redirect:/";
 	}
 	
 	
