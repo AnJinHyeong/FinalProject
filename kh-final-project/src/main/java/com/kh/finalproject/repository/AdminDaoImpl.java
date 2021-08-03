@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.finalproject.entity.ProjectReportDto;
 import com.kh.finalproject.vo.AdminMemberVO;
 
 @Repository
@@ -47,5 +48,6 @@ SqlSession sqlSession;
 		map.put("keyWord", keyWord);
 		return sqlSession.selectOne("admin.payCount", map);
 	}
+
 
 }

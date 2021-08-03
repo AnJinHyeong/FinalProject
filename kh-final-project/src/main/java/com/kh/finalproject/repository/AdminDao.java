@@ -2,6 +2,7 @@ package com.kh.finalproject.repository;
 
 import java.util.List;
 
+import com.kh.finalproject.entity.ProjectReportDto;
 import com.kh.finalproject.vo.AdminMemberVO;
 
 public interface AdminDao {
@@ -9,4 +10,5 @@ public interface AdminDao {
 	List<AdminMemberVO> paySearchAll(String searchOption, String keyWord);
 	int memberCount(String searchOption, String keyWord);
 	int payCount(String searchOption, String keyWord);
+	
 }
