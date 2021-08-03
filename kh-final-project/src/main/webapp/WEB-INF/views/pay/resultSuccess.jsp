@@ -6,6 +6,13 @@
     	<link rel="stylesheet" type="text/css" href="${root}/css/resultSuccess.css">
 <html>
 
+<style>
+#number{
+margin-left : 20px;
+}
+
+</style>
+
     <div style = "height: 900px;" id = All>
     <div id = border>
 <h2>결제가 완료되었습니다</h2><br>
