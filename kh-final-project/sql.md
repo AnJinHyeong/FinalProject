@@ -34,11 +34,7 @@ category_no REFERENCES category(category_no) ON DELETE SET NULL,
 member_info_nick varchar2(30),
 member_info_content varchar2(1000),
 project_amount_give char(1) check(project_amount_give in ('Y')),
-<<<<<<< HEAD
-project_like_count number(19) DEFAULT 0
-=======
 project_like_count number(19) DEFAULT 0 not null
->>>>>>> refs/remotes/origin/main
 );
 
 CREATE SEQUENCE project_seq;
@@ -129,7 +125,7 @@ CREATE SEQUENCE image_file_seq;
 create table sponsor(
 sponsor_no number(19) primary key,
 member_no references member(member_no) on delete set null,
-gift_no references gift(gift_no),
+gift_no references gift(gift_no) on delete set null,
 project_no references project(project_no) on delete set null,
 sponsor_amount number(19) not null check(sponsor_amount >= 0),
 sponsor_date date default sysdate not null,
@@ -139,20 +135,11 @@ sponsor_cancel char(1) check (sponsor_cancel ='Y')
 create sequence sponsor_seq;
 
 
-<<<<<<< HEAD
 ##프로젝트 좋아요
-=======
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
->>>>>>> refs/remotes/origin/main
 #project_like
 CREATE TABLE project_like(
-<<<<<<< HEAD
-like_project_no REFERENCES project(project_no) ON DELETE CASCADE,
-like_member_no references member(member_no) ON DELETE CASCADE,
-=======
 like_project_no REFERENCES project(project_no) ON DELETE cascade,
 like_member_no references member(member_no) on delete cascade,
->>>>>>> refs/remotes/origin/main
 like_date DATE DEFAULT sysdate,
 constraint project_like_pk primary key(like_project_no, like_member_no) 
 );
@@ -222,8 +209,8 @@ constraint request_like_pk primary key(request_like_no, request_like_member_no)
 ##요청게시판 댓글
 #request_reply
 CREATE TABLE request_reply(
-request_reply_pk_no number(19) PRIMARY KEY,
-request_reply_no references request(request_no) ON DELETE CASCADE,
+request_reply_no number(19) PRIMARY KEY,
+request_no references request(request_no) ON DELETE CASCADE,
 request_reply_member_no references member(member_no) ON DELETE CASCADE,
 request_reply_content varchar2(300) NOT NULL,
 request_reply_date DATE DEFAULT sysdate

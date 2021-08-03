@@ -238,7 +238,8 @@ if(mainBannerImageCount >= 2){
 		});
 		
 		function imageRollingNext(btn){
-			btn.prop("disabled", true);
+			$("#imageNextBtn").prop("disabled", true);
+			$("#imagePreBtn").prop("disabled", true);
 			
 			clearInterval(playRolling);
 			playRolling = setInterval(function() {
@@ -251,7 +252,8 @@ if(mainBannerImageCount >= 2){
 				}
 				else{
 					$(this).stop().animate({"left": (Number($(this).css("left").split("px")[0]) - width) + "px"}, 300, "swing", function(){
-						btn.prop("disabled", false);
+						$("#imageNextBtn").prop("disabled", false);
+						$("#imagePreBtn").prop("disabled", false);
 					});
 				}
 			});
@@ -286,7 +288,8 @@ if(mainBannerImageCount >= 2){
 		
 		
 		function imageRollingPre(btn){
-			btn.prop("disabled", true);
+			$("#imageNextBtn").prop("disabled", true);
+			$("#imagePreBtn").prop("disabled", true);
 			
 			clearInterval(playRolling);
 			playRolling = setInterval(function() {
@@ -299,7 +302,8 @@ if(mainBannerImageCount >= 2){
 				}
 				else{
 					$(this).stop().animate({"left": (Number($(this).css("left").split("px")[0]) + width) + "px"}, 300, "swing", function(){
-						btn.prop("disabled", false);
+						$("#imageNextBtn").prop("disabled", false);
+						$("#imagePreBtn").prop("disabled", false);
 					});
 				}
 			});
