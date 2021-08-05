@@ -19,7 +19,7 @@ margin-left : 20px;
 
 <h3>결제 상세 내역</h3><br>
 
-<ul>
+<ul id = "number">
 	<li>거래번호 : ${searchVO.tid}</li>
 	<li>
 		거래상태 : ${searchVO.status}

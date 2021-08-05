@@ -29,7 +29,7 @@ private PayDao payDao;
 
 	//사업자 번호, Admin Key는 절대로 변하지 않는다
 	public static final String cid = "TC0ONETIME";
-	public static final String adminKey = "39c9a904464bd32a722a741887da06f6";
+	public static final String adminKey = "ad99bb7721838867a4a8d393d717bb65";
 	public static final String kakaoAk = "KakaoAK " + adminKey;
 	public static final String contentType = "application/x-www-form-urlencoded;charset=utf-8";
 
@@ -57,9 +57,9 @@ private PayDao payDao;
 		body.add("total_amount", String.valueOf(payReadyPrepareVO.getTotal_amount()));//총 구매금액
 		body.add("tax_free_amount", String.valueOf(payReadyPrepareVO.getTax_free_amount()));//면세금액(없으면 0)
 		
-		body.add("approval_url", "http://localhost:8888/finalproject/pay/success");//사용자 결제 성공시 신호를 받을 주소
-		body.add("cancel_url", "http://localhost:8888/finalproject/pay/cancel");//사용자 결제 취소시 신호를 받을 주소
-		body.add("fail_url", "http://localhost:8888/finalproject/pay/fail");//사용자 결제 실패시 신호를 받을 주소
+		body.add("approval_url", "http://www.sysout.co.kr/finalproject/pay/success");//사용자 결제 성공시 신호를 받을 주소
+		body.add("cancel_url", "http://www.sysout.co.kr/finalproject/pay/cancel");//사용자 결제 취소시 신호를 받을 주소
+		body.add("fail_url", "http://www.sysout.co.kr/finalproject/pay/fail");//사용자 결제 실패시 신호를 받을 주소
 		
 		//[4] Http Header / Body 합성
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
