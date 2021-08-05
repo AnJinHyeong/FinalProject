@@ -192,6 +192,7 @@ $(function () {
 	    var emailCheckResult = $("#emailCheckResult");    // 비교 결과     
 	    
 	    if(inputCode == code){                            // 일치할 경우
+			$("#emailCheckResult").css("color", "black");
 	    	$("#emailCheckResult").text("인증번호가 일치합니다");  
 			 $("#no").attr("disabled",false);
 				noComplete = 1;

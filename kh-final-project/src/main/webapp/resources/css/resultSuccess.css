@@ -1,9 +1,10 @@
 @charset "UTF-8";
 
 #All{			
+	margin-top : 50px;
 	    width: 650px;
     padding: 72px 0px 72px;
-    margin: 0px auto 12px
+    margin: 80px 100px 12px;
 }
 
 #border{
@@ -35,6 +36,6 @@
 	
 }
 
-h3< ul < li{
+ul < li{
 margin-left: 200px;
 }
