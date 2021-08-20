@@ -46,4 +46,9 @@ public class HomeController {
 		return "redirect:/admin";
 	}
 	
+	@GetMapping("/test")
+	public String test() {
+		return "test";
+	}
+	
 }
